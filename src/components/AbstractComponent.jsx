@@ -2,31 +2,49 @@ import React from 'react';
 import settings from '../settings';
 
 export default class AbstractComponent extends React.Component {
-  constructor(props, options) {
+  constructor(props) {
     super(props);
 
-    this.options = {
-      blockName: options.blockName,
-      modifiers: options.modifiers
-    };
+    this.bindKeys(this.__proto__);
   }
 
-  blockName() {
-    const blockName = settings.getClasses().block
-      .replace('{b}', this.options.blockName);
-    const modifiers = this.modifiers(this.options.blockName, null, this.options.modifiers);
+  bindKeys(object) {
+    Object.keys(object).forEach((key) => {
+      let method = this[key];
+
+      if (typeof method === 'function') {
+        this[key] = method.bind(this);
+      }
+
+      if (object instanceof AbstractComponent) {
+        this.bindKeys(object.__proto__);
+      }
+    });
+  }
+
+  blockName(blockName, modifiers) {
+    const blockNameClass = settings.getClasses().block.replace('{b}', blockName);
+    const modifiersClass = this.modifiers(blockName, null, modifiers);
 
     if (modifiers) {
-      return `${blockName} ${modifiers}`
+      return `${blockNameClass} ${modifiersClass}`
     }
 
-    return blockName;
+    return blockNameClass;
   }
 
   elementName(elementName, modifiers) {
-    return settings.getClasses().element
+    const elementNameClass = settings.getClasses().element
       .replace('{b}', this.options.blockName)
       .replace('{e}', elementName);
+
+    const modifiersClass = this.modifiers(null, elementName, modifiers);
+
+    if (modifiers) {
+      return `${elementNameClass} ${modifiersClass}`
+    }
+
+    return elementNameClass;
   }
 
   modifiers(blockName, elementName, modifiers) {
