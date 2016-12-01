@@ -23,7 +23,7 @@ export default class AbstractComponent extends React.Component {
   }
 
   blockName(blockName, modifiers) {
-    const blockNameClass = settings.getClasses().block.replace('{b}', blockName);
+    const blockNameClass = `${settings.getPrefix()}${settings.getClasses().block.replace('{b}', blockName)}`;
     const modifiersClass = this.modifiers(blockName, null, modifiers);
 
     if (modifiers) {
@@ -66,6 +66,7 @@ export default class AbstractComponent extends React.Component {
           .replace('{mk}', key)
           .replace('{mv}', value.toString());
       }
+      return '';
     }).join(' ');
   }
 }

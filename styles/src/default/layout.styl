@@ -1,0 +1,183 @@
+make-layout($prefix, $separator, $postfix) {
+  // horizontal layout
+  .{$prefix}layout{$separator}h{$postfix} {
+    display: flex;
+    flex-direction: row;
+  }
+
+  // reverse horizontal layout
+  .{$prefix}layout{$separator}h{$separator}reverse{$postfix} {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  // vertical layout
+  .{$prefix}layout{$separator}v{$postfix} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // reverse vertical layout
+  .{$prefix}layout{$separator}v{$separator}reverse{$postfix} {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  // hide an element
+  .{$prefix}hide{$postfix} {
+    display: none;
+  }
+
+  for $i in (1..12) {
+    // grow of element
+    .{$prefix}grow{$separator}{$i}{$postfix} {
+      flex-grow: $i;
+    }
+
+    // shrink of elements
+    .{$prefix}shrink{$separator}{$i}{$postfix} {
+      flex-shrink: $i;
+    }
+
+    // order of elements
+    .{$prefix}order{$separator}{$i}{$postfix} {
+      order: $i;
+    }
+
+    // 12 column grid
+    .{$prefix}grid{$separator}{$i}{$postfix} {
+      flex-basis: (100 / 12 * $i) %;
+      max-width: (100 / 12 * $i) %;
+    }
+  }
+
+  .{$prefix}grow{$postfix} {
+    flex-grow: 1;
+  }
+
+  .{$prefix}shrink{$postfix} {
+    flex-shrink: 1;
+  }
+
+  // alignment in cross axis
+  .{$prefix}start{$postfix} {
+    align-items: flex-start;
+  }
+
+  .{$prefix}center{$postfix}, .{$prefix}center{$separator}center{$postfix} {
+    align-items: center;
+  }
+
+  .{$prefix}end{$postfix} {
+    align-items: flex-end;
+  }
+
+  .{$prefix}stretch{$postfix} {
+    align-items: stretch;
+  }
+
+  // alignment in main axis
+  .{$prefix}justify{$separator}start{$postfix} {
+    justify-content: flex-start;
+  }
+
+  .{$prefix}justify{$separator}center{$postfix}, .{$prefix}center{$separator}center{$postfix} {
+    justify-content: center;
+  }
+
+  .{$prefix}justify{$separator}end{$postfix} {
+    justify-content: flex-end;
+  }
+
+  .{$prefix}justify{$separator}around{$postfix} {
+    justify-content: space-around;
+  }
+
+  .{$prefix}justify{$postfix} {
+    justify-content: space-between;
+  }
+
+  .{$prefix}scroll{$postfix} {
+    overflow: auto;
+  }
+
+  .{$prefix}no{$separator}scroll{$postfix} {
+    overflow: hidden;
+  }
+
+  for $size in $space-sizes {
+    .{$prefix}padding{$separator}{$size}{$postfix} {
+      padding: $size;
+    }
+
+    .{$prefix}padding{$separator}h{$separator}{$size}{$postfix} {
+      padding-left: $size;
+      padding-right: $size;
+    }
+
+    .{$prefix}padding{$separator}v{$separator}{$size}{$postfix} {
+      padding-top: $size;
+      padding-bottom: $size;
+    }
+
+    .{$prefix}padding{$separator}t{$separator}{$size}{$postfix} {
+      padding-top: $size;
+    }
+
+    .{$prefix}padding{$separator}b{$separator}{$size}{$postfix} {
+      padding-bottom: $size;
+    }
+
+    .{$prefix}padding{$separator}l{$separator}{$size}{$postfix} {
+      padding-left: $size;
+    }
+
+    .{$prefix}padding{$separator}r{$separator}{$size}{$postfix} {
+      padding-right: $size;
+    }
+      
+    .{$prefix}margin{$separator}{$size}{$postfix} {
+      margin: $size;
+    }
+
+    .{$prefix}margin{$separator}h{$separator}{$size}{$postfix} {
+      margin-left: $size;
+      margin-right: $size;
+    }
+
+    .{$prefix}margin{$separator}v{$separator}{$size}{$postfix} {
+      margin-top: $size;
+      margin-bottom: $size;
+    }
+
+    .{$prefix}margin{$separator}t{$separator}{$size}{$postfix} {
+      margin-top: $size;
+    }
+
+    .{$prefix}margin{$separator}b{$separator}{$size}{$postfix} {
+      margin-bottom: $size;
+    }
+
+    .{$prefix}margin{$separator}l{$separator}{$size}{$postfix} {
+      margin-left: $size;
+    }
+
+    .{$prefix}margin{$separator}r{$separator}{$size}{$postfix} {
+      margin-right: $size;
+    }
+
+    .{$prefix}space{$separator}h{$separator}{$size} {
+      margin-left: $size;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+
+    .{$prefix}space{$separator}v{$separator}{$size} {
+      margin-top: $size;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

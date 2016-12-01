@@ -1,5 +1,6 @@
 class Settings {
   constructor() {
+    this.prefix = 'ghost-';
     this.classes = {
       block: '{b}',
       element: '{b}--{e}',
@@ -14,6 +15,14 @@ class Settings {
 
   setClasses(classes) {
     this.classes = classes;
+  }
+
+  getPrefix() {
+    return this.prefix;
+  }
+
+  setPrefix(prefix) {
+    this.prefix = prefix;
   }
 }
 

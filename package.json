@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-stylus": "^2.6.0",
     "react-scripts": "0.7.0"
   },
   "dependencies": {
