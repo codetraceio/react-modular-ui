@@ -22,8 +22,15 @@ export default class AbstractComponent extends React.Component {
     });
   }
 
+  camelCaseToDashCase(word) {
+    return word.replace(/([A-Z])/g, (match) => {
+      return `-${match.toLowerCase()}`;
+    });
+  }
+
   blockName(blockName, modifiers) {
-    const blockNameClass = `${settings.getPrefix()}${settings.getClasses().block.replace('{b}', blockName)}`;
+    const blockNameClass = `${settings.getPrefix()}${settings.getClasses().block
+      .replace('{b}', this.camelCaseToDashCase(blockName))}`;
     const modifiersClass = this.modifiers(blockName, null, modifiers);
 
     if (modifiers) {
@@ -35,8 +42,8 @@ export default class AbstractComponent extends React.Component {
 
   elementName(elementName, modifiers) {
     const elementNameClass = settings.getClasses().element
-      .replace('{b}', this.options.blockName)
-      .replace('{e}', elementName);
+      .replace('{b}', this.camelCaseToDashCase(this.options.blockName))
+      .replace('{e}', this.camelCaseToDashCase(elementName));
 
     const modifiersClass = this.modifiers(null, elementName, modifiers);
 
@@ -49,23 +56,67 @@ export default class AbstractComponent extends React.Component {
 
   modifiers(blockName, elementName, modifiers) {
     const classes = settings.getClasses();
-    return Object.keys(modifiers).map((key) => {
-      const value = modifiers[key];
-
+    return modifiers.map((key) => {
+      const value = this.props[key];
       if (typeof value === 'boolean' && value === true) {
-        return classes.modifier
-          .replace('{b}', blockName)
-          .replace('{e}', elementName)
-          .replace('{m}', key);
+        if (elementName) {
+          return classes.elementModifier
+            .replace('{b}', this.camelCaseToDashCase(blockName))
+            .replace('{e}', this.camelCaseToDashCase(elementName))
+            .replace('{m}', this.camelCaseToDashCase(key));
+        }
+
+        return classes.blockModifier
+          .replace('{b}', this.camelCaseToDashCase(blockName))
+          .replace('{m}', this.camelCaseToDashCase(key));
       }
 
       if (typeof value === 'string' || typeof value === 'number') {
-        return classes.modifierWithValue
-          .replace('{b}', blockName)
-          .replace('{e}', elementName)
-          .replace('{mk}', key)
-          .replace('{mv}', value.toString());
+        if (elementName) {
+          return classes.elementModifierWithValue
+            .replace('{b}', this.camelCaseToDashCase(blockName))
+            .replace('{e}', this.camelCaseToDashCase(elementName))
+            .replace('{mk}', this.camelCaseToDashCase(key))
+            .replace('{mv}', this.camelCaseToDashCase(value.toString()));
+        }
+
+        return classes.blockModifierWithValue
+          .replace('{b}', this.camelCaseToDashCase(blockName))
+          .replace('{mk}', this.camelCaseToDashCase(key))
+          .replace('{mv}', this.camelCaseToDashCase(value.toString()));
       }
+
+      if (typeof value === 'object') {
+        const result = [];
+        Object.keys(value).forEach((valueKey) => {
+          const valueValue = value[valueKey];
+          let className;
+          if (valueKey === 'default') {
+            className = valueValue.toString();
+          } else {
+            className = `${valueValue}-${valueKey}`;
+          }
+          console.log(elementName, key, className);
+          if (elementName) {
+            result.push(
+              classes.elementModifierWithValue
+                .replace('{b}', this.camelCaseToDashCase(blockName))
+                .replace('{e}', this.camelCaseToDashCase(elementName))
+                .replace('{mk}', this.camelCaseToDashCase(key))
+                .replace('{mv}', this.camelCaseToDashCase(className))
+            );
+          } else {
+            result.push(
+              classes.blockModifierWithValue
+                .replace('{b}', this.camelCaseToDashCase(blockName))
+                .replace('{mk}', this.camelCaseToDashCase(key))
+                .replace('{mv}', this.camelCaseToDashCase(className))
+            );
+          }
+        });
+        return result.join('')
+      }
+
       return '';
     }).join(' ');
   }

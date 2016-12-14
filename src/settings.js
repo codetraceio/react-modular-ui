@@ -4,8 +4,10 @@ class Settings {
     this.classes = {
       block: '{b}',
       element: '{b}--{e}',
-      modifier: '-{m}',
-      modifierWithValue: '-{mk}-{mv}'
+      blockModifier: '-{m}',
+      blockModifierWithValue: '-{mk}-{mv}',
+      elementModifier: '-{m}',
+      elementModifierWithValue: '-{mk}-{mv}',
     }
   }
 
