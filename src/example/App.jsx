@@ -7,9 +7,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Block layout={{xsUp: 'horizontal'}}>
+        <Block>
           <h1>React Modular UI</h1>
-          <Button>ok</Button>
+          <Block layout={{xsUp: 'horizontal', xsDown: 'vertical'}}>
+            <Button>ok</Button>
+            <Button>ok</Button>
+          </Block>
         </Block>
       </div>
     );

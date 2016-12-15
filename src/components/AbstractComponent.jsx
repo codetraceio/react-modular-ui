@@ -96,7 +96,6 @@ export default class AbstractComponent extends React.Component {
           } else {
             className = `${valueValue}-${valueKey}`;
           }
-          console.log(elementName, key, className);
           if (elementName) {
             result.push(
               classes.elementModifierWithValue
@@ -114,7 +113,7 @@ export default class AbstractComponent extends React.Component {
             );
           }
         });
-        return result.join('')
+        return result.join(' ');
       }
 
       return '';

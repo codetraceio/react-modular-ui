@@ -1,6 +1,6 @@
 class Settings {
   constructor() {
-    this.prefix = 'ghost-';
+    this.prefix = 'c-';
     this.classes = {
       block: '{b}',
       element: '{b}--{e}',
