@@ -3,7 +3,7 @@ import AbstractComponent from './AbstractComponent';
 
 export default class Button extends AbstractComponent {
   getModifiers() {
-    return ['size', 'view', 'type', 'selected', 'disabled'];
+    return ['size', 'view', 'color', 'selected', 'disabled'];
   }
 
   render() {
