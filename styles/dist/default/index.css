@@ -1,3 +1,6 @@
+body {
+  font-family: sans-serif;
+}
 .c-button {
   background-color: #888;
   color: #fff;
@@ -40,6 +43,78 @@
 }
 .c-button.-color-primary:active {
   background-color: #006f88;
+}
+.c-button.-color-success {
+  background-color: #0b9;
+  color: #fff;
+}
+.c-button.-color-success:hover {
+  background-color: #00eec3;
+}
+.c-button.-color-success:active {
+  background-color: #00886f;
+}
+.c-button.-color-danger {
+  background-color: #b00;
+  color: #fff;
+}
+.c-button.-color-danger:hover {
+  background-color: #e00;
+}
+.c-button.-color-danger:active {
+  background-color: #800;
+}
+.c-button.-view-flat {
+  background-color: transparent;
+  color: #888;
+}
+.c-button.-view-flat:hover {
+  background-color: transparent;
+  color: #a2a2a2;
+}
+.c-button.-view-flat:active {
+  background-color: transparent;
+  color: #6f6f6f;
+}
+.c-button.-view-flat.-color-primary {
+  background-color: transparent;
+  color: #09b;
+}
+.c-button.-view-flat.-color-primary:hover {
+  background-color: transparent;
+  color: #00c3ee;
+}
+.c-button.-view-flat.-color-primary:active {
+  background-color: transparent;
+  color: #006f88;
+}
+.c-button.-view-flat.-color-success {
+  background-color: transparent;
+  color: #0b9;
+}
+.c-button.-view-flat.-color-success:hover {
+  background-color: transparent;
+  color: #00eec3;
+}
+.c-button.-view-flat.-color-success:active {
+  background-color: transparent;
+  color: #00886f;
+}
+.c-button.-view-flat.-color-danger {
+  background-color: transparent;
+  color: #b00;
+}
+.c-button.-view-flat.-color-danger:hover {
+  background-color: transparent;
+  color: #e00;
+}
+.c-button.-view-flat.-color-danger:active {
+  background-color: transparent;
+  color: #800;
+}
+.c-button.-disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 .c-block {
   box-sizing: border-box;

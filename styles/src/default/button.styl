@@ -11,6 +11,19 @@ button-default($background-color, $text-color) {
   }
 }
 
+button-flat($text-color) {
+  background-color: transparent;
+  color: $text-color;
+  &:hover {
+    background-color: transparent;
+    color: lighten($text-color, 10);
+  }
+  &:active {
+    background-color: transparent;
+    color: darken($text-color, 10);
+  }
+}
+
 .{$prefix}button {
   button-default($color-default, $color-light);
   display: flex;
@@ -42,5 +55,34 @@ button-default($background-color, $text-color) {
 
   &.-color-primary {
     button-default($color-primary, $color-light);
+  }
+
+  &.-color-success {
+    button-default($color-success, $color-light);
+  }
+
+  &.-color-danger {
+    button-default($color-danger, $color-light);
+  }
+
+  &.-view-flat {
+    button-flat($color-default);
+  }
+
+  &.-view-flat.-color-primary {
+    button-flat($color-primary);
+  }
+
+  &.-view-flat.-color-success {
+    button-flat($color-success);
+  }
+
+  &.-view-flat.-color-danger {
+    button-flat($color-danger);
+  }
+
+  &.-disabled {
+    opacity: .5;
+    pointer-events: none;
   }
 }
