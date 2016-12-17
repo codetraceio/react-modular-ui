@@ -1,52 +1,56 @@
 @import "constants";
 
 make-layout($prefix, $separator, $postfix) {
-// horizontal layout
+  // horizontal layout
   {$prefix}layout{$separator}horizontal{$postfix} {
     display: flex;
     flex-direction: row;
   }
 
-// reverse horizontal layout
+  // reverse horizontal layout
   {$prefix}layout{$separator}horizontal{$separator}reverse{$postfix} {
     display: flex;
     flex-direction: row-reverse;
   }
 
-// vertical layout
+  // vertical layout
   {$prefix}layout{$separator}vertical{$postfix} {
     display: flex;
     flex-direction: column;
   }
 
-// reverse vertical layout
+  //  reverse vertical layout
   {$prefix}layout{$separator}vertical{$separator}reverse{$postfix} {
     display: flex;
     flex-direction: column-reverse;
   }
 
-// hide an element
+  {$prefix}wrap{$postfix} {
+    flex-wrap: wrap;
+  }
+
+  // hide an element
   {$prefix}hide{$postfix} {
-    display: none;
+    display: none !important;
   }
 
   for $i in (1..12) {
-  // grow of element
+    // grow of element
     {$prefix}grow{$separator}{$i}{$postfix} {
       flex-grow: $i;
     }
 
-  // shrink of elements
+    // shrink of elements
     {$prefix}shrink{$separator}{$i}{$postfix} {
       flex-shrink: $i;
     }
 
-  // order of elements
+    // order of elements
     {$prefix}order{$separator}{$i}{$postfix} {
       order: $i;
     }
 
-  // 12 column grid
+    // 12 column grid
     {$prefix}grid{$separator}{$i}{$postfix} {
       flex-basis: (100 / 12 * $i) %;
       max-width: (100 / 12 * $i) %;
@@ -61,29 +65,29 @@ make-layout($prefix, $separator, $postfix) {
     flex-shrink: 1;
   }
 
-// alignment in cross axis
-  {$prefix}start{$postfix} {
+  // alignment in cross axis
+  {$prefix}align{$separator}start{$postfix} {
     align-items: flex-start;
   }
 
-  {$prefix}center{$postfix}, {$prefix}center{$separator}center{$postfix} {
+  {$prefix}align{$separator}center{$postfix}, {$prefix}center{$postfix} {
     align-items: center;
   }
 
-  {$prefix}end{$postfix} {
+  {$prefix}align{$separator}end{$postfix} {
     align-items: flex-end;
   }
 
-  {$prefix}stretch{$postfix} {
+  {$prefix}align{$separator}stretch{$postfix} {
     align-items: stretch;
   }
 
-// alignment in main axis
+  // alignment in main axis
   {$prefix}justify{$separator}start{$postfix} {
     justify-content: flex-start;
   }
 
-  {$prefix}justify{$separator}center{$postfix}, {$prefix}center{$separator}center{$postfix} {
+  {$prefix}justify{$separator}center{$postfix}, {$prefix}center{$postfix} {
     justify-content: center;
   }
 
@@ -99,11 +103,11 @@ make-layout($prefix, $separator, $postfix) {
     justify-content: space-between;
   }
 
-  {$prefix}scroll{$postfix} {
+  {$prefix}scroll{$separator}on{$postfix} {
     overflow: auto;
   }
 
-  {$prefix}no{$separator}scroll{$postfix} {
+  {$prefix}scroll{$separator}off{$postfix} {
     overflow: hidden;
   }
 
@@ -112,29 +116,29 @@ make-layout($prefix, $separator, $postfix) {
       padding: $size;
     }
 
-    {$prefix}padding{$separator}h{$separator}{$size}{$postfix} {
+    {$prefix}padding{$separator}horizontal{$separator}{$size}{$postfix} {
       padding-left: $size;
       padding-right: $size;
     }
 
-    {$prefix}padding{$separator}v{$separator}{$size}{$postfix} {
+    {$prefix}padding{$separator}vertical{$separator}{$size}{$postfix} {
       padding-top: $size;
       padding-bottom: $size;
     }
 
-    {$prefix}padding{$separator}t{$separator}{$size}{$postfix} {
+    {$prefix}padding{$separator}top{$separator}{$size}{$postfix} {
       padding-top: $size;
     }
 
-    {$prefix}padding{$separator}b{$separator}{$size}{$postfix} {
+    {$prefix}padding{$separator}bottom{$separator}{$size}{$postfix} {
       padding-bottom: $size;
     }
 
-    {$prefix}padding{$separator}l{$separator}{$size}{$postfix} {
+    {$prefix}padding{$separator}left{$separator}{$size}{$postfix} {
       padding-left: $size;
     }
 
-    {$prefix}padding{$separator}r{$separator}{$size}{$postfix} {
+    {$prefix}padding{$separator}right{$separator}{$size}{$postfix} {
       padding-right: $size;
     }
 
@@ -142,43 +146,47 @@ make-layout($prefix, $separator, $postfix) {
       margin: $size;
     }
 
-    {$prefix}margin{$separator}h{$separator}{$size}{$postfix} {
+    {$prefix}margin{$separator}horizontal{$separator}{$size}{$postfix} {
       margin-left: $size;
       margin-right: $size;
     }
 
-    {$prefix}margin{$separator}v{$separator}{$size}{$postfix} {
+    {$prefix}margin{$separator}vertical{$separator}{$size}{$postfix} {
       margin-top: $size;
       margin-bottom: $size;
     }
 
-    {$prefix}margin{$separator}t{$separator}{$size}{$postfix} {
+    {$prefix}margin{$separator}top{$separator}{$size}{$postfix} {
       margin-top: $size;
     }
 
-    {$prefix}margin{$separator}b{$separator}{$size}{$postfix} {
+    {$prefix}margin{$separator}bottom{$separator}{$size}{$postfix} {
       margin-bottom: $size;
     }
 
-    {$prefix}margin{$separator}l{$separator}{$size}{$postfix} {
+    {$prefix}margin{$separator}left{$separator}{$size}{$postfix} {
       margin-left: $size;
     }
 
-    {$prefix}margin{$separator}r{$separator}{$size}{$postfix} {
+    {$prefix}margin{$separator}right{$separator}{$size}{$postfix} {
       margin-right: $size;
     }
 
-    {$prefix}space{$separator}h{$separator}{$size}{$postfix} {
-      margin-left: $size;
-      &:first-child {
-        margin-left: 0;
+    {$prefix}space{$separator}horizontal{$separator}{$size}{$postfix} {
+      & > * {
+        margin-left: $size;
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
 
-    {$prefix}space{$separator}v{$separator}{$size}{$postfix} {
-      margin-top: $size;
-      &:first-child {
-        margin-top: 0;
+    {$prefix}space{$separator}vertical{$separator}{$size}{$postfix} {
+      & > * {
+        margin-top: $size;
+        &:first-child {
+          margin-top: 0;
+        }
       }
     }
   }
@@ -250,4 +258,5 @@ make-responsive($prefix, $separator) {
 
 .{$prefix}block {
   make-responsive('&.-', '-');
+  box-sizing: border-box;
 }

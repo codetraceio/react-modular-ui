@@ -3,7 +3,11 @@ import AbstractComponent from './AbstractComponent';
 
 export default class Block extends AbstractComponent {
   getModifiers() {
-    return ['layout'];
+    return [
+      'layout', 'wrap', 'padding', 'margin', 'hide',
+      'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center',
+      'scroll', 'spaceHorizontal', 'spaceVertical'
+    ];
   }
 
   render() {
