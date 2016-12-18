@@ -24,13 +24,25 @@ button-flat($text-color) {
   }
 }
 
+button-glass($text-color) {
+  background-color: rgba(#ffffff, 0.4);
+  color: $text-color;
+  &:hover {
+    background-color: rgba(#ffffff, 0.5);
+  }
+  &:active {
+    background-color: rgba(#ffffff, 0.3);
+  }
+}
+
 .{$prefix}button {
-  button-default($color-default, $color-light);
+  button-default($color-default, #ffffff);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 32px;
   padding: 0 8px;
+  font-weight: bold;
   border-radius: $border-radius;
   cursor: pointer;
   user-select: none;
@@ -54,15 +66,19 @@ button-flat($text-color) {
   }
 
   &.-color-primary {
-    button-default($color-primary, $color-light);
+    button-default($color-primary, #ffffff);
   }
 
   &.-color-success {
-    button-default($color-success, $color-light);
+    button-default($color-success, #ffffff);
   }
 
   &.-color-danger {
-    button-default($color-danger, $color-light);
+    button-default($color-danger, #ffffff);
+  }
+
+  &.-color-light {
+    button-default($color-light, $color-default);
   }
 
   &.-view-flat {
@@ -79,6 +95,30 @@ button-flat($text-color) {
 
   &.-view-flat.-color-danger {
     button-flat($color-danger);
+  }
+
+  &.-view-flat.-color-light {
+    button-flat($color-light);
+  }
+    
+  &.-view-glass {
+    button-glass($color-default);
+  }
+
+  &.-view-glass.-color-primary {
+    button-glass($color-primary);
+  }
+
+  &.-view-glass.-color-success {
+    button-glass($color-success);
+  }
+
+  &.-view-glass.-color-danger {
+    button-glass($color-danger);
+  }
+
+  &.-view-glass.-color-light {
+    button-glass($color-light);
   }
 
   &.-disabled {

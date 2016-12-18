@@ -2,22 +2,23 @@ body {
   font-family: sans-serif;
 }
 .c-button {
-  background-color: #888;
+  background-color: #444;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 32px;
   padding: 0 8px;
+  font-weight: bold;
   border-radius: 0;
   cursor: pointer;
   user-select: none;
 }
 .c-button:hover {
-  background-color: #a2a2a2;
+  background-color: #5e5e5e;
 }
 .c-button:active {
-  background-color: #6f6f6f;
+  background-color: #2b2b2b;
 }
 .c-button.-size-24 {
   height: 24px;
@@ -35,24 +36,24 @@ body {
   font-size: 20px;
 }
 .c-button.-color-primary {
-  background-color: #09b;
+  background-color: #08a;
   color: #fff;
 }
 .c-button.-color-primary:hover {
-  background-color: #00c3ee;
+  background-color: #00b1dd;
 }
 .c-button.-color-primary:active {
-  background-color: #006f88;
+  background-color: #005f77;
 }
 .c-button.-color-success {
-  background-color: #0b9;
+  background-color: #0b6;
   color: #fff;
 }
 .c-button.-color-success:hover {
-  background-color: #00eec3;
+  background-color: #00ee82;
 }
 .c-button.-color-success:active {
-  background-color: #00886f;
+  background-color: #00884a;
 }
 .c-button.-color-danger {
   background-color: #b00;
@@ -64,41 +65,51 @@ body {
 .c-button.-color-danger:active {
   background-color: #800;
 }
+.c-button.-color-light {
+  background-color: #eee;
+  color: #444;
+}
+.c-button.-color-light:hover {
+  background-color: #fff;
+}
+.c-button.-color-light:active {
+  background-color: #d4d4d4;
+}
 .c-button.-view-flat {
   background-color: transparent;
-  color: #888;
+  color: #444;
 }
 .c-button.-view-flat:hover {
   background-color: transparent;
-  color: #a2a2a2;
+  color: #5e5e5e;
 }
 .c-button.-view-flat:active {
   background-color: transparent;
-  color: #6f6f6f;
+  color: #2b2b2b;
 }
 .c-button.-view-flat.-color-primary {
   background-color: transparent;
-  color: #09b;
+  color: #08a;
 }
 .c-button.-view-flat.-color-primary:hover {
   background-color: transparent;
-  color: #00c3ee;
+  color: #00b1dd;
 }
 .c-button.-view-flat.-color-primary:active {
   background-color: transparent;
-  color: #006f88;
+  color: #005f77;
 }
 .c-button.-view-flat.-color-success {
   background-color: transparent;
-  color: #0b9;
+  color: #0b6;
 }
 .c-button.-view-flat.-color-success:hover {
   background-color: transparent;
-  color: #00eec3;
+  color: #00ee82;
 }
 .c-button.-view-flat.-color-success:active {
   background-color: transparent;
-  color: #00886f;
+  color: #00884a;
 }
 .c-button.-view-flat.-color-danger {
   background-color: transparent;
@@ -111,6 +122,68 @@ body {
 .c-button.-view-flat.-color-danger:active {
   background-color: transparent;
   color: #800;
+}
+.c-button.-view-flat.-color-light {
+  background-color: transparent;
+  color: #eee;
+}
+.c-button.-view-flat.-color-light:hover {
+  background-color: transparent;
+  color: #fff;
+}
+.c-button.-view-flat.-color-light:active {
+  background-color: transparent;
+  color: #d4d4d4;
+}
+.c-button.-view-glass {
+  background-color: rgba(255,255,255,0.4);
+  color: #444;
+}
+.c-button.-view-glass:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+.c-button.-view-glass:active {
+  background-color: rgba(255,255,255,0.3);
+}
+.c-button.-view-glass.-color-primary {
+  background-color: rgba(255,255,255,0.4);
+  color: #08a;
+}
+.c-button.-view-glass.-color-primary:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+.c-button.-view-glass.-color-primary:active {
+  background-color: rgba(255,255,255,0.3);
+}
+.c-button.-view-glass.-color-success {
+  background-color: rgba(255,255,255,0.4);
+  color: #0b6;
+}
+.c-button.-view-glass.-color-success:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+.c-button.-view-glass.-color-success:active {
+  background-color: rgba(255,255,255,0.3);
+}
+.c-button.-view-glass.-color-danger {
+  background-color: rgba(255,255,255,0.4);
+  color: #b00;
+}
+.c-button.-view-glass.-color-danger:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+.c-button.-view-glass.-color-danger:active {
+  background-color: rgba(255,255,255,0.3);
+}
+.c-button.-view-glass.-color-light {
+  background-color: rgba(255,255,255,0.4);
+  color: #eee;
+}
+.c-button.-view-glass.-color-light:hover {
+  background-color: rgba(255,255,255,0.5);
+}
+.c-button.-view-glass.-color-light:active {
+  background-color: rgba(255,255,255,0.3);
 }
 .c-button.-disabled {
   opacity: 0.5;
