@@ -2,6 +2,7 @@ import React from 'react';
 import AbstractComponent from './../components/AbstractComponent';
 import Button from './../components/Button';
 import Block from './../components/Block';
+import Input from './../components/Input';
 import '../../styles/dist/default/index.css';
 
 export default class App extends AbstractComponent {
@@ -115,6 +116,10 @@ export default class App extends AbstractComponent {
               </Block>
             </Block>
           </div>
+          <h2>Inputs</h2>
+          <Block spaceHorizontal="8">
+            <Input label="Login" placeholder="Enter your login" />
+          </Block>
         </Block>
       </div>
     );

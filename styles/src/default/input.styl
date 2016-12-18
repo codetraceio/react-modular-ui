@@ -1,0 +1,21 @@
+@import "constants";
+
+.c-input {
+  input {
+    box-sizing: border-box;
+    padding: 4px;
+    font-size: 16px;
+    width: 100%;
+    background: $color-light-grey;
+    border: 1px solid $color-grey;
+    outline: none;
+    &:focus {
+      border: 1px solid $color-primary;
+    }
+  }
+  &--label {
+    font-size: 14px;
+    color: $color-dark-grey;
+    padding: 4px 0;
+  }
+}

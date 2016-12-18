@@ -14,9 +14,9 @@ export default class AbstractUiComponent extends AbstractComponent {
   }
 
   elementClassName(blockName, elementName) {
-    return settings.getClasses().element
+    return `${settings.getPrefix()}${settings.getClasses().element
       .replace('{b}', this.camelCaseToDashCase(blockName))
-      .replace('{e}', this.camelCaseToDashCase(elementName));
+      .replace('{e}', this.camelCaseToDashCase(elementName))}`;
   }
 
   blockModifierClassName(blockName, modifierName) {
@@ -104,10 +104,10 @@ export default class AbstractUiComponent extends AbstractComponent {
     return blockNameClass;
   }
 
-  elementName(elementName, modifiers) {
-    const elementNameClass = this.elementClassName(this.options.blockName, elementName);
+  elementName(blockName, elementName, modifiers) {
+    const elementNameClass = this.elementClassName(blockName, elementName);
 
-    const modifiersClass = this.modifiers(null, elementName, modifiers);
+    const modifiersClass = modifiers instanceof Array ? this.modifiers(null, elementName, modifiers) : '';
 
     if (modifiersClass !== '') {
       return `${elementNameClass} ${modifiersClass}`
