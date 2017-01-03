@@ -8,13 +8,13 @@ gulp.task('default', [
 ]);
 
 gulp.task('scripts-client', () => {
-  return gulp.src(['src/**/*.js', '!src/example/*', '!src/server.js', '!src/settings.js']).pipe(babel({
+  return gulp.src(['src/**/*.js', '!src/example/*', '!src/server.js']).pipe(babel({
     presets: ['react', 'es2015']
   })).pipe(gulp.dest('client'));
 });
 
 gulp.task('scripts-server', () => {
-  return gulp.src(['src/**/*.js', '!src/example/*', '!src/server.js', '!src/settings.js']).pipe(babel({
+  return gulp.src(['src/**/*.js', '!src/example/*', '!src/server.js']).pipe(babel({
     presets: ['react', 'nodejs-lts']
   })).pipe(gulp.dest('server'));
 });
