@@ -1,9 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import App from './example/App';
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export {AbstractComponent} from 'components/AbstractComponent';
+export {AbstractUiComponent} from 'components/AbstractUiComponent';
+export {Block} from 'components/Block';
+export {Button} from 'components/Button';
+export {Input} from 'components/Input';
