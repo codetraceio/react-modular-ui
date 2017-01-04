@@ -49,4 +49,13 @@ Object.defineProperty(exports, 'Input', {
   }
 });
 
+var _settings = require('./settings');
+
+Object.defineProperty(exports, 'settings', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_settings).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

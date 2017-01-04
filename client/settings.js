@@ -21,6 +21,7 @@ var Settings = function () {
       elementModifier: '-{m}',
       elementModifierWithValue: '-{mk}-{mv}'
     };
+    this.iconService = {};
   }
 
   _createClass(Settings, [{
@@ -42,6 +43,21 @@ var Settings = function () {
     key: 'setPrefix',
     value: function setPrefix(prefix) {
       this.prefix = prefix;
+    }
+  }, {
+    key: 'getIcons',
+    value: function getIcons() {
+      return this.icons;
+    }
+  }, {
+    key: 'setIcons',
+    value: function setIcons(icons) {
+      this.icons = icons;
+    }
+  }, {
+    key: 'getIcon',
+    value: function getIcon(name) {
+      return this.icons[name];
     }
   }]);
 

@@ -14,6 +14,7 @@ class Settings {
       elementModifier: '-{m}',
       elementModifierWithValue: '-{mk}-{mv}'
     };
+    this.iconService = {};
   }
 
   getClasses() {
@@ -30,6 +31,18 @@ class Settings {
 
   setPrefix(prefix) {
     this.prefix = prefix;
+  }
+
+  getIcons() {
+    return this.icons;
+  }
+
+  setIcons(icons) {
+    this.icons = icons;
+  }
+
+  getIcon(name) {
+    return this.icons[name];
   }
 }
 
