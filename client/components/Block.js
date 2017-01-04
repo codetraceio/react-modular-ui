@@ -34,7 +34,7 @@ var Block = function (_AbstractUiComponent) {
   _createClass(Block, [{
     key: 'getModifiers',
     value: function getModifiers() {
-      return ['layout', 'wrap', 'padding', 'margin', 'hide', 'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center', 'scroll', 'spaceHorizontal', 'spaceVertical'];
+      return ['layout', 'wrap', 'padding', 'margin', 'hide', 'fit', 'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center', 'scroll', 'spaceHorizontal', 'spaceVertical'];
     }
   }, {
     key: 'render',

@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Block extends _AbstractUiComponent2.default {
   getModifiers() {
-    return ['layout', 'wrap', 'padding', 'margin', 'hide', 'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center', 'scroll', 'spaceHorizontal', 'spaceVertical'];
+    return ['layout', 'wrap', 'padding', 'margin', 'hide', 'fit', 'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center', 'scroll', 'spaceHorizontal', 'spaceVertical'];
   }
 
   render() {
