@@ -4,7 +4,7 @@ import AbstractUiComponent from './AbstractUiComponent';
 export default class Block extends AbstractUiComponent {
   getModifiers() {
     return [
-      'layout', 'wrap', 'padding', 'margin', 'hide',
+      'layout', 'wrap', 'padding', 'margin', 'hide', 'fit',
       'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center',
       'scroll', 'spaceHorizontal', 'spaceVertical'
     ];
