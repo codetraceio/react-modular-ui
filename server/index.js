@@ -40,6 +40,15 @@ Object.defineProperty(exports, 'Button', {
   }
 });
 
+var _Icon = require('./components/Icon');
+
+Object.defineProperty(exports, 'Icon', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Icon).default;
+  }
+});
+
 var _Input = require('./components/Input');
 
 Object.defineProperty(exports, 'Input', {
