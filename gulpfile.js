@@ -32,5 +32,5 @@ gulp.task('styles', () => {
 });
 
 gulp.task('styles-watch', () => {
-  return gulp.watch('styles/src/**/*.styl', ['stylus'])
+  return gulp.watch('styles/src/**/*.styl', ['styles'])
 });

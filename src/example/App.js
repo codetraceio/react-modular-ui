@@ -153,6 +153,101 @@ export default class App extends AbstractComponent {
               </Block>
             </div>
           </Block>
+          <h2>Buttons with icons</h2>
+          <Block layout="horizontal" align="center" spaceHorizontal="8">
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Button size="24">
+                <Icon name="github" size="16" color="light" />
+                <div>default</div>
+              </Button>
+              <Button size="32">
+                <Icon name="github" size="24" color="light" />
+                <div>default</div>
+              </Button>
+              <Button size="48">
+                <Icon name="github" size="32" color="light" />
+                <div>default</div>
+              </Button>
+              <Button size="48" disabled>
+                <Icon name="github" size="32" color="light" />
+                <div>default</div>
+              </Button>
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Button size="24" color="primary">
+                <Icon name="github" size="16" color="light" />
+                <div>primary</div>
+              </Button>
+              <Button size="32" color="primary">
+                <Icon name="github" size="24" color="light" />
+                <div>primary</div>
+              </Button>
+              <Button size="48" color="primary">
+                <Icon name="github" size="32" color="light" />
+                <div>primary</div>
+              </Button>
+              <Button size="48" color="primary" disabled>
+                <Icon name="github" size="32" color="light" />
+                <div>primary</div>
+              </Button>
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Button size="24" color="success">
+                <Icon name="github" size="16" color="light" />
+                <div>success</div>
+              </Button>
+              <Button size="32" color="success">
+                <Icon name="github" size="24" color="light" />
+                <div>success</div>
+              </Button>
+              <Button size="48" color="success">
+                <Icon name="github" size="32" color="light" />
+                <div>success</div>
+              </Button>
+              <Button size="48" color="success" disabled>
+                <Icon name="github" size="32" color="light" />
+                <div>success</div>
+              </Button>
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Button size="24" color="danger">
+                <Icon name="github" size="16" />
+                <div>danger</div>
+              </Button>
+              <Button size="32" color="danger">
+                <Icon name="github" size="24" />
+                <div>danger</div>
+              </Button>
+              <Button size="48" color="danger">
+                <Icon name="github" size="32" />
+                <div>danger</div>
+              </Button>
+              <Button size="48" color="danger" disabled>
+                <Icon name="github" size="32" />
+                <div>danger</div>
+              </Button>
+            </Block>
+            <div style={{backgroundColor:'#777777'}}>
+              <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+                <Button size="24" color="light">
+                  <Icon name="github" size="16" />
+                  <div>light</div>
+                </Button>
+                <Button size="32" color="light">
+                  <Icon name="github" size="24" />
+                  <div>light</div>
+                </Button>
+                <Button size="48" color="light">
+                  <Icon name="github" size="32" />
+                  <div>light</div>
+                </Button>
+                <Button size="48" color="light" disabled>
+                  <Icon name="github" size="32" />
+                  <div>light</div>
+                </Button>
+              </Block>
+            </div>
+          </Block>
           <h2>Inputs</h2>
           <Block spaceHorizontal="8">
             <Input label="Login" placeholder="Enter your login" />

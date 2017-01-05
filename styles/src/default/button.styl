@@ -51,18 +51,36 @@ button-glass($text-color) {
     height: 24px;
     padding: 0 4px;
     font-size: 14px;
+    & > * {
+      margin-left: 4px;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
   &.-size-32 {
     height: 32px;
     padding: 0 8px;
     font-size: 16px;
+    & > * {
+      margin-left: 8px;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
   &.-size-48 {
     height: 48px;
     padding: 0 16px;
     font-size: 20px;
+    & > * {
+      margin-left: 10px;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
   &.-color-primary {
