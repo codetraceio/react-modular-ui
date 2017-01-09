@@ -1,8 +1,10 @@
 import React from 'react';
+
 import Button from './../components/Button';
 import Block from './../components/Block';
 import Input from './../components/Input';
 import Icon from './../components/Icon';
+import Loading from './../components/Loading';
 import settings from './../settings';
 
 import '../../styles/dist/default/index.css';
@@ -250,6 +252,15 @@ export default class App extends React.Component {
           <h2>Inputs</h2>
           <Block spaceHorizontal="8">
             <Input label="Login" placeholder="Enter your login" />
+          </Block>
+          <h2>Loading</h2>
+          <Block layout="horizontal" align="center" spaceHorizontal="8">
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Loading size="16" />
+              <Loading size="24" />
+              <Loading size="32" />
+              <Loading size="48" />
+            </Block>
           </Block>
         </Block>
       </div>

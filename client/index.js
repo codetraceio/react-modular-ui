@@ -13,15 +13,6 @@ Object.defineProperty(exports, 'AbstractComponent', {
   }
 });
 
-var _AbstractUiComponent = require('./components/AbstractUiComponent');
-
-Object.defineProperty(exports, 'AbstractUiComponent', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_AbstractUiComponent).default;
-  }
-});
-
 var _Block = require('./components/Block');
 
 Object.defineProperty(exports, 'Block', {
@@ -55,6 +46,15 @@ Object.defineProperty(exports, 'Input', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Input).default;
+  }
+});
+
+var _Loading = require('./components/Loading');
+
+Object.defineProperty(exports, 'Loading', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Loading).default;
   }
 });
 

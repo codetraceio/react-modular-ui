@@ -14152,3 +14152,26 @@ body {
   color: #444;
   padding: 4px 0;
 }
+.c-loading svg {
+  width: 24px;
+  height: 24px;
+}
+.c-loading circle {
+  stroke: #08a;
+}
+.c-loading.-size-16 svg {
+  height: 16px;
+  width: 16px;
+}
+.c-loading.-size-24 svg {
+  height: 24px;
+  width: 24px;
+}
+.c-loading.-size-32 svg {
+  height: 32px;
+  width: 32px;
+}
+.c-loading.-size-48 svg {
+  height: 48px;
+  width: 48px;
+}

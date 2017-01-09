@@ -8,13 +8,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AbstractUiComponent = require('./AbstractUiComponent');
+var _AbstractComponent = require('./AbstractComponent');
 
-var _AbstractUiComponent2 = _interopRequireDefault(_AbstractUiComponent);
+var _AbstractComponent2 = _interopRequireDefault(_AbstractComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Block extends _AbstractUiComponent2.default {
+class Block extends _AbstractComponent2.default {
   getModifiers() {
     return ['layout', 'wrap', 'padding', 'margin', 'hide', 'fit', 'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center', 'scroll', 'spaceHorizontal', 'spaceVertical'];
   }

@@ -8,9 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AbstractUiComponent = require('./AbstractUiComponent');
+var _AbstractComponent = require('./AbstractComponent');
 
-var _AbstractUiComponent2 = _interopRequireDefault(_AbstractUiComponent);
+var _AbstractComponent2 = _interopRequireDefault(_AbstractComponent);
 
 var _settings = require('../settings');
 
@@ -18,7 +18,7 @@ var _settings2 = _interopRequireDefault(_settings);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Button extends _AbstractUiComponent2.default {
+class Button extends _AbstractComponent2.default {
   getModifiers() {
     return ['size', 'color'];
   }
