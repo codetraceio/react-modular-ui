@@ -1,8 +1,8 @@
 import React from 'react';
-import AbstractUiComponent from './AbstractUiComponent';
+import AbstractComponent from './AbstractComponent';
 import settings from '../settings';
 
-export default class Button extends AbstractUiComponent {
+export default class Button extends AbstractComponent {
   getModifiers() {
     return ['size', 'color'];
   }

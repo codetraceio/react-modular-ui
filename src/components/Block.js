@@ -1,7 +1,7 @@
 import React from 'react';
-import AbstractUiComponent from './AbstractUiComponent';
+import AbstractComponent from './AbstractComponent';
 
-export default class Block extends AbstractUiComponent {
+export default class Block extends AbstractComponent {
   getModifiers() {
     return [
       'layout', 'wrap', 'padding', 'margin', 'hide', 'fit',

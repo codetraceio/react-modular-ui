@@ -1,7 +1,7 @@
 import React from 'react';
-import AbstractUiComponent from './AbstractUiComponent';
+import AbstractComponent from './AbstractComponent';
 
-export default class Input extends AbstractUiComponent {
+export default class Input extends AbstractComponent {
   getModifiers() {
     return ['size', 'view', 'color', 'disabled'];
   }
