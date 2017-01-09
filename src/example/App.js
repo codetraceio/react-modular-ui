@@ -261,6 +261,32 @@ export default class App extends React.Component {
               <Loading size="32" />
               <Loading size="48" />
             </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Loading size="16" color="primary" />
+              <Loading size="24" color="primary" />
+              <Loading size="32" color="primary" />
+              <Loading size="48" color="primary" />
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Loading size="16" color="success" />
+              <Loading size="24" color="success" />
+              <Loading size="32" color="success" />
+              <Loading size="48" color="success" />
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Loading size="16" color="danger" />
+              <Loading size="24" color="danger" />
+              <Loading size="32" color="danger" />
+              <Loading size="48" color="danger" />
+            </Block>
+            <div style={{backgroundColor:'#777777'}}>
+              <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+                <Loading size="16" color="light" />
+                <Loading size="24" color="light" />
+                <Loading size="32" color="light" />
+                <Loading size="48" color="light" />
+              </Block>
+            </div>
           </Block>
         </Block>
       </div>

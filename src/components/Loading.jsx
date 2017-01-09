@@ -3,7 +3,7 @@ import AbstractComponent from './AbstractComponent';
 
 export default class Loading extends AbstractComponent {
   getModifiers() {
-    return ['size'];
+    return ['size', 'color'];
   }
 
   render() {

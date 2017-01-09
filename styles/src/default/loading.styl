@@ -7,7 +7,7 @@
   }
 
   circle {
-    stroke: $color-primary;
+    stroke: $color-default;
   }
 
   &.-size-16 svg {
@@ -28,5 +28,21 @@
   &.-size-48 svg {
     height: 48px;
     width: 48px;
+  }
+
+  &.-color-primary circle {
+    stroke: $color-primary;
+  }
+
+  &.-color-success circle {
+    stroke: $color-success;
+  }
+
+  &.-color-danger circle {
+    stroke: $color-danger;
+  }
+
+  &.-color-light circle {
+    stroke: $color-light;
   }
 }

@@ -14157,7 +14157,7 @@ body {
   height: 24px;
 }
 .c-loading circle {
-  stroke: #08a;
+  stroke: #444;
 }
 .c-loading.-size-16 svg {
   height: 16px;
@@ -14174,4 +14174,16 @@ body {
 .c-loading.-size-48 svg {
   height: 48px;
   width: 48px;
+}
+.c-loading.-color-primary circle {
+  stroke: #08a;
+}
+.c-loading.-color-success circle {
+  stroke: #0b6;
+}
+.c-loading.-color-danger circle {
+  stroke: #b00;
+}
+.c-loading.-color-light circle {
+  stroke: #eee;
 }
