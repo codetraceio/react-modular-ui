@@ -37,7 +37,7 @@ export default class App extends React.Component {
       }, {
         title: 'Following',
         value: 'following',
-        count: 12
+        count: 1
       }
     ];
   }

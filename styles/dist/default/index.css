@@ -14195,10 +14195,15 @@ body {
   stroke: #eee;
 }
 .c-pill {
+  font-size: 14px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 12px;
+  min-width: 12px;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  height: 24px;
-  padding: 8px;
+  justify-content: center;
   background-color: #444;
   color: #fff;
   border-radius: 50%;
@@ -14224,6 +14229,7 @@ body {
   height: 16px;
   padding: 0 4px;
   border-radius: 8px;
+  min-width: 8px;
   font-weight: bold;
 }
 .c-pill.-size-24 {
@@ -14231,6 +14237,7 @@ body {
   height: 24px;
   padding: 0 6px;
   border-radius: 12px;
+  min-width: 12px;
   font-weight: bold;
 }
 .c-pill.-size-32 {
@@ -14238,6 +14245,7 @@ body {
   height: 32px;
   padding: 0 8px;
   border-radius: 16px;
+  min-width: 16px;
   font-weight: bold;
 }
 .c-pill.-size-48 {
@@ -14245,6 +14253,7 @@ body {
   height: 48px;
   padding: 0 12px;
   border-radius: 24px;
+  min-width: 24px;
   font-weight: bold;
 }
 .c-tabs {
