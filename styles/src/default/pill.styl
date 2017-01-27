@@ -1,0 +1,56 @@
+@import "constants.styl";
+
+pill-default($background-color, $color) {
+  background-color: $background-color;
+  color: $color;
+}
+
+pill-size($size, $font-size) {
+  font-size: $font-size;
+  height: $size;
+  padding: 0 ($size / 4);
+  border-radius: ($size / 2);
+  font-weight: bold;
+}
+
+.c-pill {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 8px;
+  background-color: $color-default;
+  color: #ffffff;
+  border-radius: 50%;
+
+  &.-color-primary {
+    pill-default($color-primary, #ffffff);
+  }
+
+  &.-color-success {
+    pill-default($color-success, #ffffff);
+  }
+
+  &.-color-danger {
+    pill-default($color-danger, #ffffff);
+  }
+
+  &.-color-light {
+    pill-default($color-light, $color-default);
+  }
+
+  &.-size-16 {
+    pill-size(16px, 12px);
+  }
+
+  &.-size-24 {
+    pill-size(24px, 14px);
+  }
+
+  &.-size-32 {
+    pill-size(32px, 16px);
+  }
+
+  &.-size-48 {
+    pill-size(48px, 20px);
+  }
+}

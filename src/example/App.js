@@ -5,6 +5,8 @@ import Block from './../components/Block';
 import Input from './../components/Input';
 import Icon from './../components/Icon';
 import Loading from './../components/Loading';
+import Pill from './../components/Pill';
+import Tabs from './../components/Tabs';
 import settings from './../settings';
 
 import '../../styles/dist/default/index.css';
@@ -14,6 +16,38 @@ settings.setIcons({
 });
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tabValue: 'profile'
+    };
+  }
+
+  getTabOptions() {
+    return [
+      {
+        title: 'Profile',
+        value: 'profile'
+      }, {
+        title: 'Followers',
+        value: 'followers',
+        count: 151,
+        countColor: 'primary'
+      }, {
+        title: 'Following',
+        value: 'following',
+        count: 12
+      }
+    ];
+  }
+
+  onChangeTab(value) {
+    this.setState({
+      tabValue: value
+    });
+  }
+
   render() {
     return (
       <div className="app">
@@ -285,6 +319,55 @@ export default class App extends React.Component {
                 <Loading size="24" color="light" />
                 <Loading size="32" color="light" />
                 <Loading size="48" color="light" />
+              </Block>
+            </div>
+          </Block>
+          <h2>Tabs</h2>
+          <Tabs
+            size="24"
+            options={this.getTabOptions()}
+            value={this.state.tabValue}
+            onChange={(value) => this.onChangeTab(value)}
+          />
+          <Tabs
+            size="32"
+            options={this.getTabOptions()}
+            value={this.state.tabValue}
+            onChange={(value) => this.onChangeTab(value)}
+          />
+          <Tabs
+            size="48"
+            options={this.getTabOptions()}
+            value={this.state.tabValue}
+            onChange={(value) => this.onChangeTab(value)}
+          />
+          <h2>Pills</h2>
+          <Block layout="horizontal" align="center" spaceHorizontal="8">
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Pill size="24">default</Pill>
+              <Pill size="32">default</Pill>
+              <Pill size="48">default</Pill>
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Pill size="24" color="primary">primary</Pill>
+              <Pill size="32" color="primary">primary</Pill>
+              <Pill size="48" color="primary">primary</Pill>
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Pill size="24" color="success">success</Pill>
+              <Pill size="32" color="success">success</Pill>
+              <Pill size="48" color="success">success</Pill>
+            </Block>
+            <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+              <Pill size="24" color="danger">danger</Pill>
+              <Pill size="32" color="danger">danger</Pill>
+              <Pill size="48" color="danger">danger</Pill>
+            </Block>
+            <div style={{backgroundColor:'#777777'}}>
+              <Block layout="vertical" align="center" spaceVertical="8" padding="8">
+                <Pill size="24" color="light">light</Pill>
+                <Pill size="32" color="light">light</Pill>
+                <Pill size="48" color="light">light</Pill>
               </Block>
             </div>
           </Block>

@@ -1,0 +1,43 @@
+@import "constants.styl";
+
+tabs-option-size($size, $font-size) {
+  height: ($size - 1);
+  font-size: $font-size;
+  padding: 0 ($size / 4);
+
+  & > * {
+    margin-left: ($size / 4);
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.c-tabs {
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid $color-light-grey;
+  &--option {
+    tabs-option-size(24px, 14px);
+    display: flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+  }
+  &--line {
+    position: absolute;
+    bottom: -1px;
+    height: 2px;
+    background-color: $color-primary;
+    transition: left .3s ease-in-out, width .3s ease-in-out;
+  }
+  &.-size-24 &--option {
+    tabs-option-size(24px, 14px);
+  }
+  &.-size-32 &--option {
+    tabs-option-size(32px, 16px);
+  }
+  &.-size-48 &--option {
+    tabs-option-size(48px, 20px);
+  }
+}

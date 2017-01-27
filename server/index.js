@@ -58,6 +58,24 @@ Object.defineProperty(exports, 'Loading', {
   }
 });
 
+var _Pill = require('./components/Pill');
+
+Object.defineProperty(exports, 'Pill', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Pill).default;
+  }
+});
+
+var _Tabs = require('./components/Tabs');
+
+Object.defineProperty(exports, 'Tabs', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Tabs).default;
+  }
+});
+
 var _settings = require('./settings');
 
 Object.defineProperty(exports, 'settings', {

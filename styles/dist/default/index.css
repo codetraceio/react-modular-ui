@@ -13865,11 +13865,12 @@ body {
 .c-button {
   background-color: #444;
   color: #fff;
+  height: 24px;
+  padding: 0 6px;
+  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 32px;
-  padding: 0 8px;
   font-weight: bold;
   border-radius: 0;
   cursor: pointer;
@@ -13881,13 +13882,19 @@ body {
 .c-button:active {
   background-color: #2b2b2b;
 }
+.c-button > * {
+  margin-left: 6px;
+}
+.c-button > *:first-child {
+  margin-left: 0;
+}
 .c-button.-size-24 {
   height: 24px;
-  padding: 0 4px;
+  padding: 0 6px;
   font-size: 14px;
 }
 .c-button.-size-24 > * {
-  margin-left: 4px;
+  margin-left: 6px;
 }
 .c-button.-size-24 > *:first-child {
   margin-left: 0;
@@ -13905,11 +13912,11 @@ body {
 }
 .c-button.-size-48 {
   height: 48px;
-  padding: 0 16px;
+  padding: 0 12px;
   font-size: 20px;
 }
 .c-button.-size-48 > * {
-  margin-left: 10px;
+  margin-left: 12px;
 }
 .c-button.-size-48 > *:first-child {
   margin-left: 0;
@@ -14186,4 +14193,117 @@ body {
 }
 .c-loading.-color-light circle {
   stroke: #eee;
+}
+.c-pill {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 8px;
+  background-color: #444;
+  color: #fff;
+  border-radius: 50%;
+}
+.c-pill.-color-primary {
+  background-color: #08a;
+  color: #fff;
+}
+.c-pill.-color-success {
+  background-color: #0b6;
+  color: #fff;
+}
+.c-pill.-color-danger {
+  background-color: #b00;
+  color: #fff;
+}
+.c-pill.-color-light {
+  background-color: #eee;
+  color: #444;
+}
+.c-pill.-size-16 {
+  font-size: 12px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.c-pill.-size-24 {
+  font-size: 14px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+.c-pill.-size-32 {
+  font-size: 16px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 16px;
+  font-weight: bold;
+}
+.c-pill.-size-48 {
+  font-size: 20px;
+  height: 48px;
+  padding: 0 12px;
+  border-radius: 24px;
+  font-weight: bold;
+}
+.c-tabs {
+  display: flex;
+  position: relative;
+  border-bottom: 1px solid #eee;
+}
+.c-tabs--option {
+  height: 23px;
+  font-size: 14px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+.c-tabs--option > * {
+  margin-left: 6px;
+}
+.c-tabs--option > *:first-child {
+  margin-left: 0;
+}
+.c-tabs--line {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  background-color: #08a;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+.c-tabs.-size-24 .c-tabs--option {
+  height: 23px;
+  font-size: 14px;
+  padding: 0 6px;
+}
+.c-tabs.-size-24 .c-tabs--option > * {
+  margin-left: 6px;
+}
+.c-tabs.-size-24 .c-tabs--option > *:first-child {
+  margin-left: 0;
+}
+.c-tabs.-size-32 .c-tabs--option {
+  height: 31px;
+  font-size: 16px;
+  padding: 0 8px;
+}
+.c-tabs.-size-32 .c-tabs--option > * {
+  margin-left: 8px;
+}
+.c-tabs.-size-32 .c-tabs--option > *:first-child {
+  margin-left: 0;
+}
+.c-tabs.-size-48 .c-tabs--option {
+  height: 47px;
+  font-size: 20px;
+  padding: 0 12px;
+}
+.c-tabs.-size-48 .c-tabs--option > * {
+  margin-left: 12px;
+}
+.c-tabs.-size-48 .c-tabs--option > *:first-child {
+  margin-left: 0;
 }
