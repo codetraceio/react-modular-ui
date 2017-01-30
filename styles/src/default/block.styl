@@ -199,6 +199,20 @@ make-layout($prefix, $separator, $postfix) {
       }
     }
   }
+
+  for $size in $block-sizes {
+    {$prefix}width{$separator}{$size}{$postfix} {
+      width: $size;
+      min-width: $size;
+      max-width: $size;
+    }
+
+    {$prefix}height{$separator}{$size}{$postfix} {
+      height: $size;
+      min-height: $size;
+      max-height: $size;
+    }
+  }
 }
 
 make-fixed($prefix, $separator, $postfix) {

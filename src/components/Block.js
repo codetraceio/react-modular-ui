@@ -6,7 +6,8 @@ export default class Block extends AbstractComponent {
     return [
       'layout', 'wrap', 'padding', 'margin', 'hide', 'fit',
       'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center',
-      'scroll', 'spaceHorizontal', 'spaceVertical'
+      'scroll', 'spaceHorizontal', 'spaceVertical',
+      'height', 'width'
     ];
   }
 
