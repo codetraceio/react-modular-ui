@@ -284,8 +284,10 @@ export default class App extends React.Component {
             </div>
           </Block>
           <h2>Inputs</h2>
-          <Block spaceHorizontal="8">
-            <Input label="Login" placeholder="Enter your login" />
+          <Block spaceVertical="8">
+            <Input size="24" label="Login" placeholder="Enter your login" />
+            <Input size="32" label="Login" placeholder="Enter your login" />
+            <Input size="48" label="Login" placeholder="Enter your login" />
           </Block>
           <h2>Loading</h2>
           <Block layout="horizontal" align="center" spaceHorizontal="8">

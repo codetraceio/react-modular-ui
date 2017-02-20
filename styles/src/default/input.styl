@@ -1,10 +1,15 @@
 @import "constants.styl";
 
+input-size($size, $font-size) {
+  height: $size;
+  padding: 0 ($size / 4);
+  font-size: $font-size;
+}
+
 .c-input {
   input {
+    input-size(24px, 14px);
     box-sizing: border-box;
-    padding: 4px;
-    font-size: 16px;
     width: 100%;
     background: $color-light-grey;
     border: 1px solid $color-grey;
@@ -17,5 +22,14 @@
     font-size: 14px;
     color: $color-dark-grey;
     padding: 4px 0;
+  }
+  &.-size-24 input {
+    input-size(24px, 14px);
+  }
+  &.-size-32 input {
+    input-size(32px, 16px);
+  }
+  &.-size-48 input {
+    input-size(48px, 18px);
   }
 }

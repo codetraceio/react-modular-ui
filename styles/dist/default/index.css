@@ -14893,9 +14893,10 @@ body {
   fill: #eee;
 }
 .c-input input {
+  height: 24px;
+  padding: 0 6px;
+  font-size: 14px;
   box-sizing: border-box;
-  padding: 4px;
-  font-size: 16px;
   width: 100%;
   background: #eee;
   border: 1px solid #bbb;
@@ -14908,6 +14909,21 @@ body {
   font-size: 14px;
   color: #444;
   padding: 4px 0;
+}
+.c-input.-size-24 input {
+  height: 24px;
+  padding: 0 6px;
+  font-size: 14px;
+}
+.c-input.-size-32 input {
+  height: 32px;
+  padding: 0 8px;
+  font-size: 16px;
+}
+.c-input.-size-48 input {
+  height: 48px;
+  padding: 0 12px;
+  font-size: 18px;
 }
 .c-loading svg {
   width: 24px;
