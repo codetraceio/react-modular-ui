@@ -6,6 +6,14 @@ export default class Input extends AbstractComponent {
     return ['size', 'view', 'color', 'disabled'];
   }
 
+  delegateEvent(eventName) {
+    return (event) => {
+      if (typeof this.props[eventName] === 'function') {
+        this.props[eventName](event.target.value, event);
+      }
+    };
+  }
+
   renderLabel() {
     return this.props.label ? (
       <div className={this.elementName('input', 'label')}>{this.props.label}</div>
@@ -20,12 +28,12 @@ export default class Input extends AbstractComponent {
           placeholder={this.props.placeholder}
           value={this.props.value}
           disabled={this.props.disabled}
-          onChange={this.props.onChange}
-          onKeyDown={this.props.onKeyDown}
-          onKeyUp={this.props.onKeyUp}
-          onKeyPress={this.props.onKeyPress}
-          onFocus={this.props.onFocus}
-          onBlur={this.props.onBlur}
+          onChange={this.delegateEvent('onChange')}
+          onKeyDown={this.delegateEvent('onKeyDown')}
+          onKeyUp={this.delegateEvent('onKeyUp')}
+          onKeyPress={this.delegateEvent('onKeyPress')}
+          onFocus={this.delegateEvent('onFocus')}
+          onBlur={this.delegateEvent('onBlur')}
         />
       </div>
     )

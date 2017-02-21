@@ -20,7 +20,8 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      tabValue: 'profile'
+      tabValue: 'profile',
+      inputValue: ''
     };
   }
 
@@ -45,6 +46,12 @@ export default class App extends React.Component {
   onChangeTab(value) {
     this.setState({
       tabValue: value
+    });
+  }
+
+  onChangeInput(value) {
+    this.setState({
+      inputValue: value
     });
   }
 
@@ -285,9 +292,27 @@ export default class App extends React.Component {
           </Block>
           <h2>Inputs</h2>
           <Block spaceVertical="8">
-            <Input size="24" label="Login" placeholder="Enter your login" />
-            <Input size="32" label="Login" placeholder="Enter your login" />
-            <Input size="48" label="Login" placeholder="Enter your login" />
+            <Input
+              size="24"
+              label="Login"
+              placeholder="Enter your login"
+              value={this.state.inputValue}
+              onChange={(value) => this.onChangeInput(value)}
+            />
+            <Input
+              size="32"
+              label="Login"
+              placeholder="Enter your login"
+              value={this.state.inputValue}
+              onChange={(value) => this.onChangeInput(value)}
+            />
+            <Input
+              size="48"
+              label="Login"
+              placeholder="Enter your login"
+              value={this.state.inputValue}
+              onChange={(value) => this.onChangeInput(value)}
+            />
           </Block>
           <h2>Loading</h2>
           <Block layout="horizontal" align="center" spaceHorizontal="8">

@@ -37,6 +37,17 @@ var Input = function (_AbstractComponent) {
       return ['size', 'view', 'color', 'disabled'];
     }
   }, {
+    key: 'delegateEvent',
+    value: function delegateEvent(eventName) {
+      var _this2 = this;
+
+      return function (event) {
+        if (typeof _this2.props[eventName] === 'function') {
+          _this2.props[eventName](event.target.value, event);
+        }
+      };
+    }
+  }, {
     key: 'renderLabel',
     value: function renderLabel() {
       return this.props.label ? _react2.default.createElement(
@@ -56,12 +67,12 @@ var Input = function (_AbstractComponent) {
           placeholder: this.props.placeholder,
           value: this.props.value,
           disabled: this.props.disabled,
-          onChange: this.props.onChange,
-          onKeyDown: this.props.onKeyDown,
-          onKeyUp: this.props.onKeyUp,
-          onKeyPress: this.props.onKeyPress,
-          onFocus: this.props.onFocus,
-          onBlur: this.props.onBlur
+          onChange: this.delegateEvent('onChange'),
+          onKeyDown: this.delegateEvent('onKeyDown'),
+          onKeyUp: this.delegateEvent('onKeyUp'),
+          onKeyPress: this.delegateEvent('onKeyPress'),
+          onFocus: this.delegateEvent('onFocus'),
+          onBlur: this.delegateEvent('onBlur')
         })
       );
     }
