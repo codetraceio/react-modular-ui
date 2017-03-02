@@ -14826,7 +14826,7 @@ body {
   pointer-events: none;
 }
 .c-icon {
-  display: block;
+  display: inline-block;
   fill: currentColor;
 }
 .c-icon svg {
