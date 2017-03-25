@@ -15022,6 +15022,37 @@ body {
   min-width: 24px;
   font-weight: bold;
 }
+.c-progress {
+  background: #eee;
+}
+.c-progress--line {
+  height: 4px;
+  background: #444;
+}
+.c-progress.-size-4 .c-progress--line {
+  height: 4px;
+}
+.c-progress.-size-8 .c-progress--line {
+  height: 8px;
+}
+.c-progress.-size-16 .c-progress--line {
+  height: 16px;
+}
+.c-progress.-color-primary .c-progress--line {
+  background: #08a;
+}
+.c-progress.-color-success .c-progress--line {
+  background: #0b6;
+}
+.c-progress.-color-danger .c-progress--line {
+  background: #b00;
+}
+.c-progress.-color-light {
+  background: rgba(255,255,255,0.5);
+}
+.c-progress.-color-light .c-progress--line {
+  background: #fff;
+}
 .c-tabs {
   display: flex;
   position: relative;

@@ -7,6 +7,7 @@ import Icon from './../components/Icon';
 import Loading from './../components/Loading';
 import Pill from './../components/Pill';
 import Tabs from './../components/Tabs';
+import Progress from './../components/Progress';
 import settings from './../settings';
 
 import '../../styles/dist/default/index.css';
@@ -398,6 +399,18 @@ export default class App extends React.Component {
               </Block>
             </div>
           </Block>
+          <h2>Progress</h2>
+          <Block spaceVertical="8" padding="8">
+            <Progress size="4" value="40" />
+            <Progress size="4" color="primary" value="40" />
+            <Progress size="4" color="success" value="40" />
+            <Progress size="4" color="danger" value="40" />
+          </Block>
+          <div style={{backgroundColor:'#777777'}}>
+            <Block spaceVertical="8" padding="8">
+              <Progress size="4" color="light" value="40" />
+            </Block>
+          </div>
         </Block>
       </div>
     );

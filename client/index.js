@@ -76,6 +76,15 @@ Object.defineProperty(exports, 'Tabs', {
   }
 });
 
+var _Progress = require('./components/Progress');
+
+Object.defineProperty(exports, 'Progress', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Progress).default;
+  }
+});
+
 var _settings = require('./settings');
 
 Object.defineProperty(exports, 'settings', {

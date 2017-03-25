@@ -1,0 +1,42 @@
+@import "constants.styl";
+
+.c-progress {
+  background: $color-light-grey;
+
+  &--line {
+    height: 4px;
+    background: $color-default;
+  }
+
+  &.-size-4 &--line {
+    height: 4px;
+  }
+
+  &.-size-8 &--line {
+    height: 8px;
+  }
+
+  &.-size-16 &--line {
+    height: 16px;
+  }
+
+  &.-color-primary &--line {
+    background: $color-primary;
+  }
+
+  &.-color-success &--line {
+    background: $color-success;
+  }
+
+  &.-color-danger &--line {
+    background: $color-danger;
+  }
+
+  &.-color-light {
+    background: rgba($color-white, .5);
+  }
+
+  &.-color-light &--line {
+    background: $color-white;
+  }
+}
