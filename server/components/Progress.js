@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Progress extends _AbstractComponent2.default {
   getModifiers() {
-    return ['color'];
+    return ['color', 'size'];
   }
 
   render() {

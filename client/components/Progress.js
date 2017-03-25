@@ -34,7 +34,7 @@ var Progress = function (_AbstractComponent) {
   _createClass(Progress, [{
     key: 'getModifiers',
     value: function getModifiers() {
-      return ['color'];
+      return ['color', 'size'];
     }
   }, {
     key: 'render',

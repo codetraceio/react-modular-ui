@@ -976,6 +976,16 @@ body {
   min-height: 32px;
   max-height: 32px;
 }
+.c-block.-width-24 {
+  width: 24px;
+  min-width: 24px;
+  max-width: 24px;
+}
+.c-block.-height-24 {
+  height: 24px;
+  min-height: 24px;
+  max-height: 24px;
+}
 @media (max-width: 480px) {
   .c-block.-layout-horizontal-xxs-down {
     display: flex;
@@ -1948,6 +1958,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-xxs-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xxs-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (max-width: 768px) {
@@ -2923,6 +2943,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-xs-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xs-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 @media (max-width: 1024px) {
   .c-block.-layout-horizontal-s-down {
@@ -3896,6 +3926,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-s-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-s-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (max-width: 1280px) {
@@ -4871,6 +4911,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-m-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-m-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 @media (max-width: 1440px) {
   .c-block.-layout-horizontal-l-down {
@@ -5844,6 +5894,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-l-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-l-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (max-width: 1920px) {
@@ -6819,6 +6879,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-xl-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xl-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 @media (max-width: 2560px) {
   .c-block.-layout-horizontal-xxl-down {
@@ -7792,6 +7862,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-xxl-down {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xxl-down {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (min-width: 481px) {
@@ -8767,6 +8847,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-xxs-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xxs-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 @media (min-width: 769px) {
   .c-block.-layout-horizontal-xs-up {
@@ -9740,6 +9830,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-xs-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xs-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (min-width: 1025px) {
@@ -10715,6 +10815,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-s-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-s-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 @media (min-width: 1281px) {
   .c-block.-layout-horizontal-m-up {
@@ -11688,6 +11798,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-m-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-m-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (min-width: 1441px) {
@@ -12663,6 +12783,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-l-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-l-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 @media (min-width: 1921px) {
   .c-block.-layout-horizontal-xl-up {
@@ -13636,6 +13766,16 @@ body {
     height: 32px;
     min-height: 32px;
     max-height: 32px;
+  }
+  .c-block.-width-24-xl-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xl-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
   }
 }
 @media (min-width: 2561px) {
@@ -14611,6 +14751,16 @@ body {
     min-height: 32px;
     max-height: 32px;
   }
+  .c-block.-width-24-xxl-up {
+    width: 24px;
+    min-width: 24px;
+    max-width: 24px;
+  }
+  .c-block.-height-24-xxl-up {
+    height: 24px;
+    min-height: 24px;
+    max-height: 24px;
+  }
 }
 .c-button {
   background-color: #444;
@@ -15024,6 +15174,8 @@ body {
 }
 .c-progress {
   background: #eee;
+  width: 100%;
+  flex: 1;
 }
 .c-progress--line {
   height: 4px;
