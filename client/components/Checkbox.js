@@ -14,6 +14,10 @@ var _AbstractComponent2 = require('./AbstractComponent');
 
 var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
 
+var _Icon = require('./Icon');
+
+var _Icon2 = _interopRequireDefault(_Icon);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34,20 +38,36 @@ var Button = function (_AbstractComponent) {
   _createClass(Button, [{
     key: 'getModifiers',
     value: function getModifiers() {
-      return ['size', 'view', 'color', 'shape', 'disabled'];
+      return ['size', 'view', 'color', 'disabled'];
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange(e) {
+      if (typeof this.props.onChange === 'function') {
+        this.props.onChange(!this.props.checked, e);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         {
-          className: this.blockName('button', this.getModifiers()),
+          className: this.blockName('checkbox', this.getModifiers()),
           'data-name': this.props.name,
           tabIndex: '1',
-          onClick: this.props.onClick
+          onClick: function onClick(e) {
+            return _this2.onChange(e);
+          }
         },
-        this.props.children
+        _react2.default.createElement(_Icon2.default, { size: this.props.size, name: this.props.checked ? 'checkbox-checked' : 'checkbox' }),
+        _react2.default.createElement(
+          'div',
+          null,
+          this.props.children
+        )
       );
     }
   }]);

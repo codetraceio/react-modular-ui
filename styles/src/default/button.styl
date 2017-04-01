@@ -50,13 +50,14 @@ button-size($size, $font-size) {
 .{$prefix}button {
   button-default($color-default, #ffffff);
   button-size(24px, 14px);
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   border-radius: $border-radius;
   cursor: pointer;
   user-select: none;
+  outline: none;
 
   &.-size-24 {
     button-size(24px, 14px);

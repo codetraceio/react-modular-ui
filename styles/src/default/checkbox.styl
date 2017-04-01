@@ -1,0 +1,27 @@
+.c-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  color: $color-dark-grey;
+  outline: none;
+
+  &.-disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+  &.-size-16 {
+    font-size: 14px;
+  }
+  &.-size-24 {
+    font-size: 16px;
+  }
+  &.-size-32 {
+    font-size: 20px;
+  }
+  & > * {
+    margin-left: 4px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

@@ -14768,13 +14768,14 @@ body {
   height: 24px;
   padding: 0 6px;
   font-size: 14px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   border-radius: 0;
   cursor: pointer;
   user-select: none;
+  outline: none;
 }
 .c-button:hover {
   background-color: #5e5e5e;
@@ -14975,8 +14976,34 @@ body {
   opacity: 0.5;
   pointer-events: none;
 }
+.c-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  color: #444;
+  outline: none;
+}
+.c-checkbox.-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.c-checkbox.-size-16 {
+  font-size: 14px;
+}
+.c-checkbox.-size-24 {
+  font-size: 16px;
+}
+.c-checkbox.-size-32 {
+  font-size: 20px;
+}
+.c-checkbox > * {
+  margin-left: 4px;
+}
+.c-checkbox > *:first-child {
+  margin-left: 0;
+}
 .c-icon {
-  display: inline-block;
+  display: inline-flex;
   fill: currentColor;
 }
 .c-icon svg {
@@ -15074,6 +15101,9 @@ body {
   height: 48px;
   padding: 0 12px;
   font-size: 18px;
+}
+.c-loading {
+  display: inline-flex;
 }
 .c-loading svg {
   width: 24px;
