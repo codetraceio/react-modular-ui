@@ -41,6 +41,7 @@ class Input extends _AbstractComponent2.default {
       { className: this.blockName('input', this.getModifiers()) },
       this.renderLabel(),
       _react2.default.createElement('input', {
+        name: this.props.name,
         placeholder: this.props.placeholder,
         value: this.props.value,
         disabled: this.props.disabled,

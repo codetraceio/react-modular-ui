@@ -15002,6 +15002,12 @@ body {
 .c-checkbox > *:first-child {
   margin-left: 0;
 }
+.c-checkbox[aria-checked=true] [data-name=checkbox] {
+  display: none;
+}
+.c-checkbox[aria-checked=false] [data-name=checkbox-checked] {
+  display: none;
+}
 .c-icon {
   display: inline-flex;
   fill: currentColor;

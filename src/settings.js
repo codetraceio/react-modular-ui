@@ -15,6 +15,7 @@ class Settings {
       '32': '24',
       '48': '32'
     };
+    this.backend = false;
   }
 
   getClasses() {
@@ -55,6 +56,14 @@ class Settings {
 
   setSizeMap(sizeMap) {
     this.sizeMap = sizeMap;
+  }
+
+  isBackend() {
+    return this.backend;
+  }
+
+  setBackend(backend) {
+    this.backend = backend;
   }
 }
 

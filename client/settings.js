@@ -27,6 +27,7 @@ var Settings = function () {
       '32': '24',
       '48': '32'
     };
+    this.backend = false;
   }
 
   _createClass(Settings, [{
@@ -78,6 +79,16 @@ var Settings = function () {
     key: 'setSizeMap',
     value: function setSizeMap(sizeMap) {
       this.sizeMap = sizeMap;
+    }
+  }, {
+    key: 'isBackend',
+    value: function isBackend() {
+      return this.backend;
+    }
+  }, {
+    key: 'setBackend',
+    value: function setBackend(backend) {
+      this.backend = backend;
     }
   }]);
 

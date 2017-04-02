@@ -25,6 +25,7 @@ export default class Input extends AbstractComponent {
       <div className={this.blockName('input', this.getModifiers())}>
         {this.renderLabel()}
         <input
+          name={this.props.name}
           placeholder={this.props.placeholder}
           value={this.props.value}
           disabled={this.props.disabled}

@@ -1,4 +1,7 @@
 import React from 'react';
+
+import settings from '../settings';
+
 import AbstractComponent from './AbstractComponent';
 import Icon from './Icon';
 
@@ -14,6 +17,24 @@ export default class Button extends AbstractComponent {
   }
 
   render() {
+    if (settings.isBackend()) {
+      return (
+        <div
+          className={this.blockName('checkbox', this.getModifiers())}
+          role="checkbox"
+          tabIndex="1"
+          data-name={this.props.name}
+          aria-checked={this.props.checked.toString()}
+        >
+          <div>
+            <Icon size={this.props.size} name='checkbox-checked' />
+            <Icon size={this.props.size} name='checkbox' />
+          </div>
+          <div>{this.props.children}</div>
+        </div>
+      );
+    }
+
     return (
       <div
         className={this.blockName('checkbox', this.getModifiers())}

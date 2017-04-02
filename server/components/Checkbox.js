@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _settings = require('../settings');
+
+var _settings2 = _interopRequireDefault(_settings);
+
 var _AbstractComponent = require('./AbstractComponent');
 
 var _AbstractComponent2 = _interopRequireDefault(_AbstractComponent);
@@ -30,6 +34,30 @@ class Button extends _AbstractComponent2.default {
   }
 
   render() {
+    if (_settings2.default.isBackend()) {
+      return _react2.default.createElement(
+        'div',
+        {
+          className: this.blockName('checkbox', this.getModifiers()),
+          role: 'checkbox',
+          tabIndex: '1',
+          'data-name': this.props.name,
+          'aria-checked': this.props.checked.toString()
+        },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'checkbox-checked' }),
+          _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'checkbox' })
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          this.props.children
+        )
+      );
+    }
+
     return _react2.default.createElement(
       'div',
       {

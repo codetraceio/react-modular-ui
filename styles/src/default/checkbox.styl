@@ -24,4 +24,12 @@
       margin-left: 0;
     }
   }
+
+  &[aria-checked=true] [data-name=checkbox] {
+    display: none;
+  }
+
+  &[aria-checked=false] [data-name=checkbox-checked] {
+    display: none;
+  }
 }

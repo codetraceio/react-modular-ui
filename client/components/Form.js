@@ -14,10 +14,6 @@ var _AbstractComponent2 = require('./AbstractComponent');
 
 var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
 
-var _settings = require('../settings');
-
-var _settings2 = _interopRequireDefault(_settings);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26,36 +22,43 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Button = function (_AbstractComponent) {
-  _inherits(Button, _AbstractComponent);
+var Form = function (_AbstractComponent) {
+  _inherits(Form, _AbstractComponent);
 
-  function Button() {
-    _classCallCheck(this, Button);
+  function Form() {
+    _classCallCheck(this, Form);
 
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
   }
 
-  _createClass(Button, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
-      return ['size', 'color'];
+  _createClass(Form, [{
+    key: 'onChange',
+    value: function onChange(e) {
+      if (typeof this.props.onChange === 'function') {
+        this.props.onChange(e.target.name, e.target.value, e);
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        'form',
         {
-          className: this.blockName('icon', this.getModifiers()),
-          'data-name': this.props.name,
-          onClick: this.props.onClick
+          className: this.blockName('form', []),
+          action: this.props.action,
+          method: this.props.method,
+          name: this.props.name,
+          target: this.props.target,
+          onChange: this.onChange,
+          onSubmit: this.props.onSubmit
         },
-        _settings2.default.getIcon(this.props.name)
+        _react2.default.createElement('input', { type: 'submit', style: { display: 'none' } }),
+        this.props.children
       );
     }
   }]);
 
-  return Button;
+  return Form;
 }(_AbstractComponent3.default);
 
-exports.default = Button;
+exports.default = Form;
