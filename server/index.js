@@ -31,6 +31,15 @@ Object.defineProperty(exports, 'Button', {
   }
 });
 
+var _Checkbox = require('./components/Checkbox');
+
+Object.defineProperty(exports, 'Checkbox', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Checkbox).default;
+  }
+});
+
 var _Icon = require('./components/Icon');
 
 Object.defineProperty(exports, 'Icon', {
@@ -46,6 +55,15 @@ Object.defineProperty(exports, 'Input', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Input).default;
+  }
+});
+
+var _Form = require('./components/Form');
+
+Object.defineProperty(exports, 'Form', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Form).default;
   }
 });
 
