@@ -47,7 +47,9 @@ var AbstractComponent = function (_React$Component) {
         modifiers[_key] = arguments[_key];
       }
 
-      return modifiers.join(_settings2.default.getClasses().separator);
+      return modifiers.filter(function (m) {
+        return m !== '';
+      }).join(_settings2.default.getClasses().separator);
     }
   }, {
     key: 'blockClassName',
@@ -112,7 +114,6 @@ var AbstractComponent = function (_React$Component) {
         return modifierValues[key] !== '0';
       }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        console.log(blockName, newModifierKey, _this2.modifier(modifierValues[key], modifierMedia));
         return _this2.blockModifierClassName(blockName, _this2.modifier(newModifierKey, modifierValues[key], modifierMedia));
       }).join(' ');
     }

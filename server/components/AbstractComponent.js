@@ -26,7 +26,7 @@ class AbstractComponent extends _react2.default.Component {
       modifiers[_key] = arguments[_key];
     }
 
-    return modifiers.join(_settings2.default.getClasses().separator);
+    return modifiers.filter(m => m !== '').join(_settings2.default.getClasses().separator);
   }
 
   blockClassName(blockName) {
@@ -81,7 +81,6 @@ class AbstractComponent extends _react2.default.Component {
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
       const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
-      console.log(blockName, newModifierKey, this.modifier(modifierValues[key], modifierMedia));
       return this.blockModifierClassName(blockName, this.modifier(newModifierKey, modifierValues[key], modifierMedia));
     }).join(' ');
   }
