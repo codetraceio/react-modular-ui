@@ -41,6 +41,15 @@ var AbstractComponent = function (_React$Component) {
       });
     }
   }, {
+    key: 'modifier',
+    value: function modifier() {
+      for (var _len = arguments.length, modifiers = Array(_len), _key = 0; _key < _len; _key++) {
+        modifiers[_key] = arguments[_key];
+      }
+
+      return modifiers.join(_settings2.default.getClasses().separator);
+    }
+  }, {
     key: 'blockClassName',
     value: function blockClassName(blockName) {
       return '' + _settings2.default.getPrefix() + _settings2.default.getClasses().block.replace('{b}', this.camelCaseToDashCase(blockName));
@@ -59,23 +68,6 @@ var AbstractComponent = function (_React$Component) {
     key: 'elementModifierClassName',
     value: function elementModifierClassName(blockName, elementName, modifierName) {
       return _settings2.default.getClasses().elementModifier.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{m}', this.camelCaseToDashCase(modifierName));
-    }
-  }, {
-    key: 'blockModifierWithValueClassName',
-    value: function blockModifierWithValueClassName(blockName, modifierKey, modifierValue) {
-      var modifierMedia = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-
-      var className = modifierMedia ? _settings2.default.getClasses().blockModifierWithValueAndMedia : _settings2.default.getClasses().blockModifierWithValue;
-
-      return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
-    }
-  }, {
-    key: 'elementModifierWithValueClassName',
-    value: function elementModifierWithValueClassName(blockName, elementName, modifierKey, modifierValue) {
-      var modifierMedia = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-
-      var className = modifierMedia ? _settings2.default.getClasses().elementModifierWithValueAndMedia : _settings2.default.getClasses().elementModifierWithValue;
-      return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
     }
   }, {
     key: 'complexModifierValues',
@@ -120,7 +112,8 @@ var AbstractComponent = function (_React$Component) {
         return modifierValues[key] !== '0';
       }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this2.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key], modifierMedia);
+        console.log(blockName, newModifierKey, _this2.modifier(modifierValues[key], modifierMedia));
+        return _this2.blockModifierClassName(blockName, _this2.modifier(newModifierKey, modifierValues[key], modifierMedia));
       }).join(' ');
     }
   }, {
@@ -135,7 +128,7 @@ var AbstractComponent = function (_React$Component) {
         return modifierValues[key] !== '0';
       }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this3.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key], modifierMedia);
+        return _this3.elementModifierClassName(blockName, elementName, _this3.modifier(newModifierKey, modifierValues[key], modifierMedia));
       }).join(' ');
     }
   }, {
@@ -206,13 +199,13 @@ var AbstractComponent = function (_React$Component) {
                 if (className !== '') {
                   result.push(_this4.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
                 } else {
-                  result.push(_this4.elementModifierClassName(blockName, elementName, key, media));
+                  result.push(_this4.elementModifierClassName(blockName, elementName, _this4.modifier(key, media)));
                 }
               } else {
                 if (className !== '') {
                   result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className, media));
                 } else {
-                  result.push(_this4.blockModifierClassName(blockName, elementName, key, media));
+                  result.push(_this4.blockModifierClassName(blockName, elementName, _this4.modifier(key, media)));
                 }
               }
             });

@@ -5,11 +5,8 @@ class Settings {
       block: '{b}',
       element: '{b}--{e}',
       blockModifier: '-{m}',
-      blockModifierWithValue: '-{mk}-{mv}',
-      blockModifierWithValueAndMedia: '-{mk}-{mv}-{mm}',
       elementModifier: '-{m}',
-      elementModifierWithValue: '-{mk}-{mv}',
-      elementModifierWithValueAndMedia: '-{mk}-{mv}-{mm}',
+      separator: '-'
     };
     this.icons = {};
     this.sizeMap = {

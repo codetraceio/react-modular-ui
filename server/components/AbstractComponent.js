@@ -21,6 +21,14 @@ class AbstractComponent extends _react2.default.Component {
     });
   }
 
+  modifier() {
+    for (var _len = arguments.length, modifiers = Array(_len), _key = 0; _key < _len; _key++) {
+      modifiers[_key] = arguments[_key];
+    }
+
+    return modifiers.join(_settings2.default.getClasses().separator);
+  }
+
   blockClassName(blockName) {
     return `${ _settings2.default.getPrefix() }${ _settings2.default.getClasses().block.replace('{b}', this.camelCaseToDashCase(blockName)) }`;
   }
@@ -35,21 +43,6 @@ class AbstractComponent extends _react2.default.Component {
 
   elementModifierClassName(blockName, elementName, modifierName) {
     return _settings2.default.getClasses().elementModifier.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{m}', this.camelCaseToDashCase(modifierName));
-  }
-
-  blockModifierWithValueClassName(blockName, modifierKey, modifierValue) {
-    let modifierMedia = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
-
-    const className = modifierMedia ? _settings2.default.getClasses().blockModifierWithValueAndMedia : _settings2.default.getClasses().blockModifierWithValue;
-
-    return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
-  }
-
-  elementModifierWithValueClassName(blockName, elementName, modifierKey, modifierValue) {
-    let modifierMedia = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
-
-    const className = modifierMedia ? _settings2.default.getClasses().elementModifierWithValueAndMedia : _settings2.default.getClasses().elementModifierWithValue;
-    return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
   }
 
   complexModifierValues(modifierValue) {
@@ -88,7 +81,8 @@ class AbstractComponent extends _react2.default.Component {
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
       const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
-      return this.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key], modifierMedia);
+      console.log(blockName, newModifierKey, this.modifier(modifierValues[key], modifierMedia));
+      return this.blockModifierClassName(blockName, this.modifier(newModifierKey, modifierValues[key], modifierMedia));
     }).join(' ');
   }
 
@@ -98,7 +92,7 @@ class AbstractComponent extends _react2.default.Component {
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
       const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
-      return this.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key], modifierMedia);
+      return this.elementModifierClassName(blockName, elementName, this.modifier(newModifierKey, modifierValues[key], modifierMedia));
     }).join(' ');
   }
 
@@ -163,13 +157,13 @@ class AbstractComponent extends _react2.default.Component {
             if (className !== '') {
               result.push(this.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
             } else {
-              result.push(this.elementModifierClassName(blockName, elementName, key, media));
+              result.push(this.elementModifierClassName(blockName, elementName, this.modifier(key, media)));
             }
           } else {
             if (className !== '') {
               result.push(this.blockModifierWithComplexValueClassName(blockName, key, className, media));
             } else {
-              result.push(this.blockModifierClassName(blockName, elementName, key, media));
+              result.push(this.blockModifierClassName(blockName, elementName, this.modifier(key, media)));
             }
           }
         });

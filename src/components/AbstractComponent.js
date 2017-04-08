@@ -9,6 +9,10 @@ export default class AbstractComponent extends React.Component {
     });
   }
 
+  modifier(...modifiers) {
+    return modifiers.filter(m => m !== '').join(settings.getClasses().separator);
+  }
+
   blockClassName(blockName) {
     return `${settings.getPrefix()}${settings.getClasses().block
       .replace('{b}', this.camelCaseToDashCase(blockName))}`;
@@ -31,34 +35,6 @@ export default class AbstractComponent extends React.Component {
       .replace('{b}', this.camelCaseToDashCase(blockName))
       .replace('{e}', this.camelCaseToDashCase(elementName))
       .replace('{m}', this.camelCaseToDashCase(modifierName));
-  }
-
-  blockModifierWithValueClassName(blockName, modifierKey, modifierValue, modifierMedia = '') {
-    const className = (
-      modifierMedia ?
-        settings.getClasses().blockModifierWithValueAndMedia :
-        settings.getClasses().blockModifierWithValue
-    );
-
-    return className
-      .replace('{b}', this.camelCaseToDashCase(blockName))
-      .replace('{mk}', this.camelCaseToDashCase(modifierKey))
-      .replace('{mv}', this.camelCaseToDashCase(modifierValue))
-      .replace('{mm}', this.camelCaseToDashCase(modifierMedia));
-  }
-
-  elementModifierWithValueClassName(blockName, elementName, modifierKey, modifierValue, modifierMedia = '') {
-    const className = (
-      modifierMedia ?
-        settings.getClasses().elementModifierWithValueAndMedia :
-        settings.getClasses().elementModifierWithValue
-    );
-    return className
-      .replace('{b}', this.camelCaseToDashCase(blockName))
-      .replace('{e}', this.camelCaseToDashCase(elementName))
-      .replace('{mk}', this.camelCaseToDashCase(modifierKey))
-      .replace('{mv}', this.camelCaseToDashCase(modifierValue))
-      .replace('{mm}', this.camelCaseToDashCase(modifierMedia));
   }
 
   complexModifierValues(modifierValue) {
@@ -95,7 +71,9 @@ export default class AbstractComponent extends React.Component {
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter((key) => modifierValues[key] !== '0').map((key) => {
       const newModifierKey = key === 'default' ? modifierKey : `${modifierKey}-${key}`;
-      return this.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key], modifierMedia);
+      return this.blockModifierClassName(
+        blockName, this.modifier(newModifierKey, modifierValues[key], modifierMedia)
+      );
     }).join(' ');
   }
 
@@ -103,7 +81,9 @@ export default class AbstractComponent extends React.Component {
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter((key) => modifierValues[key] !== '0').map((key) => {
       const newModifierKey = key === 'default' ? modifierKey : `${modifierKey}-${key}`;
-      return this.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key], modifierMedia);
+      return this.elementModifierClassName(
+        blockName, elementName, this.modifier(newModifierKey, modifierValues[key], modifierMedia)
+      );
     }).join(' ');
   }
 
@@ -171,7 +151,7 @@ export default class AbstractComponent extends React.Component {
               );
             } else {
               result.push(
-                this.elementModifierClassName(blockName, elementName, key, media)
+                this.elementModifierClassName(blockName, elementName, this.modifier(key, media))
               );
             }
           } else {
@@ -181,7 +161,7 @@ export default class AbstractComponent extends React.Component {
               );
             } else {
               result.push(
-                this.blockModifierClassName(blockName, elementName, key, media)
+                this.blockModifierClassName(blockName, elementName, this.modifier(key, media))
               );
             }
           }
