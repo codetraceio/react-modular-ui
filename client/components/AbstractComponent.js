@@ -206,7 +206,7 @@ var AbstractComponent = function (_React$Component) {
                 if (className !== '') {
                   result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className, media));
                 } else {
-                  result.push(_this4.blockModifierClassName(blockName, elementName, _this4.modifier(key, media)));
+                  result.push(_this4.blockModifierClassName(blockName, _this4.modifier(key, media)));
                 }
               }
             });

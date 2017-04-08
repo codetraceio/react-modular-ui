@@ -162,7 +162,7 @@ class AbstractComponent extends _react2.default.Component {
             if (className !== '') {
               result.push(this.blockModifierWithComplexValueClassName(blockName, key, className, media));
             } else {
-              result.push(this.blockModifierClassName(blockName, elementName, this.modifier(key, media)));
+              result.push(this.blockModifierClassName(blockName, this.modifier(key, media)));
             }
           }
         });

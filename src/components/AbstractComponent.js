@@ -161,7 +161,7 @@ export default class AbstractComponent extends React.Component {
               );
             } else {
               result.push(
-                this.blockModifierClassName(blockName, elementName, this.modifier(key, media))
+                this.blockModifierClassName(blockName, this.modifier(key, media))
               );
             }
           }
