@@ -63,12 +63,19 @@ var AbstractComponent = function (_React$Component) {
   }, {
     key: 'blockModifierWithValueClassName',
     value: function blockModifierWithValueClassName(blockName, modifierKey, modifierValue) {
-      return _settings2.default.getClasses().blockModifierWithValue.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue));
+      var modifierMedia = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+      var className = modifierMedia ? _settings2.default.getClasses().blockModifierWithValueAndMedia : _settings2.default.getClasses().blockModifierWithValue;
+
+      return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
     }
   }, {
     key: 'elementModifierWithValueClassName',
     value: function elementModifierWithValueClassName(blockName, elementName, modifierKey, modifierValue) {
-      return _settings2.default.getClasses().elementModifierWithValue.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue));
+      var modifierMedia = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+
+      var className = modifierMedia ? _settings2.default.getClasses().elementModifierWithValueAndMedia : _settings2.default.getClasses().elementModifierWithValue;
+      return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
     }
   }, {
     key: 'complexModifierValues',
@@ -106,10 +113,14 @@ var AbstractComponent = function (_React$Component) {
     value: function blockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue) {
       var _this2 = this;
 
+      var modifierMedia = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
       var modifierValues = this.complexModifierValues(modifierValue);
-      return Object.keys(modifierValues).map(function (key) {
+      return Object.keys(modifierValues).filter(function (key) {
+        return modifierValues[key] !== '0';
+      }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this2.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key]);
+        return _this2.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key], modifierMedia);
       }).join(' ');
     }
   }, {
@@ -117,10 +128,14 @@ var AbstractComponent = function (_React$Component) {
     value: function elementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue) {
       var _this3 = this;
 
+      var modifierMedia = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+
       var modifierValues = this.complexModifierValues(modifierValue);
-      return Object.keys(modifierValues).map(function (key) {
+      return Object.keys(modifierValues).filter(function (key) {
+        return modifierValues[key] !== '0';
+      }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this3.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key]);
+        return _this3.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key], modifierMedia);
       }).join(' ');
     }
   }, {
@@ -181,29 +196,23 @@ var AbstractComponent = function (_React$Component) {
               }
 
               var className = '';
-              if (typeof valueValue === 'boolean') {
-                if (valueKey !== 'default') {
-                  className = valueKey;
-                }
-              } else if (typeof valueValue === 'string' || typeof valueValue === 'number') {
-                if (valueKey !== 'default') {
-                  className = valueValue.toString() + '-' + valueKey;
-                } else {
-                  className = valueValue.toString();
-                }
+              if (typeof valueValue === 'string' || typeof valueValue === 'number') {
+                className = valueValue.toString();
               }
+
+              var media = valueKey;
 
               if (elementName) {
                 if (className !== '') {
-                  result.push(_this4.elementModifierWithComplexValueClassName(blockName, elementName, key, className));
+                  result.push(_this4.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
                 } else {
-                  result.push(_this4.elementModifierClassName(blockName, elementName, key));
+                  result.push(_this4.elementModifierClassName(blockName, elementName, key, media));
                 }
               } else {
                 if (className !== '') {
-                  result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className));
+                  result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className, media));
                 } else {
-                  result.push(_this4.blockModifierClassName(blockName, elementName, key));
+                  result.push(_this4.blockModifierClassName(blockName, elementName, key, media));
                 }
               }
             });

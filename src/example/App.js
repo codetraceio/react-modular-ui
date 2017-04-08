@@ -69,7 +69,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Block>
+        <Block
+          padding={{
+            xsUp: '64 0',
+            xsDown: '32 0'
+          }}
+        >
           <h1>React Modular UI</h1>
           <h2>Default buttons</h2>
           <Block layout="horizontal" align="center" spaceHorizontal="8">

@@ -11,8 +11,10 @@ class Settings {
       element: '{b}--{e}',
       blockModifier: '-{m}',
       blockModifierWithValue: '-{mk}-{mv}',
+      blockModifierWithValueAndMedia: '-{mk}-{mv}-{mm}',
       elementModifier: '-{m}',
-      elementModifierWithValue: '-{mk}-{mv}'
+      elementModifierWithValue: '-{mk}-{mv}',
+      elementModifierWithValueAndMedia: '-{mk}-{mv}-{mm}'
     };
     this.icons = {};
     this.sizeMap = {

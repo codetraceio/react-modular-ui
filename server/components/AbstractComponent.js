@@ -38,11 +38,18 @@ class AbstractComponent extends _react2.default.Component {
   }
 
   blockModifierWithValueClassName(blockName, modifierKey, modifierValue) {
-    return _settings2.default.getClasses().blockModifierWithValue.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue));
+    let modifierMedia = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
+
+    const className = modifierMedia ? _settings2.default.getClasses().blockModifierWithValueAndMedia : _settings2.default.getClasses().blockModifierWithValue;
+
+    return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
   }
 
   elementModifierWithValueClassName(blockName, elementName, modifierKey, modifierValue) {
-    return _settings2.default.getClasses().elementModifierWithValue.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue));
+    let modifierMedia = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
+
+    const className = modifierMedia ? _settings2.default.getClasses().elementModifierWithValueAndMedia : _settings2.default.getClasses().elementModifierWithValue;
+    return className.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{mk}', this.camelCaseToDashCase(modifierKey)).replace('{mv}', this.camelCaseToDashCase(modifierValue)).replace('{mm}', this.camelCaseToDashCase(modifierMedia));
   }
 
   complexModifierValues(modifierValue) {
@@ -76,18 +83,22 @@ class AbstractComponent extends _react2.default.Component {
   }
 
   blockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue) {
+    let modifierMedia = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
+
     const modifierValues = this.complexModifierValues(modifierValue);
-    return Object.keys(modifierValues).map(key => {
+    return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
       const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
-      return this.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key]);
+      return this.blockModifierWithValueClassName(blockName, newModifierKey, modifierValues[key], modifierMedia);
     }).join(' ');
   }
 
   elementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue) {
+    let modifierMedia = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
+
     const modifierValues = this.complexModifierValues(modifierValue);
-    return Object.keys(modifierValues).map(key => {
+    return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
       const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
-      return this.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key]);
+      return this.elementModifierWithValueClassName(blockName, elementName, newModifierKey, modifierValues[key], modifierMedia);
     }).join(' ');
   }
 
@@ -142,29 +153,23 @@ class AbstractComponent extends _react2.default.Component {
           }
 
           let className = '';
-          if (typeof valueValue === 'boolean') {
-            if (valueKey !== 'default') {
-              className = valueKey;
-            }
-          } else if (typeof valueValue === 'string' || typeof valueValue === 'number') {
-            if (valueKey !== 'default') {
-              className = `${ valueValue.toString() }-${ valueKey }`;
-            } else {
-              className = valueValue.toString();
-            }
+          if (typeof valueValue === 'string' || typeof valueValue === 'number') {
+            className = valueValue.toString();
           }
+
+          const media = valueKey;
 
           if (elementName) {
             if (className !== '') {
-              result.push(this.elementModifierWithComplexValueClassName(blockName, elementName, key, className));
+              result.push(this.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
             } else {
-              result.push(this.elementModifierClassName(blockName, elementName, key));
+              result.push(this.elementModifierClassName(blockName, elementName, key, media));
             }
           } else {
             if (className !== '') {
-              result.push(this.blockModifierWithComplexValueClassName(blockName, key, className));
+              result.push(this.blockModifierWithComplexValueClassName(blockName, key, className, media));
             } else {
-              result.push(this.blockModifierClassName(blockName, elementName, key));
+              result.push(this.blockModifierClassName(blockName, elementName, key, media));
             }
           }
         });
