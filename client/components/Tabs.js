@@ -142,7 +142,7 @@ var Button = function (_AbstractComponent) {
             ref: function ref(element) {
               return _this3.setOptionElement(option.value, element);
             },
-            className: _this3.elementName('tabs', 'option', _this3.getOptionModifiers(option)),
+            className: _this3.elementName('tabs', 'option', _this3.getOptionModifiers(option), true),
             onClick: function onClick() {
               return _this3.onChange(option.value, option);
             }

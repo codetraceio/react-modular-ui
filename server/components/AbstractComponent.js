@@ -106,10 +106,10 @@ class AbstractComponent extends _react2.default.Component {
     return blockNameClass;
   }
 
-  elementName(blockName, elementName, modifiers) {
+  elementName(blockName, elementName, modifiers, isStatic) {
     const elementNameClass = this.elementClassName(blockName, elementName);
 
-    const modifiersClass = modifiers instanceof Array ? this.modifiers(null, elementName, modifiers) : '';
+    const modifiersClass = modifiers instanceof Array ? this.modifiers(blockName, elementName, modifiers, isStatic) : '';
 
     if (modifiersClass !== '') {
       return `${ elementNameClass } ${ modifiersClass }`;
@@ -118,10 +118,10 @@ class AbstractComponent extends _react2.default.Component {
     return elementNameClass;
   }
 
-  modifiers(blockName, elementName, modifiers) {
+  modifiers(blockName, elementName, modifiers, isStatic) {
     return modifiers.map(key => {
       const value = this.props[key];
-      if (typeof value === 'boolean' && value === true) {
+      if (typeof value === 'boolean' && value === true || isStatic) {
         if (elementName) {
           return this.elementModifierClassName(blockName, elementName, key);
         }

@@ -146,10 +146,10 @@ var AbstractComponent = function (_React$Component) {
     }
   }, {
     key: 'elementName',
-    value: function elementName(blockName, _elementName, modifiers) {
+    value: function elementName(blockName, _elementName, modifiers, isStatic) {
       var elementNameClass = this.elementClassName(blockName, _elementName);
 
-      var modifiersClass = modifiers instanceof Array ? this.modifiers(null, _elementName, modifiers) : '';
+      var modifiersClass = modifiers instanceof Array ? this.modifiers(blockName, _elementName, modifiers, isStatic) : '';
 
       if (modifiersClass !== '') {
         return elementNameClass + ' ' + modifiersClass;
@@ -159,12 +159,12 @@ var AbstractComponent = function (_React$Component) {
     }
   }, {
     key: 'modifiers',
-    value: function modifiers(blockName, elementName, _modifiers) {
+    value: function modifiers(blockName, elementName, _modifiers, isStatic) {
       var _this4 = this;
 
       return _modifiers.map(function (key) {
         var value = _this4.props[key];
-        if (typeof value === 'boolean' && value === true) {
+        if (typeof value === 'boolean' && value === true || isStatic) {
           if (elementName) {
             return _this4.elementModifierClassName(blockName, elementName, key);
           }

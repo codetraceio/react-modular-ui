@@ -107,7 +107,7 @@ class Button extends _AbstractComponent2.default {
         {
           key: option.value,
           ref: element => this.setOptionElement(option.value, element),
-          className: this.elementName('tabs', 'option', this.getOptionModifiers(option)),
+          className: this.elementName('tabs', 'option', this.getOptionModifiers(option), true),
           onClick: () => this.onChange(option.value, option)
         },
         _react2.default.createElement(

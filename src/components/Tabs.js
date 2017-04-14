@@ -70,7 +70,7 @@ export default class Button extends AbstractComponent {
       <div
         ref={(element) => this.setLineElement(element)}
         className={this.elementName('tabs', 'line')}
-      ></div>
+      />
     );
   }
 
@@ -89,7 +89,7 @@ export default class Button extends AbstractComponent {
         <div
           key={option.value}
           ref={(element) => this.setOptionElement(option.value, element)}
-          className={this.elementName('tabs', 'option', this.getOptionModifiers(option))}
+          className={this.elementName('tabs', 'option', this.getOptionModifiers(option), true)}
           onClick={() => this.onChange(option.value, option)}
         >
           <div>{option.title}</div>
