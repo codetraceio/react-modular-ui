@@ -38,7 +38,7 @@ var Button = function (_AbstractComponent) {
   _createClass(Button, [{
     key: 'getModifiers',
     value: function getModifiers() {
-      return ['size', 'color'];
+      return ['size', 'color', 'rotate'];
     }
   }, {
     key: 'render',
