@@ -4,7 +4,7 @@ import settings from '../settings';
 
 export default class Button extends AbstractComponent {
   getModifiers() {
-    return ['size', 'color', 'rotate'];
+    return ['size', 'width', 'height', 'color', 'rotate'];
   }
 
   render() {
