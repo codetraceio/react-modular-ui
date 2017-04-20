@@ -20,7 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Button extends _AbstractComponent2.default {
   getModifiers() {
-    return ['size', 'color', 'rotate'];
+    return ['size', 'width', 'height', 'color', 'rotate'];
   }
 
   render() {

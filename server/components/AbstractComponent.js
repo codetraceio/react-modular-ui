@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class AbstractComponent extends _react2.default.Component {
   camelCaseToDashCase(word) {
     return word.replace(/([A-Z])/g, match => {
-      return `-${ match.toLowerCase() }`;
+      return `-${match.toLowerCase()}`;
     });
   }
 
@@ -30,11 +30,11 @@ class AbstractComponent extends _react2.default.Component {
   }
 
   blockClassName(blockName) {
-    return `${ _settings2.default.getPrefix() }${ _settings2.default.getClasses().block.replace('{b}', this.camelCaseToDashCase(blockName)) }`;
+    return `${_settings2.default.getPrefix()}${_settings2.default.getClasses().block.replace('{b}', this.camelCaseToDashCase(blockName))}`;
   }
 
   elementClassName(blockName, elementName) {
-    return `${ _settings2.default.getPrefix() }${ _settings2.default.getClasses().element.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)) }`;
+    return `${_settings2.default.getPrefix()}${_settings2.default.getClasses().element.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName))}`;
   }
 
   blockModifierClassName(blockName, modifierName) {
@@ -80,7 +80,7 @@ class AbstractComponent extends _react2.default.Component {
 
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
-      const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
+      const newModifierKey = key === 'default' ? modifierKey : `${modifierKey}-${key}`;
       return this.blockModifierClassName(blockName, this.modifier(newModifierKey, modifierValues[key], modifierMedia));
     }).join(' ');
   }
@@ -90,7 +90,7 @@ class AbstractComponent extends _react2.default.Component {
 
     const modifierValues = this.complexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter(key => modifierValues[key] !== '0').map(key => {
-      const newModifierKey = key === 'default' ? modifierKey : `${ modifierKey }-${ key }`;
+      const newModifierKey = key === 'default' ? modifierKey : `${modifierKey}-${key}`;
       return this.elementModifierClassName(blockName, elementName, this.modifier(newModifierKey, modifierValues[key], modifierMedia));
     }).join(' ');
   }
@@ -100,7 +100,7 @@ class AbstractComponent extends _react2.default.Component {
     const modifiersClass = this.modifiers(blockName, null, modifiers);
 
     if (modifiersClass !== '') {
-      return `${ blockNameClass } ${ modifiersClass }`;
+      return `${blockNameClass} ${modifiersClass}`;
     }
 
     return blockNameClass;
@@ -112,7 +112,7 @@ class AbstractComponent extends _react2.default.Component {
     const modifiersClass = modifiers instanceof Array ? this.modifiers(blockName, elementName, modifiers, isStatic) : '';
 
     if (modifiersClass !== '') {
-      return `${ elementNameClass } ${ modifiersClass }`;
+      return `${elementNameClass} ${modifiersClass}`;
     }
 
     return elementNameClass;

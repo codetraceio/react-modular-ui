@@ -181,41 +181,35 @@ var AbstractComponent = function (_React$Component) {
         }
 
         if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
-          var _ret = function () {
-            var result = [];
-            Object.keys(value).forEach(function (valueKey) {
-              var valueValue = value[valueKey];
-              if (typeof valueValue === 'boolean' && valueValue === false) {
-                return;
-              }
+          var result = [];
+          Object.keys(value).forEach(function (valueKey) {
+            var valueValue = value[valueKey];
+            if (typeof valueValue === 'boolean' && valueValue === false) {
+              return;
+            }
 
-              var className = '';
-              if (typeof valueValue === 'string' || typeof valueValue === 'number') {
-                className = valueValue.toString();
-              }
+            var className = '';
+            if (typeof valueValue === 'string' || typeof valueValue === 'number') {
+              className = valueValue.toString();
+            }
 
-              var media = valueKey;
+            var media = valueKey;
 
-              if (elementName) {
-                if (className !== '') {
-                  result.push(_this4.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
-                } else {
-                  result.push(_this4.elementModifierClassName(blockName, elementName, _this4.modifier(key, media)));
-                }
+            if (elementName) {
+              if (className !== '') {
+                result.push(_this4.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
               } else {
-                if (className !== '') {
-                  result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className, media));
-                } else {
-                  result.push(_this4.blockModifierClassName(blockName, _this4.modifier(key, media)));
-                }
+                result.push(_this4.elementModifierClassName(blockName, elementName, _this4.modifier(key, media)));
               }
-            });
-            return {
-              v: result.join(' ')
-            };
-          }();
-
-          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+            } else {
+              if (className !== '') {
+                result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className, media));
+              } else {
+                result.push(_this4.blockModifierClassName(blockName, _this4.modifier(key, media)));
+              }
+            }
+          });
+          return result.join(' ');
         }
 
         return '';
