@@ -47,7 +47,6 @@ var Button = function (_AbstractComponent) {
         'div',
         {
           className: this.blockName('icon', this.getModifiers()),
-          'data-name': this.props.name,
           onClick: this.props.onClick
         },
         _settings2.default.getIcon(this.props.name)

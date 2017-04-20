@@ -11,7 +11,6 @@ export default class Button extends AbstractComponent {
     return (
       <div
         className={this.blockName('icon', this.getModifiers())}
-        data-name={this.props.name}
         onClick={this.props.onClick}
       >
         {settings.getIcon(this.props.name)}
