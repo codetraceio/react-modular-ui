@@ -72,8 +72,8 @@ class Button extends _AbstractComponent2.default {
     const optionRect = optionElement.getBoundingClientRect();
     const left = optionRect.left - elementRect.left;
     const width = optionRect.right - optionRect.left;
-    lineElement.style.left = `${ left }px`;
-    lineElement.style.width = `${ width }px`;
+    lineElement.style.left = `${left}px`;
+    lineElement.style.width = `${width}px`;
   }
 
   onChange(value, option) {

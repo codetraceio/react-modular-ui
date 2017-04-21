@@ -23,7 +23,7 @@ class Progress extends _AbstractComponent2.default {
     return _react2.default.createElement(
       'div',
       { className: this.blockName('progress', this.getModifiers()) },
-      _react2.default.createElement('div', { className: this.elementName('progress', 'line'), style: { width: `${ this.props.value }%` } })
+      _react2.default.createElement('div', { className: this.elementName('progress', 'line'), style: { width: `${this.props.value}%` } })
     );
   }
 }

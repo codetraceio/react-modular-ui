@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form should render Form 1`] = `
+<form
+  action={undefined}
+  className="c-form"
+  method={undefined}
+  name={undefined}
+  onChange={[Function]}
+  onSubmit={undefined}
+  target={undefined}
+>
+  <input
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
+  Something
+</form>
+`;
