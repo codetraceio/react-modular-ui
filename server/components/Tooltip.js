@@ -71,10 +71,9 @@ var Tooltip = function (_AbstractComponent) {
       var left = 0;
       var top = 0;
       var tailSize = 8;
-      console.log(rect.left + width + tailSize, window.outerWidth);
-      var fitsRight = rect.left + width + tailSize < window.outerWidth;
-      var fitsRightHalf = rect.left + width / 2 + tailSize < window.outerWidth;
-      var fitsBottom = rect.bottom + height + tailSize < window.outerHeight;
+      var fitsRight = rect.left + width + tailSize < window.innerWidth;
+      var fitsRightHalf = rect.left + width / 2 + tailSize < window.innerWidth;
+      var fitsBottom = rect.bottom + height + tailSize < window.innerHeight;
       var fitsLeft = rect.left - width - tailSize > 0;
       var fitsLeftHalf = rect.left - width - tailSize / 2 > 0;
       var fitsTop = rect.top - height - tailSize > 0;
@@ -122,7 +121,6 @@ var Tooltip = function (_AbstractComponent) {
 
       tooltipElement.style.left = scrollLeft + left + 'px';
       tooltipElement.style.top = scrollTop + top + 'px';
-      console.log(tooltipElement);
     }
   }, {
     key: 'onShowTooltip',

@@ -103,6 +103,15 @@ Object.defineProperty(exports, 'Tooltip', {
   }
 });
 
+var _Portal = require('./components/Portal');
+
+Object.defineProperty(exports, 'Portal', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Portal).default;
+  }
+});
+
 var _Progress = require('./components/Progress');
 
 Object.defineProperty(exports, 'Progress', {
