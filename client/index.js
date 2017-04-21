@@ -94,6 +94,15 @@ Object.defineProperty(exports, 'Tabs', {
   }
 });
 
+var _Tooltip = require('./components/Tooltip');
+
+Object.defineProperty(exports, 'Tooltip', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Tooltip).default;
+  }
+});
+
 var _Progress = require('./components/Progress');
 
 Object.defineProperty(exports, 'Progress', {

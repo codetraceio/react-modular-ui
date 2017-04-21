@@ -1,6 +1,6 @@
 const components = [
   'AbstractComponent', 'Block', 'Button', 'Checkbox', 'Icon', 'Input', 'Form', 'Loading', 'Pill',
-  'Tabs', 'Progress'
+  'Tabs', 'Tooltip', 'Portal', 'Progress'
 ];
 
 components.forEach((component) => {
@@ -57,6 +57,14 @@ describe('index', () => {
 
   it('should contain Tabs', () =>{
     expect(index.Tabs).toBeDefined();
+  });
+
+  it('should contain Tooltip', () =>{
+    expect(index.Tooltip).toBeDefined();
+  });
+
+  it('should contain Portal', () =>{
+    expect(index.Portal).toBeDefined();
   });
 
   it('should contain Progress', () =>{

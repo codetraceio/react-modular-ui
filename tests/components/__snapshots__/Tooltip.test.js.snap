@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip should render Tooltip 1`] = `
+<div
+  onMouseOut={[Function]}
+  onMouseOver={[Function]}
+>
+  Something
+</div>
+`;

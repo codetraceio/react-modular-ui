@@ -1,0 +1,62 @@
+@import "constants.styl";
+@import "mixins.styl";
+
+.c-tooltip {
+  position: absolute;
+  z-index: 1000;
+  padding: 8px;
+  background: $color-dark-grey;
+  color: $color-white;
+  border-radius: $border-radius;
+  user-select: none;
+  pointer-events: none;
+  shadow();
+
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  &.-tail-bottom:after {
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-top: 8px solid $color-dark-grey;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+  }
+
+  &.-tail-top:after {
+    top: 0;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border-bottom: 8px solid $color-dark-grey;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+  }
+
+  &.-tail-left:after {
+    top: 50%;
+    left: 0;
+    margin-left: -8px;
+    margin-top: -8px;
+    border-right: 8px solid $color-dark-grey;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
+  &.-tail-right:after {
+    top: 50%;
+    left: 100%;
+    margin-right: -8px;
+    margin-top: -8px;
+    border-left: 8px solid $color-dark-grey;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+}

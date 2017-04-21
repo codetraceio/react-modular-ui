@@ -15310,3 +15310,57 @@ body {
 .c-tabs.-size-48 .c-tabs--option > *:first-child {
   margin-left: 0;
 }
+.c-tooltip {
+  position: absolute;
+  z-index: 1000;
+  padding: 8px;
+  background: #444;
+  color: #fff;
+  border-radius: 0;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.25);
+}
+.c-tooltip:after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.c-tooltip.-tail-bottom:after {
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-top: 8px solid #444;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+.c-tooltip.-tail-top:after {
+  top: 0;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border-bottom: 8px solid #444;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+.c-tooltip.-tail-left:after {
+  top: 50%;
+  left: 0;
+  margin-left: -8px;
+  margin-top: -8px;
+  border-right: 8px solid #444;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.c-tooltip.-tail-right:after {
+  top: 50%;
+  left: 100%;
+  margin-right: -8px;
+  margin-top: -8px;
+  border-left: 8px solid #444;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}

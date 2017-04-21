@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _AbstractComponent2 = require('./AbstractComponent');
 
 var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
@@ -22,33 +26,72 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Progress = function (_AbstractComponent) {
-  _inherits(Progress, _AbstractComponent);
+var Portal = function (_AbstractComponent) {
+  _inherits(Portal, _AbstractComponent);
 
-  function Progress() {
-    _classCallCheck(this, Progress);
+  function Portal(props) {
+    _classCallCheck(this, Portal);
 
-    return _possibleConstructorReturn(this, (Progress.__proto__ || Object.getPrototypeOf(Progress)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).call(this, props));
+
+    _this.portalElement = null;
+    return _this;
   }
 
-  _createClass(Progress, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
-      return ['color', 'size'];
+  _createClass(Portal, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.updatePortal();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.removePortalElement();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.updatePortal();
+    }
+  }, {
+    key: 'addPortalElement',
+    value: function addPortalElement() {
+      if (!this.portalElement) {
+        this.portalElement = document.createElement('div');
+        window.document.body.appendChild(this.portalElement);
+      }
+    }
+  }, {
+    key: 'updatePortal',
+    value: function updatePortal() {
+      if (this.props.show) {
+        this.addPortalElement();
+        _reactDom2.default.render(_react2.default.createElement(
+          'div',
+          null,
+          this.props.children
+        ), this.portalElement);
+      } else {
+        this.removePortalElement();
+      }
+    }
+  }, {
+    key: 'removePortalElement',
+    value: function removePortalElement() {
+      if (this.portalElement) {
+        window.document.body.removeChild(this.portalElement);
+        this.portalElement = null;
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: this.blockName('progress', this.getModifiers()) },
-        _react2.default.createElement('div', { className: this.elementName('progress', 'line'), style: { width: this.props.value + '%' } })
-      );
+      return null;
     }
   }]);
 
-  return Progress;
+  return Portal;
 }(_AbstractComponent3.default);
 
-exports.default = Progress;
+exports.default = Portal;
 module.exports = exports['default'];

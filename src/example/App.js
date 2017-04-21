@@ -8,6 +8,7 @@ import Icon from './../components/Icon';
 import Loading from './../components/Loading';
 import Pill from './../components/Pill';
 import Tabs from './../components/Tabs';
+import Tooltip from './../components/Tooltip';
 import Progress from './../components/Progress';
 import settings from './../settings';
 
@@ -432,6 +433,29 @@ export default class App extends React.Component {
             <Checkbox size="24" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>checkbox</Checkbox>
             <Checkbox size="32" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>checkbox</Checkbox>
             <Checkbox size="32" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)} disabled>checkbox</Checkbox>
+          </Block>
+          <Block>
+            <h2>Tooltip</h2>
+            <Block layout="horizontal" padding="   0" spaceHorizontal="16">
+              <Tooltip title="Help">
+                <Button>Help</Button>
+              </Tooltip>
+              <Tooltip title="Help">
+                <Button>Help</Button>
+              </Tooltip>
+              <Tooltip title="Help">
+                <Button>Help</Button>
+              </Tooltip>
+              <Tooltip title="Help">
+                <Button>Help</Button>
+              </Tooltip>
+              <Tooltip title="Help">
+                <Button>Help</Button>
+              </Tooltip>
+              <Tooltip title="Help">
+                <Button>Help</Button>
+              </Tooltip>
+            </Block>
           </Block>
         </Block>
       </div>

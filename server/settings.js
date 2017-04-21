@@ -3,8 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-class Settings {
-  constructor() {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Settings = function () {
+  function Settings() {
+    _classCallCheck(this, Settings);
+
     this.prefix = 'c-';
     this.classes = {
       block: '{b}',
@@ -22,54 +29,70 @@ class Settings {
     this.backend = false;
   }
 
-  getClasses() {
-    return this.classes;
-  }
+  _createClass(Settings, [{
+    key: 'getClasses',
+    value: function getClasses() {
+      return this.classes;
+    }
+  }, {
+    key: 'setClasses',
+    value: function setClasses(classes) {
+      this.classes = classes;
+    }
+  }, {
+    key: 'getPrefix',
+    value: function getPrefix() {
+      return this.prefix;
+    }
+  }, {
+    key: 'setPrefix',
+    value: function setPrefix(prefix) {
+      this.prefix = prefix;
+    }
+  }, {
+    key: 'getIcons',
+    value: function getIcons() {
+      return this.icons;
+    }
+  }, {
+    key: 'setIcons',
+    value: function setIcons(icons) {
+      this.icons = icons;
+    }
+  }, {
+    key: 'getIcon',
+    value: function getIcon(name) {
+      return this.icons[name];
+    }
+  }, {
+    key: 'getSize',
+    value: function getSize(size) {
+      return this.sizeMap[size];
+    }
+  }, {
+    key: 'getSizeMap',
+    value: function getSizeMap() {
+      return this.sizeMap;
+    }
+  }, {
+    key: 'setSizeMap',
+    value: function setSizeMap(sizeMap) {
+      this.sizeMap = sizeMap;
+    }
+  }, {
+    key: 'isBackend',
+    value: function isBackend() {
+      return this.backend;
+    }
+  }, {
+    key: 'setBackend',
+    value: function setBackend(backend) {
+      this.backend = backend;
+    }
+  }]);
 
-  setClasses(classes) {
-    this.classes = classes;
-  }
-
-  getPrefix() {
-    return this.prefix;
-  }
-
-  setPrefix(prefix) {
-    this.prefix = prefix;
-  }
-
-  getIcons() {
-    return this.icons;
-  }
-
-  setIcons(icons) {
-    this.icons = icons;
-  }
-
-  getIcon(name) {
-    return this.icons[name];
-  }
-
-  getSize(size) {
-    return this.sizeMap[size];
-  }
-
-  getSizeMap() {
-    return this.sizeMap;
-  }
-
-  setSizeMap(sizeMap) {
-    this.sizeMap = sizeMap;
-  }
-
-  isBackend() {
-    return this.backend;
-  }
-
-  setBackend(backend) {
-    this.backend = backend;
-  }
-}
+  return Settings;
+}();
 
 exports.default = new Settings();
 module.exports = exports['default'];
