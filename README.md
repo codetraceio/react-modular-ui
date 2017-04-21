@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/codetraceio/react-modular-ui.png?label=ready&title=Ready)](https://waffle.io/codetraceio/react-modular-ui)
 # React Modular UI
 
 Customizable React UI library which supports both front-end and back-end rendering.   
