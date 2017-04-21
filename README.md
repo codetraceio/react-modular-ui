@@ -19,3 +19,9 @@ class Example extends React.Component {
   }
 }
 ```
+
+## Set up
+
+```
+npm install
+```
