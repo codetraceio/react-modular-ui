@@ -2,7 +2,7 @@
 
 Customizable React UI library which supports both front-end and back-end rendering.   
 
-## Usage example (client side)
+## Usage example
  
 ```
 import React from 'react';

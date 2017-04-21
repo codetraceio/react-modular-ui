@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input should render Input 1`] = `
+<div
+  className="c-input -size-4 -view-flat -color-primary"
+>
+  <input
+    disabled={undefined}
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    onKeyUp={[Function]}
+    placeholder={undefined}
+    value={undefined}
+  />
+</div>
+`;
