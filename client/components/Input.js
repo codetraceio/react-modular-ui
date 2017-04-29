@@ -32,8 +32,8 @@ var Input = function (_AbstractComponent) {
   }
 
   _createClass(Input, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       return ['size', 'view', 'color', 'disabled'];
     }
   }, {
@@ -52,7 +52,7 @@ var Input = function (_AbstractComponent) {
     value: function renderLabel() {
       return this.props.label ? _react2.default.createElement(
         'div',
-        { className: this.elementName('input', 'label') },
+        { className: this.getElementName('input', 'label') },
         this.props.label
       ) : null;
     }
@@ -61,7 +61,7 @@ var Input = function (_AbstractComponent) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.blockName('input', this.getModifiers()) },
+        { className: this.getBlockName('input', this.getModifierNames()) },
         this.renderLabel(),
         _react2.default.createElement('input', {
           name: this.props.name,

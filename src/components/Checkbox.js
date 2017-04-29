@@ -20,7 +20,7 @@ export default class Button extends AbstractComponent {
     if (settings.isBackend()) {
       return (
         <div
-          className={this.blockName('checkbox', this.getModifiers())}
+          className={this.getBlockName('checkbox', this.getModifiers())}
           role="checkbox"
           tabIndex="1"
           data-name={this.props.name}
@@ -37,7 +37,7 @@ export default class Button extends AbstractComponent {
 
     return (
       <div
-        className={this.blockName('checkbox', this.getModifiers())}
+        className={this.getBlockName('checkbox', this.getModifiers())}
         data-name={this.props.name}
         tabIndex="1"
         onClick={(e) => this.onChange(e)}

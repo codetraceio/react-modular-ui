@@ -60,7 +60,7 @@ var Button = function (_AbstractComponent) {
         return _react2.default.createElement(
           'div',
           {
-            className: this.blockName('checkbox', this.getModifiers()),
+            className: this.getBlockName('checkbox', this.getModifiers()),
             role: 'checkbox',
             tabIndex: '1',
             'data-name': this.props.name,
@@ -83,7 +83,7 @@ var Button = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.blockName('checkbox', this.getModifiers()),
+          className: this.getBlockName('checkbox', this.getModifiers()),
           'data-name': this.props.name,
           tabIndex: '1',
           onClick: function onClick(e) {

@@ -34,15 +34,16 @@ var AbstractComponent = function (_React$Component) {
   }
 
   _createClass(AbstractComponent, [{
-    key: 'camelCaseToDashCase',
-    value: function camelCaseToDashCase(word) {
-      return word.replace(/([A-Z])/g, function (match) {
-        return '-' + match.toLowerCase();
-      });
+    key: 'getValue',
+    value: function getValue(key) {
+      if (this.modifiers && this.modifiers[key]) {
+        return this.modifiers[key];
+      }
+      return this.props[key];
     }
   }, {
-    key: 'modifier',
-    value: function modifier() {
+    key: 'getModifier',
+    value: function getModifier() {
       for (var _len = arguments.length, modifiers = Array(_len), _key = 0; _key < _len; _key++) {
         modifiers[_key] = arguments[_key];
       }
@@ -52,28 +53,28 @@ var AbstractComponent = function (_React$Component) {
       }).join(_settings2.default.getClasses().separator);
     }
   }, {
-    key: 'blockClassName',
-    value: function blockClassName(blockName) {
+    key: 'getBlockClassName',
+    value: function getBlockClassName(blockName) {
       return '' + _settings2.default.getPrefix() + _settings2.default.getClasses().block.replace('{b}', this.camelCaseToDashCase(blockName));
     }
   }, {
-    key: 'elementClassName',
-    value: function elementClassName(blockName, elementName) {
+    key: 'getElementClassName',
+    value: function getElementClassName(blockName, elementName) {
       return '' + _settings2.default.getPrefix() + _settings2.default.getClasses().element.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName));
     }
   }, {
-    key: 'blockModifierClassName',
-    value: function blockModifierClassName(blockName, modifierName) {
+    key: 'getBlockModifierClassName',
+    value: function getBlockModifierClassName(blockName, modifierName) {
       return _settings2.default.getClasses().blockModifier.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{m}', this.camelCaseToDashCase(modifierName));
     }
   }, {
-    key: 'elementModifierClassName',
-    value: function elementModifierClassName(blockName, elementName, modifierName) {
+    key: 'getElementModifierClassName',
+    value: function getElementModifierClassName(blockName, elementName, modifierName) {
       return _settings2.default.getClasses().elementModifier.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{m}', this.camelCaseToDashCase(modifierName));
     }
   }, {
-    key: 'complexModifierValues',
-    value: function complexModifierValues(modifierValue) {
+    key: 'getComplexModifierValues',
+    value: function getComplexModifierValues(modifierValue) {
       var modifierValues = modifierValue.split(' ');
       if (modifierValues.length === 1) {
         return {
@@ -103,40 +104,40 @@ var AbstractComponent = function (_React$Component) {
       }
     }
   }, {
-    key: 'blockModifierWithComplexValueClassName',
-    value: function blockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue) {
+    key: 'getBlockModifierWithComplexValueClassName',
+    value: function getBlockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue) {
       var _this2 = this;
 
       var modifierMedia = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
 
-      var modifierValues = this.complexModifierValues(modifierValue);
+      var modifierValues = this.getComplexModifierValues(modifierValue);
       return Object.keys(modifierValues).filter(function (key) {
         return modifierValues[key] !== '0';
       }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this2.blockModifierClassName(blockName, _this2.modifier(newModifierKey, modifierValues[key], modifierMedia));
+        return _this2.getBlockModifierClassName(blockName, _this2.getModifier(newModifierKey, modifierValues[key], modifierMedia));
       }).join(' ');
     }
   }, {
-    key: 'elementModifierWithComplexValueClassName',
-    value: function elementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue) {
+    key: 'getElementModifierWithComplexValueClassName',
+    value: function getElementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue) {
       var _this3 = this;
 
       var modifierMedia = arguments.length <= 4 || arguments[4] === undefined ? '' : arguments[4];
 
-      var modifierValues = this.complexModifierValues(modifierValue);
+      var modifierValues = this.getComplexModifierValues(modifierValue);
       return Object.keys(modifierValues).filter(function (key) {
         return modifierValues[key] !== '0';
       }).map(function (key) {
         var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this3.elementModifierClassName(blockName, elementName, _this3.modifier(newModifierKey, modifierValues[key], modifierMedia));
+        return _this3.getElementModifierClassName(blockName, elementName, _this3.getModifier(newModifierKey, modifierValues[key], modifierMedia));
       }).join(' ');
     }
   }, {
-    key: 'blockName',
-    value: function blockName(_blockName, modifiers) {
-      var blockNameClass = this.blockClassName(_blockName);
-      var modifiersClass = this.modifiers(_blockName, null, modifiers);
+    key: 'getBlockName',
+    value: function getBlockName(blockName, modifiers) {
+      var blockNameClass = this.getBlockClassName(blockName);
+      var modifiersClass = this.getModifiers(blockName, null, modifiers);
 
       if (modifiersClass !== '') {
         return blockNameClass + ' ' + modifiersClass;
@@ -145,11 +146,11 @@ var AbstractComponent = function (_React$Component) {
       return blockNameClass;
     }
   }, {
-    key: 'elementName',
-    value: function elementName(blockName, _elementName, modifiers, isStatic) {
-      var elementNameClass = this.elementClassName(blockName, _elementName);
+    key: 'getElementName',
+    value: function getElementName(blockName, elementName, modifiers, isStatic) {
+      var elementNameClass = this.getElementClassName(blockName, elementName);
 
-      var modifiersClass = modifiers instanceof Array ? this.modifiers(blockName, _elementName, modifiers, isStatic) : '';
+      var modifiersClass = modifiers instanceof Array ? this.getModifiers(blockName, elementName, modifiers, isStatic) : '';
 
       if (modifiersClass !== '') {
         return elementNameClass + ' ' + modifiersClass;
@@ -158,26 +159,26 @@ var AbstractComponent = function (_React$Component) {
       return elementNameClass;
     }
   }, {
-    key: 'modifiers',
-    value: function modifiers(blockName, elementName, _modifiers, isStatic) {
+    key: 'getModifiers',
+    value: function getModifiers(blockName, elementName, modifiers, isStatic) {
       var _this4 = this;
 
-      return _modifiers.map(function (key) {
-        var value = _this4.props[key];
+      return modifiers.map(function (key) {
+        var value = _this4.getValue(key);
         if (typeof value === 'boolean' && value === true || isStatic) {
           if (elementName) {
-            return _this4.elementModifierClassName(blockName, elementName, key);
+            return _this4.getElementModifierClassName(blockName, elementName, key);
           }
 
-          return _this4.blockModifierClassName(blockName, key);
+          return _this4.getBlockModifierClassName(blockName, key);
         }
 
         if (typeof value === 'string' || typeof value === 'number') {
           if (elementName) {
-            return _this4.elementModifierWithComplexValueClassName(blockName, elementName, key, value.toString());
+            return _this4.getElementModifierWithComplexValueClassName(blockName, elementName, key, value.toString());
           }
 
-          return _this4.blockModifierWithComplexValueClassName(blockName, key, value.toString());
+          return _this4.getBlockModifierWithComplexValueClassName(blockName, key, value.toString());
         }
 
         if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
@@ -197,15 +198,15 @@ var AbstractComponent = function (_React$Component) {
 
             if (elementName) {
               if (className !== '') {
-                result.push(_this4.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
+                result.push(_this4.getElementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
               } else {
-                result.push(_this4.elementModifierClassName(blockName, elementName, _this4.modifier(key, media)));
+                result.push(_this4.getElementModifierClassName(blockName, elementName, _this4.getModifier(key, media)));
               }
             } else {
               if (className !== '') {
-                result.push(_this4.blockModifierWithComplexValueClassName(blockName, key, className, media));
+                result.push(_this4.getBlockModifierWithComplexValueClassName(blockName, key, className, media));
               } else {
-                result.push(_this4.blockModifierClassName(blockName, _this4.modifier(key, media)));
+                result.push(_this4.getBlockModifierClassName(blockName, _this4.getModifier(key, media)));
               }
             }
           });
@@ -216,6 +217,13 @@ var AbstractComponent = function (_React$Component) {
       }).filter(function (modifier) {
         return modifier !== '';
       }).join(' ');
+    }
+  }, {
+    key: 'camelCaseToDashCase',
+    value: function camelCaseToDashCase(word) {
+      return word.replace(/([A-Z])/g, function (match) {
+        return '-' + match.toLowerCase();
+      });
     }
   }]);
 

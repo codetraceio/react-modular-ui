@@ -112,7 +112,7 @@ export default class Tooltip extends AbstractComponent {
       >
         {this.props.children}
         <Portal show={this.state.show}>
-          <div className={this.blockClassName('tooltip')} ref={(element) => this.updateTooltip(element)}>
+          <div className={this.getBlockClassName('tooltip')} ref={(element) => this.updateTooltip(element)}>
             {this.props.title}
           </div>
         </Portal>

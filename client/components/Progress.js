@@ -32,8 +32,8 @@ var Progress = function (_AbstractComponent) {
   }
 
   _createClass(Progress, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       return ['color', 'size'];
     }
   }, {
@@ -41,8 +41,8 @@ var Progress = function (_AbstractComponent) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.blockName('progress', this.getModifiers()) },
-        _react2.default.createElement('div', { className: this.elementName('progress', 'line'), style: { width: this.props.value + '%' } })
+        { className: this.getBlockName('progress', this.getModifierNames()) },
+        _react2.default.createElement('div', { className: this.getElementName('progress', 'line'), style: { width: this.props.value + '%' } })
       );
     }
   }]);

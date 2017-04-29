@@ -32,8 +32,8 @@ var Loading = function (_AbstractComponent) {
   }
 
   _createClass(Loading, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       return ['size', 'color'];
     }
   }, {
@@ -42,7 +42,7 @@ var Loading = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.blockName('loading', this.getModifiers())
+          className: this.getBlockName('loading', this.getModifierNames())
         },
         _react2.default.createElement(
           'svg',

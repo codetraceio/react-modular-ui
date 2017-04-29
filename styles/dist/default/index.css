@@ -15364,3 +15364,13 @@ body {
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
 }
+.c-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #bbb;
+  min-height: 80px;
+}
+.c-upload.-active {
+  border-color: #08a;
+}

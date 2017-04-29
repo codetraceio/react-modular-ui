@@ -164,7 +164,7 @@ var Tooltip = function (_AbstractComponent) {
           { show: this.state.show },
           _react2.default.createElement(
             'div',
-            { className: this.blockClassName('tooltip'), ref: function ref(element) {
+            { className: this.getBlockClassName('tooltip'), ref: function ref(element) {
                 return _this3.updateTooltip(element);
               } },
             this.props.title

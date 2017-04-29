@@ -32,8 +32,8 @@ var Pill = function (_AbstractComponent) {
   }
 
   _createClass(Pill, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       return ['size', 'color'];
     }
   }, {
@@ -42,7 +42,7 @@ var Pill = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.blockName('pill', this.getModifiers())
+          className: this.getBlockName('pill', this.getModifierNames())
         },
         _react2.default.createElement(
           'div',

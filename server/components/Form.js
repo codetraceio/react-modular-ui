@@ -44,7 +44,7 @@ var Form = function (_AbstractComponent) {
       return _react2.default.createElement(
         'form',
         {
-          className: this.blockName('form', []),
+          className: this.getBlockName('form', []),
           action: this.props.action,
           method: this.props.method,
           name: this.props.name,

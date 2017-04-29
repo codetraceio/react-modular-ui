@@ -36,8 +36,8 @@ var Button = function (_AbstractComponent) {
   }
 
   _createClass(Button, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       return ['size', 'width', 'height', 'color', 'rotate'];
     }
   }, {
@@ -46,7 +46,7 @@ var Button = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.blockName('icon', this.getModifiers()),
+          className: this.getBlockName('icon', this.getModifierNames()),
           onClick: this.props.onClick
         },
         _settings2.default.getIcon(this.props.name)

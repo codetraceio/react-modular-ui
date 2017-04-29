@@ -20,7 +20,7 @@ export default class Button extends AbstractComponent {
     this.updateLine();
   }
 
-  getModifiers() {
+  getModifierNames() {
     return ['size', 'color'];
   }
 
@@ -69,7 +69,7 @@ export default class Button extends AbstractComponent {
     return (
       <div
         ref={(element) => this.setLineElement(element)}
-        className={this.elementName('tabs', 'line')}
+        className={this.getElementName('tabs', 'line')}
       />
     );
   }
@@ -89,7 +89,7 @@ export default class Button extends AbstractComponent {
         <div
           key={option.value}
           ref={(element) => this.setOptionElement(option.value, element)}
-          className={this.elementName('tabs', 'option', this.getOptionModifiers(option), true)}
+          className={this.getElementName('tabs', 'option', this.getOptionModifiers(option), true)}
           onClick={() => this.onChange(option.value, option)}
         >
           <div>{option.title}</div>
@@ -103,7 +103,7 @@ export default class Button extends AbstractComponent {
     return (
       <div
         ref={(element) => this.setElement(element)}
-        className={this.blockName('tabs', this.getModifiers())}
+        className={this.getBlockName('tabs', this.getModifierNames())}
       >
         {this.renderLine()}
         {this.renderOptions()}

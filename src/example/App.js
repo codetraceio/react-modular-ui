@@ -10,6 +10,7 @@ import Pill from './../components/Pill';
 import Tabs from './../components/Tabs';
 import Tooltip from './../components/Tooltip';
 import Progress from './../components/Progress';
+import Upload from './../components/Upload';
 import settings from './../settings';
 
 import '../../styles/dist/default/index.css';
@@ -456,6 +457,10 @@ export default class App extends React.Component {
                 <Button>Help</Button>
               </Tooltip>
             </Block>
+          </Block>
+          <Block>
+            <h2>Upload</h2>
+            <Upload text="Drug file here to upload" />
           </Block>
         </Block>
       </div>

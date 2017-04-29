@@ -3,41 +3,42 @@ import React from 'react';
 import settings from '../settings';
 
 export default class AbstractComponent extends React.Component {
-  camelCaseToDashCase(word) {
-    return word.replace(/([A-Z])/g, (match) => {
-      return `-${match.toLowerCase()}`;
-    });
+  getValue(key) {
+    if (this.modifiers && this.modifiers[key]) {
+      return this.modifiers[key];
+    }
+    return this.props[key];
   }
 
-  modifier(...modifiers) {
+  getModifier(...modifiers) {
     return modifiers.filter(m => m !== '').join(settings.getClasses().separator);
   }
 
-  blockClassName(blockName) {
+  getBlockClassName(blockName) {
     return `${settings.getPrefix()}${settings.getClasses().block
       .replace('{b}', this.camelCaseToDashCase(blockName))}`;
   }
 
-  elementClassName(blockName, elementName) {
+  getElementClassName(blockName, elementName) {
     return `${settings.getPrefix()}${settings.getClasses().element
       .replace('{b}', this.camelCaseToDashCase(blockName))
       .replace('{e}', this.camelCaseToDashCase(elementName))}`;
   }
 
-  blockModifierClassName(blockName, modifierName) {
+  getBlockModifierClassName(blockName, modifierName) {
     return settings.getClasses().blockModifier
       .replace('{b}', this.camelCaseToDashCase(blockName))
       .replace('{m}', this.camelCaseToDashCase(modifierName));
   }
 
-  elementModifierClassName(blockName, elementName, modifierName) {
+  getElementModifierClassName(blockName, elementName, modifierName) {
     return settings.getClasses().elementModifier
       .replace('{b}', this.camelCaseToDashCase(blockName))
       .replace('{e}', this.camelCaseToDashCase(elementName))
       .replace('{m}', this.camelCaseToDashCase(modifierName));
   }
 
-  complexModifierValues(modifierValue) {
+  getComplexModifierValues(modifierValue) {
     const modifierValues = modifierValue.split(' ');
     if (modifierValues.length === 1) {
       return {
@@ -67,29 +68,29 @@ export default class AbstractComponent extends React.Component {
     }
   }
 
-  blockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue, modifierMedia = '') {
-    const modifierValues = this.complexModifierValues(modifierValue);
+  getBlockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue, modifierMedia = '') {
+    const modifierValues = this.getComplexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter((key) => modifierValues[key] !== '0').map((key) => {
       const newModifierKey = key === 'default' ? modifierKey : `${modifierKey}-${key}`;
-      return this.blockModifierClassName(
-        blockName, this.modifier(newModifierKey, modifierValues[key], modifierMedia)
+      return this.getBlockModifierClassName(
+        blockName, this.getModifier(newModifierKey, modifierValues[key], modifierMedia)
       );
     }).join(' ');
   }
 
-  elementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue, modifierMedia = '') {
-    const modifierValues = this.complexModifierValues(modifierValue);
+  getElementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue, modifierMedia = '') {
+    const modifierValues = this.getComplexModifierValues(modifierValue);
     return Object.keys(modifierValues).filter((key) => modifierValues[key] !== '0').map((key) => {
       const newModifierKey = key === 'default' ? modifierKey : `${modifierKey}-${key}`;
-      return this.elementModifierClassName(
-        blockName, elementName, this.modifier(newModifierKey, modifierValues[key], modifierMedia)
+      return this.getElementModifierClassName(
+        blockName, elementName, this.getModifier(newModifierKey, modifierValues[key], modifierMedia)
       );
     }).join(' ');
   }
 
-  blockName(blockName, modifiers) {
-    const blockNameClass = this.blockClassName(blockName);
-    const modifiersClass = this.modifiers(blockName, null, modifiers);
+  getBlockName(blockName, modifiers) {
+    const blockNameClass = this.getBlockClassName(blockName);
+    const modifiersClass = this.getModifiers(blockName, null, modifiers);
 
     if (modifiersClass !== '') {
       return `${blockNameClass} ${modifiersClass}`
@@ -98,10 +99,10 @@ export default class AbstractComponent extends React.Component {
     return blockNameClass;
   }
 
-  elementName(blockName, elementName, modifiers, isStatic) {
-    const elementNameClass = this.elementClassName(blockName, elementName);
+  getElementName(blockName, elementName, modifiers, isStatic) {
+    const elementNameClass = this.getElementClassName(blockName, elementName);
 
-    const modifiersClass = modifiers instanceof Array ? this.modifiers(blockName, elementName, modifiers, isStatic) : '';
+    const modifiersClass = modifiers instanceof Array ? this.getModifiers(blockName, elementName, modifiers, isStatic) : '';
 
     if (modifiersClass !== '') {
       return `${elementNameClass} ${modifiersClass}`
@@ -110,23 +111,23 @@ export default class AbstractComponent extends React.Component {
     return elementNameClass;
   }
 
-  modifiers(blockName, elementName, modifiers, isStatic) {
+  getModifiers(blockName, elementName, modifiers, isStatic) {
     return modifiers.map((key) => {
-      const value = this.props[key];
+      const value = this.getValue(key);
       if ((typeof value === 'boolean' && value === true) || isStatic) {
         if (elementName) {
-          return this.elementModifierClassName(blockName, elementName, key);
+          return this.getElementModifierClassName(blockName, elementName, key);
         }
 
-        return this.blockModifierClassName(blockName, key);
+        return this.getBlockModifierClassName(blockName, key);
       }
 
       if (typeof value === 'string' || typeof value === 'number') {
         if (elementName) {
-          return this.elementModifierWithComplexValueClassName(blockName, elementName, key, value.toString());
+          return this.getElementModifierWithComplexValueClassName(blockName, elementName, key, value.toString());
         }
 
-        return this.blockModifierWithComplexValueClassName(blockName, key, value.toString());
+        return this.getBlockModifierWithComplexValueClassName(blockName, key, value.toString());
       }
 
       if (typeof value === 'object') {
@@ -147,21 +148,21 @@ export default class AbstractComponent extends React.Component {
           if (elementName) {
             if (className !== '') {
               result.push(
-                this.elementModifierWithComplexValueClassName(blockName, elementName, key, className, media)
+                this.getElementModifierWithComplexValueClassName(blockName, elementName, key, className, media)
               );
             } else {
               result.push(
-                this.elementModifierClassName(blockName, elementName, this.modifier(key, media))
+                this.getElementModifierClassName(blockName, elementName, this.getModifier(key, media))
               );
             }
           } else {
             if (className !== '') {
               result.push(
-                this.blockModifierWithComplexValueClassName(blockName, key, className, media)
+                this.getBlockModifierWithComplexValueClassName(blockName, key, className, media)
               );
             } else {
               result.push(
-                this.blockModifierClassName(blockName, this.modifier(key, media))
+                this.getBlockModifierClassName(blockName, this.getModifier(key, media))
               );
             }
           }
@@ -171,5 +172,11 @@ export default class AbstractComponent extends React.Component {
 
       return '';
     }).filter(modifier => modifier !== '').join(' ');
+  }
+
+  camelCaseToDashCase(word) {
+    return word.replace(/([A-Z])/g, (match) => {
+      return `-${match.toLowerCase()}`;
+    });
   }
 }

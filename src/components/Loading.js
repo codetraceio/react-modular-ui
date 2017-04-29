@@ -2,14 +2,14 @@ import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
 export default class Loading extends AbstractComponent {
-  getModifiers() {
+  getModifierNames() {
     return ['size', 'color'];
   }
 
   render() {
     return (
       <div
-        className={this.blockName('loading', this.getModifiers())}
+        className={this.getBlockName('loading', this.getModifierNames())}
       >
         <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
           <circle cx="50" cy="50" r="40" stroke="none" fill="none" strokeWidth="10">

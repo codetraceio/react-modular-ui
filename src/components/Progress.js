@@ -2,14 +2,14 @@ import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
 export default class Progress extends AbstractComponent {
-  getModifiers() {
+  getModifierNames() {
     return ['color', 'size'];
   }
 
   render() {
     return (
-      <div className={this.blockName('progress', this.getModifiers())}>
-        <div className={this.elementName('progress', 'line')} style={{width:`${this.props.value}%`}} />
+      <div className={this.getBlockName('progress', this.getModifierNames())}>
+        <div className={this.getElementName('progress', 'line')} style={{width:`${this.props.value}%`}} />
       </div>
     );
   }

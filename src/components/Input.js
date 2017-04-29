@@ -2,7 +2,7 @@ import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
 export default class Input extends AbstractComponent {
-  getModifiers() {
+  getModifierNames() {
     return ['size', 'view', 'color', 'disabled'];
   }
 
@@ -16,13 +16,13 @@ export default class Input extends AbstractComponent {
 
   renderLabel() {
     return this.props.label ? (
-      <div className={this.elementName('input', 'label')}>{this.props.label}</div>
+      <div className={this.getElementName('input', 'label')}>{this.props.label}</div>
     ) : null;
   }
 
   render() {
     return (
-      <div className={this.blockName('input', this.getModifiers())}>
+      <div className={this.getBlockName('input', this.getModifierNames())}>
         {this.renderLabel()}
         <input
           name={this.props.name}

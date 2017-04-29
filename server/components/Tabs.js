@@ -55,8 +55,8 @@ var Button = function (_AbstractComponent) {
       this.updateLine();
     }
   }, {
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       return ['size', 'color'];
     }
   }, {
@@ -114,7 +114,7 @@ var Button = function (_AbstractComponent) {
         ref: function ref(element) {
           return _this2.setLineElement(element);
         },
-        className: this.elementName('tabs', 'line')
+        className: this.getElementName('tabs', 'line')
       });
     }
   }, {
@@ -142,7 +142,7 @@ var Button = function (_AbstractComponent) {
             ref: function ref(element) {
               return _this3.setOptionElement(option.value, element);
             },
-            className: _this3.elementName('tabs', 'option', _this3.getOptionModifiers(option), true),
+            className: _this3.getElementName('tabs', 'option', _this3.getOptionModifiers(option), true),
             onClick: function onClick() {
               return _this3.onChange(option.value, option);
             }
@@ -167,7 +167,7 @@ var Button = function (_AbstractComponent) {
           ref: function ref(element) {
             return _this4.setElement(element);
           },
-          className: this.blockName('tabs', this.getModifiers())
+          className: this.getBlockName('tabs', this.getModifierNames())
         },
         this.renderLine(),
         this.renderOptions(),

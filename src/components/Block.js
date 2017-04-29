@@ -2,7 +2,7 @@ import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
 export default class Block extends AbstractComponent {
-  getModifiers() {
+  getModifierNames() {
     const modifiers = [
       'layout', 'wrap', 'padding', 'margin', 'hide', 'fit',
       'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center',
@@ -17,7 +17,7 @@ export default class Block extends AbstractComponent {
 
   render() {
     return (
-      <div className={this.blockName('block', this.getModifiers())}>
+      <div className={this.getBlockName('block', this.getModifierNames())}>
         {this.props.children}
       </div>
     )

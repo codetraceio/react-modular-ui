@@ -34,8 +34,8 @@ var Block = function (_AbstractComponent) {
   }
 
   _createClass(Block, [{
-    key: 'getModifiers',
-    value: function getModifiers() {
+    key: 'getModifierNames',
+    value: function getModifierNames() {
       var modifiers = ['layout', 'wrap', 'padding', 'margin', 'hide', 'fit', 'grow', 'shrink', 'order', 'grid', 'align', 'justify', 'center', 'scroll', 'spaceHorizontal', 'spaceVertical', 'height', 'width'];
       if (this.props.modifiers) {
         modifiers.push.apply(modifiers, _toConsumableArray(this.props.modifiers));
@@ -47,7 +47,7 @@ var Block = function (_AbstractComponent) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.blockName('block', this.getModifiers()) },
+        { className: this.getBlockName('block', this.getModifierNames()) },
         this.props.children
       );
     }
