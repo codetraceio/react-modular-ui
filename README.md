@@ -21,7 +21,7 @@ yarn add react-modular-ui
  
 ```
 import React from 'react';
-import {Button} from 'react-modular-ui/client';
+import {Button} from 'react-modular-ui';
 
 class Example extends React.Component {
   render() {
@@ -45,9 +45,20 @@ npm install
 
 ## Run
 
+Build:
+
+```
+gulp
+```
+
+Start server:
+
 ```
 npm start
 ```
+
+Client side rendering example: http://localhost:3000
+Server side rendering example: http://localhost:3000/static
 
 ## Test
 

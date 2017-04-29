@@ -31,6 +31,15 @@ tabs-option-size($size, $font-size) {
     background-color: $color-primary;
     transition: left .3s ease-in-out, width .3s ease-in-out;
   }
+  &--count {
+    font-size: 12px;
+    height: 16px;
+    background: $color-dark-grey;
+    border-radius: 8px;
+    padding: 0 8px;
+    line-height: 16px;
+    color: $color-light;
+  }
   &.-size-24 &--option {
     tabs-option-size(24px, 14px);
   }

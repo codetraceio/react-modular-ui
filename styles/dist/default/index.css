@@ -15002,10 +15002,10 @@ body {
 .c-checkbox > *:first-child {
   margin-left: 0;
 }
-.c-checkbox[aria-checked=true] [data-name=checkbox] {
+.c-checkbox[aria-checked=true] .c-checkbox--icon.-checked {
   display: none;
 }
-.c-checkbox[aria-checked=false] [data-name=checkbox-checked] {
+.c-checkbox[aria-checked=false] .c-checkbox--icon.-not-checked {
   display: none;
 }
 .c-icon {
@@ -15277,6 +15277,15 @@ body {
   background-color: #08a;
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
+.c-tabs--count {
+  font-size: 12px;
+  height: 16px;
+  background: #444;
+  border-radius: 8px;
+  padding: 0 8px;
+  line-height: 16px;
+  color: #eee;
+}
 .c-tabs.-size-24 .c-tabs--option {
   height: 23px;
   font-size: 14px;
@@ -15370,6 +15379,7 @@ body {
   justify-content: center;
   border: 2px dashed #bbb;
   min-height: 80px;
+  cursor: pointer;
 }
 .c-upload.-active {
   border-color: #08a;

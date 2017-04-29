@@ -2,14 +2,17 @@ import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
 export default class Pill extends AbstractComponent {
-  getModifierNames() {
-    return ['size', 'color'];
+  getModifierObject() {
+    return {
+      size: this.props.size,
+      color: this.props.color
+    };
   }
 
   render() {
     return (
       <div
-        className={this.getBlockName('pill', this.getModifierNames())}
+        className={this.getBlockName('pill', this.getModifierObject())}
       >
         <div>
           {this.props.children}

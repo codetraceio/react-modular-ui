@@ -3,13 +3,6 @@ import React from 'react';
 import settings from '../settings';
 
 export default class AbstractComponent extends React.Component {
-  getValue(key) {
-    if (this.modifiers && this.modifiers[key]) {
-      return this.modifiers[key];
-    }
-    return this.props[key];
-  }
-
   getModifier(...modifiers) {
     return modifiers.filter(m => m !== '').join(settings.getClasses().separator);
   }
@@ -102,7 +95,7 @@ export default class AbstractComponent extends React.Component {
   getElementName(blockName, elementName, modifiers, isStatic) {
     const elementNameClass = this.getElementClassName(blockName, elementName);
 
-    const modifiersClass = modifiers instanceof Array ? this.getModifiers(blockName, elementName, modifiers, isStatic) : '';
+    const modifiersClass = this.getModifiers(blockName, elementName, modifiers, isStatic);
 
     if (modifiersClass !== '') {
       return `${elementNameClass} ${modifiersClass}`
@@ -112,8 +105,12 @@ export default class AbstractComponent extends React.Component {
   }
 
   getModifiers(blockName, elementName, modifiers, isStatic) {
-    return modifiers.map((key) => {
-      const value = this.getValue(key);
+    if (typeof modifiers !== 'object') {
+      return '';
+    }
+
+    return Object.keys(modifiers).map((key) => {
+      const value = modifiers[key];
       if ((typeof value === 'boolean' && value === true) || isStatic) {
         if (elementName) {
           return this.getElementModifierClassName(blockName, elementName, key);

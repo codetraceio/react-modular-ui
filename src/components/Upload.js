@@ -8,21 +8,20 @@ export default class Upload extends AbstractComponent {
 
     this.element = null;
     this.fileElement = null;
-    this.modifiers = {};
 
     this.onDragOverListener = this.onDragOver.bind(this);
     this.onDragLeaveListener = this.onDragLeave.bind(this);
     this.onDropListener = this.onDrop.bind(this);
-  }
 
-  componentWillUpdate(props, state) {
-    this.modifiers = {
-      active: state.active
+    this.state = {
+      active: false
     };
   }
 
-  getModifierNames() {
-    return ['active'];
+  getModifierObject() {
+    return {
+      active: this.state.active
+    };
   }
 
   updateElement(element) {
@@ -100,7 +99,7 @@ export default class Upload extends AbstractComponent {
   render() {
     return (
       <div
-        className={this.getBlockName('upload', this.getModifierNames())}
+        className={this.getBlockName('upload', this.getModifierObject())}
         ref={(element) => this.updateElement(element)}
         onClick={() => this.onClick()}
       >

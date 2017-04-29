@@ -20,8 +20,11 @@ export default class Button extends AbstractComponent {
     this.updateLine();
   }
 
-  getModifierNames() {
-    return ['size', 'color'];
+  getModifierObject() {
+    return {
+      size: this.props.size,
+      color: this.props.color
+    };
   }
 
   getOptionModifiers(option) {
@@ -79,7 +82,13 @@ export default class Button extends AbstractComponent {
       return null;
     }
     return (
-      <Pill size={settings.getSize(this.props.size || '24')} color={option.countColor}>{option.count}</Pill>
+      <div
+        className={this.getElementName('tabs', 'count', {
+          countColor: option.countColor
+        })}
+      >
+        {option.count}
+      </div>
     );
   }
 
@@ -103,7 +112,7 @@ export default class Button extends AbstractComponent {
     return (
       <div
         ref={(element) => this.setElement(element)}
-        className={this.getBlockName('tabs', this.getModifierNames())}
+        className={this.getBlockName('tabs', this.getModifierObject())}
       >
         {this.renderLine()}
         {this.renderOptions()}

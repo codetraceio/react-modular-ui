@@ -11,7 +11,7 @@ export default class Form extends AbstractComponent {
   render() {
     return (
       <form
-        className={this.getBlockName('form', [])}
+        className={this.getBlockName('form')}
         action={this.props.action}
         method={this.props.method}
         name={this.props.name}

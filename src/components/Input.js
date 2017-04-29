@@ -2,8 +2,13 @@ import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
 export default class Input extends AbstractComponent {
-  getModifierNames() {
-    return ['size', 'view', 'color', 'disabled'];
+  getModifierObject() {
+    return {
+      size: this.props.size,
+      view: this.props.view,
+      color: this.props.color,
+      disabled: this.props.disabled
+    };
   }
 
   delegateEvent(eventName) {
@@ -22,7 +27,7 @@ export default class Input extends AbstractComponent {
 
   render() {
     return (
-      <div className={this.getBlockName('input', this.getModifierNames())}>
+      <div className={this.getBlockName('input', this.getModifierObject())}>
         {this.renderLabel()}
         <input
           name={this.props.name}
