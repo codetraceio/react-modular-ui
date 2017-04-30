@@ -25,23 +25,25 @@ export default class Upload extends AbstractComponent {
   }
 
   updateElement(element) {
-    this.element = element;
-    if (!this.element) {
+    if (!element) {
       return;
     }
-    this.element.removeEventListener('dragover', this.onDragOverListener, false);
-    this.element.removeEventListener('dragleave', this.onDragLeaveListener, false);
-    this.element.removeEventListener('drop', this.onDropListener, false);
-    this.element.addEventListener('dragover', this.onDragOverListener, false);
-    this.element.addEventListener('dragleave', this.onDragLeaveListener, false);
-    this.element.addEventListener('drop', this.onDropListener, false);
+
+    if (this.element !== element) {
+      element.addEventListener('dragover', this.onDragOverListener, false);
+      element.addEventListener('dragleave', this.onDragLeaveListener, false);
+      element.addEventListener('drop', this.onDropListener, false);
+    }
+
+    this.element = element;
   }
 
   updateFileElement(element) {
     this.fileElement = element;
   }
 
-  onDragOver() {
+  onDragOver(event) {
+    event.preventDefault();
     this.setState({
       active: true
     });
@@ -62,6 +64,7 @@ export default class Upload extends AbstractComponent {
     if (files.length > 0) {
       file = files[0];
     }
+    console.log(file);
 
     this.setState({
       active: false

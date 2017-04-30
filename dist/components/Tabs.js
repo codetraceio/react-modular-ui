@@ -66,9 +66,11 @@ var Button = function (_AbstractComponent) {
     key: 'getOptionModifiers',
     value: function getOptionModifiers(option) {
       if (option.value === this.props.value) {
-        return ['selected'];
+        return {
+          selected: this.props.selected
+        };
       }
-      return [];
+      return {};
     }
   }, {
     key: 'setElement',

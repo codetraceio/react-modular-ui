@@ -29,9 +29,11 @@ export default class Button extends AbstractComponent {
 
   getOptionModifiers(option) {
     if (option.value === this.props.value) {
-      return ['selected'];
+      return {
+        selected: this.props.selected
+      }
     }
-    return [];
+    return {};
   }
 
   setElement(element) {
