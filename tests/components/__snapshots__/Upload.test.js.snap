@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Upload should render Upload with default text 1`] = `
+<div
+  className="c-upload"
+  onClick={[Function]}
+>
+  <input
+    name={undefined}
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+  <div>
+    Something
+  </div>
+</div>
+`;
+
+exports[`Upload should render Upload with success text when upload succeed 1`] = `
+<div
+  className="c-upload"
+  onClick={[Function]}
+>
+  <input
+    name={undefined}
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+  <div>
+    Something else
+  </div>
+</div>
+`;

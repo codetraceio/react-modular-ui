@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input should render Input 1`] = `
+exports[`Textarea should render Textarea 1`] = `
 <div
-  className="c-input -size-4 -view-flat -color-primary -disabled"
+  className="c-textarea -size-128 -view-flat -color-primary -disabled"
 >
-  <input
+  <textarea
     disabled={true}
     name={undefined}
     onBlur={[Function]}

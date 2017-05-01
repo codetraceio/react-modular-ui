@@ -94,6 +94,15 @@ Object.defineProperty(exports, 'Tabs', {
   }
 });
 
+var _Textarea = require('./components/Textarea');
+
+Object.defineProperty(exports, 'Textarea', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Textarea).default;
+  }
+});
+
 var _Tooltip = require('./components/Tooltip');
 
 Object.defineProperty(exports, 'Tooltip', {
@@ -118,6 +127,15 @@ Object.defineProperty(exports, 'Progress', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Progress).default;
+  }
+});
+
+var _Upload = require('./components/Upload');
+
+Object.defineProperty(exports, 'Upload', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Upload).default;
   }
 });
 

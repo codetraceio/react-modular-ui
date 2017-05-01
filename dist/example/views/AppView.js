@@ -42,6 +42,10 @@ var _Tabs = require('../../components/Tabs');
 
 var _Tabs2 = _interopRequireDefault(_Tabs);
 
+var _Textarea = require('../../components/Textarea');
+
+var _Textarea2 = _interopRequireDefault(_Textarea);
+
 var _Tooltip = require('../../components/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
@@ -1200,6 +1204,16 @@ var App = function (_React$Component) {
               'Upload'
             ),
             _react2.default.createElement(_Upload2.default, { text: 'Drug file here to upload' })
+          ),
+          _react2.default.createElement(
+            _Block2.default,
+            null,
+            _react2.default.createElement(
+              'h2',
+              null,
+              'Textarea'
+            ),
+            _react2.default.createElement(_Textarea2.default, { label: 'Something' })
           )
         )
       );

@@ -1,12 +1,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Input from '../../src/components/Input';
+import Textarea from '../../src/components/Textarea';
 
-describe('Input', () => {
-  it('should render Input', () => {
+describe('Textarea', () => {
+  it('should render Textarea', () => {
     const tree = renderer.create(
-      <Input
-        size="4"
+      <Textarea
+        size="128"
         color="primary"
         view="flat"
         disabled

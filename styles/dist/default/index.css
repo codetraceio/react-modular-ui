@@ -15319,6 +15319,41 @@ body {
 .c-tabs.-size-48 .c-tabs--option > *:first-child {
   margin-left: 0;
 }
+.c-textarea textarea {
+  height: 48px;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  padding: 8px;
+  background: #eee;
+  border: 1px solid #bbb;
+  outline: none;
+}
+.c-textarea textarea:focus {
+  border: 1px solid #08a;
+}
+.c-textarea--label {
+  font-size: 14px;
+  color: #444;
+  padding: 4px 0;
+}
+.c-textarea.-size-48 textarea {
+  height: 48px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+.c-textarea.-size-64 textarea {
+  height: 64px;
+  padding: 0 16px;
+  font-size: 16px;
+}
+.c-textarea.-size-128 textarea {
+  height: 128px;
+  padding: 0 32px;
+  font-size: 16px;
+}
 .c-tooltip {
   position: absolute;
   z-index: 1000;

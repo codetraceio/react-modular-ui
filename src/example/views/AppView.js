@@ -8,6 +8,7 @@ import Icon from '../../components/Icon';
 import Loading from '../../components/Loading';
 import Pill from '../../components/Pill';
 import Tabs from '../../components/Tabs';
+import Textarea from '../../components/Textarea';
 import Tooltip from '../../components/Tooltip';
 import Progress from '../../components/Progress';
 import Upload from '../../components/Upload';
@@ -459,6 +460,10 @@ export default class App extends React.Component {
           <Block>
             <h2>Upload</h2>
             <Upload text="Drug file here to upload" />
+          </Block>
+          <Block>
+            <h2>Textarea</h2>
+            <Textarea label="Something" />
           </Block>
         </Block>
       </div>

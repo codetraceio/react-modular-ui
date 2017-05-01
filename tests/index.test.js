@@ -1,6 +1,6 @@
 const components = [
   'AbstractComponent', 'Block', 'Button', 'Checkbox', 'Icon', 'Input', 'Form', 'Loading', 'Pill',
-  'Tabs', 'Tooltip', 'Portal', 'Progress'
+  'Tabs', 'Textarea', 'Tooltip', 'Portal', 'Progress', 'Upload'
 ];
 
 components.forEach((component) => {
@@ -59,6 +59,10 @@ describe('index', () => {
     expect(index.Tabs).toBeDefined();
   });
 
+  it('should contain Textarea', () =>{
+    expect(index.Textarea).toBeDefined();
+  });
+
   it('should contain Tooltip', () =>{
     expect(index.Tooltip).toBeDefined();
   });
@@ -69,6 +73,10 @@ describe('index', () => {
 
   it('should contain Progress', () =>{
     expect(index.Progress).toBeDefined();
+  });
+
+  it('should contain Upload', () =>{
+    expect(index.Upload).toBeDefined();
   });
 
   it('should contain settings', () =>{
