@@ -120,15 +120,6 @@ var Upload = function (_AbstractComponent) {
       }
     }
   }, {
-    key: 'renderText',
-    value: function renderText() {
-      if (this.props.success) {
-        return this.props.successText;
-      }
-
-      return this.props.text;
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -158,7 +149,7 @@ var Upload = function (_AbstractComponent) {
         _react2.default.createElement(
           'div',
           null,
-          this.renderText()
+          this.props.children
         )
       );
     }

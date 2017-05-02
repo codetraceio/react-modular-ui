@@ -459,7 +459,9 @@ export default class App extends React.Component {
           </Block>
           <Block>
             <h2>Upload</h2>
-            <Upload text="Drug file here to upload" />
+            <Upload>
+              Drug file here to upload
+            </Upload>
           </Block>
           <Block>
             <h2>Textarea</h2>

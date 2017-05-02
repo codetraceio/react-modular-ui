@@ -86,14 +86,6 @@ export default class Upload extends AbstractComponent {
     }
   }
 
-  renderText() {
-    if (this.props.success) {
-      return this.props.successText;
-    }
-
-    return this.props.text;
-  }
-
   render() {
     return (
       <div
@@ -109,7 +101,7 @@ export default class Upload extends AbstractComponent {
           onChange={() => this.onChange()}
         />
         <div>
-          {this.renderText()}
+          {this.props.children}
         </div>
       </div>
     );

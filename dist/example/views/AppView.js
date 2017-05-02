@@ -1203,7 +1203,11 @@ var App = function (_React$Component) {
               null,
               'Upload'
             ),
-            _react2.default.createElement(_Upload2.default, { text: 'Drug file here to upload' })
+            _react2.default.createElement(
+              _Upload2.default,
+              null,
+              'Drug file here to upload'
+            )
           ),
           _react2.default.createElement(
             _Block2.default,
