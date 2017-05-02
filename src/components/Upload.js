@@ -60,18 +60,13 @@ export default class Upload extends AbstractComponent {
     event.preventDefault();
 
     const files = event.dataTransfer.files;
-    let file = null;
-    if (files.length > 0) {
-      file = files[0];
-    }
-    console.log(file);
 
     this.setState({
       active: false
     });
 
     if (typeof this.props.onChange === 'function') {
-      this.props.onChange(file);
+      this.props.onChange(files);
     }
   }
 
@@ -84,10 +79,10 @@ export default class Upload extends AbstractComponent {
   }
 
   onChange() {
-    const file = this.fileElement.files[0];
+    const files = this.fileElement.files;
 
     if (typeof this.props.onChange === 'function') {
-      this.props.onChange(file);
+      this.props.onChange(files);
     }
   }
 
