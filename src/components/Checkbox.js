@@ -59,10 +59,14 @@ export default class Button extends AbstractComponent {
         tabIndex="1"
         onClick={(e) => this.onChange(e)}
       >
-        <Icon
-          size={this.props.size}
-          name={this.props.checked ? 'checkbox-checked' : 'checkbox'}
-        />
+        <div className={this.getElementName('checkbox', 'icon')}>
+          {this.props.checked ? (
+            <Icon
+              size={this.props.size}
+              name="checkbox"
+            />
+          ) : null}
+        </div>
         <div>{this.props.children}</div>
       </div>
     )

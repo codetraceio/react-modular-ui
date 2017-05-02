@@ -9,11 +9,6 @@ class Settings {
       separator: '-'
     };
     this.icons = {};
-    this.sizeMap = {
-      '24': '16',
-      '32': '24',
-      '48': '32'
-    };
     this.backend = false;
   }
 
@@ -43,18 +38,6 @@ class Settings {
 
   getIcon(name) {
     return this.icons[name];
-  }
-
-  getSize(size) {
-    return this.sizeMap[size];
-  }
-
-  getSizeMap() {
-    return this.sizeMap;
-  }
-
-  setSizeMap(sizeMap) {
-    this.sizeMap = sizeMap;
   }
 
   isBackend() {

@@ -21,11 +21,6 @@ var Settings = function () {
       separator: '-'
     };
     this.icons = {};
-    this.sizeMap = {
-      '24': '16',
-      '32': '24',
-      '48': '32'
-    };
     this.backend = false;
   }
 
@@ -63,21 +58,6 @@ var Settings = function () {
     key: 'getIcon',
     value: function getIcon(name) {
       return this.icons[name];
-    }
-  }, {
-    key: 'getSize',
-    value: function getSize(size) {
-      return this.sizeMap[size];
-    }
-  }, {
-    key: 'getSizeMap',
-    value: function getSizeMap() {
-      return this.sizeMap;
-    }
-  }, {
-    key: 'setSizeMap',
-    value: function setSizeMap(sizeMap) {
-      this.sizeMap = sizeMap;
     }
   }, {
     key: 'isBackend',

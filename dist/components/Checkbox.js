@@ -111,10 +111,14 @@ var Button = function (_AbstractComponent) {
             return _this2.onChange(e);
           }
         },
-        _react2.default.createElement(_Icon2.default, {
-          size: this.props.size,
-          name: this.props.checked ? 'checkbox-checked' : 'checkbox'
-        }),
+        _react2.default.createElement(
+          'div',
+          { className: this.getElementName('checkbox', 'icon') },
+          this.props.checked ? _react2.default.createElement(_Icon2.default, {
+            size: this.props.size,
+            name: 'checkbox'
+          }) : null
+        ),
         _react2.default.createElement(
           'div',
           null,

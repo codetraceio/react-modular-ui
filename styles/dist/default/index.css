@@ -14983,6 +14983,12 @@ body {
   color: #444;
   outline: none;
 }
+.c-checkbox--icon {
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: 1px solid #eee;
+}
 .c-checkbox.-disabled {
   opacity: 0.5;
   pointer-events: none;
@@ -14990,11 +14996,23 @@ body {
 .c-checkbox.-size-16 {
   font-size: 14px;
 }
+.c-checkbox.-size-16 .c-checkbox--icon {
+  width: 16px;
+  height: 16px;
+}
 .c-checkbox.-size-24 {
   font-size: 16px;
 }
+.c-checkbox.-size-24 .c-checkbox--icon {
+  width: 24px;
+  height: 24px;
+}
 .c-checkbox.-size-32 {
   font-size: 20px;
+}
+.c-checkbox.-size-32 .c-checkbox--icon {
+  width: 32px;
+  height: 32px;
 }
 .c-checkbox > * {
   margin-left: 4px;
