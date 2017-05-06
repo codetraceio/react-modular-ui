@@ -131,6 +131,7 @@ var Upload = function (_AbstractComponent) {
           ref: function ref(element) {
             return _this2.updateElement(element);
           },
+          'data-name': this.props.name,
           onClick: function onClick() {
             return _this2.onClick();
           }

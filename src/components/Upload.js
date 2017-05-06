@@ -91,6 +91,7 @@ export default class Upload extends AbstractComponent {
       <div
         className={this.getBlockName('upload', this.getModifierObject())}
         ref={(element) => this.updateElement(element)}
+        data-name={this.props.name}
         onClick={() => this.onClick()}
       >
         <input

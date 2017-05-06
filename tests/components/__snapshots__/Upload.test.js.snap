@@ -3,6 +3,7 @@
 exports[`Upload should render Upload with default text 1`] = `
 <div
   className="c-upload"
+  data-name={undefined}
   onClick={[Function]}
 >
   <input
@@ -15,15 +16,14 @@ exports[`Upload should render Upload with default text 1`] = `
     }
     type="file"
   />
-  <div>
-    Something
-  </div>
+  <div />
 </div>
 `;
 
 exports[`Upload should render Upload with success text when upload succeed 1`] = `
 <div
   className="c-upload"
+  data-name={undefined}
   onClick={[Function]}
 >
   <input
@@ -36,8 +36,6 @@ exports[`Upload should render Upload with success text when upload succeed 1`] =
     }
     type="file"
   />
-  <div>
-    Something else
-  </div>
+  <div />
 </div>
 `;

@@ -8,8 +8,7 @@ exports[`Checkbox should render Checkbox 1`] = `
   tabIndex="1"
 >
   <div
-    className="c-icon -size-32"
-    onClick={undefined}
+    className="c-checkbox--icon"
   />
   <div>
     Something
