@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
         detail: files
       });
 
-      currentElement.dispatchEvent(customEvent);
+      currentElement.parentNode.dispatchEvent(customEvent);
     }, false);
   });
 });

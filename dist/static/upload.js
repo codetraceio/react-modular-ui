@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function () {
         detail: files
       });
 
-      currentElement.dispatchEvent(customEvent);
+      currentElement.parentNode.dispatchEvent(customEvent);
     }, false);
   });
 });
