@@ -15372,6 +15372,75 @@ body {
   padding: 0 32px;
   font-size: 16px;
 }
+.c-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+.c-toggle--label {
+  padding-left: 4px;
+  font-size: 14px;
+}
+.c-toggle--container {
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  height: 24px;
+  width: 34px;
+}
+.c-toggle--handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  margin: 3px 0;
+  background: #eee;
+  border-radius: 50%;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.25), 0 0 1px 0 rgba(0,0,0,0.12);
+  transition: left 0.3s ease-in-out;
+}
+.c-toggle--line {
+  position: absolute;
+  top: 5px;
+  height: 14px;
+  width: 34px;
+  background: #bbb;
+  border-radius: 7px;
+  transition: background 0.3s ease-in-out;
+}
+.c-toggle.-checked .c-toggle--handle {
+  left: 16px;
+}
+.c-toggle.-checked .c-toggle--line {
+  background: #0b6;
+}
+.c-toggle.-size-32 .c-toggle--label {
+  font-size: 16px;
+}
+.c-toggle.-size-32 .c-toggle--container {
+  height: 32px;
+  width: 48px;
+}
+.c-toggle.-size-32 .c-toggle--handle {
+  height: 26px;
+  width: 26px;
+}
+.c-toggle.-size-32 .c-toggle--line {
+  top: 6px;
+  height: 20px;
+  width: 48px;
+  border-radius: 10px;
+}
+.c-toggle.-size-32.-checked .c-toggle--handle {
+  left: 22px;
+}
+.c-toggle.-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .c-tooltip {
   position: absolute;
   z-index: 1000;

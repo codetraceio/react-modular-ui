@@ -46,6 +46,10 @@ var _Textarea = require('../../components/Textarea');
 
 var _Textarea2 = _interopRequireDefault(_Textarea);
 
+var _Toggle = require('../../components/Toggle');
+
+var _Toggle2 = _interopRequireDefault(_Toggle);
+
 var _Tooltip = require('../../components/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
@@ -1213,6 +1217,36 @@ var App = function (_React$Component) {
               'Textarea'
             ),
             _react2.default.createElement(_Textarea2.default, { label: 'Something' })
+          )
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Toggle'
+        ),
+        _react2.default.createElement(
+          _Block2.default,
+          { layout: 'vertical', spaceVertical: '8', align: 'start' },
+          _react2.default.createElement(
+            _Toggle2.default,
+            { size: '24', checked: this.state.checked, onChange: function onChange(value) {
+                return _this2.onToggleChecked(value);
+              } },
+            'toggle'
+          ),
+          _react2.default.createElement(
+            _Toggle2.default,
+            { size: '32', checked: this.state.checked, onChange: function onChange(value) {
+                return _this2.onToggleChecked(value);
+              } },
+            'toggle'
+          ),
+          _react2.default.createElement(
+            _Toggle2.default,
+            { size: '32', checked: this.state.checked, disabled: true, onChange: function onChange(value) {
+                return _this2.onToggleChecked(value);
+              } },
+            'toggle'
           )
         )
       );
