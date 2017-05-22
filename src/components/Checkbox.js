@@ -56,6 +56,7 @@ export default class Button extends AbstractComponent {
       <div
         className={this.getBlockName('checkbox', this.getModifierObject())}
         data-name={this.props.name}
+        aria-checked={this.props.checked.toString()}
         tabIndex="1"
         onClick={(e) => this.onChange(e)}
       >

@@ -22,16 +22,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Pill = function (_AbstractComponent) {
-  _inherits(Pill, _AbstractComponent);
+var Toggle = function (_AbstractComponent) {
+  _inherits(Toggle, _AbstractComponent);
 
-  function Pill() {
-    _classCallCheck(this, Pill);
+  function Toggle() {
+    _classCallCheck(this, Toggle);
 
-    return _possibleConstructorReturn(this, (Pill.__proto__ || Object.getPrototypeOf(Pill)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).apply(this, arguments));
   }
 
-  _createClass(Pill, [{
+  _createClass(Toggle, [{
     key: 'getModifierObject',
     value: function getModifierObject() {
       return {
@@ -57,6 +57,7 @@ var Pill = function (_AbstractComponent) {
           className: this.getBlockName('toggle', this.getModifierObject()),
           role: 'checkbox',
           tabIndex: '0',
+          'aria-checked': this.props.checked.toString(),
           onClick: function onClick(e) {
             return _this2.onClick(e);
           }
@@ -76,7 +77,7 @@ var Pill = function (_AbstractComponent) {
     }
   }]);
 
-  return Pill;
+  return Toggle;
 }(_AbstractComponent3.default);
 
-exports.default = Pill;
+exports.default = Toggle;

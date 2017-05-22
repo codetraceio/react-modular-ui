@@ -43,11 +43,11 @@
     transition: background .3s ease-in-out;
   }
 
-  &.-checked &--handle {
+  &.-checked &--handle, &[aria-checked=true] &--handle {
     left: 16px;
   }
 
-  &.-checked &--line {
+  &.-checked &--line, &[aria-checked=true] &--line {
     background: $color-success;
   }
 
@@ -72,7 +72,7 @@
     border-radius: 10px;
   }
 
-  &.-size-32.-checked &--handle {
+  &.-size-32.-checked &--handle, &.-size-32[aria-checked=true] &--handle {
     left: 22px;
   }
 

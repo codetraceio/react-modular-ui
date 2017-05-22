@@ -1,7 +1,7 @@
 import React from 'react';
 import AbstractComponent from './AbstractComponent';
 
-export default class Pill extends AbstractComponent {
+export default class Toggle extends AbstractComponent {
   getModifierObject() {
     return {
       size: this.props.size,
@@ -21,6 +21,7 @@ export default class Pill extends AbstractComponent {
         className={this.getBlockName('toggle', this.getModifierObject())}
         role="checkbox"
         tabIndex="0"
+        aria-checked={this.props.checked.toString()}
         onClick={(e) => this.onClick(e)}
       >
         <div className={this.getElementName('toggle', 'container')}>

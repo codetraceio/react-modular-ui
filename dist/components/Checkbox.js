@@ -106,6 +106,7 @@ var Button = function (_AbstractComponent) {
         {
           className: this.getBlockName('checkbox', this.getModifierObject()),
           'data-name': this.props.name,
+          'aria-checked': this.props.checked.toString(),
           tabIndex: '1',
           onClick: function onClick(e) {
             return _this2.onChange(e);
