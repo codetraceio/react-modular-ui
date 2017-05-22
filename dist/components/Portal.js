@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _settings = require('../settings');
+
+var _settings2 = _interopRequireDefault(_settings);
+
 var _AbstractComponent2 = require('./AbstractComponent');
 
 var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
@@ -86,6 +90,14 @@ var Portal = function (_AbstractComponent) {
   }, {
     key: 'render',
     value: function render() {
+      if (_settings2.default.isBackend() && Array.isArray(this.props.portal) && this.props.portalKey) {
+        this.props.portal.push(_react2.default.createElement(
+          'div',
+          { key: this.props.portalKey, 'data-portal': this.props.portalKey, style: { display: 'none' } },
+          this.props.children
+        ));
+      }
+
       return null;
     }
   }]);

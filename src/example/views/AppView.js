@@ -437,22 +437,22 @@ export default class App extends React.Component {
           <Block>
             <h2>Tooltip</h2>
             <Block layout="horizontal" padding="   0" spaceHorizontal="16">
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
             </Block>

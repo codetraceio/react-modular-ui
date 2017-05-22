@@ -25,13 +25,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/static', (req, res) => {
+  const portal = [];
+  const appView = ReactDomServer.renderToStaticMarkup(<AppView portal={portal} />);
   res.end(`<!DOCTYPE html>${ReactDomServer.renderToStaticMarkup(
     <BaseView
       title="React Modular UI"
       styles="index.css"
       scripts="static.js"
+      html={appView}
     >
-      <AppView />
+      {portal}
     </BaseView>
   )}`);
 });

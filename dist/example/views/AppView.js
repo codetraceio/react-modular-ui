@@ -1140,7 +1140,7 @@ var App = function (_React$Component) {
               { layout: 'horizontal', padding: '   0', spaceHorizontal: '16' },
               _react2.default.createElement(
                 _Tooltip2.default,
-                { title: 'Help' },
+                { title: 'Help', portal: this.props.portal },
                 _react2.default.createElement(
                   _Button2.default,
                   null,
@@ -1149,7 +1149,7 @@ var App = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _Tooltip2.default,
-                { title: 'Help' },
+                { title: 'Help', portal: this.props.portal },
                 _react2.default.createElement(
                   _Button2.default,
                   null,
@@ -1158,7 +1158,7 @@ var App = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _Tooltip2.default,
-                { title: 'Help' },
+                { title: 'Help', portal: this.props.portal },
                 _react2.default.createElement(
                   _Button2.default,
                   null,
@@ -1167,7 +1167,7 @@ var App = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _Tooltip2.default,
-                { title: 'Help' },
+                { title: 'Help', portal: this.props.portal },
                 _react2.default.createElement(
                   _Button2.default,
                   null,
@@ -1176,7 +1176,7 @@ var App = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _Tooltip2.default,
-                { title: 'Help' },
+                { title: 'Help', portal: this.props.portal },
                 _react2.default.createElement(
                   _Button2.default,
                   null,
@@ -1185,7 +1185,7 @@ var App = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _Tooltip2.default,
-                { title: 'Help' },
+                { title: 'Help', portal: this.props.portal },
                 _react2.default.createElement(
                   _Button2.default,
                   null,

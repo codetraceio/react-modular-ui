@@ -10,6 +10,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _settings = require('../settings');
+
+var _settings2 = _interopRequireDefault(_settings);
+
+var _utils = require('../utils');
+
+var _utils2 = _interopRequireDefault(_utils);
+
 var _AbstractComponent2 = require('./AbstractComponent');
 
 var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
@@ -63,64 +71,7 @@ var Tooltip = function (_AbstractComponent) {
         return;
       }
 
-      var rect = wrapperElement.getBoundingClientRect();
-      var wrapperWidth = wrapperElement.offsetWidth;
-      var wrapperHeight = wrapperElement.offsetHeight;
-      var width = tooltipElement.offsetWidth;
-      var height = tooltipElement.offsetHeight;
-      var left = 0;
-      var top = 0;
-      var tailSize = 8;
-      var fitsRight = rect.left + width + tailSize < window.innerWidth;
-      var fitsRightHalf = rect.left + width / 2 + tailSize < window.innerWidth;
-      var fitsBottom = rect.bottom + height + tailSize < window.innerHeight;
-      var fitsLeft = rect.left - width - tailSize > 0;
-      var fitsLeftHalf = rect.left - width - tailSize / 2 > 0;
-      var fitsTop = rect.top - height - tailSize > 0;
-      var position = void 0;
-
-      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-
-      tooltipElement.classList.remove('-tail-top');
-      tooltipElement.classList.remove('-tail-right');
-      tooltipElement.classList.remove('-tail-bottom');
-      tooltipElement.classList.remove('-tail-left');
-
-      if (this.props.prefer === 'left' && fitsLeft) {
-        position = 'left';
-      } else if (this.props.prefer === 'right' && fitsRight) {
-        position = 'right';
-      } else if (this.props.prefer === 'top' && fitsRightHalf && fitsLeftHalf && fitsTop) {
-        position = 'top';
-      } else if (fitsRightHalf && fitsLeftHalf && (fitsTop || fitsBottom)) {
-        position = fitsBottom ? 'bottom' : 'top';
-      } else {
-        position = fitsRight ? 'right' : 'left';
-      }
-
-      if (position === 'top' || position === 'bottom') {
-        left = rect.left - width / 2 + wrapperWidth / 2;
-        if (position === 'top') {
-          top = rect.top - height - tailSize;
-          tooltipElement.classList.add('-tail-bottom');
-        } else {
-          top = rect.top + wrapperHeight + tailSize;
-          tooltipElement.classList.add('-tail-top');
-        }
-      } else {
-        top = rect.top - height / 2 + wrapperHeight / 2;
-        if (position === 'left') {
-          left = rect.left - width - tailSize;
-          tooltipElement.classList.add('-tail-right');
-        } else {
-          left = rect.left + wrapperWidth + tailSize;
-          tooltipElement.classList.add('-tail-left');
-        }
-      }
-
-      tooltipElement.style.left = scrollLeft + left + 'px';
-      tooltipElement.style.top = scrollTop + top + 'px';
+      _utils2.default.updateTooltip(wrapperElement, tooltipElement, this.props.prefer);
     }
   }, {
     key: 'onShowTooltip',
@@ -145,9 +96,12 @@ var Tooltip = function (_AbstractComponent) {
     value: function render() {
       var _this3 = this;
 
+      var portalKey = _settings2.default.isBackend() ? _utils2.default.generateKey() : null;
+
       return _react2.default.createElement(
         'div',
         {
+          className: this.getBlockClassName('tooltip-wrapper'),
           onMouseOver: function onMouseOver() {
             return _this3.onShowTooltip();
           },
@@ -156,12 +110,13 @@ var Tooltip = function (_AbstractComponent) {
           },
           ref: function ref(element) {
             return _this3.updateWrapper(element);
-          }
+          },
+          'data-portal-key': portalKey
         },
         this.props.children,
         _react2.default.createElement(
           _Portal2.default,
-          { show: this.state.show },
+          { show: this.state.show, portal: this.props.portal, portalKey: portalKey },
           _react2.default.createElement(
             'div',
             { className: this.getBlockClassName('tooltip'), ref: function ref(element) {
