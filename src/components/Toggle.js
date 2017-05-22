@@ -11,6 +11,10 @@ export default class Toggle extends AbstractComponent {
     };
   }
 
+  isChecked() {
+    return this.props.checked || false;
+  }
+
   onClick(e) {
     this.props.onChange(!this.props.checked, e);
   }
@@ -21,7 +25,7 @@ export default class Toggle extends AbstractComponent {
         className={this.getBlockName('toggle', this.getModifierObject())}
         role="checkbox"
         tabIndex="0"
-        aria-checked={this.props.checked.toString()}
+        aria-checked={this.isChecked().toString()}
         onClick={(e) => this.onClick(e)}
       >
         <div className={this.getElementName('toggle', 'container')}>

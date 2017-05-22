@@ -2,6 +2,7 @@
 
 exports[`Toggle should render Toggle 1`] = `
 <div
+  aria-checked="false"
   className="c-toggle -size-32 -color-primary -disabled"
   onClick={[Function]}
   role="checkbox"

@@ -42,6 +42,11 @@ var Toggle = function (_AbstractComponent) {
       };
     }
   }, {
+    key: 'isChecked',
+    value: function isChecked() {
+      return this.props.checked || false;
+    }
+  }, {
     key: 'onClick',
     value: function onClick(e) {
       this.props.onChange(!this.props.checked, e);
@@ -57,7 +62,7 @@ var Toggle = function (_AbstractComponent) {
           className: this.getBlockName('toggle', this.getModifierObject()),
           role: 'checkbox',
           tabIndex: '0',
-          'aria-checked': this.props.checked.toString(),
+          'aria-checked': this.isChecked().toString(),
           onClick: function onClick(e) {
             return _this2.onClick(e);
           }
