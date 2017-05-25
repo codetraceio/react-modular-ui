@@ -42,6 +42,15 @@ var Textarea = function (_AbstractComponent) {
       };
     }
   }, {
+    key: 'getStyle',
+    value: function getStyle() {
+      var style = {};
+      if (this.props.height) {
+        style.height = this.props.height + 'px';
+      }
+      return style;
+    }
+  }, {
     key: 'delegateEvent',
     value: function delegateEvent(eventName) {
       var _this2 = this;
@@ -66,7 +75,7 @@ var Textarea = function (_AbstractComponent) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.getBlockName('textarea', this.getModifierObject()) },
+        { className: this.getBlockName('textarea', this.getModifierObject()), style: this.getStyle() },
         this.renderLabel(),
         _react2.default.createElement('textarea', {
           name: this.props.name,

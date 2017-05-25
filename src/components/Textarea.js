@@ -11,6 +11,14 @@ export default class Textarea extends AbstractComponent {
     };
   }
 
+  getStyle() {
+    const style = {};
+    if (this.props.height) {
+      style.height = `${this.props.height}px`;
+    }
+    return style;
+  }
+
   delegateEvent(eventName) {
     return (event) => {
       if (typeof this.props[eventName] === 'function') {
@@ -27,7 +35,7 @@ export default class Textarea extends AbstractComponent {
 
   render() {
     return (
-      <div className={this.getBlockName('textarea', this.getModifierObject())}>
+      <div className={this.getBlockName('textarea', this.getModifierObject())} style={this.getStyle()}>
         {this.renderLabel()}
         <textarea
           name={this.props.name}
