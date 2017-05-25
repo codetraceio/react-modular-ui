@@ -40,7 +40,9 @@ var Button = function (_AbstractComponent) {
         color: this.props.color,
         shape: this.props.shape,
         disabled: this.props.disabled,
-        padding: this.props.padding
+        padding: this.props.padding,
+        paddingLeft: this.props.paddingLeft,
+        paddingRight: this.props.paddingRight
       };
     }
   }, {
