@@ -75,13 +75,14 @@ var Textarea = function (_AbstractComponent) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.getBlockName('textarea', this.getModifierObject()), style: this.getStyle() },
+        { className: this.getBlockName('textarea', this.getModifierObject()) },
         this.renderLabel(),
         _react2.default.createElement('textarea', {
           name: this.props.name,
           placeholder: this.props.placeholder,
           value: this.props.value,
           disabled: this.props.disabled,
+          style: this.getStyle(),
           onChange: this.delegateEvent('onChange'),
           onKeyDown: this.delegateEvent('onKeyDown'),
           onKeyUp: this.delegateEvent('onKeyUp'),
