@@ -35,13 +35,14 @@ export default class Textarea extends AbstractComponent {
 
   render() {
     return (
-      <div className={this.getBlockName('textarea', this.getModifierObject())} style={this.getStyle()}>
+      <div className={this.getBlockName('textarea', this.getModifierObject())}>
         {this.renderLabel()}
         <textarea
           name={this.props.name}
           placeholder={this.props.placeholder}
           value={this.props.value}
           disabled={this.props.disabled}
+          style={this.getStyle()}
           onChange={this.delegateEvent('onChange')}
           onKeyDown={this.delegateEvent('onKeyDown')}
           onKeyUp={this.delegateEvent('onKeyUp')}
