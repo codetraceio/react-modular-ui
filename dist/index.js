@@ -103,6 +103,15 @@ Object.defineProperty(exports, 'Textarea', {
   }
 });
 
+var _Toggle = require('./components/Toggle');
+
+Object.defineProperty(exports, 'Toggle', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Toggle).default;
+  }
+});
+
 var _Tooltip = require('./components/Tooltip');
 
 Object.defineProperty(exports, 'Tooltip', {
