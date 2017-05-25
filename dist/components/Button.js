@@ -39,7 +39,8 @@ var Button = function (_AbstractComponent) {
         view: this.props.view,
         color: this.props.color,
         shape: this.props.shape,
-        disabled: this.props.disabled
+        disabled: this.props.disabled,
+        iconPosition: this.props.iconPosition
       };
     }
   }, {
