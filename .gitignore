@@ -1,3 +1,4 @@
 /node_modules
 /.webpack_cache
 /coverage
+/npm-debug.log

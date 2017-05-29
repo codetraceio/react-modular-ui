@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio should render Radio 1`] = `
+<div
+  className="c-radio -size-32 -view-flat -color-primary -disabled"
+  data-name={undefined}
+  onClick={[Function]}
+  tabIndex="1"
+>
+  <div
+    className="c-radio--icon"
+  />
+  <div>
+    Something
+  </div>
+</div>
+`;
