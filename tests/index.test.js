@@ -1,6 +1,20 @@
 const components = [
-  'AbstractComponent', 'Block', 'Button', 'Checkbox', 'Icon', 'Input', 'Form', 'Loading', 'Pill',
-  'Tabs', 'Textarea', 'Tooltip', 'Portal', 'Progress', 'Upload'
+  'AbstractComponent',
+  'Block',
+  'Button',
+  'Checkbox',
+  'Icon',
+  'Input',
+  'Form',
+  'Loading',
+  'Pill',
+  'Radio',
+  'Tabs',
+  'Textarea',
+  'Tooltip',
+  'Portal',
+  'Progress',
+  'Upload'
 ];
 
 components.forEach((component) => {
@@ -54,7 +68,9 @@ describe('index', () => {
   it('should contain Pill', () =>{
     expect(index.Pill).toBeDefined();
   });
-
+  it('should contain Radio', () =>{
+    expect(index.Radio).toBeDefined();
+  });
   it('should contain Tabs', () =>{
     expect(index.Tabs).toBeDefined();
   });

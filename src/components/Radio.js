@@ -5,7 +5,7 @@ import settings from '../settings';
 import AbstractComponent from './AbstractComponent';
 import Icon from './Icon';
 
-export default class Checkbox extends AbstractComponent {
+export default class Radio extends AbstractComponent {
   getModifierObject() {
     return {
       size: this.props.size,
@@ -14,37 +14,35 @@ export default class Checkbox extends AbstractComponent {
       disabled: this.props.disabled
     };
   }
-
   onChange(e) {
     if (typeof this.props.onChange === 'function') {
-      this.props.onChange(!this.props.checked, e);
+      this.props.onChange(this.props.value, e);
     }
   }
-
   render() {
     if (settings.isBackend()) {
       return (
         <div
-          className={this.getBlockName('checkbox', this.getModifierObject())}
-          role="checkbox"
+          className={this.getBlockName('radio', this.getModifierObject())}
+          role="radio"
           tabIndex="1"
           data-name={this.props.name}
           aria-checked={this.props.checked.toString()}
         >
           <div>
             <div
-              className={this.getElementName('checkbox', 'icon', {
+              className={this.getElementName('radio', 'icon', {
                 checked: true
               })}
             >
-              <Icon size={this.props.size} name='checkbox-checked' />
+              <Icon size={this.props.size} name='radio-selected' />
             </div>
             <div
-              className={this.getElementName('checkbox', 'icon', {
+              className={this.getElementName('radio', 'icon', {
                 notChecked: true
               })}
             >
-              <Icon size={this.props.size} name='checkbox' />
+              <Icon size={this.props.size} name='radio' />
             </div>
           </div>
           <div>{this.props.children}</div>
@@ -54,16 +52,16 @@ export default class Checkbox extends AbstractComponent {
 
     return (
       <div
-        className={this.getBlockName('checkbox', this.getModifierObject())}
+        className={this.getBlockName('radio', this.getModifierObject())}
         data-name={this.props.name}
         tabIndex="1"
         onClick={(e) => this.onChange(e)}
       >
-        <div className={this.getElementName('checkbox', 'icon')}>
+        <div className={this.getElementName('radio', 'icon')}>
           {this.props.checked ? (
             <Icon
               size={this.props.size}
-              name="checkbox"
+              name="radio"
             />
           ) : null}
         </div>
