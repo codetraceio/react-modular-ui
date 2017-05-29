@@ -15,6 +15,10 @@ export default class Checkbox extends AbstractComponent {
     };
   }
 
+  isChecked() {
+    return this.props.checked || false;
+  }
+
   onChange(e) {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(!this.props.checked, e);
@@ -29,7 +33,7 @@ export default class Checkbox extends AbstractComponent {
           role="checkbox"
           tabIndex="1"
           data-name={this.props.name}
-          aria-checked={this.props.checked.toString()}
+          aria-checked={this.isChecked().toString()}
         >
           <div>
             <div
@@ -56,6 +60,7 @@ export default class Checkbox extends AbstractComponent {
       <div
         className={this.getBlockName('checkbox', this.getModifierObject())}
         data-name={this.props.name}
+        aria-checked={this.isChecked().toString()}
         tabIndex="1"
         onClick={(e) => this.onChange(e)}
       >

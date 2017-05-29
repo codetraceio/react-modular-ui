@@ -10,6 +10,7 @@ import Loading from '../../components/Loading';
 import Pill from '../../components/Pill';
 import Tabs from '../../components/Tabs';
 import Textarea from '../../components/Textarea';
+import Toggle from '../../components/Toggle';
 import Tooltip from '../../components/Tooltip';
 import Progress from '../../components/Progress';
 import Upload from '../../components/Upload';
@@ -483,22 +484,22 @@ export default class App extends React.Component {
           <Block>
             <h2>Tooltip</h2>
             <Block layout="horizontal" padding="   0" spaceHorizontal="16">
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
-              <Tooltip title="Help">
+              <Tooltip title="Help" portal={this.props.portal}>
                 <Button>Help</Button>
               </Tooltip>
             </Block>
@@ -513,6 +514,12 @@ export default class App extends React.Component {
             <h2>Textarea</h2>
             <Textarea label="Something" />
           </Block>
+        </Block>
+        <h2>Toggle</h2>
+        <Block layout="vertical" spaceVertical="8" align="start">
+          <Toggle size="24" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>toggle</Toggle>
+          <Toggle size="32" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>toggle</Toggle>
+          <Toggle size="32" checked={this.state.checked} disabled onChange={(value) => this.onToggleChecked(value)}>toggle</Toggle>
         </Block>
       </div>
     );

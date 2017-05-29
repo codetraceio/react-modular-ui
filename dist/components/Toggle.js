@@ -10,14 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _settings = require('../settings');
-
-var _settings2 = _interopRequireDefault(_settings);
-
 var _AbstractComponent2 = require('./AbstractComponent');
 
 var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
@@ -30,79 +22,67 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Portal = function (_AbstractComponent) {
-  _inherits(Portal, _AbstractComponent);
+var Toggle = function (_AbstractComponent) {
+  _inherits(Toggle, _AbstractComponent);
 
-  function Portal(props) {
-    _classCallCheck(this, Portal);
+  function Toggle() {
+    _classCallCheck(this, Toggle);
 
-    var _this = _possibleConstructorReturn(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).call(this, props));
-
-    _this.portalElement = null;
-    return _this;
+    return _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).apply(this, arguments));
   }
 
-  _createClass(Portal, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.updatePortal();
+  _createClass(Toggle, [{
+    key: 'getModifierObject',
+    value: function getModifierObject() {
+      return {
+        size: this.props.size,
+        color: this.props.color,
+        checked: this.props.checked,
+        disabled: this.props.disabled
+      };
     }
   }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.removePortalElement();
+    key: 'isChecked',
+    value: function isChecked() {
+      return this.props.checked || false;
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      this.updatePortal();
-    }
-  }, {
-    key: 'addPortalElement',
-    value: function addPortalElement() {
-      if (!this.portalElement) {
-        this.portalElement = document.createElement('div');
-        window.document.body.appendChild(this.portalElement);
-      }
-    }
-  }, {
-    key: 'updatePortal',
-    value: function updatePortal() {
-      if (this.props.show) {
-        this.addPortalElement();
-        _reactDom2.default.render(_react2.default.createElement(
-          'div',
-          null,
-          this.props.children
-        ), this.portalElement);
-      } else {
-        this.removePortalElement();
-      }
-    }
-  }, {
-    key: 'removePortalElement',
-    value: function removePortalElement() {
-      if (this.portalElement) {
-        window.document.body.removeChild(this.portalElement);
-        this.portalElement = null;
-      }
+    key: 'onClick',
+    value: function onClick(e) {
+      this.props.onChange(!this.props.checked, e);
     }
   }, {
     key: 'render',
     value: function render() {
-      if (_settings2.default.isBackend() && Array.isArray(this.props.portal) && this.props.portalKey) {
-        this.props.portal.push(_react2.default.createElement(
-          'div',
-          { key: this.props.portalKey, 'data-portal': this.props.portalKey, style: { display: 'none' } },
-          this.props.children
-        ));
-      }
+      var _this2 = this;
 
-      return null;
+      return _react2.default.createElement(
+        'div',
+        {
+          className: this.getBlockName('toggle', this.getModifierObject()),
+          role: 'checkbox',
+          tabIndex: '0',
+          'aria-checked': this.isChecked().toString(),
+          onClick: function onClick(e) {
+            return _this2.onClick(e);
+          }
+        },
+        _react2.default.createElement(
+          'div',
+          { className: this.getElementName('toggle', 'container') },
+          _react2.default.createElement('div', { className: this.getElementName('toggle', 'line') }),
+          _react2.default.createElement('div', { className: this.getElementName('toggle', 'handle') })
+        ),
+        this.props.children ? _react2.default.createElement(
+          'div',
+          { className: this.getElementName('toggle', 'label') },
+          this.props.children
+        ) : null
+      );
     }
   }]);
 
-  return Portal;
+  return Toggle;
 }(_AbstractComponent3.default);
 
-exports.default = Portal;
+exports.default = Toggle;

@@ -14,6 +14,31 @@ exports[`Textarea should render Textarea 1`] = `
     onKeyPress={[Function]}
     onKeyUp={[Function]}
     placeholder={undefined}
+    style={Object {}}
+    value={undefined}
+  />
+</div>
+`;
+
+exports[`Textarea should render Textarea with height 1`] = `
+<div
+  className="c-textarea -size-128 -view-flat -color-primary -disabled"
+>
+  <textarea
+    disabled={true}
+    name={undefined}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    onKeyUp={[Function]}
+    placeholder={undefined}
+    style={
+      Object {
+        "height": "200px",
+      }
+    }
     value={undefined}
   />
 </div>

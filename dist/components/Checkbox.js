@@ -50,6 +50,11 @@ var Button = function (_AbstractComponent) {
       };
     }
   }, {
+    key: 'isChecked',
+    value: function isChecked() {
+      return this.props.checked || false;
+    }
+  }, {
     key: 'onChange',
     value: function onChange(e) {
       if (typeof this.props.onChange === 'function') {
@@ -69,7 +74,7 @@ var Button = function (_AbstractComponent) {
             role: 'checkbox',
             tabIndex: '1',
             'data-name': this.props.name,
-            'aria-checked': this.props.checked.toString()
+            'aria-checked': this.isChecked().toString()
           },
           _react2.default.createElement(
             'div',
@@ -106,6 +111,7 @@ var Button = function (_AbstractComponent) {
         {
           className: this.getBlockName('checkbox', this.getModifierObject()),
           'data-name': this.props.name,
+          'aria-checked': this.isChecked().toString(),
           tabIndex: '1',
           onClick: function onClick(e) {
             return _this2.onChange(e);

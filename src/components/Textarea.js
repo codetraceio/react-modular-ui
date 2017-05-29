@@ -11,6 +11,14 @@ export default class Textarea extends AbstractComponent {
     };
   }
 
+  getStyle() {
+    const style = {};
+    if (this.props.height) {
+      style.height = `${this.props.height}px`;
+    }
+    return style;
+  }
+
   delegateEvent(eventName) {
     return (event) => {
       if (typeof this.props[eventName] === 'function') {
@@ -34,6 +42,7 @@ export default class Textarea extends AbstractComponent {
           placeholder={this.props.placeholder}
           value={this.props.value}
           disabled={this.props.disabled}
+          style={this.getStyle()}
           onChange={this.delegateEvent('onChange')}
           onKeyDown={this.delegateEvent('onKeyDown')}
           onKeyUp={this.delegateEvent('onKeyUp')}
