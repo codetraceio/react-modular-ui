@@ -6,7 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const currentName = element.getAttribute('data-name');
       
       Array.from(window.document.querySelectorAll('.c-radio')).forEach((element)=>{
-      	console.log(element, 'elementelementelementelement');
       	if(element.getAttribute('data-name') === currentName){
       		element.setAttribute('aria-checked', 'false');
       	}

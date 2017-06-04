@@ -40,6 +40,15 @@ Object.defineProperty(exports, 'Checkbox', {
   }
 });
 
+var _Radio = require('./components/Radio');
+
+Object.defineProperty(exports, 'Radio', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Radio).default;
+  }
+});
+
 var _Icon = require('./components/Icon');
 
 Object.defineProperty(exports, 'Icon', {

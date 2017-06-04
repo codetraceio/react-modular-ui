@@ -22,6 +22,10 @@ var _Checkbox = require('../../components/Checkbox');
 
 var _Checkbox2 = _interopRequireDefault(_Checkbox);
 
+var _Radio = require('../../components/Radio');
+
+var _Radio2 = _interopRequireDefault(_Radio);
+
 var _Input = require('../../components/Input');
 
 var _Input2 = _interopRequireDefault(_Input);
@@ -80,6 +84,11 @@ _settings2.default.setIcons({
     'svg',
     { height: '24', width: '24', viewBox: '0 0 24 24' },
     _react2.default.createElement('path', { d: 'M20.785 5.745l-2.346-1.85c-.074-.06-.164-.103-.266-.103-.103 0-.197.043-.27.107L9.37 14.865s-3.356-3.227-3.45-3.32c-.094-.095-.218-.253-.406-.253-.188 0-.273.132-.37.23-.074.077-1.27 1.334-1.86 1.958-.035.04-.056.06-.086.09-.05.073-.085.155-.085.244 0 .094.034.17.085.244l.12.11s5.953 5.72 6.05 5.818c.1.098.22.222.395.222.17 0 .312-.184.393-.265L20.802 6.267c.05-.073.085-.154.085-.248 0-.108-.042-.198-.102-.275z' })
+  ),
+  radio: _react2.default.createElement(
+    'svg',
+    { height: '24', width: '24', viewBox: '0 0 24 24' },
+    _react2.default.createElement('path', { d: 'M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z' })
   )
 });
 
@@ -94,7 +103,8 @@ var App = function (_React$Component) {
     _this.state = {
       tabValue: 'profile',
       inputValue: '',
-      checked: false
+      checked: false,
+      selected: ''
     };
     return _this;
   }
@@ -104,6 +114,13 @@ var App = function (_React$Component) {
     value: function onToggleChecked(value) {
       this.setState({
         checked: value
+      });
+    }
+  }, {
+    key: 'onChangeSelected',
+    value: function onChangeSelected(value) {
+      this.setState({
+        selected: value
       });
     }
   }, {
@@ -1121,6 +1138,67 @@ var App = function (_React$Component) {
                   return _this2.onToggleChecked(value);
                 }, disabled: true },
               'checkbox'
+            )
+          ),
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Radio'
+          ),
+          _react2.default.createElement(
+            _Block2.default,
+            { layout: 'vertical', spaceVertical: '8', align: 'start' },
+            _react2.default.createElement(
+              _Radio2.default,
+              {
+                size: '16',
+                checked: this.state.selected === 'first',
+                name: 'radio',
+                value: 'first',
+                onChange: function onChange(value) {
+                  return _this2.onChangeSelected(value);
+                }
+              },
+              'Radio'
+            ),
+            _react2.default.createElement(
+              _Radio2.default,
+              {
+                size: '24',
+                checked: this.state.selected === 'second',
+                name: 'radio',
+                value: 'second',
+                onChange: function onChange(value) {
+                  return _this2.onChangeSelected(value);
+                }
+              },
+              'Radio'
+            ),
+            _react2.default.createElement(
+              _Radio2.default,
+              {
+                size: '32',
+                checked: this.state.selected === 'third',
+                name: 'radio',
+                value: 'third',
+                onChange: function onChange(value) {
+                  return _this2.onChangeSelected(value);
+                }
+              },
+              'Radio'
+            ),
+            _react2.default.createElement(
+              _Radio2.default,
+              {
+                size: '32',
+                checked: this.state.selected === 'fourth',
+                name: 'radio',
+                value: 'fourth',
+                onChange: function onChange(value) {
+                  return _this2.onChangeSelected(value);
+                }, disabled: true
+              },
+              'Radio'
             )
           ),
           _react2.default.createElement(

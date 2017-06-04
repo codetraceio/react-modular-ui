@@ -32,14 +32,14 @@ export default class Radio extends AbstractComponent {
           <div>
             <div
               className={this.getElementName('radio', 'icon', {
-                checked: true
+                notChecked: true
               })}
             >
-              <Icon size={this.props.size} name='radio-selected' />
+              
             </div>
             <div
               className={this.getElementName('radio', 'icon', {
-                notChecked: true
+                checked: true
               })}
             >
               <Icon size={this.props.size} name='radio' />

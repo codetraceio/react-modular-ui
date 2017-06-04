@@ -15071,10 +15071,10 @@ body {
 .c-radio > *:first-child {
   margin-left: 0;
 }
-.c-radio[aria-checked=true] .c-radio--icon.-checked {
+.c-radio[aria-checked=true] .c-radio--icon.-not-checked {
   display: none;
 }
-.c-radio[aria-checked=false] .c-radio--icon.-not-checked {
+.c-radio[aria-checked=false] .c-radio--icon.-checked {
   display: none;
 }
 .c-icon {

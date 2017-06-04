@@ -30,16 +30,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Checkbox = function (_AbstractComponent) {
-  _inherits(Checkbox, _AbstractComponent);
+var Radio = function (_AbstractComponent) {
+  _inherits(Radio, _AbstractComponent);
 
-  function Checkbox() {
-    _classCallCheck(this, Checkbox);
+  function Radio() {
+    _classCallCheck(this, Radio);
 
-    return _possibleConstructorReturn(this, (Checkbox.__proto__ || Object.getPrototypeOf(Checkbox)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Radio.__proto__ || Object.getPrototypeOf(Radio)).apply(this, arguments));
   }
 
-  _createClass(Checkbox, [{
+  _createClass(Radio, [{
     key: 'getModifierObject',
     value: function getModifierObject() {
       return {
@@ -53,7 +53,7 @@ var Checkbox = function (_AbstractComponent) {
     key: 'onChange',
     value: function onChange(e) {
       if (typeof this.props.onChange === 'function') {
-        this.props.onChange(!this.props.checked, e);
+        this.props.onChange(this.props.value, e);
       }
     }
   }, {
@@ -65,8 +65,8 @@ var Checkbox = function (_AbstractComponent) {
         return _react2.default.createElement(
           'div',
           {
-            className: this.getBlockName('checkbox', this.getModifierObject()),
-            role: 'checkbox',
+            className: this.getBlockName('radio', this.getModifierObject()),
+            role: 'radio',
             tabIndex: '1',
             'data-name': this.props.name,
             'aria-checked': this.props.checked.toString()
@@ -74,23 +74,19 @@ var Checkbox = function (_AbstractComponent) {
           _react2.default.createElement(
             'div',
             null,
+            _react2.default.createElement('div', {
+              className: this.getElementName('radio', 'icon', {
+                notChecked: true
+              })
+            }),
             _react2.default.createElement(
               'div',
               {
-                className: this.getElementName('checkbox', 'icon', {
+                className: this.getElementName('radio', 'icon', {
                   checked: true
                 })
               },
-              _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'checkbox-checked' })
-            ),
-            _react2.default.createElement(
-              'div',
-              {
-                className: this.getElementName('checkbox', 'icon', {
-                  notChecked: true
-                })
-              },
-              _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'checkbox' })
+              _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'radio' })
             )
           ),
           _react2.default.createElement(
@@ -104,7 +100,7 @@ var Checkbox = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.getBlockName('checkbox', this.getModifierObject()),
+          className: this.getBlockName('radio', this.getModifierObject()),
           'data-name': this.props.name,
           tabIndex: '1',
           onClick: function onClick(e) {
@@ -113,10 +109,10 @@ var Checkbox = function (_AbstractComponent) {
         },
         _react2.default.createElement(
           'div',
-          { className: this.getElementName('checkbox', 'icon') },
+          { className: this.getElementName('radio', 'icon') },
           this.props.checked ? _react2.default.createElement(_Icon2.default, {
             size: this.props.size,
-            name: 'checkbox'
+            name: 'radio'
           }) : null
         ),
         _react2.default.createElement(
@@ -128,7 +124,7 @@ var Checkbox = function (_AbstractComponent) {
     }
   }]);
 
-  return Checkbox;
+  return Radio;
 }(_AbstractComponent3.default);
 
-exports.default = Checkbox;
+exports.default = Radio;
