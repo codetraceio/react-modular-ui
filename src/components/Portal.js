@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+
+import settings from '../settings';
 import AbstractComponent from './AbstractComponent';
 
 export default class Portal extends AbstractComponent {
@@ -45,6 +47,14 @@ export default class Portal extends AbstractComponent {
   }
 
   render() {
+    if (settings.isBackend() && Array.isArray(this.props.portal) && this.props.portalKey) {
+      this.props.portal.push(
+        <div key={this.props.portalKey} data-portal={this.props.portalKey} style={{display: 'none'}}>
+          {this.props.children}
+        </div>
+      );
+    }
+
     return null;
   }
 }

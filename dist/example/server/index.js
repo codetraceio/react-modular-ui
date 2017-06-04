@@ -43,14 +43,17 @@ app.get('/', function (req, res) {
 });
 
 app.get('/static', function (req, res) {
+  var portal = [];
+  var appView = _server2.default.renderToStaticMarkup(_react2.default.createElement(_AppView2.default, { portal: portal }));
   res.end('<!DOCTYPE html>' + _server2.default.renderToStaticMarkup(_react2.default.createElement(
     _BaseView2.default,
     {
       title: 'React Modular UI',
       styles: 'index.css',
-      scripts: 'static.js'
+      scripts: 'static.js',
+      html: appView
     },
-    _react2.default.createElement(_AppView2.default, null)
+    portal
   )));
 });
 

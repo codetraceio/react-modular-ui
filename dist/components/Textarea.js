@@ -42,6 +42,15 @@ var Textarea = function (_AbstractComponent) {
       };
     }
   }, {
+    key: 'getStyle',
+    value: function getStyle() {
+      var style = {};
+      if (this.props.height) {
+        style.height = this.props.height + 'px';
+      }
+      return style;
+    }
+  }, {
     key: 'delegateEvent',
     value: function delegateEvent(eventName) {
       var _this2 = this;
@@ -73,6 +82,7 @@ var Textarea = function (_AbstractComponent) {
           placeholder: this.props.placeholder,
           value: this.props.value,
           disabled: this.props.disabled,
+          style: this.getStyle(),
           onChange: this.delegateEvent('onChange'),
           onKeyDown: this.delegateEvent('onKeyDown'),
           onKeyUp: this.delegateEvent('onKeyUp'),

@@ -104,7 +104,7 @@ export default class AbstractComponent extends React.Component {
     return elementNameClass;
   }
 
-  getModifiers(blockName, elementName, modifiers, isStatic) {
+  getModifie rs(blockName, elementName, modifiers, isStatic) {
     if (typeof modifiers !== 'object') {
       return '';
     }

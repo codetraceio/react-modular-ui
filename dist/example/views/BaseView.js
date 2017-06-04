@@ -60,6 +60,7 @@ var BaseView = function (_React$Component) {
         _react2.default.createElement(
           "body",
           null,
+          this.props.html ? _react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: this.props.html } }) : null,
           this.props.children,
           this.renderScript()
         )

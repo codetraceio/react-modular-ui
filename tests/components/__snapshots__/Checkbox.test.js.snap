@@ -2,6 +2,7 @@
 
 exports[`Checkbox should render Checkbox 1`] = `
 <div
+  aria-checked="false"
   className="c-checkbox -size-32 -view-flat -color-primary -disabled"
   data-name={undefined}
   onClick={[Function]}

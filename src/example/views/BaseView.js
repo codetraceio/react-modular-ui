@@ -27,6 +27,9 @@ export default class BaseView extends React.Component {
         {this.renderStyle()}
       </head>
       <body>
+        {this.props.html ? (
+          <div dangerouslySetInnerHTML={{__html: this.props.html}} />
+        ) : null}
         {this.props.children}
         {this.renderScript()}
       </body>
