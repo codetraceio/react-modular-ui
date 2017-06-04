@@ -40,6 +40,15 @@ Object.defineProperty(exports, 'Checkbox', {
   }
 });
 
+var _Form = require('./components/Form');
+
+Object.defineProperty(exports, 'Form', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Form).default;
+  }
+});
+
 var _Icon = require('./components/Icon');
 
 Object.defineProperty(exports, 'Icon', {
@@ -58,21 +67,21 @@ Object.defineProperty(exports, 'Input', {
   }
 });
 
-var _Form = require('./components/Form');
-
-Object.defineProperty(exports, 'Form', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Form).default;
-  }
-});
-
 var _Loading = require('./components/Loading');
 
 Object.defineProperty(exports, 'Loading', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_Loading).default;
+  }
+});
+
+var _Modal = require('./components/Modal');
+
+Object.defineProperty(exports, 'Modal', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Modal).default;
   }
 });
 
@@ -154,6 +163,15 @@ Object.defineProperty(exports, 'settings', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_settings).default;
+  }
+});
+
+var _utils = require('./utils');
+
+Object.defineProperty(exports, 'utils', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_utils).default;
   }
 });
 

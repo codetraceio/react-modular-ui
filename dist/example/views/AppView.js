@@ -62,6 +62,10 @@ var _Upload = require('../../components/Upload');
 
 var _Upload2 = _interopRequireDefault(_Upload);
 
+var _Modal = require('../../components/Modal');
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
 var _settings = require('../../settings');
 
 var _settings2 = _interopRequireDefault(_settings);
@@ -98,19 +102,13 @@ var App = function (_React$Component) {
     _this.state = {
       tabValue: 'profile',
       inputValue: '',
-      checked: false
+      checked: false,
+      showModal: false
     };
     return _this;
   }
 
   _createClass(App, [{
-    key: 'onToggleChecked',
-    value: function onToggleChecked(value) {
-      this.setState({
-        checked: value
-      });
-    }
-  }, {
     key: 'getTabOptions',
     value: function getTabOptions() {
       return [{
@@ -139,6 +137,20 @@ var App = function (_React$Component) {
     value: function onChangeInput(value) {
       this.setState({
         inputValue: value
+      });
+    }
+  }, {
+    key: 'onToggleChecked',
+    value: function onToggleChecked(value) {
+      this.setState({
+        checked: value
+      });
+    }
+  }, {
+    key: 'onToggleModal',
+    value: function onToggleModal() {
+      this.setState({
+        showModal: !this.state.showModal
       });
     }
   }, {
@@ -1247,6 +1259,33 @@ var App = function (_React$Component) {
                 return _this2.onToggleChecked(value);
               } },
             'toggle'
+          )
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Modal'
+        ),
+        _react2.default.createElement(
+          _Block2.default,
+          { layout: 'vertical', spaceVertical: '8', align: 'start' },
+          _react2.default.createElement(
+            _Button2.default,
+            { size: '24', onClick: function onClick() {
+                return _this2.onToggleModal();
+              } },
+            'Modal'
+          ),
+          _react2.default.createElement(
+            _Modal2.default,
+            { show: this.state.showModal, portal: this.props.portal, onClose: function onClose() {
+                return _this2.onToggleModal();
+              } },
+            _react2.default.createElement(
+              'div',
+              null,
+              'This is a simple modal'
+            )
           )
         )
       );

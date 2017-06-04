@@ -1,6 +1,21 @@
 const components = [
-  'AbstractComponent', 'Block', 'Button', 'Checkbox', 'Icon', 'Input', 'Form', 'Loading', 'Pill',
-  'Tabs', 'Textarea', 'Tooltip', 'Portal', 'Progress', 'Upload'
+  'AbstractComponent',
+  'Block',
+  'Button',
+  'Checkbox',
+  'Form',
+  'Icon',
+  'Input',
+  'Loading',
+  'Modal',
+  'Pill',
+  'Portal',
+  'Progress',
+  'Tabs',
+  'Textarea',
+  'Toggle',
+  'Tooltip',
+  'Upload'
 ];
 
 components.forEach((component) => {
@@ -51,6 +66,10 @@ describe('index', () => {
     expect(index.Loading).toBeDefined();
   });
 
+  it('should contain Modal', () =>{
+    expect(index.Modal).toBeDefined();
+  });
+
   it('should contain Pill', () =>{
     expect(index.Pill).toBeDefined();
   });
@@ -65,6 +84,10 @@ describe('index', () => {
 
   it('should contain Tooltip', () =>{
     expect(index.Tooltip).toBeDefined();
+  });
+
+  it('should contain Toggle', () =>{
+    expect(index.Toggle).toBeDefined();
   });
 
   it('should contain Portal', () =>{

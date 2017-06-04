@@ -13,6 +13,7 @@ import Toggle from '../../components/Toggle';
 import Tooltip from '../../components/Tooltip';
 import Progress from '../../components/Progress';
 import Upload from '../../components/Upload';
+import Modal from '../../components/Modal';
 import settings from '../../settings';
 
 settings.setIcons({
@@ -27,14 +28,9 @@ export default class App extends React.Component {
     this.state = {
       tabValue: 'profile',
       inputValue: '',
-      checked: false
+      checked: false,
+      showModal: false
     };
-  }
-
-  onToggleChecked(value) {
-    this.setState({
-      checked: value
-    })
   }
 
   getTabOptions() {
@@ -64,6 +60,18 @@ export default class App extends React.Component {
   onChangeInput(value) {
     this.setState({
       inputValue: value
+    });
+  }
+
+  onToggleChecked(value) {
+    this.setState({
+      checked: value
+    })
+  }
+
+  onToggleModal() {
+    this.setState({
+      showModal: !this.state.showModal
     });
   }
 
@@ -473,6 +481,13 @@ export default class App extends React.Component {
           <Toggle size="24" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>toggle</Toggle>
           <Toggle size="32" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>toggle</Toggle>
           <Toggle size="32" checked={this.state.checked} disabled onChange={(value) => this.onToggleChecked(value)}>toggle</Toggle>
+        </Block>
+        <h2>Modal</h2>
+        <Block layout="vertical" spaceVertical="8" align="start">
+          <Button size="24" onClick={() => this.onToggleModal()}>Modal</Button>
+          <Modal show={this.state.showModal} portal={this.props.portal} onClose={() => this.onToggleModal()}>
+            <div>This is a simple modal</div>
+          </Modal>
         </Block>
       </div>
     );

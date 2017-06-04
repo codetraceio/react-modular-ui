@@ -15173,6 +15173,23 @@ body {
 .c-loading.-color-light circle {
   stroke: #eee;
 }
+.c-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+}
+.c-modal--content {
+  background: #fff;
+  max-width: calc(100% - 32px);
+  max-heihgt: calc(100% - 32px);
+}
 .c-pill {
   font-size: 14px;
   height: 24px;
