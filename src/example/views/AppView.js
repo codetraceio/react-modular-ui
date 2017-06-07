@@ -11,6 +11,7 @@ import Tabs from '../../components/Tabs';
 import Textarea from '../../components/Textarea';
 import Toggle from '../../components/Toggle';
 import Tooltip from '../../components/Tooltip';
+import Pagination from '../../components/Pagination';
 import Progress from '../../components/Progress';
 import Upload from '../../components/Upload';
 import Modal from '../../components/Modal';
@@ -488,6 +489,10 @@ export default class App extends React.Component {
           <Modal show={this.state.showModal} portal={this.props.portal} onClose={() => this.onToggleModal()}>
             <div>This is a simple modal</div>
           </Modal>
+        </Block>
+        <h2>Pagination</h2>
+        <Block layout="vertical" spaceVertical="8" align="start">
+          <Pagination count="100" offset="10" limit="10" />
         </Block>
       </div>
     );

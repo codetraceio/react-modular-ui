@@ -54,6 +54,10 @@ var _Tooltip = require('../../components/Tooltip');
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _Pagination = require('../../components/Pagination');
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
 var _Progress = require('../../components/Progress');
 
 var _Progress2 = _interopRequireDefault(_Progress);
@@ -1287,6 +1291,16 @@ var App = function (_React$Component) {
               'This is a simple modal'
             )
           )
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Pagination'
+        ),
+        _react2.default.createElement(
+          _Block2.default,
+          { layout: 'vertical', spaceVertical: '8', align: 'start' },
+          _react2.default.createElement(_Pagination2.default, { count: '100', offset: '10', limit: '10' })
         )
       );
     }
