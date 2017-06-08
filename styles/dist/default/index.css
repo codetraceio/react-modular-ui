@@ -15190,6 +15190,39 @@ body {
   max-width: calc(100% - 32px);
   max-heihgt: calc(100% - 32px);
 }
+.c-pagination {
+  display: flex;
+  flex-direction: row;
+}
+.c-pagination--item,
+.c-pagination--ellipsis {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+}
+.c-pagination--item {
+  cursor: pointer;
+}
+.c-pagination--item.-characters-multiple {
+  width: auto;
+  padding: 0 4px;
+}
+.c-pagination--ellipsis {
+  cursor: default;
+}
+.c-pagination--item.-current {
+  background: #08a;
+  color: #fff;
+  border-radius: 12px;
+}
+.c-pagination--prev,
+.c-pagination--next {
+  color: #08a;
+  cursor: pointer;
+}
 .c-pill {
   font-size: 14px;
   height: 24px;

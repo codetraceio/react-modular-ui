@@ -44,6 +44,11 @@ var Pagination = function (_AbstractComponent) {
       };
     }
   }, {
+    key: 'getSize',
+    value: function getSize() {
+      return this.props.size || 24;
+    }
+  }, {
     key: 'getInfo',
     value: function getInfo() {
       var count = parseInt(this.props.count) || 0;
@@ -91,6 +96,14 @@ var Pagination = function (_AbstractComponent) {
       };
     }
   }, {
+    key: 'onChange',
+    value: function onChange(page) {
+      var offset = (page - 1) * this.props.limit;
+      if (typeof this.props.onChange === 'function') {
+        this.props.onChange(offset, page);
+      }
+    }
+  }, {
     key: 'renderPrev',
     value: function renderPrev(page) {
       var _this2 = this;
@@ -98,14 +111,14 @@ var Pagination = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.getElementClassName('pagination', 'prev', {
+          className: this.getElementName('pagination', 'prev', {
             disabled: page === 1
           }),
           onClick: function onClick() {
             return _this2.onChange(page - 1);
           }
         },
-        _react2.default.createElement(_Icon2.default, { name: 'prev' })
+        _react2.default.createElement(_Icon2.default, { height: this.getSize(), name: 'pagination' })
       );
     }
   }, {
@@ -116,14 +129,14 @@ var Pagination = function (_AbstractComponent) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.getElementClassName('pagination', 'next', {
+          className: this.getElementName('pagination', 'next', {
             disabled: page === lastPage
           }),
           onClick: function onClick() {
-            return _this3.onChange(page - 1);
+            return _this3.onChange(page + 1);
           }
         },
-        _react2.default.createElement(_Icon2.default, { name: 'next' })
+        _react2.default.createElement(_Icon2.default, { height: this.getSize(), name: 'pagination', rotate: '180' })
       );
     }
   }, {
@@ -136,18 +149,30 @@ var Pagination = function (_AbstractComponent) {
       pages.forEach(function (page, index) {
         var afterEllipsis = false;
         if (page !== prevPage + 1) {
-          result.push(_react2.default.createElement('div', { className: 'ellipsis', key: 'ellipsis.' + page }));
+          result.push(_react2.default.createElement(
+            'div',
+            { className: _this4.getElementName('pagination', 'ellipsis'), key: 'ellipsis.' + page },
+            '\u2026'
+          ));
           afterEllipsis = true;
         }
 
         if (!(index === pages.length - 1 && afterEllipsis && _this4.props.hideLastPage)) {
+          var characterLength = page.toString().length;
+          var characters = 'single';
+          if (characterLength === 2) {
+            characters = 'double';
+          }
+          if (characterLength > 2) {
+            characters = 'multiple';
+          }
           result.push(_react2.default.createElement(
             'div',
             {
               key: page,
-              className: _this4.getElementClassName('pagination', 'item', {
+              className: _this4.getElementName('pagination', 'item', {
                 current: page === currentPage,
-                characters: page.toString().length
+                characters: characters
               }),
               onClick: function onClick() {
                 return _this4.onChange(page);
@@ -164,6 +189,10 @@ var Pagination = function (_AbstractComponent) {
     key: 'render',
     value: function render() {
       var info = this.getInfo();
+      if (!info) {
+        return null;
+      }
+
       return _react2.default.createElement(
         'div',
         {

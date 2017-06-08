@@ -10,6 +10,10 @@ export default class Pagination extends AbstractComponent {
     };
   }
 
+  getSize() {
+    return this.props.size || 24;
+  }
+
   getInfo() {
     const count = parseInt(this.props.count) || 0;
     const limit = parseInt(this.props.limit) || 10;
@@ -56,15 +60,22 @@ export default class Pagination extends AbstractComponent {
     };
   }
 
+  onChange(page) {
+    let offset = (page - 1) * this.props.limit;
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(offset, page);
+    }
+  }
+
   renderPrev(page) {
     return (
       <div
-        className={this.getElementClassName('pagination', 'prev', {
+        className={this.getElementName('pagination', 'prev', {
           disabled: page === 1
         })}
         onClick={() => this.onChange(page - 1)}
       >
-        <Icon name="prev" />
+        <Icon height={this.getSize()} name="pagination" />
       </div>
     );
   }
@@ -72,12 +83,12 @@ export default class Pagination extends AbstractComponent {
   renderNext(page, lastPage) {
     return (
       <div
-        className={this.getElementClassName('pagination', 'next', {
+        className={this.getElementName('pagination', 'next', {
           disabled: page === lastPage
         })}
-        onClick={() => this.onChange(page - 1)}
+        onClick={() => this.onChange(page + 1)}
       >
-        <Icon name="next" />
+        <Icon height={this.getSize()} name="pagination" rotate="180" />
       </div>
     );
   }
@@ -88,17 +99,25 @@ export default class Pagination extends AbstractComponent {
     pages.forEach((page, index) => {
       let afterEllipsis = false;
       if (page !== (prevPage + 1)) {
-        result.push(<div className="ellipsis" key={'ellipsis.' + page} />);
+        result.push(<div className={this.getElementName('pagination', 'ellipsis')} key={'ellipsis.' + page}>…</div>);
         afterEllipsis = true;
       }
 
       if (!(index === pages.length - 1 && afterEllipsis && this.props.hideLastPage)) {
+        const characterLength = page.toString().length;
+        let characters = 'single';
+        if (characterLength === 2) {
+          characters = 'double';
+        }
+        if (characterLength > 2) {
+          characters = 'multiple';
+        }
         result.push(
           <div
             key={page}
-            className={this.getElementClassName('pagination', 'item', {
+            className={this.getElementName('pagination', 'item', {
               current: page === currentPage,
-              characters: page.toString().length
+              characters: characters
             })}
             onClick={() => this.onChange(page)}
           >
@@ -113,6 +132,10 @@ export default class Pagination extends AbstractComponent {
 
   render() {
     const info = this.getInfo();
+    if (!info) {
+      return null;
+    }
+
     return (
       <div
         className={this.getBlockName('pagination', this.getModifierObject())}

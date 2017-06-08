@@ -1,0 +1,38 @@
+@import "constants.styl";
+
+.c-pagination {
+  display: flex;
+  flex-direction: row;
+
+  &--item, &--ellipsis {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+  }
+
+  &--item {
+    cursor: pointer;
+    &.-characters-multiple {
+      width: auto;
+      padding: 0 4px;
+    }
+  }
+
+  &--ellipsis {
+    cursor: default;
+  }
+
+  &--item.-current {
+    background: $color-primary;
+    color: white;
+    border-radius: 12px;
+  }
+
+  &--prev, &--next {
+    color: $color-primary;
+    cursor: pointer;
+  }
+}
