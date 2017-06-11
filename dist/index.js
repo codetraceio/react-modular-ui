@@ -130,6 +130,15 @@ Object.defineProperty(exports, 'Tooltip', {
   }
 });
 
+var _Pagination = require('./components/Pagination');
+
+Object.defineProperty(exports, 'Pagination', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_Pagination).default;
+  }
+});
+
 var _Portal = require('./components/Portal');
 
 Object.defineProperty(exports, 'Portal', {

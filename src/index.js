@@ -12,6 +12,7 @@ export {default as Tabs} from './components/Tabs';
 export {default as Textarea} from './components/Textarea';
 export {default as Toggle} from './components/Toggle';
 export {default as Tooltip} from './components/Tooltip';
+export {default as Pagination} from './components/Pagination';
 export {default as Portal} from './components/Portal';
 export {default as Progress} from './components/Progress';
 export {default as Upload} from './components/Upload';

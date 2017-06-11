@@ -8,6 +8,7 @@ const components = [
   'Input',
   'Loading',
   'Modal',
+  'Pagination',
   'Pill',
   'Portal',
   'Progress',
@@ -88,6 +89,10 @@ describe('index', () => {
 
   it('should contain Toggle', () =>{
     expect(index.Toggle).toBeDefined();
+  });
+
+  it('should contain Pagination', () =>{
+    expect(index.Pagination).toBeDefined();
   });
 
   it('should contain Portal', () =>{
