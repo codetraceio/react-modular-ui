@@ -3,6 +3,7 @@ const components = [
   'Block',
   'Button',
   'Checkbox',
+  'Radio',
   'Form',
   'Icon',
   'Input',
@@ -50,7 +51,9 @@ describe('index', () => {
   it('should contain Checkbox', () =>{
     expect(index.Checkbox).toBeDefined();
   });
-
+  it('should contain Radio', () =>{
+    expect(index.Radio).toBeDefined();
+  });
   it('should contain Icon', () =>{
     expect(index.Icon).toBeDefined();
   });

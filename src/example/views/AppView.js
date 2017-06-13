@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../../components/Button';
 import Block from '../../components/Block';
 import Checkbox from '../../components/Checkbox';
+import Radio from '../../components/Radio';
 import Input from '../../components/Input';
 import Icon from '../../components/Icon';
 import Loading from '../../components/Loading';
@@ -20,6 +21,7 @@ import settings from '../../settings';
 settings.setIcons({
   github: <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></svg>,
   checkbox: <svg viewBox="0 0 24 24"><path d="M20.785 5.745l-2.346-1.85c-.074-.06-.164-.103-.266-.103-.103 0-.197.043-.27.107L9.37 14.865s-3.356-3.227-3.45-3.32c-.094-.095-.218-.253-.406-.253-.188 0-.273.132-.37.23-.074.077-1.27 1.334-1.86 1.958-.035.04-.056.06-.086.09-.05.073-.085.155-.085.244 0 .094.034.17.085.244l.12.11s5.953 5.72 6.05 5.818c.1.098.22.222.395.222.17 0 .312-.184.393-.265L20.802 6.267c.05-.073.085-.154.085-.248 0-.108-.042-.198-.102-.275z" /></svg>,
+  radio: <svg height="24" width="24" viewBox="0 0 24 24"><path d="M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>,
   pagination: <svg viewBox="0 0 24 24"><path d="M5.875 11.998l8.214-8.553c.205-.212.2-.56-.01-.777l-1.47-1.503c-.21-.216-.555-.22-.762-.01L1.818 11.6c-.11.108-.158.255-.15.398-.003.147.046.29.15.397l10.03 10.45c.207.21.55.206.762-.01l1.47-1.503c.21-.217.215-.565.01-.777l-8.215-8.557z"/></svg>
 });
 
@@ -31,6 +33,7 @@ export default class App extends React.Component {
       tabValue: 'profile',
       inputValue: '',
       checked: false,
+      selected: '',
       showModal: false,
       count: 100000,
       offset: 10,
@@ -73,7 +76,11 @@ export default class App extends React.Component {
       checked: value
     })
   }
-
+  onChangeSelected(value){
+    this.setState({
+      selected: value
+    })
+  }
   onToggleModal() {
     this.setState({
       showModal: !this.state.showModal
@@ -452,6 +459,45 @@ export default class App extends React.Component {
             <Checkbox size="24" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>checkbox</Checkbox>
             <Checkbox size="32" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)}>checkbox</Checkbox>
             <Checkbox size="32" checked={this.state.checked} onChange={(value) => this.onToggleChecked(value)} disabled>checkbox</Checkbox>
+          </Block>
+          <h2>Radio</h2>
+          <Block layout="vertical" spaceVertical="8" align="start">
+            <Radio
+              size="16"
+              checked={this.state.selected === 'first'}
+              name="radio"
+              value="first"
+              onChange={(value) => this.onChangeSelected(value)}
+            >
+              Radio
+            </Radio>
+            <Radio 
+              size="24"
+              checked={this.state.selected === 'second'}
+              name="radio"
+              value="second"
+              onChange={(value) => this.onChangeSelected(value)}
+            >
+              Radio
+            </Radio>
+            <Radio 
+              size="32"
+              checked={this.state.selected === 'third'}
+              name="radio"
+              value="third"
+              onChange={(value) => this.onChangeSelected(value)}
+            >
+              Radio
+              </Radio>
+            <Radio 
+              size="32"
+              checked={this.state.selected === 'fourth'}
+              name="radio"
+              value="fourth"
+              onChange={(value) => this.onChangeSelected(value)} disabled
+            >
+            Radio
+            </Radio>
           </Block>
           <Block>
             <h2>Tooltip</h2>
