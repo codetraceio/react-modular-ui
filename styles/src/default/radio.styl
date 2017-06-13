@@ -1,0 +1,61 @@
+.c-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  color: $color-dark-grey;
+  outline: none;
+
+  &--icon {
+    width: 24px;
+    height: 24px;
+    background: $color-white;
+    border: 1px solid $color-light-grey;
+    border-radius: 50%;
+  }
+
+  &.-disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+  &.-size-16 {
+    font-size: 14px;
+  }
+
+  &.-size-16 &--icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.-size-24 {
+    font-size: 16px;
+  }
+
+  &.-size-24 &--icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.-size-32 {
+    font-size: 20px;
+  }
+
+  &.-size-32 &--icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  & > * {
+    margin-left: 4px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  &[aria-checked=true] &--icon.-not-checked {
+    display: none;
+  }
+
+  &[aria-checked=false] &--icon.-checked {
+    display: none;
+  }
+}
