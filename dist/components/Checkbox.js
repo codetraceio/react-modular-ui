@@ -1,140 +1,59 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _settings = require('../settings');
-
-var _settings2 = _interopRequireDefault(_settings);
-
-var _AbstractComponent2 = require('./AbstractComponent');
-
-var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
-
-var _Icon = require('./Icon');
-
-var _Icon2 = _interopRequireDefault(_Icon);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Button = function (_AbstractComponent) {
-  _inherits(Button, _AbstractComponent);
-
-  function Button() {
-    _classCallCheck(this, Button);
-
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
-  }
-
-  _createClass(Button, [{
-    key: 'getModifierObject',
-    value: function getModifierObject() {
-      return {
-        size: this.props.size,
-        view: this.props.view,
-        color: this.props.color,
-        disabled: this.props.disabled
-      };
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = require("react");
+var settings_1 = require("../settings");
+var AbstractComponent_1 = require("./AbstractComponent");
+var Icon_1 = require("./Icon");
+var Button = (function (_super) {
+    __extends(Button, _super);
+    function Button() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-  }, {
-    key: 'isChecked',
-    value: function isChecked() {
-      return this.props.checked || false;
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange(e) {
-      if (typeof this.props.onChange === 'function') {
-        this.props.onChange(!this.props.checked, e);
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      if (_settings2.default.isBackend()) {
-        return _react2.default.createElement(
-          'div',
-          {
-            className: this.getBlockName('checkbox', this.getModifierObject()),
-            role: 'checkbox',
-            tabIndex: '1',
-            'data-name': this.props.name,
-            'aria-checked': this.isChecked().toString()
-          },
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'div',
-              {
-                className: this.getElementName('checkbox', 'icon', {
-                  checked: true
-                })
-              },
-              _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'checkbox-checked' })
-            ),
-            _react2.default.createElement(
-              'div',
-              {
-                className: this.getElementName('checkbox', 'icon', {
-                  notChecked: true
-                })
-              },
-              _react2.default.createElement(_Icon2.default, { size: this.props.size, name: 'checkbox' })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            this.props.children
-          )
-        );
-      }
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: this.getBlockName('checkbox', this.getModifierObject()),
-          'data-name': this.props.name,
-          'aria-checked': this.isChecked().toString(),
-          tabIndex: '1',
-          onClick: function onClick(e) {
-            return _this2.onChange(e);
-          }
-        },
-        _react2.default.createElement(
-          'div',
-          { className: this.getElementName('checkbox', 'icon') },
-          this.props.checked ? _react2.default.createElement(_Icon2.default, {
+    Button.prototype.getModifierObject = function () {
+        return {
             size: this.props.size,
-            name: 'checkbox'
-          }) : null
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          this.props.children
-        )
-      );
-    }
-  }]);
-
-  return Button;
-}(_AbstractComponent3.default);
-
+            view: this.props.view,
+            color: this.props.color,
+            disabled: this.props.disabled
+        };
+    };
+    Button.prototype.isChecked = function () {
+        return this.props.checked || false;
+    };
+    Button.prototype.onChange = function (e) {
+        if (typeof this.props.onChange === 'function') {
+            this.props.onChange(!this.props.checked, e);
+        }
+    };
+    Button.prototype.render = function () {
+        var _this = this;
+        if (settings_1.default.isBackend()) {
+            return (react_1.default.createElement("div", { className: this.getBlockName('checkbox', this.getModifierObject()), role: "checkbox", tabIndex: "1", "data-name": this.props.name, "aria-checked": this.isChecked().toString() },
+                react_1.default.createElement("div", null,
+                    react_1.default.createElement("div", { className: this.getElementName('checkbox', 'icon', {
+                            checked: true
+                        }) },
+                        react_1.default.createElement(Icon_1.default, { size: this.props.size, name: 'checkbox-checked' })),
+                    react_1.default.createElement("div", { className: this.getElementName('checkbox', 'icon', {
+                            notChecked: true
+                        }) },
+                        react_1.default.createElement(Icon_1.default, { size: this.props.size, name: 'checkbox' }))),
+                react_1.default.createElement("div", null, this.props.children)));
+        }
+        return (react_1.default.createElement("div", { className: this.getBlockName('checkbox', this.getModifierObject()), "data-name": this.props.name, "aria-checked": this.isChecked().toString(), tabIndex: "1", onClick: function (e) { return _this.onChange(e); } },
+            react_1.default.createElement("div", { className: this.getElementName('checkbox', 'icon') }, this.props.checked ? (react_1.default.createElement(Icon_1.default, { size: this.props.size, name: "checkbox" })) : null),
+            react_1.default.createElement("div", null, this.props.children)));
+    };
+    return Button;
+}(AbstractComponent_1.default));
 exports.default = Button;

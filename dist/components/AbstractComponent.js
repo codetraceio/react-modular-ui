@@ -1,229 +1,172 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _settings = require('../settings');
-
-var _settings2 = _interopRequireDefault(_settings);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AbstractComponent = function (_React$Component) {
-  _inherits(AbstractComponent, _React$Component);
-
-  function AbstractComponent() {
-    _classCallCheck(this, AbstractComponent);
-
-    return _possibleConstructorReturn(this, (AbstractComponent.__proto__ || Object.getPrototypeOf(AbstractComponent)).apply(this, arguments));
-  }
-
-  _createClass(AbstractComponent, [{
-    key: 'getModifier',
-    value: function getModifier() {
-      for (var _len = arguments.length, modifiers = Array(_len), _key = 0; _key < _len; _key++) {
-        modifiers[_key] = arguments[_key];
-      }
-
-      return modifiers.filter(function (m) {
-        return m !== '';
-      }).join(_settings2.default.getClasses().separator);
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
+var settings_1 = require("../settings");
+var AbstractComponent = (function (_super) {
+    __extends(AbstractComponent, _super);
+    function AbstractComponent() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-  }, {
-    key: 'getBlockClassName',
-    value: function getBlockClassName(blockName) {
-      return '' + _settings2.default.getPrefix() + _settings2.default.getClasses().block.replace('{b}', this.camelCaseToDashCase(blockName));
-    }
-  }, {
-    key: 'getElementClassName',
-    value: function getElementClassName(blockName, elementName) {
-      return '' + _settings2.default.getPrefix() + _settings2.default.getClasses().element.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName));
-    }
-  }, {
-    key: 'getBlockModifierClassName',
-    value: function getBlockModifierClassName(blockName, modifierName) {
-      return _settings2.default.getClasses().blockModifier.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{m}', this.camelCaseToDashCase(modifierName));
-    }
-  }, {
-    key: 'getElementModifierClassName',
-    value: function getElementModifierClassName(blockName, elementName, modifierName) {
-      return _settings2.default.getClasses().elementModifier.replace('{b}', this.camelCaseToDashCase(blockName)).replace('{e}', this.camelCaseToDashCase(elementName)).replace('{m}', this.camelCaseToDashCase(modifierName));
-    }
-  }, {
-    key: 'getComplexModifierValues',
-    value: function getComplexModifierValues(modifierValue) {
-      var modifierValues = modifierValue.split(' ');
-      if (modifierValues.length === 1) {
-        return {
-          default: modifierValue
-        };
-      }
-      if (modifierValues.length === 2) {
-        return {
-          vertical: modifierValues[0],
-          horizontal: modifierValues[1]
-        };
-      }
-      if (modifierValues.length === 3) {
-        return {
-          top: modifierValues[0],
-          horizontal: modifierValues[1],
-          bottom: modifierValues[2]
-        };
-      }
-      if (modifierValues.length === 4) {
-        return {
-          top: modifierValues[0],
-          right: modifierValues[1],
-          bottom: modifierValues[2],
-          left: modifierValues[3]
-        };
-      }
-    }
-  }, {
-    key: 'getBlockModifierWithComplexValueClassName',
-    value: function getBlockModifierWithComplexValueClassName(blockName, modifierKey, modifierValue) {
-      var _this2 = this;
-
-      var modifierMedia = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-
-      var modifierValues = this.getComplexModifierValues(modifierValue);
-      return Object.keys(modifierValues).filter(function (key) {
-        return modifierValues[key] !== '0';
-      }).map(function (key) {
-        var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this2.getBlockModifierClassName(blockName, _this2.getModifier(newModifierKey, modifierValues[key], modifierMedia));
-      }).join(' ');
-    }
-  }, {
-    key: 'getElementModifierWithComplexValueClassName',
-    value: function getElementModifierWithComplexValueClassName(blockName, elementName, modifierKey, modifierValue) {
-      var _this3 = this;
-
-      var modifierMedia = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-
-      var modifierValues = this.getComplexModifierValues(modifierValue);
-      return Object.keys(modifierValues).filter(function (key) {
-        return modifierValues[key] !== '0';
-      }).map(function (key) {
-        var newModifierKey = key === 'default' ? modifierKey : modifierKey + '-' + key;
-        return _this3.getElementModifierClassName(blockName, elementName, _this3.getModifier(newModifierKey, modifierValues[key], modifierMedia));
-      }).join(' ');
-    }
-  }, {
-    key: 'getBlockName',
-    value: function getBlockName(blockName, modifiers) {
-      var blockNameClass = this.getBlockClassName(blockName);
-      var modifiersClass = this.getModifiers(blockName, null, modifiers);
-
-      if (modifiersClass !== '') {
-        return blockNameClass + ' ' + modifiersClass;
-      }
-
-      return blockNameClass;
-    }
-  }, {
-    key: 'getElementName',
-    value: function getElementName(blockName, elementName, modifiers, isStatic) {
-      var elementNameClass = this.getElementClassName(blockName, elementName);
-
-      var modifiersClass = this.getModifiers(blockName, elementName, modifiers, isStatic);
-
-      if (modifiersClass !== '') {
-        return elementNameClass + ' ' + modifiersClass;
-      }
-
-      return elementNameClass;
-    }
-  }, {
-    key: 'getModifiers',
-    value: function getModifiers(blockName, elementName, modifiers, isStatic) {
-      var _this4 = this;
-
-      if ((typeof modifiers === 'undefined' ? 'undefined' : _typeof(modifiers)) !== 'object') {
-        return '';
-      }
-
-      return Object.keys(modifiers).map(function (key) {
-        var value = modifiers[key];
-        if (typeof value === 'boolean' && value === true || isStatic) {
-          if (elementName) {
-            return _this4.getElementModifierClassName(blockName, elementName, key);
-          }
-
-          return _this4.getBlockModifierClassName(blockName, key);
+    AbstractComponent.prototype.getModifier = function () {
+        var modifiers = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            modifiers[_i] = arguments[_i];
         }
-
-        if (typeof value === 'string' || typeof value === 'number') {
-          if (elementName) {
-            return _this4.getElementModifierWithComplexValueClassName(blockName, elementName, key, value.toString());
-          }
-
-          return _this4.getBlockModifierWithComplexValueClassName(blockName, key, value.toString());
+        return modifiers.filter(function (m) { return m !== ''; }).join(settings_1.default.getClasses().separator);
+    };
+    AbstractComponent.prototype.getBlockClassName = function (blockName) {
+        return "" + settings_1.default.getPrefix() + settings_1.default.getClasses().block
+            .replace('{b}', this.camelCaseToDashCase(blockName));
+    };
+    AbstractComponent.prototype.getElementClassName = function (blockName, elementName) {
+        return "" + settings_1.default.getPrefix() + settings_1.default.getClasses().element
+            .replace('{b}', this.camelCaseToDashCase(blockName))
+            .replace('{e}', this.camelCaseToDashCase(elementName));
+    };
+    AbstractComponent.prototype.getBlockModifierClassName = function (blockName, modifierName) {
+        return settings_1.default.getClasses().blockModifier
+            .replace('{b}', this.camelCaseToDashCase(blockName))
+            .replace('{m}', this.camelCaseToDashCase(modifierName));
+    };
+    AbstractComponent.prototype.getElementModifierClassName = function (blockName, elementName, modifierName) {
+        return settings_1.default.getClasses().elementModifier
+            .replace('{b}', this.camelCaseToDashCase(blockName))
+            .replace('{e}', this.camelCaseToDashCase(elementName))
+            .replace('{m}', this.camelCaseToDashCase(modifierName));
+    };
+    AbstractComponent.prototype.getComplexModifierValues = function (modifierValue) {
+        var modifierValues = modifierValue.split(' ');
+        if (modifierValues.length === 1) {
+            return {
+                default: modifierValue
+            };
         }
-
-        if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
-          var result = [];
-          Object.keys(value).forEach(function (valueKey) {
-            var valueValue = value[valueKey];
-            if (typeof valueValue === 'boolean' && valueValue === false) {
-              return;
-            }
-
-            var className = '';
-            if (typeof valueValue === 'string' || typeof valueValue === 'number') {
-              className = valueValue.toString();
-            }
-
-            var media = valueKey;
-
-            if (elementName) {
-              if (className !== '') {
-                result.push(_this4.getElementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
-              } else {
-                result.push(_this4.getElementModifierClassName(blockName, elementName, _this4.getModifier(key, media)));
-              }
-            } else {
-              if (className !== '') {
-                result.push(_this4.getBlockModifierWithComplexValueClassName(blockName, key, className, media));
-              } else {
-                result.push(_this4.getBlockModifierClassName(blockName, _this4.getModifier(key, media)));
-              }
-            }
-          });
-          return result.join(' ');
+        if (modifierValues.length === 2) {
+            return {
+                vertical: modifierValues[0],
+                horizontal: modifierValues[1]
+            };
         }
-
-        return '';
-      }).filter(function (modifier) {
-        return modifier !== '';
-      }).join(' ');
-    }
-  }, {
-    key: 'camelCaseToDashCase',
-    value: function camelCaseToDashCase(word) {
-      return word.replace(/([A-Z])/g, function (match) {
-        return '-' + match.toLowerCase();
-      });
-    }
-  }]);
-
-  return AbstractComponent;
-}(_react2.default.Component);
-
+        if (modifierValues.length === 3) {
+            return {
+                top: modifierValues[0],
+                horizontal: modifierValues[1],
+                bottom: modifierValues[2]
+            };
+        }
+        if (modifierValues.length === 4) {
+            return {
+                top: modifierValues[0],
+                right: modifierValues[1],
+                bottom: modifierValues[2],
+                left: modifierValues[3]
+            };
+        }
+    };
+    AbstractComponent.prototype.getBlockModifierWithComplexValueClassName = function (blockName, modifierKey, modifierValue, modifierMedia) {
+        var _this = this;
+        if (modifierMedia === void 0) { modifierMedia = ''; }
+        var modifierValues = this.getComplexModifierValues(modifierValue);
+        return Object.keys(modifierValues).filter(function (key) { return modifierValues[key] !== '0'; }).map(function (key) {
+            var newModifierKey = key === 'default' ? modifierKey : modifierKey + "-" + key;
+            return _this.getBlockModifierClassName(blockName, _this.getModifier(newModifierKey, modifierValues[key], modifierMedia));
+        }).join(' ');
+    };
+    AbstractComponent.prototype.getElementModifierWithComplexValueClassName = function (blockName, elementName, modifierKey, modifierValue, modifierMedia) {
+        var _this = this;
+        if (modifierMedia === void 0) { modifierMedia = ''; }
+        var modifierValues = this.getComplexModifierValues(modifierValue);
+        return Object.keys(modifierValues).filter(function (key) { return modifierValues[key] !== '0'; }).map(function (key) {
+            var newModifierKey = key === 'default' ? modifierKey : modifierKey + "-" + key;
+            return _this.getElementModifierClassName(blockName, elementName, _this.getModifier(newModifierKey, modifierValues[key], modifierMedia));
+        }).join(' ');
+    };
+    AbstractComponent.prototype.getBlockName = function (blockName, modifiers) {
+        var blockNameClass = this.getBlockClassName(blockName);
+        var modifiersClass = this.getModifiers(blockName, null, modifiers);
+        if (modifiersClass !== '') {
+            return blockNameClass + " " + modifiersClass;
+        }
+        return blockNameClass;
+    };
+    AbstractComponent.prototype.getElementName = function (blockName, elementName, modifiers, isStatic) {
+        if (isStatic === void 0) { isStatic = false; }
+        var elementNameClass = this.getElementClassName(blockName, elementName);
+        var modifiersClass = this.getModifiers(blockName, elementName, modifiers, isStatic);
+        if (modifiersClass !== '') {
+            return elementNameClass + " " + modifiersClass;
+        }
+        return elementNameClass;
+    };
+    AbstractComponent.prototype.getModifiers = function (blockName, elementName, modifiers, isStatic) {
+        var _this = this;
+        if (isStatic === void 0) { isStatic = false; }
+        if (typeof modifiers !== 'object') {
+            return '';
+        }
+        return Object.keys(modifiers).map(function (key) {
+            var value = modifiers[key];
+            if ((typeof value === 'boolean' && value === true) || isStatic) {
+                if (elementName) {
+                    return _this.getElementModifierClassName(blockName, elementName, key);
+                }
+                return _this.getBlockModifierClassName(blockName, key);
+            }
+            if (typeof value === 'string' || typeof value === 'number') {
+                if (elementName) {
+                    return _this.getElementModifierWithComplexValueClassName(blockName, elementName, key, value.toString());
+                }
+                return _this.getBlockModifierWithComplexValueClassName(blockName, key, value.toString());
+            }
+            if (typeof value === 'object') {
+                var result_1 = [];
+                Object.keys(value).forEach(function (valueKey) {
+                    var valueValue = value[valueKey];
+                    if (typeof valueValue === 'boolean' && valueValue === false) {
+                        return;
+                    }
+                    var className = '';
+                    if (typeof valueValue === 'string' || typeof valueValue === 'number') {
+                        className = valueValue.toString();
+                    }
+                    var media = valueKey;
+                    if (elementName) {
+                        if (className !== '') {
+                            result_1.push(_this.getElementModifierWithComplexValueClassName(blockName, elementName, key, className, media));
+                        }
+                        else {
+                            result_1.push(_this.getElementModifierClassName(blockName, elementName, _this.getModifier(key, media)));
+                        }
+                    }
+                    else {
+                        if (className !== '') {
+                            result_1.push(_this.getBlockModifierWithComplexValueClassName(blockName, key, className, media));
+                        }
+                        else {
+                            result_1.push(_this.getBlockModifierClassName(blockName, _this.getModifier(key, media)));
+                        }
+                    }
+                });
+                return result_1.join(' ');
+            }
+            return '';
+        }).filter(function (modifier) { return modifier !== ''; }).join(' ');
+    };
+    AbstractComponent.prototype.camelCaseToDashCase = function (word) {
+        return word.replace(/([A-Z])/g, function (match) {
+            return "-" + match.toLowerCase();
+        });
+    };
+    return AbstractComponent;
+}(React.Component));
 exports.default = AbstractComponent;

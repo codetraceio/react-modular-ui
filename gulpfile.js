@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const babel = require('gulp-babel');
+const typescript = require('gulp-typescript');
 const stylus = require('gulp-stylus');
 const webpackGulp = require('gulp-webpack');
 const named = require('vinyl-named');
@@ -17,9 +17,7 @@ gulp.task('default', [
 ]);
 
 gulp.task('scripts', () => {
-  return gulp.src(['src/**/*.js', '!src/example/**/*']).pipe(babel({
-    presets: ['react', 'es2015']
-  })).pipe(gulp.dest('dist'));
+  return gulp.src(['src/**/*.js', '!src/example/**/*']).pipe(typescript()).pipe(gulp.dest('dist'));
 });
 
 gulp.task('scripts-example-client', () => {
@@ -28,17 +26,14 @@ gulp.task('scripts-example-client', () => {
       filename: '[name].js',
     },
     resolve: {
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
     },
     module: {
       loaders: [
         {
-          test: /\.jsx?$/,
+          test: /\.(ts|js)x?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel-loader',
-          query: {
-            presets: ['react', 'es2015']
-          }
+          loader: 'ts-loader'
         }
       ]
     },

@@ -1,77 +1,45 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Settings = function () {
-  function Settings() {
-    _classCallCheck(this, Settings);
-
-    this.prefix = 'c-';
-    this.classes = {
-      block: '{b}',
-      element: '{b}--{e}',
-      blockModifier: '-{m}',
-      elementModifier: '-{m}',
-      separator: '-'
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Settings = (function () {
+    function Settings() {
+        this.prefix = 'c-';
+        this.classes = {
+            block: '{b}',
+            element: '{b}--{e}',
+            blockModifier: '-{m}',
+            elementModifier: '-{m}',
+            separator: '-'
+        };
+        this.icons = {};
+        this.backend = false;
+    }
+    Settings.prototype.getClasses = function () {
+        return this.classes;
     };
-    this.icons = {};
-    this.backend = false;
-  }
-
-  _createClass(Settings, [{
-    key: 'getClasses',
-    value: function getClasses() {
-      return this.classes;
-    }
-  }, {
-    key: 'setClasses',
-    value: function setClasses(classes) {
-      this.classes = classes;
-    }
-  }, {
-    key: 'getPrefix',
-    value: function getPrefix() {
-      return this.prefix;
-    }
-  }, {
-    key: 'setPrefix',
-    value: function setPrefix(prefix) {
-      this.prefix = prefix;
-    }
-  }, {
-    key: 'getIcons',
-    value: function getIcons() {
-      return this.icons;
-    }
-  }, {
-    key: 'setIcons',
-    value: function setIcons(icons) {
-      this.icons = icons;
-    }
-  }, {
-    key: 'getIcon',
-    value: function getIcon(name) {
-      return this.icons[name];
-    }
-  }, {
-    key: 'isBackend',
-    value: function isBackend() {
-      return this.backend;
-    }
-  }, {
-    key: 'setBackend',
-    value: function setBackend(backend) {
-      this.backend = backend;
-    }
-  }]);
-
-  return Settings;
-}();
-
+    Settings.prototype.setClasses = function (classes) {
+        this.classes = classes;
+    };
+    Settings.prototype.getPrefix = function () {
+        return this.prefix;
+    };
+    Settings.prototype.setPrefix = function (prefix) {
+        this.prefix = prefix;
+    };
+    Settings.prototype.getIcons = function () {
+        return this.icons;
+    };
+    Settings.prototype.setIcons = function (icons) {
+        this.icons = icons;
+    };
+    Settings.prototype.getIcon = function (name) {
+        return this.icons[name];
+    };
+    Settings.prototype.isBackend = function () {
+        return this.backend;
+    };
+    Settings.prototype.setBackend = function (backend) {
+        this.backend = backend;
+    };
+    return Settings;
+}());
 exports.default = new Settings();

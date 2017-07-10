@@ -1,187 +1,44 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _AbstractComponent = require('./components/AbstractComponent');
-
-Object.defineProperty(exports, 'AbstractComponent', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_AbstractComponent).default;
-  }
-});
-
-var _Block = require('./components/Block');
-
-Object.defineProperty(exports, 'Block', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Block).default;
-  }
-});
-
-var _Button = require('./components/Button');
-
-Object.defineProperty(exports, 'Button', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Button).default;
-  }
-});
-
-var _Checkbox = require('./components/Checkbox');
-
-Object.defineProperty(exports, 'Checkbox', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Checkbox).default;
-  }
-});
-
-var _Form = require('./components/Form');
-
-Object.defineProperty(exports, 'Form', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Form).default;
-  }
-});
-
-var _Icon = require('./components/Icon');
-
-Object.defineProperty(exports, 'Icon', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Icon).default;
-  }
-});
-
-var _Input = require('./components/Input');
-
-Object.defineProperty(exports, 'Input', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Input).default;
-  }
-});
-
-var _Loading = require('./components/Loading');
-
-Object.defineProperty(exports, 'Loading', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Loading).default;
-  }
-});
-
-var _Modal = require('./components/Modal');
-
-Object.defineProperty(exports, 'Modal', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Modal).default;
-  }
-});
-
-var _Pill = require('./components/Pill');
-
-Object.defineProperty(exports, 'Pill', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Pill).default;
-  }
-});
-
-var _Tabs = require('./components/Tabs');
-
-Object.defineProperty(exports, 'Tabs', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Tabs).default;
-  }
-});
-
-var _Textarea = require('./components/Textarea');
-
-Object.defineProperty(exports, 'Textarea', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Textarea).default;
-  }
-});
-
-var _Toggle = require('./components/Toggle');
-
-Object.defineProperty(exports, 'Toggle', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Toggle).default;
-  }
-});
-
-var _Tooltip = require('./components/Tooltip');
-
-Object.defineProperty(exports, 'Tooltip', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Tooltip).default;
-  }
-});
-
-var _Pagination = require('./components/Pagination');
-
-Object.defineProperty(exports, 'Pagination', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Pagination).default;
-  }
-});
-
-var _Portal = require('./components/Portal');
-
-Object.defineProperty(exports, 'Portal', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Portal).default;
-  }
-});
-
-var _Progress = require('./components/Progress');
-
-Object.defineProperty(exports, 'Progress', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Progress).default;
-  }
-});
-
-var _Upload = require('./components/Upload');
-
-Object.defineProperty(exports, 'Upload', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_Upload).default;
-  }
-});
-
-var _settings = require('./settings');
-
-Object.defineProperty(exports, 'settings', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_settings).default;
-  }
-});
-
-var _utils = require('./utils');
-
-Object.defineProperty(exports, 'utils', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_utils).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var AbstractComponent_1 = require("./components/AbstractComponent");
+exports.AbstractComponent = AbstractComponent_1.default;
+var Block_1 = require("./components/Block");
+exports.Block = Block_1.default;
+var Button_1 = require("./components/Button");
+exports.Button = Button_1.default;
+var Checkbox_1 = require("./components/Checkbox");
+exports.Checkbox = Checkbox_1.default;
+var Radio_1 = require("./components/Radio");
+exports.Radio = Radio_1.default;
+var Form_1 = require("./components/Form");
+exports.Form = Form_1.default;
+var Icon_1 = require("./components/Icon");
+exports.Icon = Icon_1.default;
+var Input_1 = require("./components/Input");
+exports.Input = Input_1.default;
+var Loading_1 = require("./components/Loading");
+exports.Loading = Loading_1.default;
+var Modal_1 = require("./components/Modal");
+exports.Modal = Modal_1.default;
+var Pill_1 = require("./components/Pill");
+exports.Pill = Pill_1.default;
+var Tabs_1 = require("./components/Tabs");
+exports.Tabs = Tabs_1.default;
+var Textarea_1 = require("./components/Textarea");
+exports.Textarea = Textarea_1.default;
+var Toggle_1 = require("./components/Toggle");
+exports.Toggle = Toggle_1.default;
+var Tooltip_1 = require("./components/Tooltip");
+exports.Tooltip = Tooltip_1.default;
+var Pagination_1 = require("./components/Pagination");
+exports.Pagination = Pagination_1.default;
+var Portal_1 = require("./components/Portal");
+exports.Portal = Portal_1.default;
+var Progress_1 = require("./components/Progress");
+exports.Progress = Progress_1.default;
+var Upload_1 = require("./components/Upload");
+exports.Upload = Upload_1.default;
+var settings_1 = require("./settings");
+exports.settings = settings_1.default;
+var utils_1 = require("./utils");
+exports.utils = utils_1.default;

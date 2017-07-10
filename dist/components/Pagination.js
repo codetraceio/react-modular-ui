@@ -1,211 +1,132 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _AbstractComponent2 = require('./AbstractComponent');
-
-var _AbstractComponent3 = _interopRequireDefault(_AbstractComponent2);
-
-var _Icon = require('./Icon');
-
-var _Icon2 = _interopRequireDefault(_Icon);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Pagination = function (_AbstractComponent) {
-  _inherits(Pagination, _AbstractComponent);
-
-  function Pagination() {
-    _classCallCheck(this, Pagination);
-
-    return _possibleConstructorReturn(this, (Pagination.__proto__ || Object.getPrototypeOf(Pagination)).apply(this, arguments));
-  }
-
-  _createClass(Pagination, [{
-    key: 'getModifierObject',
-    value: function getModifierObject() {
-      return {
-        size: this.props.size,
-        color: this.props.color
-      };
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = require("react");
+var AbstractComponent_1 = require("./AbstractComponent");
+var Icon_1 = require("./Icon");
+var Pagination = (function (_super) {
+    __extends(Pagination, _super);
+    function Pagination() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-  }, {
-    key: 'getSize',
-    value: function getSize() {
-      return this.props.size || 24;
-    }
-  }, {
-    key: 'getInfo',
-    value: function getInfo() {
-      var count = parseInt(this.props.count) || 0;
-      var limit = parseInt(this.props.limit) || 10;
-      if (count <= limit) {
-        return null;
-      }
-
-      var offset = parseInt(this.props.offset) || 0;
-      if (offset < 0) {
-        offset = 0;
-      }
-      if (offset > count - 2) {
-        offset = count - 2;
-      }
-
-      var page = Math.ceil(offset / limit) + 1;
-      var lastPage = Math.ceil(count / limit) || 1;
-      var startPage = page - 2;
-      if (startPage < 1) {
-        startPage = 1;
-      }
-      var endPage = page + 2;
-      if (endPage > lastPage) {
-        endPage = lastPage;
-      }
-      var pages = [];
-      pages.push(1);
-      for (var i = startPage; i <= endPage; i++) {
-        if (i !== 1 && i !== lastPage) {
-          pages.push(i);
+    Pagination.prototype.getModifierObject = function () {
+        return {
+            size: this.props.size,
+            color: this.props.color
+        };
+    };
+    Pagination.prototype.getSize = function () {
+        return this.props.size || 24;
+    };
+    Pagination.prototype.getInfo = function () {
+        var count = parseInt(this.props.count) || 0;
+        var limit = parseInt(this.props.limit) || 10;
+        if (count <= limit) {
+            return null;
         }
-      }
-      if (lastPage !== 1) {
-        pages.push(lastPage);
-      }
-
-      return {
-        count: count,
-        limit: limit,
-        offset: offset,
-        page: page,
-        lastPage: lastPage,
-        pages: pages
-      };
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange(page) {
-      var offset = (page - 1) * this.props.limit;
-      if (typeof this.props.onChange === 'function') {
-        this.props.onChange(offset, page);
-      }
-    }
-  }, {
-    key: 'renderPrev',
-    value: function renderPrev(page) {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: this.getElementName('pagination', 'prev', {
-            disabled: page === 1
-          }),
-          onClick: function onClick() {
-            return _this2.onChange(page - 1);
-          }
-        },
-        _react2.default.createElement(_Icon2.default, { height: this.getSize(), name: 'pagination' })
-      );
-    }
-  }, {
-    key: 'renderNext',
-    value: function renderNext(page, lastPage) {
-      var _this3 = this;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: this.getElementName('pagination', 'next', {
-            disabled: page === lastPage
-          }),
-          onClick: function onClick() {
-            return _this3.onChange(page + 1);
-          }
-        },
-        _react2.default.createElement(_Icon2.default, { height: this.getSize(), name: 'pagination', rotate: '180' })
-      );
-    }
-  }, {
-    key: 'renderPages',
-    value: function renderPages(pages, currentPage) {
-      var _this4 = this;
-
-      var prevPage = 0;
-      var result = [];
-      pages.forEach(function (page, index) {
-        var afterEllipsis = false;
-        if (page !== prevPage + 1) {
-          result.push(_react2.default.createElement(
-            'div',
-            { className: _this4.getElementName('pagination', 'ellipsis'), key: 'ellipsis.' + page },
-            '\u2026'
-          ));
-          afterEllipsis = true;
+        var offset = parseInt(this.props.offset) || 0;
+        if (offset < 0) {
+            offset = 0;
         }
-
-        if (!(index === pages.length - 1 && afterEllipsis && _this4.props.hideLastPage)) {
-          var characterLength = page.toString().length;
-          var characters = 'single';
-          if (characterLength === 2) {
-            characters = 'double';
-          }
-          if (characterLength > 2) {
-            characters = 'multiple';
-          }
-          result.push(_react2.default.createElement(
-            'div',
-            {
-              key: page,
-              className: _this4.getElementName('pagination', 'item', {
-                current: page === currentPage,
-                characters: characters
-              }),
-              onClick: function onClick() {
-                return _this4.onChange(page);
-              }
-            },
-            page
-          ));
+        if (offset > count - 2) {
+            offset = count - 2;
         }
-        prevPage = page;
-      });
-      return result;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var info = this.getInfo();
-      if (!info) {
-        return null;
-      }
-
-      return _react2.default.createElement(
-        'div',
-        {
-          className: this.getBlockName('pagination', this.getModifierObject())
-        },
-        this.renderPrev(info.page),
-        this.renderPages(info.pages, info.page),
-        this.renderNext(info.page, info.lastPage)
-      );
-    }
-  }]);
-
-  return Pagination;
-}(_AbstractComponent3.default);
-
+        var page = Math.ceil(offset / limit) + 1;
+        var lastPage = Math.ceil(count / limit) || 1;
+        var startPage = page - 2;
+        if (startPage < 1) {
+            startPage = 1;
+        }
+        var endPage = page + 2;
+        if (endPage > lastPage) {
+            endPage = lastPage;
+        }
+        var pages = [];
+        pages.push(1);
+        for (var i = startPage; i <= endPage; i++) {
+            if (i !== 1 && i !== lastPage) {
+                pages.push(i);
+            }
+        }
+        if (lastPage !== 1) {
+            pages.push(lastPage);
+        }
+        return {
+            count: count,
+            limit: limit,
+            offset: offset,
+            page: page,
+            lastPage: lastPage,
+            pages: pages
+        };
+    };
+    Pagination.prototype.onChange = function (page) {
+        var offset = (page - 1) * this.props.limit;
+        if (typeof this.props.onChange === 'function') {
+            this.props.onChange(offset, page);
+        }
+    };
+    Pagination.prototype.renderPrev = function (page) {
+        var _this = this;
+        return (react_1.default.createElement("div", { className: this.getElementName('pagination', 'prev', {
+                disabled: page === 1
+            }), onClick: function () { return _this.onChange(page - 1); } },
+            react_1.default.createElement(Icon_1.default, { height: this.getSize(), name: "pagination" })));
+    };
+    Pagination.prototype.renderNext = function (page, lastPage) {
+        var _this = this;
+        return (react_1.default.createElement("div", { className: this.getElementName('pagination', 'next', {
+                disabled: page === lastPage
+            }), onClick: function () { return _this.onChange(page + 1); } },
+            react_1.default.createElement(Icon_1.default, { height: this.getSize(), name: "pagination", rotate: "180" })));
+    };
+    Pagination.prototype.renderPages = function (pages, currentPage) {
+        var _this = this;
+        var prevPage = 0;
+        var result = [];
+        pages.forEach(function (page, index) {
+            var afterEllipsis = false;
+            if (page !== (prevPage + 1)) {
+                result.push(react_1.default.createElement("div", { className: _this.getElementName('pagination', 'ellipsis'), key: 'ellipsis.' + page }, "\u2026"));
+                afterEllipsis = true;
+            }
+            if (!(index === pages.length - 1 && afterEllipsis && _this.props.hideLastPage)) {
+                var characterLength = page.toString().length;
+                var characters = 'single';
+                if (characterLength === 2) {
+                    characters = 'double';
+                }
+                if (characterLength > 2) {
+                    characters = 'multiple';
+                }
+                result.push(react_1.default.createElement("div", { key: page, className: _this.getElementName('pagination', 'item', {
+                        current: page === currentPage,
+                        characters: characters
+                    }), onClick: function () { return _this.onChange(page); } }, page));
+            }
+            prevPage = page;
+        });
+        return result;
+    };
+    Pagination.prototype.render = function () {
+        var info = this.getInfo();
+        if (!info) {
+            return null;
+        }
+        return (react_1.default.createElement("div", { className: this.getBlockName('pagination', this.getModifierObject()) },
+            this.renderPrev(info.page),
+            this.renderPages(info.pages, info.page),
+            this.renderNext(info.page, info.lastPage)));
+    };
+    return Pagination;
+}(AbstractComponent_1.default));
 exports.default = Pagination;
