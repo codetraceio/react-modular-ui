@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Icon_1 = require("./Icon");
 var Pagination = (function (_super) {
@@ -24,16 +24,19 @@ var Pagination = (function (_super) {
             color: this.props.color
         };
     };
+    Pagination.prototype.getLimit = function () {
+        return parseInt(this.props.limit.toString(), 10) || 10;
+    };
     Pagination.prototype.getSize = function () {
-        return this.props.size || 24;
+        return parseInt(this.props.size.toString(), 10) || 24;
     };
     Pagination.prototype.getInfo = function () {
-        var count = parseInt(this.props.count) || 0;
-        var limit = parseInt(this.props.limit) || 10;
+        var count = parseInt(this.props.count.toString(), 10) || 0;
+        var limit = this.getLimit();
         if (count <= limit) {
             return null;
         }
-        var offset = parseInt(this.props.offset) || 0;
+        var offset = parseInt(this.props.offset.toString(), 10) || 0;
         if (offset < 0) {
             offset = 0;
         }
@@ -70,24 +73,24 @@ var Pagination = (function (_super) {
         };
     };
     Pagination.prototype.onChange = function (page) {
-        var offset = (page - 1) * this.props.limit;
+        var offset = (page - 1) * this.getLimit();
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(offset, page);
         }
     };
     Pagination.prototype.renderPrev = function (page) {
         var _this = this;
-        return (react_1.default.createElement("div", { className: this.getElementName('pagination', 'prev', {
+        return (React.createElement("div", { className: this.getElementName('pagination', 'prev', {
                 disabled: page === 1
             }), onClick: function () { return _this.onChange(page - 1); } },
-            react_1.default.createElement(Icon_1.default, { height: this.getSize(), name: "pagination" })));
+            React.createElement(Icon_1.default, { height: this.getSize(), name: "pagination" })));
     };
     Pagination.prototype.renderNext = function (page, lastPage) {
         var _this = this;
-        return (react_1.default.createElement("div", { className: this.getElementName('pagination', 'next', {
+        return (React.createElement("div", { className: this.getElementName('pagination', 'next', {
                 disabled: page === lastPage
             }), onClick: function () { return _this.onChange(page + 1); } },
-            react_1.default.createElement(Icon_1.default, { height: this.getSize(), name: "pagination", rotate: "180" })));
+            React.createElement(Icon_1.default, { height: this.getSize(), name: "pagination", rotate: "180" })));
     };
     Pagination.prototype.renderPages = function (pages, currentPage) {
         var _this = this;
@@ -96,7 +99,7 @@ var Pagination = (function (_super) {
         pages.forEach(function (page, index) {
             var afterEllipsis = false;
             if (page !== (prevPage + 1)) {
-                result.push(react_1.default.createElement("div", { className: _this.getElementName('pagination', 'ellipsis'), key: 'ellipsis.' + page }, "\u2026"));
+                result.push(React.createElement("div", { className: _this.getElementName('pagination', 'ellipsis'), key: 'ellipsis.' + page }, "\u2026"));
                 afterEllipsis = true;
             }
             if (!(index === pages.length - 1 && afterEllipsis && _this.props.hideLastPage)) {
@@ -108,7 +111,7 @@ var Pagination = (function (_super) {
                 if (characterLength > 2) {
                     characters = 'multiple';
                 }
-                result.push(react_1.default.createElement("div", { key: page, className: _this.getElementName('pagination', 'item', {
+                result.push(React.createElement("div", { key: page, className: _this.getElementName('pagination', 'item', {
                         current: page === currentPage,
                         characters: characters
                     }), onClick: function () { return _this.onChange(page); } }, page));
@@ -122,7 +125,7 @@ var Pagination = (function (_super) {
         if (!info) {
             return null;
         }
-        return (react_1.default.createElement("div", { className: this.getBlockName('pagination', this.getModifierObject()) },
+        return (React.createElement("div", { className: this.getBlockName('pagination', this.getModifierObject()) },
             this.renderPrev(info.page),
             this.renderPages(info.pages, info.page),
             this.renderNext(info.page, info.lastPage)));

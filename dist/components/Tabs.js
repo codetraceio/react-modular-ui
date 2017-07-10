@@ -10,12 +10,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Button = (function (_super) {
     __extends(Button, _super);
-    function Button(props) {
-        var _this = _super.call(this, props) || this;
+    function Button() {
+        var _this = _super.call(this) || this;
         _this.element = null;
         _this.lineElement = null;
         _this.optionElements = {};
@@ -36,7 +36,7 @@ var Button = (function (_super) {
     Button.prototype.getOptionModifiers = function (option) {
         if (option.value === this.props.value) {
             return {
-                selected: this.props.selected
+                selected: true
             };
         }
         return {};
@@ -71,27 +71,27 @@ var Button = (function (_super) {
     };
     Button.prototype.renderLine = function () {
         var _this = this;
-        return (react_1.default.createElement("div", { ref: function (element) { return _this.setLineElement(element); }, className: this.getElementName('tabs', 'line') }));
+        return (React.createElement("div", { ref: function (element) { return _this.setLineElement(element); }, className: this.getElementName('tabs', 'line') }));
     };
     Button.prototype.renderCount = function (option) {
         if (typeof option.count !== 'string' && typeof option.count !== 'number') {
             return null;
         }
-        return (react_1.default.createElement("div", { className: this.getElementName('tabs', 'count', {
+        return (React.createElement("div", { className: this.getElementName('tabs', 'count', {
                 countColor: option.countColor
             }) }, option.count));
     };
     Button.prototype.renderOptions = function () {
         var _this = this;
         return this.props.options.map(function (option) {
-            return (react_1.default.createElement("div", { key: option.value, ref: function (element) { return _this.setOptionElement(option.value, element); }, className: _this.getElementName('tabs', 'option', _this.getOptionModifiers(option), true), onClick: function () { return _this.onChange(option.value, option); } },
-                react_1.default.createElement("div", null, option.title),
+            return (React.createElement("div", { key: option.value, ref: function (element) { return _this.setOptionElement(option.value.toString(), element); }, className: _this.getElementName('tabs', 'option', _this.getOptionModifiers(option), true), onClick: function () { return _this.onChange(option.value, option); } },
+                React.createElement("div", null, option.title),
                 _this.renderCount(option)));
         });
     };
     Button.prototype.render = function () {
         var _this = this;
-        return (react_1.default.createElement("div", { ref: function (element) { return _this.setElement(element); }, className: this.getBlockName('tabs', this.getModifierObject()) },
+        return (React.createElement("div", { ref: function (element) { return _this.setElement(element); }, className: this.getBlockName('tabs', this.getModifierObject()) },
             this.renderLine(),
             this.renderOptions(),
             this.props.children));

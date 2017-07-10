@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Input = (function (_super) {
     __extends(Input, _super);
@@ -25,21 +25,19 @@ var Input = (function (_super) {
             disabled: this.props.disabled
         };
     };
-    Input.prototype.delegateEvent = function (eventName) {
-        var _this = this;
-        return function (event) {
-            if (typeof _this.props[eventName] === 'function') {
-                _this.props[eventName](event.target.value, event);
-            }
-        };
+    Input.prototype.onEvent = function (event, callback) {
+        if (typeof callback === 'function') {
+            callback(event.currentTarget.value, event);
+        }
     };
     Input.prototype.renderLabel = function () {
-        return this.props.label ? (react_1.default.createElement("div", { className: this.getElementName('input', 'label') }, this.props.label)) : null;
+        return this.props.label ? (React.createElement("div", { className: this.getElementName('input', 'label') }, this.props.label)) : null;
     };
     Input.prototype.render = function () {
-        return (react_1.default.createElement("div", { className: this.getBlockName('input', this.getModifierObject()) },
+        var _this = this;
+        return (React.createElement("div", { className: this.getBlockName('input', this.getModifierObject()) },
             this.renderLabel(),
-            react_1.default.createElement("input", { name: this.props.name, placeholder: this.props.placeholder, value: this.props.value, disabled: this.props.disabled, onChange: this.delegateEvent('onChange'), onKeyDown: this.delegateEvent('onKeyDown'), onKeyUp: this.delegateEvent('onKeyUp'), onKeyPress: this.delegateEvent('onKeyPress'), onFocus: this.delegateEvent('onFocus'), onBlur: this.delegateEvent('onBlur') })));
+            React.createElement("input", { name: this.props.name, placeholder: this.props.placeholder, value: this.props.value, disabled: this.props.disabled, onChange: function (event) { return _this.onEvent(event, _this.props.onChange); }, onKeyDown: function (event) { return _this.onEvent(event, _this.props.onKeyDown); }, onKeyUp: function (event) { return _this.onEvent(event, _this.props.onKeyUp); }, onKeyPress: function (event) { return _this.onEvent(event, _this.props.onKeyPress); }, onFocus: function (event) { return _this.onEvent(event, _this.props.onFocus); }, onBlur: function (event) { return _this.onEvent(event, _this.props.onBlur); } })));
     };
     return Input;
 }(AbstractComponent_1.default));

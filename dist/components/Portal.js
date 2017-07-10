@@ -10,14 +10,14 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
-var react_dom_1 = require("react-dom");
+var React = require("react");
+var ReactDom = require("react-dom");
 var settings_1 = require("../settings");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Portal = (function (_super) {
     __extends(Portal, _super);
-    function Portal(props) {
-        var _this = _super.call(this, props) || this;
+    function Portal() {
+        var _this = _super.call(this) || this;
         _this.portalElement = null;
         return _this;
     }
@@ -39,7 +39,7 @@ var Portal = (function (_super) {
     Portal.prototype.updatePortal = function () {
         if (this.props.show) {
             this.addPortalElement();
-            react_dom_1.default.render(react_1.default.createElement("div", null, this.props.children), this.portalElement);
+            ReactDom.render(React.createElement("div", null, this.props.children), this.portalElement);
         }
         else {
             this.removePortalElement();
@@ -53,7 +53,7 @@ var Portal = (function (_super) {
     };
     Portal.prototype.render = function () {
         if (settings_1.default.isBackend() && Array.isArray(this.props.portal) && this.props.portalKey) {
-            this.props.portal.push(react_1.default.createElement("div", { key: this.props.portalKey, "data-portal": this.props.portalKey, style: { display: 'none' } }, this.props.children));
+            this.props.portal.push(React.createElement("div", { key: this.props.portalKey, "data-portal": this.props.portalKey, style: { display: 'none' } }, this.props.children));
         }
         return null;
     };

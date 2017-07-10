@@ -70,4 +70,5 @@ var Utils = (function () {
     };
     return Utils;
 }());
+exports.Utils = Utils;
 exports.default = new Utils();

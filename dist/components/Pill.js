@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Pill = (function (_super) {
     __extends(Pill, _super);
@@ -24,8 +24,8 @@ var Pill = (function (_super) {
         };
     };
     Pill.prototype.render = function () {
-        return (react_1.default.createElement("div", { className: this.getBlockName('pill', this.getModifierObject()) },
-            react_1.default.createElement("div", null, this.props.children)));
+        return (React.createElement("div", { className: this.getBlockName('pill', this.getModifierObject()) },
+            React.createElement("div", null, this.props.children)));
     };
     return Pill;
 }(AbstractComponent_1.default));

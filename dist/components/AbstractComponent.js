@@ -92,6 +92,7 @@ var AbstractComponent = (function (_super) {
         }).join(' ');
     };
     AbstractComponent.prototype.getBlockName = function (blockName, modifiers) {
+        if (modifiers === void 0) { modifiers = {}; }
         var blockNameClass = this.getBlockClassName(blockName);
         var modifiersClass = this.getModifiers(blockName, null, modifiers);
         if (modifiersClass !== '') {
@@ -100,6 +101,7 @@ var AbstractComponent = (function (_super) {
         return blockNameClass;
     };
     AbstractComponent.prototype.getElementName = function (blockName, elementName, modifiers, isStatic) {
+        if (modifiers === void 0) { modifiers = {}; }
         if (isStatic === void 0) { isStatic = false; }
         var elementNameClass = this.getElementClassName(blockName, elementName);
         var modifiersClass = this.getModifiers(blockName, elementName, modifiers, isStatic);

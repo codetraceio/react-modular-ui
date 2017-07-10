@@ -2,18 +2,18 @@ import * as React from 'react';
 
 import settings from '../settings';
 
-interface ISpace {
+export interface ISpace {
   vertical?: string;
   horizontal?: string;
   top?: string;
   right?: string;
   bottom?: string;
   left?: string;
-  default?: string;
+  'default'?: string;
   [key: string]: string;
 }
 
-interface IModifiers {
+export interface IModifiers {
   [key: string]: IProp<string | number | boolean>;
 }
 
@@ -102,7 +102,7 @@ export default class AbstractComponent<P, S> extends React.Component<P, S> {
     }).join(' ');
   }
 
-  getBlockName(blockName: string, modifiers: IModifiers): string {
+  getBlockName(blockName: string, modifiers: IModifiers = {}): string {
     const blockNameClass: string = this.getBlockClassName(blockName);
     const modifiersClass: string = this.getModifiers(blockName, null, modifiers);
 
@@ -114,7 +114,7 @@ export default class AbstractComponent<P, S> extends React.Component<P, S> {
   }
 
   getElementName(
-      blockName: string, elementName: string, modifiers: IModifiers, isStatic: boolean = false
+      blockName: string, elementName: string, modifiers: IModifiers = {}, isStatic: boolean = false
   ) {
     const elementNameClass: string = this.getElementClassName(blockName, elementName);
 

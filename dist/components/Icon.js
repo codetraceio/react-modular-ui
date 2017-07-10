@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var settings_1 = require("../settings");
 var Button = (function (_super) {
@@ -28,7 +28,7 @@ var Button = (function (_super) {
         };
     };
     Button.prototype.render = function () {
-        return (react_1.default.createElement("div", { className: this.getBlockName('icon', this.getModifierObject()), onClick: this.props.onClick }, settings_1.default.getIcon(this.props.name)));
+        return (React.createElement("div", { className: this.getBlockName('icon', this.getModifierObject()), onClick: this.props.onClick }, settings_1.default.getIcon(this.props.name)));
     };
     return Button;
 }(AbstractComponent_1.default));

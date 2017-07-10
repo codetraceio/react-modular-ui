@@ -10,12 +10,12 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Upload = (function (_super) {
     __extends(Upload, _super);
-    function Upload(props) {
-        var _this = _super.call(this, props) || this;
+    function Upload() {
+        var _this = _super.call(this) || this;
         _this.element = null;
         _this.fileElement = null;
         _this.onDragOverListener = _this.onDragOver.bind(_this);
@@ -81,9 +81,9 @@ var Upload = (function (_super) {
     };
     Upload.prototype.render = function () {
         var _this = this;
-        return (react_1.default.createElement("div", { className: this.getBlockName('upload', this.getModifierObject()), ref: function (element) { return _this.updateElement(element); }, "data-name": this.props.name, onClick: function () { return _this.onClick(); } },
-            react_1.default.createElement("input", { type: "file", name: this.props.name, style: { display: 'none' }, ref: function (element) { return _this.updateFileElement(element); }, onChange: function () { return _this.onChange(); } }),
-            react_1.default.createElement("div", null, this.props.children)));
+        return (React.createElement("div", { className: this.getBlockName('upload', this.getModifierObject()), ref: function (element) { return _this.updateElement(element); }, "data-name": this.props.name, onClick: function () { return _this.onClick(); } },
+            React.createElement("input", { type: "file", name: this.props.name, style: { display: 'none' }, ref: function (element) { return _this.updateFileElement(element); }, onChange: function () { return _this.onChange(); } }),
+            React.createElement("div", null, this.props.children)));
     };
     return Upload;
 }(AbstractComponent_1.default));

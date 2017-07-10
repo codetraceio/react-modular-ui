@@ -10,30 +10,30 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var settings_1 = require("../settings");
 var utils_1 = require("../utils");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Portal_1 = require("./Portal");
 var Tooltip = (function (_super) {
     __extends(Tooltip, _super);
-    function Tooltip(props) {
-        var _this = _super.call(this, props) || this;
+    function Tooltip() {
+        var _this = _super.call(this) || this;
         _this.state = {
             show: false
         };
-        _this.wrapperElemenet = null;
+        _this.wrapperElement = null;
         _this.tooltipElement = null;
         return _this;
     }
     Tooltip.prototype.updateWrapper = function (element) {
-        this.wrapperElemenet = element;
+        this.wrapperElement = element;
     };
     Tooltip.prototype.updateTooltip = function (element) {
         this.tooltipElement = element;
     };
     Tooltip.prototype.onUpdateTooltip = function () {
-        var wrapperElement = this.wrapperElemenet;
+        var wrapperElement = this.wrapperElement;
         var tooltipElement = this.tooltipElement;
         if (!wrapperElement || !tooltipElement) {
             return;
@@ -53,11 +53,11 @@ var Tooltip = (function (_super) {
     };
     Tooltip.prototype.render = function () {
         var _this = this;
-        var portalKey = settings_1.default.isBackend() ? utils_1.default.generateKey() : null;
-        return (react_1.default.createElement("div", { className: this.getBlockClassName('tooltip-wrapper'), onMouseOver: function () { return _this.onShowTooltip(); }, onMouseOut: function () { return _this.onHideTooltip(); }, ref: function (element) { return _this.updateWrapper(element); }, "data-portal-key": portalKey },
+        var portalKey = settings_1.default.isBackend() ? utils_1.default.generateKey() : '';
+        return (React.createElement("div", { className: this.getBlockClassName('tooltip-wrapper'), onMouseOver: function () { return _this.onShowTooltip(); }, onMouseOut: function () { return _this.onHideTooltip(); }, ref: function (element) { return _this.updateWrapper(element); }, "data-portal-key": portalKey },
             this.props.children,
-            react_1.default.createElement(Portal_1.default, { show: this.state.show, portal: this.props.portal, portalKey: portalKey },
-                react_1.default.createElement("div", { className: this.getBlockClassName('tooltip'), ref: function (element) { return _this.updateTooltip(element); } }, this.props.title))));
+            React.createElement(Portal_1.default, { show: this.state.show, portal: this.props.portal, portalKey: portalKey },
+                React.createElement("div", { className: this.getBlockClassName('tooltip'), ref: function (element) { return _this.updateTooltip(element); } }, this.props.title))));
     };
     return Tooltip;
 }(AbstractComponent_1.default));

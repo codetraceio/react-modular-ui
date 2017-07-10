@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var settings_1 = require("../settings");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Icon_1 = require("./Icon");
@@ -38,21 +38,21 @@ var Button = (function (_super) {
     Button.prototype.render = function () {
         var _this = this;
         if (settings_1.default.isBackend()) {
-            return (react_1.default.createElement("div", { className: this.getBlockName('checkbox', this.getModifierObject()), role: "checkbox", tabIndex: "1", "data-name": this.props.name, "aria-checked": this.isChecked().toString() },
-                react_1.default.createElement("div", null,
-                    react_1.default.createElement("div", { className: this.getElementName('checkbox', 'icon', {
+            return (React.createElement("div", { className: this.getBlockName('checkbox', this.getModifierObject()), role: "checkbox", tabIndex: 1, "data-name": this.props.name, "aria-checked": this.isChecked().toString() },
+                React.createElement("div", null,
+                    React.createElement("div", { className: this.getElementName('checkbox', 'icon', {
                             checked: true
                         }) },
-                        react_1.default.createElement(Icon_1.default, { size: this.props.size, name: 'checkbox-checked' })),
-                    react_1.default.createElement("div", { className: this.getElementName('checkbox', 'icon', {
+                        React.createElement(Icon_1.default, { size: this.props.size, name: 'checkbox-checked' })),
+                    React.createElement("div", { className: this.getElementName('checkbox', 'icon', {
                             notChecked: true
                         }) },
-                        react_1.default.createElement(Icon_1.default, { size: this.props.size, name: 'checkbox' }))),
-                react_1.default.createElement("div", null, this.props.children)));
+                        React.createElement(Icon_1.default, { size: this.props.size, name: 'checkbox' }))),
+                React.createElement("div", null, this.props.children)));
         }
-        return (react_1.default.createElement("div", { className: this.getBlockName('checkbox', this.getModifierObject()), "data-name": this.props.name, "aria-checked": this.isChecked().toString(), tabIndex: "1", onClick: function (e) { return _this.onChange(e); } },
-            react_1.default.createElement("div", { className: this.getElementName('checkbox', 'icon') }, this.props.checked ? (react_1.default.createElement(Icon_1.default, { size: this.props.size, name: "checkbox" })) : null),
-            react_1.default.createElement("div", null, this.props.children)));
+        return (React.createElement("div", { className: this.getBlockName('checkbox', this.getModifierObject()), "data-name": this.props.name, "aria-checked": this.isChecked().toString(), tabIndex: 1, onClick: function (e) { return _this.onChange(e); } },
+            React.createElement("div", { className: this.getElementName('checkbox', 'icon') }, this.props.checked ? (React.createElement(Icon_1.default, { size: this.props.size, name: "checkbox" })) : null),
+            React.createElement("div", null, this.props.children)));
     };
     return Button;
 }(AbstractComponent_1.default));

@@ -10,7 +10,7 @@ export interface IIcons {
   [key: string]: any
 }
 
-class Settings {
+export class Settings {
   private prefix: string;
   private classes: IClasses;
   private icons: {[key: string]: any};

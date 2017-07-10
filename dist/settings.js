@@ -42,4 +42,5 @@ var Settings = (function () {
     };
     return Settings;
 }());
+exports.Settings = Settings;
 exports.default = new Settings();

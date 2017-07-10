@@ -1,5 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 window.addEventListener('DOMContentLoaded', function () {
-    Array.from(window.document.querySelectorAll('.c-upload')).forEach(function (element) {
+    window.document.querySelectorAll('.c-upload').slice().forEach(function (element) {
         element.addEventListener('dragover', function (event) {
             event.preventDefault();
             var currentElement = event.currentTarget;
@@ -25,7 +27,8 @@ window.addEventListener('DOMContentLoaded', function () {
             var currentElement = event.currentTarget;
             currentElement.querySelector('input').click();
         }, false);
-        element.querySelector('input').addEventListener('change', function (event) {
+        var input = element.querySelector('input');
+        input.addEventListener('change', function (event) {
             var currentElement = event.currentTarget;
             var files = currentElement.files;
             var customEvent = new CustomEvent('upload', {

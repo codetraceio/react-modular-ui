@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var AbstractComponent_1 = require("./AbstractComponent");
 var Toggle = (function (_super) {
     __extends(Toggle, _super);
@@ -29,15 +29,17 @@ var Toggle = (function (_super) {
         return this.props.checked || false;
     };
     Toggle.prototype.onClick = function (e) {
-        this.props.onChange(!this.props.checked, e);
+        if (typeof this.props.onChange === 'function') {
+            this.props.onChange(!this.props.checked, e);
+        }
     };
     Toggle.prototype.render = function () {
         var _this = this;
-        return (react_1.default.createElement("div", { className: this.getBlockName('toggle', this.getModifierObject()), role: "checkbox", tabIndex: "0", "aria-checked": this.isChecked().toString(), onClick: function (e) { return _this.onClick(e); } },
-            react_1.default.createElement("div", { className: this.getElementName('toggle', 'container') },
-                react_1.default.createElement("div", { className: this.getElementName('toggle', 'line') }),
-                react_1.default.createElement("div", { className: this.getElementName('toggle', 'handle') })),
-            this.props.children ? (react_1.default.createElement("div", { className: this.getElementName('toggle', 'label') }, this.props.children)) : null));
+        return (React.createElement("div", { className: this.getBlockName('toggle', this.getModifierObject()), role: "checkbox", tabIndex: 0, "aria-checked": this.isChecked().toString(), onClick: function (e) { return _this.onClick(e); } },
+            React.createElement("div", { className: this.getElementName('toggle', 'container') },
+                React.createElement("div", { className: this.getElementName('toggle', 'line') }),
+                React.createElement("div", { className: this.getElementName('toggle', 'handle') })),
+            this.props.children ? (React.createElement("div", { className: this.getElementName('toggle', 'label') }, this.props.children)) : null));
     };
     return Toggle;
 }(AbstractComponent_1.default));

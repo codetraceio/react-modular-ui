@@ -25,7 +25,7 @@ var Progress = (function (_super) {
     };
     Progress.prototype.render = function () {
         return (react_1.default.createElement("div", { className: this.getBlockName('progress', this.getModifierObject()) },
-            react_1.default.createElement("div", { className: this.getElementName('progress', 'line'), style: { width: this.props.value + "%" } })));
+            react_1.default.createElement("div", { className: this.getElementName('progress', 'line'), style: { width: this.props.value.toString() + "%" } })));
     };
     return Progress;
 }(AbstractComponent_1.default));

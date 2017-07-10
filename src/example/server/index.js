@@ -9,7 +9,7 @@ import AppView from '../views/AppView';
 settings.setBackend(true);
 
 const app = express();
-app.use('/', express.static(`${__dirname}/../client`));
+app.use('/', express.static(`${__dirname}/../build`));
 app.use('/', express.static(`${__dirname}/../../../styles/dist/default`));
 
 app.get('/', (req, res) => {
