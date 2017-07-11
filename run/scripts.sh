@@ -3,9 +3,12 @@
 ./node_modules/typescript/bin/tsc --outDir "./dist" --target ES5 --noImplicitAny \
 --module commonjs --moduleResolution classic --jsx react --allowSyntheticDefaultImports \
 --declaration --declarationDir "./typescript" \
-./src/*.ts ./src/example/client/*.ts ./src/example/client/*.tsx
+./src/index.ts
+
+./node_modules/typescript/bin/tsc --outDir "./dist" --target ES5 --noImplicitAny \
+--module commonjs --moduleResolution classic --jsx react --allowSyntheticDefaultImports \
+./src/static.ts ./src/example/client/*.ts ./src/example/client/*.tsx
 
 ./node_modules/typescript/bin/tsc --outDir "./dist" --target ES6 --noImplicitAny \
 --module commonjs --moduleResolution node --jsx react --allowSyntheticDefaultImports \
---declaration \
 ./src/example/server/*.tsx
