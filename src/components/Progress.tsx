@@ -18,12 +18,19 @@ export default class Progress extends AbstractComponent<IProgressProps, {}> {
     };
   }
 
+  getValue() {
+    if (typeof this.props.value === 'string' || typeof this.props.value === 'number') {
+      return this.props.value.toString();
+    }
+    return '0';
+  }
+
   render() {
     return (
       <div className={this.getBlockName('progress', this.getModifierObject())}>
         <div
           className={this.getElementName('progress', 'line')}
-          style={{width:`${this.props.value.toString()}%`}}
+          style={{width:`${this.getValue()}%`}}
         />
       </div>
     );

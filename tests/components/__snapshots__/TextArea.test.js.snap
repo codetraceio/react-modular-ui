@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Textarea should render Textarea 1`] = `
+exports[`TextArea should render TextArea 1`] = `
 <div
   className="c-textarea -size-128 -view-flat -color-primary -disabled"
 >
@@ -20,7 +20,7 @@ exports[`Textarea should render Textarea 1`] = `
 </div>
 `;
 
-exports[`Textarea should render Textarea with height 1`] = `
+exports[`TextArea should render TextArea with height 1`] = `
 <div
   className="c-textarea -size-128 -view-flat -color-primary -disabled"
 >

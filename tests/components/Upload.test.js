@@ -1,5 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+
 import Upload from '../../src/components/Upload';
 
 describe('Upload', () => {

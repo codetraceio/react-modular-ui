@@ -1,5 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+
 import Loading from '../../src/components/Loading';
 
 describe('Loading', () => {

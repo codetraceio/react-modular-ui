@@ -14,7 +14,7 @@ const components = [
   'Portal',
   'Progress',
   'Tabs',
-  'Textarea',
+  'TextArea',
   'Toggle',
   'Tooltip',
   'Upload'
@@ -35,7 +35,7 @@ jest.mock('../src/settings', () => {
 });
 
 describe('index', () => {
-  const index = require('../src/index.js');
+  const index = require('../src/index');
   it('should contain AbstractComponent', () =>{
     expect(index.AbstractComponent).toBeDefined();
   });
@@ -82,8 +82,8 @@ describe('index', () => {
     expect(index.Tabs).toBeDefined();
   });
 
-  it('should contain Textarea', () =>{
-    expect(index.Textarea).toBeDefined();
+  it('should contain TextArea', () =>{
+    expect(index.TextArea).toBeDefined();
   });
 
   it('should contain Tooltip', () =>{

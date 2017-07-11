@@ -8,7 +8,7 @@ exports[`Progress should render Progress 1`] = `
     className="c-progress--line"
     style={
       Object {
-        "width": "undefined%",
+        "width": "0%",
       }
     }
   />

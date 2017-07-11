@@ -3,7 +3,7 @@
 exports[`Tooltip should render Tooltip 1`] = `
 <div
   className="c-tooltip-wrapper"
-  data-portal-key={null}
+  data-portal-key=""
   onMouseOut={[Function]}
   onMouseOver={[Function]}
 >

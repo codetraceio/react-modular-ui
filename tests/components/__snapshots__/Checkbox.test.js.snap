@@ -6,7 +6,7 @@ exports[`Checkbox should render Checkbox 1`] = `
   className="c-checkbox -size-32 -view-flat -color-primary -disabled"
   data-name={undefined}
   onClick={[Function]}
-  tabIndex="1"
+  tabIndex={1}
 >
   <div
     className="c-checkbox--icon"

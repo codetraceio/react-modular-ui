@@ -1,5 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import * as React from 'react';
+import * as renderer from 'react-test-renderer';
+
 import Icon from '../../src/components/Icon';
 
 describe('Icon', () => {
