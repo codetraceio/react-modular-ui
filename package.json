@@ -17,7 +17,6 @@
     "stylus": "^0.54.5",
     "ts-loader": "^2.2.2",
     "typescript": "^2.4.1",
-    "vinyl-named": "^1.1.0",
     "webpack": "^2.4.1"
   },
   "dependencies": {
@@ -32,9 +31,10 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/components/**/*.js",
-      "src/settings.js",
-      "src/index.js"
+      "src/components/**/*.tsx",
+      "src/settings.ts",
+      "src/index.ts",
+      "src/utils.ts"
     ],
     "moduleFileExtensions": [
       "ts",
