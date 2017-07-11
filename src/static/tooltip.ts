@@ -1,7 +1,9 @@
 import utils from '../utils';
 
 window.addEventListener('DOMContentLoaded', () => {
-  [...<Node[]><any>window.document.querySelectorAll('.c-tooltip-wrapper')].forEach((element: HTMLDivElement) => {
+  const elements = window.document.querySelectorAll('.c-tooltip-wrapper');
+  for (let i = 0; i < elements.length; i++) {
+    const element: HTMLDivElement = <HTMLDivElement>elements[i];
     element.addEventListener('mouseover', (event: MouseEvent) => {
       const wrapperElement: HTMLDivElement = <HTMLDivElement>event.currentTarget;
       const portalKey: string = wrapperElement.getAttribute('data-portal-key');
@@ -16,5 +18,5 @@ window.addEventListener('DOMContentLoaded', () => {
       const portal: HTMLElement = <HTMLElement>window.document.querySelector(`[data-portal=${portalKey}]`);
       portal.style.display = 'none';
     });
-  });
+  }
 });

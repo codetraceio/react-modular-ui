@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Settings = (function () {
-    function Settings() {
+class Settings {
+    constructor() {
         this.prefix = 'c-';
         this.classes = {
             block: '{b}',
@@ -13,34 +13,33 @@ var Settings = (function () {
         this.icons = {};
         this.backend = false;
     }
-    Settings.prototype.getClasses = function () {
+    getClasses() {
         return this.classes;
-    };
-    Settings.prototype.setClasses = function (classes) {
+    }
+    setClasses(classes) {
         this.classes = classes;
-    };
-    Settings.prototype.getPrefix = function () {
+    }
+    getPrefix() {
         return this.prefix;
-    };
-    Settings.prototype.setPrefix = function (prefix) {
+    }
+    setPrefix(prefix) {
         this.prefix = prefix;
-    };
-    Settings.prototype.getIcons = function () {
+    }
+    getIcons() {
         return this.icons;
-    };
-    Settings.prototype.setIcons = function (icons) {
+    }
+    setIcons(icons) {
         this.icons = icons;
-    };
-    Settings.prototype.getIcon = function (name) {
+    }
+    getIcon(name) {
         return this.icons[name];
-    };
-    Settings.prototype.isBackend = function () {
+    }
+    isBackend() {
         return this.backend;
-    };
-    Settings.prototype.setBackend = function (backend) {
+    }
+    setBackend(backend) {
         this.backend = backend;
-    };
-    return Settings;
-}());
+    }
+}
 exports.Settings = Settings;
 exports.default = new Settings();

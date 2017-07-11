@@ -4,7 +4,7 @@ import AbstractComponent from './AbstractComponent';
 export interface IModalProps {
     show?: boolean;
     portal?: JSX.Element[];
-    name: string;
+    name?: string;
     onClose?: () => void;
 }
 export default class Modal extends AbstractComponent<IModalProps, {}> {

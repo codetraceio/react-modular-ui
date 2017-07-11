@@ -1,42 +1,30 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = require("react");
-var ReactDom = require("react-dom");
-var settings_1 = require("../settings");
-var AbstractComponent_1 = require("./AbstractComponent");
-var Portal = (function (_super) {
-    __extends(Portal, _super);
-    function Portal() {
-        var _this = _super.call(this) || this;
-        _this.portalElement = null;
-        return _this;
+const React = require("react");
+const ReactDom = require("react-dom");
+const settings_1 = require("../settings");
+const AbstractComponent_1 = require("./AbstractComponent");
+class Portal extends AbstractComponent_1.default {
+    constructor() {
+        super();
+        this.portalElement = null;
     }
-    Portal.prototype.componentDidMount = function () {
+    componentDidMount() {
         this.updatePortal();
-    };
-    Portal.prototype.componentWillUnmount = function () {
+    }
+    componentWillUnmount() {
         this.removePortalElement();
-    };
-    Portal.prototype.componentDidUpdate = function () {
+    }
+    componentDidUpdate() {
         this.updatePortal();
-    };
-    Portal.prototype.addPortalElement = function () {
+    }
+    addPortalElement() {
         if (!this.portalElement) {
             this.portalElement = document.createElement('div');
             window.document.body.appendChild(this.portalElement);
         }
-    };
-    Portal.prototype.updatePortal = function () {
+    }
+    updatePortal() {
         if (this.props.show) {
             this.addPortalElement();
             ReactDom.render(React.createElement("div", null, this.props.children), this.portalElement);
@@ -44,19 +32,18 @@ var Portal = (function (_super) {
         else {
             this.removePortalElement();
         }
-    };
-    Portal.prototype.removePortalElement = function () {
+    }
+    removePortalElement() {
         if (this.portalElement) {
             window.document.body.removeChild(this.portalElement);
             this.portalElement = null;
         }
-    };
-    Portal.prototype.render = function () {
+    }
+    render() {
         if (settings_1.default.isBackend() && Array.isArray(this.props.portal) && this.props.portalKey) {
             this.props.portal.push(React.createElement("div", { key: this.props.portalKey, "data-portal": this.props.portalKey, style: { display: 'none' } }, this.props.children));
         }
         return null;
-    };
-    return Portal;
-}(AbstractComponent_1.default));
+    }
+}
 exports.default = Portal;

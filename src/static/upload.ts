@@ -1,6 +1,7 @@
-import {ChangeEvent, ChangeEventHandler} from "react";
 window.addEventListener('DOMContentLoaded', () => {
-  [...<Node[]><any>window.document.querySelectorAll('.c-upload')].forEach((element: HTMLElement) => {
+  const elements = window.document.querySelectorAll('.c-upload');
+  for (let i = 0; i < elements.length; i++) {
+    const element: HTMLDivElement = <HTMLDivElement>elements[i];
     element.addEventListener('dragover', (event: DragEvent) => {
       event.preventDefault();
       const currentElement: HTMLElement = <HTMLElement>event.currentTarget;
@@ -43,5 +44,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
       currentElement.parentNode.dispatchEvent(customEvent);
     }, false);
-  });
+  }
 });

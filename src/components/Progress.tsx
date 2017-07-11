@@ -1,12 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import {
   default as AbstractComponent,
   IModifiers
 } from './AbstractComponent';
 
 export interface IProgressProps {
-  size: string | number;
-  color: string;
+  size?: string | number;
+  color?: string;
   value: string | number;
 }
 

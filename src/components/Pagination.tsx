@@ -35,21 +35,41 @@ export default class Pagination extends AbstractComponent<IPaginationProps, {}> 
   }
 
   getLimit(): number {
-    return parseInt(this.props.limit.toString(), 10) || 10;
+    if (typeof this.props.limit === 'string' || typeof this.props.limit === 'number') {
+      return parseInt(this.props.limit.toString(), 10);
+    }
+    return 10;
   }
 
   getSize(): number {
-    return parseInt(this.props.size.toString(), 10) || 24;
+    if (typeof this.props.size === 'string' || typeof this.props.size === 'number') {
+      return parseInt(this.props.size.toString(), 10);
+    }
+    return 24;
+  }
+
+  getCount(): number {
+    if (typeof this.props.count === 'string' || typeof this.props.count === 'number') {
+      return parseInt(this.props.count.toString(), 10);
+    }
+    return 0;
+  }
+
+  getOffset(): number {
+    if (typeof this.props.offset === 'string' || typeof this.props.offset === 'number') {
+      return parseInt(this.props.offset.toString(), 10);
+    }
+    return 0;
   }
 
   getInfo(): IPaginationInfo {
-    const count: number = parseInt(this.props.count.toString(), 10) || 0;
+    const count: number = this.getCount();
     const limit: number = this.getLimit();
     if (count <= limit) {
       return null;
     }
 
-    let offset = parseInt(this.props.offset.toString(), 10) || 0;
+    let offset: number = this.getOffset();
     if (offset < 0) {
       offset = 0;
     }

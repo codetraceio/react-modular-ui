@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-interface IBaseViewProps {
-  styles: string;
-  scripts: string;
-  title: string;
-  html: string;
+export interface IBaseViewProps {
+  styles?: string;
+  scripts?: string;
+  title?: string;
+  html?: string;
 }
 
 export default class BaseView extends React.Component<IBaseViewProps, {}> {

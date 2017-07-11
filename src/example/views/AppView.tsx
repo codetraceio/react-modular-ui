@@ -21,11 +21,11 @@ import Upload from '../../components/Upload';
 import Modal from '../../components/Modal';
 import settings from '../../settings';
 
-interface IAppViewProps {
-  portal: HTMLElement[]
+export interface IAppViewProps {
+  portal?: JSX.Element[]
 }
 
-interface IAppViewState {
+export interface IAppViewState {
   tabValue: string;
   inputValue: string;
   checked: boolean;
@@ -77,24 +77,24 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     ];
   }
 
-  onChangeTab(value) {
+  onChangeTab(value: string) {
     this.setState({
       tabValue: value
     });
   }
 
-  onChangeInput(value) {
+  onChangeInput(value: string) {
     this.setState({
       inputValue: value
     });
   }
 
-  onToggleChecked(value) {
+  onToggleChecked(value: boolean) {
     this.setState({
       checked: value
     })
   }
-  onChangeSelected(value){
+  onChangeSelected(value: string){
     this.setState({
       selected: value
     })
@@ -105,7 +105,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     });
   }
 
-  onChangeOffset(offset) {
+  onChangeOffset(offset: number) {
     this.setState({
       offset: offset
     });
@@ -415,19 +415,19 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             size="24"
             options={this.getTabOptions()}
             value={this.state.tabValue}
-            onChange={(value) => this.onChangeTab(value)}
+            onChange={(value: string) => this.onChangeTab(value)}
           />
           <Tabs
             size="32"
             options={this.getTabOptions()}
             value={this.state.tabValue}
-            onChange={(value) => this.onChangeTab(value)}
+            onChange={(value: string) => this.onChangeTab(value)}
           />
           <Tabs
             size="48"
             options={this.getTabOptions()}
             value={this.state.tabValue}
-            onChange={(value) => this.onChangeTab(value)}
+            onChange={(value: string) => this.onChangeTab(value)}
           />
           <h2>Pills</h2>
           <Block layout="horizontal" align="center" spaceHorizontal="8">
@@ -485,7 +485,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               checked={this.state.selected === 'first'}
               name="radio"
               value="first"
-              onChange={(value) => this.onChangeSelected(value)}
+              onChange={(value: string) => this.onChangeSelected(value)}
             >
               Radio
             </Radio>
@@ -494,7 +494,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               checked={this.state.selected === 'second'}
               name="radio"
               value="second"
-              onChange={(value) => this.onChangeSelected(value)}
+              onChange={(value: string) => this.onChangeSelected(value)}
             >
               Radio
             </Radio>
@@ -503,7 +503,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               checked={this.state.selected === 'third'}
               name="radio"
               value="third"
-              onChange={(value) => this.onChangeSelected(value)}
+              onChange={(value: string) => this.onChangeSelected(value)}
             >
               Radio
               </Radio>
@@ -512,7 +512,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               checked={this.state.selected === 'fourth'}
               name="radio"
               value="fourth"
-              onChange={(value) => this.onChangeSelected(value)} disabled
+              onChange={(value: string) => this.onChangeSelected(value)} disabled
             >
             Radio
             </Radio>
@@ -570,7 +570,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             count={this.state.count}
             offset={this.state.offset}
             limit={this.state.limit}
-            onChange={(offset) => this.onChangeOffset(offset)}
+            onChange={(offset: number) => this.onChangeOffset(offset)}
           />
         </Block>
       </div>

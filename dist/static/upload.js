@@ -1,7 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 window.addEventListener('DOMContentLoaded', function () {
-    window.document.querySelectorAll('.c-upload').slice().forEach(function (element) {
+    var elements = window.document.querySelectorAll('.c-upload');
+    for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
         element.addEventListener('dragover', function (event) {
             event.preventDefault();
             var currentElement = event.currentTarget;
@@ -36,5 +36,5 @@ window.addEventListener('DOMContentLoaded', function () {
             });
             currentElement.parentNode.dispatchEvent(customEvent);
         }, false);
-    });
+    }
 });

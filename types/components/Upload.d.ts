@@ -7,7 +7,7 @@ export interface IUploadProps {
     disabled?: boolean;
     checked?: boolean;
     name?: string;
-    onChange: (files: FileList) => void;
+    onChange?: (files: FileList) => void;
 }
 export interface IUploadState {
     active: boolean;

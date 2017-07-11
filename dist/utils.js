@@ -1,29 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Utils = (function () {
-    function Utils() {
+class Utils {
+    generateKey() {
+        return `k${Math.random().toString(36).substr(2, 20)}`;
     }
-    Utils.prototype.generateKey = function () {
-        return "k" + Math.random().toString(36).substr(2, 20);
-    };
-    Utils.prototype.updateTooltip = function (wrapperElement, tooltipElement, prefer) {
-        var rect = wrapperElement.getBoundingClientRect();
-        var wrapperWidth = wrapperElement.offsetWidth;
-        var wrapperHeight = wrapperElement.offsetHeight;
-        var width = tooltipElement.offsetWidth;
-        var height = tooltipElement.offsetHeight;
-        var left = 0;
-        var top = 0;
-        var tailSize = 8;
-        var fitsRight = rect.left + width + tailSize < window.innerWidth;
-        var fitsRightHalf = rect.left + width / 2 + tailSize < window.innerWidth;
-        var fitsBottom = rect.bottom + height + tailSize < window.innerHeight;
-        var fitsLeft = rect.left - width - tailSize > 0;
-        var fitsLeftHalf = rect.left - width - tailSize / 2 > 0;
-        var fitsTop = rect.top - height - tailSize > 0;
-        var position;
-        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+    updateTooltip(wrapperElement, tooltipElement, prefer) {
+        let rect = wrapperElement.getBoundingClientRect();
+        let wrapperWidth = wrapperElement.offsetWidth;
+        let wrapperHeight = wrapperElement.offsetHeight;
+        let width = tooltipElement.offsetWidth;
+        let height = tooltipElement.offsetHeight;
+        let left = 0;
+        let top = 0;
+        let tailSize = 8;
+        let fitsRight = rect.left + width + tailSize < window.innerWidth;
+        let fitsRightHalf = rect.left + width / 2 + tailSize < window.innerWidth;
+        let fitsBottom = rect.bottom + height + tailSize < window.innerHeight;
+        let fitsLeft = rect.left - width - tailSize > 0;
+        let fitsLeftHalf = rect.left - width - tailSize / 2 > 0;
+        let fitsTop = rect.top - height - tailSize > 0;
+        let position;
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
         tooltipElement.classList.remove('-tail-top');
         tooltipElement.classList.remove('-tail-right');
         tooltipElement.classList.remove('-tail-bottom');
@@ -67,8 +65,7 @@ var Utils = (function () {
         }
         tooltipElement.style.left = (scrollLeft + left) + 'px';
         tooltipElement.style.top = (scrollTop + top) + 'px';
-    };
-    return Utils;
-}());
+    }
+}
 exports.Utils = Utils;
 exports.default = new Utils();

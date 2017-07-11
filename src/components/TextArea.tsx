@@ -14,7 +14,7 @@ export interface ITextAreaProps {
   label?: string;
   name?: string;
   placeholder?: string;
-  value: string | number;
+  value?: string | number;
 
   onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;

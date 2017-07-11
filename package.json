@@ -7,6 +7,8 @@
     "url": "https://github.com/codetraceio/react-modular-ui"
   },
   "devDependencies": {
+    "@types/express": "^4.0.36",
+    "@types/node": "^8.0.10",
     "@types/react": "^15.0.35",
     "coveralls": "^2.13.0",
     "express": "^4.15.2",
@@ -34,10 +36,16 @@
       "src/settings.js",
       "src/index.js"
     ],
-    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
     "transform": {
       "^.+\\.(ts|tsx|js)$": "./preprocessor.js"
     },
-    "testMatch": ["**/tests/**/*.(ts|tsx|js)"]
+    "testMatch": [
+      "**/tests/**/*.(ts|tsx|js)"
+    ]
   }
 }

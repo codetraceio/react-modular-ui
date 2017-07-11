@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = require("../utils");
 window.addEventListener('DOMContentLoaded', function () {
-    window.document.querySelectorAll('.c-tooltip-wrapper').slice().forEach(function (element) {
+    var elements = window.document.querySelectorAll('.c-tooltip-wrapper');
+    for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
         element.addEventListener('mouseover', function (event) {
             var wrapperElement = event.currentTarget;
             var portalKey = wrapperElement.getAttribute('data-portal-key');
@@ -17,5 +19,5 @@ window.addEventListener('DOMContentLoaded', function () {
             var portal = window.document.querySelector("[data-portal=" + portalKey + "]");
             portal.style.display = 'none';
         });
-    });
+    }
 });

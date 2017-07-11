@@ -1,24 +1,10 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = require("react");
-var AbstractComponent_1 = require("./AbstractComponent");
-var settings_1 = require("../settings");
-var Button = (function (_super) {
-    __extends(Button, _super);
-    function Button() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Button.prototype.getModifierObject = function () {
+const React = require("react");
+const AbstractComponent_1 = require("./AbstractComponent");
+const settings_1 = require("../settings");
+class Button extends AbstractComponent_1.default {
+    getModifierObject() {
         return {
             size: this.props.size,
             width: this.props.width,
@@ -26,10 +12,9 @@ var Button = (function (_super) {
             color: this.props.color,
             rotate: this.props.rotate
         };
-    };
-    Button.prototype.render = function () {
+    }
+    render() {
         return (React.createElement("div", { className: this.getBlockName('icon', this.getModifierObject()), onClick: this.props.onClick }, settings_1.default.getIcon(this.props.name)));
-    };
-    return Button;
-}(AbstractComponent_1.default));
+    }
+}
 exports.default = Button;

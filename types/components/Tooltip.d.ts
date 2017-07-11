@@ -2,7 +2,7 @@
 import * as React from 'react';
 import AbstractComponent from './AbstractComponent';
 export interface ITooltipProps {
-    title: string;
+    title: string | JSX.Element;
     prefer?: string;
     portal?: JSX.Element[];
     onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;

@@ -6,7 +6,7 @@ import Portal from './Portal';
 export interface IModalProps {
   show?: boolean;
   portal?: JSX.Element[];
-  name: string;
+  name?: string;
   onClose?: () => void;
 }
 

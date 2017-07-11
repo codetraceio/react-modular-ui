@@ -21,6 +21,8 @@ export default class Pagination extends AbstractComponent<IPaginationProps, {}> 
     getModifierObject(): IModifiers;
     getLimit(): number;
     getSize(): number;
+    getCount(): number;
+    getOffset(): number;
     getInfo(): IPaginationInfo;
     onChange(page: number): void;
     renderPrev(page: number): JSX.Element;

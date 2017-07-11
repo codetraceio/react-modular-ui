@@ -7,7 +7,7 @@ import AbstractComponent from './AbstractComponent';
 import Portal from './Portal';
 
 export interface ITooltipProps {
-  title: string;
+  title: string | JSX.Element;
   prefer?: string;
   portal?: JSX.Element[];
 

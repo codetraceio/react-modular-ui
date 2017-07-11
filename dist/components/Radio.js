@@ -1,39 +1,24 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = require("react");
-var settings_1 = require("../settings");
-var AbstractComponent_1 = require("./AbstractComponent");
-var Icon_1 = require("./Icon");
-var Radio = (function (_super) {
-    __extends(Radio, _super);
-    function Radio() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Radio.prototype.getModifierObject = function () {
+const React = require("react");
+const settings_1 = require("../settings");
+const AbstractComponent_1 = require("./AbstractComponent");
+const Icon_1 = require("./Icon");
+class Radio extends AbstractComponent_1.default {
+    getModifierObject() {
         return {
             size: this.props.size,
             view: this.props.view,
             color: this.props.color,
             disabled: this.props.disabled
         };
-    };
-    Radio.prototype.onChange = function (e) {
+    }
+    onChange(e) {
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(this.props.value, e);
         }
-    };
-    Radio.prototype.render = function () {
-        var _this = this;
+    }
+    render() {
         if (settings_1.default.isBackend()) {
             return (React.createElement("div", { className: this.getBlockName('radio', this.getModifierObject()), role: "radio", tabIndex: 1, "data-name": this.props.name, "aria-checked": this.props.checked.toString() },
                 React.createElement("div", null,
@@ -46,10 +31,9 @@ var Radio = (function (_super) {
                         React.createElement(Icon_1.default, { size: this.props.size, name: 'radio' }))),
                 React.createElement("div", null, this.props.children)));
         }
-        return (React.createElement("div", { className: this.getBlockName('radio', this.getModifierObject()), "data-name": this.props.name, tabIndex: 1, onClick: function (e) { return _this.onChange(e); } },
+        return (React.createElement("div", { className: this.getBlockName('radio', this.getModifierObject()), "data-name": this.props.name, tabIndex: 1, onClick: (e) => this.onChange(e) },
             React.createElement("div", { className: this.getElementName('radio', 'icon') }, this.props.checked ? (React.createElement(Icon_1.default, { size: this.props.size, name: "radio" })) : null),
             React.createElement("div", null, this.props.children)));
-    };
-    return Radio;
-}(AbstractComponent_1.default));
+    }
+}
 exports.default = Radio;

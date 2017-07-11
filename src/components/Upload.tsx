@@ -12,7 +12,7 @@ export interface IUploadProps {
   checked?: boolean;
   name?: string;
 
-  onChange: (files: FileList) => void
+  onChange?: (files: FileList) => void
 }
 
 export interface IUploadState {

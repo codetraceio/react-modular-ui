@@ -4,5 +4,4 @@ mkdir -p dist
 
 sh ./run/scripts.sh
 sh ./run/webpack.sh
-sh ./run/copy.sh
 sh ./run/stylus.sh

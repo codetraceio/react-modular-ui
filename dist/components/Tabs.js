@@ -1,101 +1,85 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = require("react");
-var AbstractComponent_1 = require("./AbstractComponent");
-var Button = (function (_super) {
-    __extends(Button, _super);
-    function Button() {
-        var _this = _super.call(this) || this;
-        _this.element = null;
-        _this.lineElement = null;
-        _this.optionElements = {};
-        return _this;
+const React = require("react");
+const AbstractComponent_1 = require("./AbstractComponent");
+class Button extends AbstractComponent_1.default {
+    constructor() {
+        super();
+        this.element = null;
+        this.lineElement = null;
+        this.optionElements = {};
     }
-    Button.prototype.componentDidMount = function () {
+    componentDidMount() {
         this.updateLine();
-    };
-    Button.prototype.componentDidUpdate = function () {
+    }
+    componentDidUpdate() {
         this.updateLine();
-    };
-    Button.prototype.getModifierObject = function () {
+    }
+    getModifierObject() {
         return {
             size: this.props.size,
             color: this.props.color
         };
-    };
-    Button.prototype.getOptionModifiers = function (option) {
+    }
+    getOptionModifiers(option) {
         if (option.value === this.props.value) {
             return {
                 selected: true
             };
         }
         return {};
-    };
-    Button.prototype.setElement = function (element) {
+    }
+    setElement(element) {
         this.element = element;
-    };
-    Button.prototype.setLineElement = function (element) {
+    }
+    setLineElement(element) {
         this.lineElement = element;
-    };
-    Button.prototype.setOptionElement = function (name, element) {
+    }
+    setOptionElement(name, element) {
         this.optionElements[name] = element;
-    };
-    Button.prototype.updateLine = function () {
-        var element = this.element;
-        var lineElement = this.lineElement;
-        var optionElement = this.optionElements[this.props.value];
+    }
+    updateLine() {
+        const element = this.element;
+        const lineElement = this.lineElement;
+        const optionElement = this.optionElements[this.props.value];
         if (!element || !lineElement || !optionElement) {
             return;
         }
-        var elementRect = element.getBoundingClientRect();
-        var optionRect = optionElement.getBoundingClientRect();
-        var left = optionRect.left - elementRect.left;
-        var width = optionRect.right - optionRect.left;
-        lineElement.style.left = left + "px";
-        lineElement.style.width = width + "px";
-    };
-    Button.prototype.onChange = function (value, option) {
+        const elementRect = element.getBoundingClientRect();
+        const optionRect = optionElement.getBoundingClientRect();
+        const left = optionRect.left - elementRect.left;
+        const width = optionRect.right - optionRect.left;
+        lineElement.style.left = `${left}px`;
+        lineElement.style.width = `${width}px`;
+    }
+    onChange(value, option) {
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(value, option);
         }
-    };
-    Button.prototype.renderLine = function () {
-        var _this = this;
-        return (React.createElement("div", { ref: function (element) { return _this.setLineElement(element); }, className: this.getElementName('tabs', 'line') }));
-    };
-    Button.prototype.renderCount = function (option) {
+    }
+    renderLine() {
+        return (React.createElement("div", { ref: (element) => this.setLineElement(element), className: this.getElementName('tabs', 'line') }));
+    }
+    renderCount(option) {
         if (typeof option.count !== 'string' && typeof option.count !== 'number') {
             return null;
         }
         return (React.createElement("div", { className: this.getElementName('tabs', 'count', {
                 countColor: option.countColor
             }) }, option.count));
-    };
-    Button.prototype.renderOptions = function () {
-        var _this = this;
-        return this.props.options.map(function (option) {
-            return (React.createElement("div", { key: option.value, ref: function (element) { return _this.setOptionElement(option.value.toString(), element); }, className: _this.getElementName('tabs', 'option', _this.getOptionModifiers(option), true), onClick: function () { return _this.onChange(option.value, option); } },
+    }
+    renderOptions() {
+        return this.props.options.map((option) => {
+            return (React.createElement("div", { key: option.value, ref: (element) => this.setOptionElement(option.value.toString(), element), className: this.getElementName('tabs', 'option', this.getOptionModifiers(option), true), onClick: () => this.onChange(option.value, option) },
                 React.createElement("div", null, option.title),
-                _this.renderCount(option)));
+                this.renderCount(option)));
         });
-    };
-    Button.prototype.render = function () {
-        var _this = this;
-        return (React.createElement("div", { ref: function (element) { return _this.setElement(element); }, className: this.getBlockName('tabs', this.getModifierObject()) },
+    }
+    render() {
+        return (React.createElement("div", { ref: (element) => this.setElement(element), className: this.getBlockName('tabs', this.getModifierObject()) },
             this.renderLine(),
             this.renderOptions(),
             this.props.children));
-    };
-    return Button;
-}(AbstractComponent_1.default));
+    }
+}
 exports.default = Button;
