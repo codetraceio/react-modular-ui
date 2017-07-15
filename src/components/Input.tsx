@@ -21,6 +21,7 @@ export interface IInputProps {
   onKeyPress?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
+  onSubmit?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export default class Input extends AbstractComponent<IInputProps, {}> {
@@ -39,6 +40,21 @@ export default class Input extends AbstractComponent<IInputProps, {}> {
   ) {
     if (typeof callback === 'function') {
       callback(event.currentTarget.value, event);
+    }
+  }
+
+  onKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (typeof this.props.onKeyDown === 'function') {
+      this.props.onKeyDown(event.currentTarget.value, event);
+    }
+    if (event.isPropagationStopped()) {
+      return;
+    }
+    if (
+      typeof this.props.onSubmit === 'function' &&
+      ['Enter', 'NumpadEnter'].indexOf(event.key) !== -1 && !event.shiftKey
+    ) {
+      this.props.onSubmit(event.currentTarget.value, event);
     }
   }
 

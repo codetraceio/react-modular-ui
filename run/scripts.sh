@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-./node_modules/typescript/bin/tsc --outDir "./dist" --target ES6 --noImplicitAny \
+./node_modules/typescript/bin/tsc --outDir "./dist" --target ES2016 --noImplicitAny \
 --module commonjs --moduleResolution node --jsx react --allowSyntheticDefaultImports \
 ./src/example/server/*.tsx
 
