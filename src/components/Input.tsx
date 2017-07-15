@@ -74,7 +74,7 @@ export default class Input extends AbstractComponent<IInputProps, {}> {
           value={this.props.value}
           disabled={this.props.disabled}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.onEvent(event, this.props.onChange)}
-          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => this.onEvent(event, this.props.onKeyDown)}
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => this.onKeyDown(event)}
           onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => this.onEvent(event, this.props.onKeyUp)}
           onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => this.onEvent(event, this.props.onKeyPress)}
           onFocus={(event: React.FocusEvent<HTMLInputElement>) => this.onEvent(event, this.props.onFocus)}
