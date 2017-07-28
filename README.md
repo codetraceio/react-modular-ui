@@ -35,6 +35,20 @@ class Example extends React.Component {
 }
 ```
 
+## Preact support
+
+You can use `preact-modular-ui` package in case you are using preact.
+
+```
+npm install preact-modular-ui --save
+```
+
+or
+
+```
+yarn add preact-modular-ui
+```
+
 # Development
 
 ## Set up
