@@ -3,22 +3,21 @@ import * as React from 'react';
 import Button from '../../components/Button';
 import Block from '../../components/Block';
 import Checkbox from '../../components/Checkbox';
-import Radio from '../../components/Radio';
 import Input from '../../components/Input';
 import Icon from '../../components/Icon';
 import Loading from '../../components/Loading';
+import Modal from '../../components/Modal';
+import Pagination from '../../components/Pagination';
 import Pill from '../../components/Pill';
-import {
-  default as Tabs,
-  ITabsOption
-} from '../../components/Tabs';
+import Progress from '../../components/Progress';
+import Radio from '../../components/Radio';
+import Select from '../../components/Select';
+import Tabs, {ITabsOption} from '../../components/Tabs';
 import TextArea from '../../components/TextArea';
 import Toggle from '../../components/Toggle';
 import Tooltip from '../../components/Tooltip';
-import Pagination from '../../components/Pagination';
-import Progress from '../../components/Progress';
 import Upload from '../../components/Upload';
-import Modal from '../../components/Modal';
+
 import settings from '../../settings';
 
 export interface IAppViewProps {
@@ -572,6 +571,10 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             limit={this.state.limit}
             onChange={(offset: number) => this.onChangeOffset(offset)}
           />
+        </Block>
+        <h2>Select</h2>
+        <Block layout="vertical" spaceVertical="8">
+          <Select placeholder="Select" />
         </Block>
       </div>
     );

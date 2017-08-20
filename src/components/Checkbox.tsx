@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import settings from '../settings';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import AbstractComponent, {IModifiers} from './AbstractComponent';
 
 export interface ICheckboxProps {
   size?: string | number;
