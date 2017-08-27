@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 
-import settings from '../settings';
+import settings from '../services/settingService';
 import AbstractComponent from './AbstractComponent';
 
 export interface IPortalProps {

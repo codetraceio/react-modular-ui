@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import settings from '../settings';
-import utils from '../utils';
+import settings from '../services/settingService';
+import utilService from '../services/utilService';
+import tooltipService from '../services/tooltipService';
 
 import AbstractComponent from './AbstractComponent';
 import Portal from './Portal';
@@ -49,7 +50,7 @@ export default class Tooltip extends AbstractComponent<ITooltipProps, ITooltipSt
       return;
     }
 
-    utils.updateTooltip(wrapperElement, tooltipElement, this.props.prefer);
+    tooltipService.updateTooltip(wrapperElement, tooltipElement, this.props.prefer);
   }
 
   onShowTooltip() {
@@ -65,7 +66,7 @@ export default class Tooltip extends AbstractComponent<ITooltipProps, ITooltipSt
   }
 
   render() {
-    const portalKey: string = settings.isBackend() ? utils.generateKey() : '';
+    const portalKey: string = settings.isBackend() ? utilService.generateKey() : '';
 
     return (
       <div

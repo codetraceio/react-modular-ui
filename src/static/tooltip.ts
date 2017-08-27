@@ -1,4 +1,4 @@
-import utils from '../utils';
+import tooltipService from '../services/tooltipService';
 
 window.addEventListener('DOMContentLoaded', () => {
   const elements = window.document.querySelectorAll('.c-tooltip-wrapper');
@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const portalElement: HTMLElement = <HTMLElement>window.document.querySelector(`[data-portal=${portalKey}]`);
       const tooltipElement: HTMLElement = <HTMLElement>portalElement.firstElementChild;
       portalElement.style.display = 'block';
-      utils.updateTooltip(wrapperElement, tooltipElement);
+      tooltipService.updateTooltip(wrapperElement, tooltipElement);
     });
     element.addEventListener('mouseout', (event) => {
       const currentTarget: HTMLDivElement = <HTMLDivElement>event.currentTarget;

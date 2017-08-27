@@ -1,5 +1,23 @@
 @import "constants.styl";
 
+$icon-sizes = 12, 16, 24, 32, 48, 56, 64, 128;
+
+icon-size($size) {
+  height: ($size)px;
+  width: ($size)px;
+  min-width: ($size)px;
+}
+
+icon-height($size) {
+  height: ($size)px;
+  min-height: ($size)px;
+}
+
+icon-width($size) {
+  width: ($size)px;
+  min-width: ($size)px;
+}
+
 .c-icon {
   display: inline-flex;
   fill: currentColor;
@@ -9,50 +27,21 @@
   }
 
   &, svg {
-    height: 24px;
-    width: 24px;
-    min-width: 24px;
+    icon-size(24px);
   }
 
-  &.-size-16, &.-size-16 svg {
-    width: 16px;
-    height: 16px;
-    min-width: 16px;
-  }
+  for $i in $icon-sizes {
+    &.-size-{$i}, &.-size-{$i} svg {
+      icon-size($i);
+    }
 
-  &.-size-24, &.-size-24 svg {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-  }
+    &.-height-{$i}, &.-height-{$i} svg {
+      icon-height($i);
+    }
 
-  &.-size-32, &.-size-32 svg {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-  }
-
-  &.-size-48, &.-size-48 svg {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-  }
-  &.-size-56, &.-size-56 svg {
-    width: 56px;
-    height: 56px;
-    min-width: 56px;
-  }
-
-  &.-size-64, &.-size-64 svg {
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
-  }
-
-  &.-size-128, &.-size-128 svg {
-    width: 128px;
-    height: 128px;
-    min-width: 128px;
+    &.-width-{$i}, &.-width-{$i} svg {
+      icon-width($i);
+    }
   }
 
   &.-color-primary {

@@ -4,7 +4,7 @@ import {
   default as AbstractComponent,
   IModifiers
 } from './AbstractComponent';
-import settings from '../settings';
+import settings from '../services/settingService';
 
 export interface IIconProps {
   size?: string | number;

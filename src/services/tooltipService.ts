@@ -1,8 +1,4 @@
-export class Utils {
-  generateKey(): string {
-    return `k${Math.random().toString(36).substr(2, 20)}`;
-  }
-
+export class TooltipService {
   updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLElement, prefer?: string) {
     let rect: ClientRect = wrapperElement.getBoundingClientRect();
     let wrapperWidth: number = wrapperElement.offsetWidth;
@@ -65,4 +61,4 @@ export class Utils {
   }
 }
 
-export default new Utils();
+export default new TooltipService();

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import settings from '../settings';
+import settings from '../services/settingService';
 
 import {
   default as AbstractComponent,

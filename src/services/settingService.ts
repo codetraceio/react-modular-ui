@@ -10,7 +10,7 @@ export interface IIcons {
   [key: string]: any
 }
 
-export class Settings {
+export class SettingService {
   private prefix: string;
   private classes: IClasses;
   private icons: {[key: string]: any};
@@ -66,4 +66,4 @@ export class Settings {
   }
 }
 
-export default new Settings();
+export default new SettingService();

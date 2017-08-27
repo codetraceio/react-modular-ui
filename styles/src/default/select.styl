@@ -16,9 +16,23 @@ select-size($size, $font-size) {
   select-size(24px, 14px);
   background: white;
   border: 1px solid $color-grey;
-  display: flex;
-  align-items: center;
   &.-selected {
     border: 1px solid $color-primary;
+  }
+  &--box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &--drop-down {
+    position: absolute;
+    background: $color-white;
+    box-shadow: 0 0 5px rgba($color-black, 0.2);
+  }
+  &--option {
+    padding: 8px;
+    &:hover {
+      background: $color-light-grey;
+    }
   }
 }
