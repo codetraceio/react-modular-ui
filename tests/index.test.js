@@ -3,7 +3,6 @@ const components = [
   'Block',
   'Button',
   'Checkbox',
-  'Radio',
   'Form',
   'Icon',
   'Input',
@@ -13,11 +12,21 @@ const components = [
   'Pill',
   'Portal',
   'Progress',
+  'Radio',
+  'Select',
   'Tabs',
   'TextArea',
   'Toggle',
   'Tooltip',
   'Upload'
+];
+
+const services = [
+  'clickOutsideService',
+  'dropDownService',
+  'settingService',
+  'tooltipService',
+  'utilService'
 ];
 
 components.forEach((component) => {
@@ -28,89 +37,25 @@ components.forEach((component) => {
   });
 });
 
-jest.mock('../src/settings', () => {
-  return {
-    default: {}
-  };
+services.forEach((service) => {
+  jest.mock(`../src/services/${service}`, () => {
+    return {
+      default: {}
+    };
+  });
 });
 
 describe('index', () => {
   const index = require('../src/index');
-  it('should contain AbstractComponent', () =>{
-    expect(index.AbstractComponent).toBeDefined();
+  components.forEach((component) => {
+    it(`should contain ${component}`, () => {
+      expect(index[component]).toBeDefined();
+    });
   });
 
-  it('should contain Block', () =>{
-    expect(index.Block).toBeDefined();
-  });
-
-  it('should contain Button', () =>{
-    expect(index.Button).toBeDefined();
-  });
-
-  it('should contain Checkbox', () =>{
-    expect(index.Checkbox).toBeDefined();
-  });
-  it('should contain Radio', () =>{
-    expect(index.Radio).toBeDefined();
-  });
-  it('should contain Icon', () =>{
-    expect(index.Icon).toBeDefined();
-  });
-
-  it('should contain Input', () =>{
-    expect(index.Input).toBeDefined();
-  });
-
-  it('should contain Form', () =>{
-    expect(index.Form).toBeDefined();
-  });
-
-  it('should contain Loading', () =>{
-    expect(index.Loading).toBeDefined();
-  });
-
-  it('should contain Modal', () =>{
-    expect(index.Modal).toBeDefined();
-  });
-
-  it('should contain Pill', () =>{
-    expect(index.Pill).toBeDefined();
-  });
-
-  it('should contain Tabs', () =>{
-    expect(index.Tabs).toBeDefined();
-  });
-
-  it('should contain TextArea', () =>{
-    expect(index.TextArea).toBeDefined();
-  });
-
-  it('should contain Tooltip', () =>{
-    expect(index.Tooltip).toBeDefined();
-  });
-
-  it('should contain Toggle', () =>{
-    expect(index.Toggle).toBeDefined();
-  });
-
-  it('should contain Pagination', () =>{
-    expect(index.Pagination).toBeDefined();
-  });
-
-  it('should contain Portal', () =>{
-    expect(index.Portal).toBeDefined();
-  });
-
-  it('should contain Progress', () =>{
-    expect(index.Progress).toBeDefined();
-  });
-
-  it('should contain Upload', () =>{
-    expect(index.Upload).toBeDefined();
-  });
-
-  it('should contain settings', () =>{
-    expect(index.settings).toBeDefined();
+  services.forEach((service) => {
+    it(`should contain ${service}`, () => {
+      expect(index[service]).toBeDefined();
+    });
   });
 });

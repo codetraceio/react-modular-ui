@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select should render Select 1`] = `
+<div
+  className="c-select"
+>
+  <div
+    className="c-select--box"
+    data-inside={false}
+    onClick={[Function]}
+  >
+    <div>
+      title1
+    </div>
+    <div
+      className="c-icon -width-12"
+      onClick={undefined}
+    />
+  </div>
+</div>
+`;
