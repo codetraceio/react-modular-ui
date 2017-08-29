@@ -34,10 +34,9 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/components/**/*.tsx",
-      "src/settings.ts",
-      "src/index.ts",
-      "src/utils.ts"
+      "src/components/*.tsx",
+      "src/services/*.ts",
+      "src/index.ts"
     ],
     "moduleFileExtensions": [
       "ts",
