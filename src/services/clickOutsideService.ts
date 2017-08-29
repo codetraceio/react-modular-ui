@@ -1,15 +1,31 @@
 export class ClickOutsideService {
   private events: Array<() => void>;
   private onDocumentClickHandler: (event: any) => void;
+  private listenerAdded: boolean;
 
   constructor() {
     this.events = [];
+    this.listenerAdded = false;
 
     this.onDocumentClickHandler = this.onDocumentClick.bind(this);
   }
 
-  init() {
+  addListener() {
+    if (this.listenerAdded) {
+      return;
+    }
     window.document.addEventListener('click', this.onDocumentClickHandler, true);
+
+    this.listenerAdded = true;
+  }
+
+  removeListener() {
+    if (!this.listenerAdded) {
+      return;
+    }
+    window.document.removeEventListener('click', this.onDocumentClickHandler, true);
+
+    this.listenerAdded = false;
   }
 
   isOwnElement(element: Element, isRecursive?: boolean): boolean {
@@ -17,7 +33,7 @@ export class ClickOutsideService {
       return false;
     }
     const inside: string = element.getAttribute('data-inside');
-    if (inside) {
+    if (typeof inside === 'string' && inside !== 'false') {
       return true;
     }
     return isRecursive ? this.isOwnElement(element.parentElement, true) : false;
@@ -40,6 +56,10 @@ export class ClickOutsideService {
 
   on(listener: () => void) {
     this.events.push(listener);
+
+    if (this.events.length === 1) {
+      this.addListener();
+    }
   }
 
   off(listener: () => void) {
@@ -49,6 +69,10 @@ export class ClickOutsideService {
     this.events = this.events.filter((currentListener) => {
       return currentListener !== listener;
     });
+
+    if (this.events.length === 0) {
+      this.removeListener();
+    }
   }
 
   trigger() {

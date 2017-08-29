@@ -33,6 +33,7 @@ export interface IAppViewState {
   count: number;
   offset: number;
   limit: number;
+  selectValue: string;
 }
 
 settings.setIcons({
@@ -55,7 +56,8 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
       showModal: false,
       count: 100000,
       offset: 10,
-      limit: 10
+      limit: 10,
+      selectValue: ''
     };
   }
 
@@ -120,6 +122,12 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
   onChangeOffset(offset: number) {
     this.setState({
       offset: offset
+    });
+  }
+
+  onChangeSelect(value: string) {
+    this.setState({
+      selectValue: value
     });
   }
 
@@ -586,8 +594,19 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
           />
         </Block>
         <h2>Select</h2>
-        <Block layout="vertical" spaceVertical="8">
-          <Select placeholder="Select" options={this.getSelectOptions()} />
+        <Block layout="horizontal" spaceHorizontal="8">
+          <Select
+            placeholder="Select"
+            value={this.state.selectValue}
+            options={this.getSelectOptions()}
+            onChange={(value: string) => this.onChangeSelect(value)}
+          />
+          <Select
+            placeholder="Select"
+            value={this.state.selectValue}
+            options={this.getSelectOptions()}
+            onChange={(value: string) => this.onChangeSelect(value)}
+          />
         </Block>
       </div>
     );

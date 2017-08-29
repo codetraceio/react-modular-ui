@@ -18,6 +18,7 @@ export interface ISelectProps {
   fixed?: boolean;
   portal?: JSX.Element[];
   options?: ISelectOption[];
+  value?: string;
 
   onChangeOpened?: (opened: boolean) => void;
   onChange?: (value: string, option: ISelectOption) => void;
@@ -82,6 +83,18 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
     return this.props.options || [];
   }
 
+  getTitle() {
+    if (this.props.value) {
+      const option: ISelectOption = this.props.options.find((option: ISelectOption) => {
+        return option.value === this.props.value;
+      });
+      if (option) {
+        return option.title;
+      }
+    }
+    return this.props.placeholder;
+  }
+
   isOpened(): boolean {
     return this.props.opened || this.state.opened;
   }
@@ -130,12 +143,21 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
     }
   }
 
+  onChange(value: string, option: ISelectOption) {
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(value, option);
+    }
+
+    this.onClose();
+  }
+
   renderOptions() {
     return this.getOptions().map((option: ISelectOption) => {
       return (
         <div
+          key={option.value}
           className={this.getElementName('select', 'option')}
-          onClick={() => this.props.onChange(option.value, option)}
+          onClick={() => this.onChange(option.value, option)}
         >
           {option.title}
         </div>
@@ -154,9 +176,10 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
         <div
           className={this.getElementName('select', 'box')}
           onClick={this.onClickHandler}
+          data-inside={this.isOpened()}
         >
           <div>
-            {this.props.placeholder}
+            {this.getTitle()}
           </div>
           <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="dropDown" />
         </div>
@@ -168,6 +191,7 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
           <div
             className={this.getElementName('select', 'drop-down')}
             ref={this.onUpdateDropDownElementHandler}
+            data-inside
           >
             {this.renderOptions()}
           </div>
