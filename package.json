@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "0.13.6",
+  "version": "0.14.0",
   "main": "dist/index.js",
   "typings": "typescript/index.d.ts",
   "repository": {
@@ -30,6 +30,7 @@
     "start": "node dist/example/server/index.js",
     "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test-dev": "jest --coverage",
+    "test-update": "jest --coverage -u",
     "build": "./run/build.sh"
   },
   "jest": {

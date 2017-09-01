@@ -9,13 +9,19 @@ exports[`Select should render Select 1`] = `
     data-inside={false}
     onClick={[Function]}
   >
-    <div>
+    <div
+      className="c-select--value"
+    >
       title1
     </div>
     <div
-      className="c-icon -width-12"
-      onClick={undefined}
-    />
+      className="c-select--icon"
+    >
+      <div
+        className="c-icon -width-12"
+        onClick={undefined}
+      />
+    </div>
   </div>
 </div>
 `;
