@@ -2,7 +2,6 @@
 
 const tsc = require('typescript');
 const tsConfig = require('./tsconfig.js');
-console.log('ok');
 module.exports = {
   process(src, path) {
     console.log(path);
