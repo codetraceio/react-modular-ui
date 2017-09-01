@@ -178,10 +178,12 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
           onClick={this.onClickHandler}
           data-inside={this.isOpened()}
         >
-          <div>
+          <div className={this.getElementName('select', 'value')}>
             {this.getTitle()}
           </div>
-          <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="dropDown" />
+          <div className={this.getElementName('select', 'icon')}>
+            <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="dropDown" />
+          </div>
         </div>
         <Portal
           show={this.isOpened()}
