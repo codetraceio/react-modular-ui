@@ -62,7 +62,7 @@ export class ClickOutsideService {
     }
   }
 
-  off(listener: () => void) {
+  off(listener?: () => void) {
     if (!listener) {
       this.events = [];
     }
