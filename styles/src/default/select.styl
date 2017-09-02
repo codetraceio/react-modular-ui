@@ -13,16 +13,13 @@ select-size($size, $font-size) {
 }
 
 .c-select {
-  select-size(24px, 14px);
-  background: white;
-  border: 1px solid $color-grey;
-  &.-selected {
-    border: 1px solid $color-primary;
-  }
   &--box {
+    select-size(24px, 14px);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: white;
+    border: 1px solid $color-grey;
   }
   &--drop-down {
     position: absolute;
@@ -38,5 +35,8 @@ select-size($size, $font-size) {
   }
   &--icon {
     padding-left: 4px;
+  }
+  &.-selected {
+    border: 1px solid $color-primary;
   }
 }

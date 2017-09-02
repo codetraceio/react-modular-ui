@@ -182,7 +182,7 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
             {this.getTitle()}
           </div>
           <div className={this.getElementName('select', 'icon')}>
-            <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="dropDown" />
+            <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="drop-down" />
           </div>
         </div>
         <Portal
