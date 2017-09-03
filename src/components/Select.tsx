@@ -11,6 +11,7 @@ import Portal from './Portal';
 
 export interface ISelectProps {
   placeholder?: string;
+  label?: string;
   size?: string | number;
   view?: string;
   disabled?: boolean;
@@ -152,6 +153,18 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
     this.onClose();
   }
 
+  renderLabel() {
+    if (!this.props.label) {
+      return null;
+    }
+
+    return (
+      <div className={this.getElementName('select', 'label')}>
+        {this.props.label}
+      </div>
+    );
+  }
+
   renderOptions() {
     return this.getOptions().map((option: ISelectOption) => {
       return (
@@ -172,12 +185,13 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
     return (
       <div
         className={this.getBlockName('select', this.getModifierObject())}
-        ref={this.onUpdateSelectElementHandler}
       >
+        {this.renderLabel()}
         <div
           className={this.getElementName('select', 'box')}
           onClick={this.onClickHandler}
           data-inside={this.isOpened()}
+          ref={this.onUpdateSelectElementHandler}
         >
           <div className={this.getElementName('select', 'value')}>
             {this.getTitle()}

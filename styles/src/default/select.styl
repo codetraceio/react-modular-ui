@@ -15,6 +15,7 @@ select-size($size, $font-size) {
 .c-select {
   &--box {
     select-size(24px, 14px);
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,6 +36,11 @@ select-size($size, $font-size) {
   }
   &--icon {
     padding-left: 4px;
+  }
+  &--label {
+    font-size: 14px;
+    color: $color-dark-grey;
+    padding: 4px 0;
   }
   &.-selected &--box {
     border: 1px solid $color-primary;

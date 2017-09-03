@@ -596,16 +596,22 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
         <h2>Select</h2>
         <Block layout="horizontal" spaceHorizontal="8">
           <Select
+            label="Select"
             placeholder="Select"
             value={this.state.selectValue}
             options={this.getSelectOptions()}
             onChange={(value: string) => this.onChangeSelect(value)}
           />
           <Select
+            label="Select"
             placeholder="Select"
             value={this.state.selectValue}
             options={this.getSelectOptions()}
             onChange={(value: string) => this.onChangeSelect(value)}
+          />
+          <Input
+            label="Input"
+            placeholder="Input"
           />
         </Block>
       </div>
