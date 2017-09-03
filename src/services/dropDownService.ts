@@ -1,29 +1,36 @@
+import settingService from '../services/settingService'
+
+export const DROP_DOWN_ORIENTATION_TOP = 'top';
+export const DROP_DOWN_ORIENTATION_BOTTOM = 'bottom';
+
 export class DropDownService {
   updateDropDown(dropDownElement: HTMLElement, selectElement: HTMLElement, fixed: boolean) {
-    const selectRect = selectElement.getBoundingClientRect();
+    const selectRect: ClientRect = selectElement.getBoundingClientRect();
 
-    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+    let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
+    let scrollLeft: number = document.documentElement.scrollLeft || document.body.scrollLeft;
+    let orientation: string = DROP_DOWN_ORIENTATION_BOTTOM;
 
     if (fixed) {
       dropDownElement.style.position = 'fixed';
       scrollLeft = scrollTop = 0;
     }
 
-    const maxHeight = Math.min(Math.max(window.innerHeight - selectRect.bottom - 32, 256), 512);
+    const maxHeight: number = Math.min(Math.max(window.innerHeight - selectRect.bottom - 32, 256), 512);
 
     dropDownElement.style.minWidth = `${selectRect.width}px`;
     dropDownElement.style.maxWidth = `${window.innerWidth - 64}px`;
     dropDownElement.style.maxHeight = `${maxHeight}px`;
 
-    let top = selectRect.bottom + scrollTop;
+    let top: number = selectRect.bottom + scrollTop;
     if (selectRect.bottom + dropDownElement.offsetHeight > window.innerHeight) {
-      dropDownElement.style.maxHeight = `${Math.min(selectRect.top - 64, 512)}px`;
+      orientation = DROP_DOWN_ORIENTATION_TOP;
+      dropDownElement.style.maxHeight = `${Math.min(selectRect.top - 32, 512)}px`;
       top = selectRect.top - dropDownElement.offsetHeight + scrollTop;
     }
-    let left = selectRect.left + scrollLeft;
-    let right = 0;
-    let availableWidth = window.innerWidth - 16;
+    let left: number = selectRect.left + scrollLeft;
+    let right: number = 0;
+    let availableWidth: number = window.innerWidth - 16;
     if (selectRect.left + dropDownElement.offsetWidth > availableWidth) {
       left = Math.max(16, availableWidth - dropDownElement.offsetWidth);
       right = Math.max(16, availableWidth - selectRect.left - dropDownElement.offsetWidth);
@@ -32,6 +39,10 @@ export class DropDownService {
     dropDownElement.style.top = `${top}px`;
     dropDownElement.style.left = left ? `${left}px` : 'auto';
     dropDownElement.style.right = right ? `${right}px` : 'auto';
+
+    const separator: string = settingService.getClasses().separator;
+    const className: string = `${separator}orientation${separator}${orientation}`;
+    dropDownElement.classList.add(className);
   }
 }
 
