@@ -76,6 +76,7 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
       size: this.props.size,
       view: this.props.view,
       disabled: this.props.disabled,
+      selected: this.isOpened(),
     };
   }
 
