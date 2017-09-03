@@ -41,8 +41,14 @@ export class DropDownService {
     dropDownElement.style.right = right ? `${right}px` : 'auto';
 
     const separator: string = settingService.getClasses().separator;
-    const className: string = `${separator}orientation${separator}${orientation}`;
-    dropDownElement.classList.add(className);
+    const orientationTopClassName: string = `${separator}orientation${separator}${DROP_DOWN_ORIENTATION_TOP}`;
+    const orientationBottomClassName: string = `${separator}orientation${separator}${DROP_DOWN_ORIENTATION_BOTTOM}`;
+    dropDownElement.classList.add(
+      orientation === DROP_DOWN_ORIENTATION_TOP ? orientationTopClassName : orientationBottomClassName
+    );
+    dropDownElement.classList.remove(
+      orientation === DROP_DOWN_ORIENTATION_TOP ? orientationBottomClassName : orientationTopClassName
+    );
   }
 }
 
