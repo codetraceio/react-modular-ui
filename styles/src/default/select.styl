@@ -26,10 +26,14 @@ select-size($size, $font-size) {
     position: absolute;
     background: $color-white;
     box-shadow: 0 0 5px rgba($color-black, 0.2);
+    overflow-x: auto;
   }
   &--option {
     padding: 8px;
     cursor: pointer;
+    &.-selected {
+      font-weight: bold;
+    }
     &:hover {
       background: $color-light-grey;
     }

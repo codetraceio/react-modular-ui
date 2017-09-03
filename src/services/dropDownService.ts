@@ -4,7 +4,7 @@ export const DROP_DOWN_ORIENTATION_TOP = 'top';
 export const DROP_DOWN_ORIENTATION_BOTTOM = 'bottom';
 
 export class DropDownService {
-  updateDropDown(dropDownElement: HTMLElement, selectElement: HTMLElement, fixed: boolean) {
+  updateDropDown(dropDownElement: HTMLElement, selectElement: HTMLElement, scroll: boolean, fixed: boolean) {
     const selectRect: ClientRect = selectElement.getBoundingClientRect();
 
     let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
@@ -49,6 +49,12 @@ export class DropDownService {
     dropDownElement.classList.remove(
       orientation === DROP_DOWN_ORIENTATION_TOP ? orientationBottomClassName : orientationTopClassName
     );
+    if (scroll) {
+      const selectedElement = dropDownElement.querySelector('[data-selected=true]');
+      if (selectedElement) {
+        selectedElement.scrollIntoView();
+      }
+    }
   }
 }
 

@@ -27,6 +27,7 @@ export interface ISelectProps {
 
 export interface ISelectState {
   opened: boolean;
+  scroll: boolean;
 }
 
 export interface ISelectOption {
@@ -50,6 +51,7 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
 
     this.state = {
       opened: false,
+      scroll: false,
     };
 
     this.onClickHandler = this.onClick.bind(this);
@@ -78,6 +80,12 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
       view: this.props.view,
       disabled: this.props.disabled,
       selected: this.isOpened(),
+    };
+  }
+
+  getOptionModifierObject(value: string): IModifiers {
+    return {
+      selected: value === this.props.value,
     };
   }
 
@@ -121,7 +129,8 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
 
   onSetOpened(opened: boolean) {
     this.setState({
-      opened: opened
+      opened: opened,
+      scroll: opened
     });
 
     if (this.props.onChangeOpened) {
@@ -130,7 +139,13 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
   }
 
   onUpdateDropDown() {
-    dropDownService.updateDropDown(this.dropDownElement, this.selectElement, this.props.fixed);
+    dropDownService.updateDropDown(this.dropDownElement, this.selectElement, this.state.scroll, this.props.fixed);
+
+    if (this.state.scroll) {
+      this.setState({
+        scroll: false
+      });
+    }
   }
 
   onWindowScroll() {
@@ -170,8 +185,11 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
       return (
         <div
           key={option.value}
-          className={this.getElementName('select', 'option')}
+          className={this.getElementName(
+            'select', 'option', this.getOptionModifierObject(option.value)
+          )}
           onClick={() => this.onChange(option.value, option)}
+          data-selected={option.value === this.props.value}
         >
           {option.title}
         </div>

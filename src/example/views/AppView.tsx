@@ -80,15 +80,12 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
   }
 
   getSelectOptions(): ISelectOption[] {
-    return [
-      {
-        title: 'Option 1',
-        value: 'option1'
-      }, {
-        title: 'Option 2',
-        value: 'option2'
+    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((item) => {
+      return {
+        title: `Option ${item}`,
+        value: `option${item}`,
       }
-    ]
+    });
   }
 
   onChangeTab(value: string) {
