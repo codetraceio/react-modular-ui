@@ -50,9 +50,11 @@ export class DropDownService {
       orientation === DROP_DOWN_ORIENTATION_TOP ? orientationBottomClassName : orientationTopClassName
     );
     if (scroll) {
-      const selectedElement = dropDownElement.querySelector('[data-selected=true]');
+      const selectedElement: HTMLDivElement = (
+        dropDownElement.querySelector('[data-selected=true]') as HTMLDivElement
+      );
       if (selectedElement) {
-        selectedElement.scrollIntoView();
+        dropDownElement.scrollTop = selectedElement.offsetTop;
       }
     }
   }
