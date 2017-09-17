@@ -9,6 +9,7 @@ exports[`Input should render Input 1`] = `
     name={undefined}
     onBlur={[Function]}
     onChange={[Function]}
+    onClick={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
     onKeyPress={[Function]}

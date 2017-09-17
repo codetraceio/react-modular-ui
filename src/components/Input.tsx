@@ -10,11 +10,12 @@ export interface IInputProps {
   view?: string;
   color?: string;
   disabled?: boolean;
-
   name?: string;
   label?: string;
   value?: string;
   placeholder?: string;
+  shape?: string;
+
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
   onKeyUp?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -22,6 +23,7 @@ export interface IInputProps {
   onFocus?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
   onSubmit?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: (value: string, event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 export default class Input extends AbstractComponent<IInputProps, {}> {
@@ -30,7 +32,8 @@ export default class Input extends AbstractComponent<IInputProps, {}> {
       size: this.props.size,
       view: this.props.view,
       color: this.props.color,
-      disabled: this.props.disabled
+      disabled: this.props.disabled,
+      shape: this.props.shape,
     };
   }
 
@@ -79,6 +82,7 @@ export default class Input extends AbstractComponent<IInputProps, {}> {
           onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => this.onEvent(event, this.props.onKeyPress)}
           onFocus={(event: React.FocusEvent<HTMLInputElement>) => this.onEvent(event, this.props.onFocus)}
           onBlur={(event: React.FocusEvent<HTMLInputElement>) => this.onEvent(event, this.props.onBlur)}
+          onClick={(event: React.MouseEvent<HTMLInputElement>) => this.onEvent(event, this.props.onClick)}
         />
       </div>
     )
