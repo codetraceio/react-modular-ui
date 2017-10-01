@@ -23,7 +23,8 @@ export default class Button extends AbstractComponent<IIconProps, {}> {
       width: this.props.width,
       height: this.props.height,
       color: this.props.color,
-      rotate: this.props.rotate
+      rotate: this.props.rotate,
+      clickable: !!this.props.onClick,
     };
   }
 
