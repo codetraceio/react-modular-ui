@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName, getElementName} from '../services/componentService';
 
 export interface IInputProps {
   size?: string | number;
@@ -26,65 +23,63 @@ export interface IInputProps {
   onClick?: (value: string, event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
-export default class Input extends AbstractComponent<IInputProps, {}> {
-  getModifierObject(): IModifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      color: this.props.color,
-      disabled: this.props.disabled,
-      shape: this.props.shape,
-    };
-  }
+function getModifierObject(props: IInputProps): IModifiers {
+  return {
+    size: props.size,
+    view: props.view,
+    color: props.color,
+    disabled: props.disabled,
+    shape: props.shape,
+  };
+}
 
-  onEvent(
-    event: React.SyntheticEvent<HTMLInputElement>,
-    callback: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void
+function renderLabel(props: IInputProps) {
+  return props.label ? (
+    <div className={getElementName('input', 'label')}>{props.label}</div>
+  ) : null;
+}
+
+function onEvent(
+  event: React.SyntheticEvent<HTMLInputElement>,
+  callback: (value: string, event: React.SyntheticEvent<HTMLInputElement>) => void
+) {
+  if (typeof callback === 'function') {
+    callback(event.currentTarget.value, event);
+  }
+}
+
+function onKeyDownEvent(event: React.KeyboardEvent<HTMLInputElement>, props: IInputProps) {
+  if (typeof props.onKeyDown === 'function') {
+    props.onKeyDown(event.currentTarget.value, event);
+  }
+  if (event.isPropagationStopped()) {
+    return;
+  }
+  if (
+    typeof props.onSubmit === 'function' &&
+    ['Enter', 'NumpadEnter'].indexOf(event.key) !== -1 && !event.shiftKey
   ) {
-    if (typeof callback === 'function') {
-      callback(event.currentTarget.value, event);
-    }
+    props.onSubmit(event.currentTarget.value, event);
   }
+}
 
-  onKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (typeof this.props.onKeyDown === 'function') {
-      this.props.onKeyDown(event.currentTarget.value, event);
-    }
-    if (event.isPropagationStopped()) {
-      return;
-    }
-    if (
-      typeof this.props.onSubmit === 'function' &&
-      ['Enter', 'NumpadEnter'].indexOf(event.key) !== -1 && !event.shiftKey
-    ) {
-      this.props.onSubmit(event.currentTarget.value, event);
-    }
-  }
-
-  renderLabel() {
-    return this.props.label ? (
-      <div className={this.getElementName('input', 'label')}>{this.props.label}</div>
-    ) : null;
-  }
-
-  render() {
-    return (
-      <div className={this.getBlockName('input', this.getModifierObject())}>
-        {this.renderLabel()}
-        <input
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          value={this.props.value}
-          disabled={this.props.disabled}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.onEvent(event, this.props.onChange)}
-          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => this.onKeyDown(event)}
-          onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => this.onEvent(event, this.props.onKeyUp)}
-          onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => this.onEvent(event, this.props.onKeyPress)}
-          onFocus={(event: React.FocusEvent<HTMLInputElement>) => this.onEvent(event, this.props.onFocus)}
-          onBlur={(event: React.FocusEvent<HTMLInputElement>) => this.onEvent(event, this.props.onBlur)}
-          onClick={(event: React.MouseEvent<HTMLInputElement>) => this.onEvent(event, this.props.onClick)}
-        />
-      </div>
-    )
-  }
+export default function Input(props: IInputProps) {
+  return (
+    <div className={getBlockName('input', getModifierObject(props))}>
+      {renderLabel(props)}
+      <input
+        name={props.name}
+        placeholder={props.placeholder}
+        value={props.value}
+        disabled={props.disabled}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => onEvent(event, props.onChange)}
+        onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => onKeyDownEvent(event, props)}
+        onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => onEvent(event, props.onKeyUp)}
+        onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => onEvent(event, props.onKeyPress)}
+        onFocus={(event: React.FocusEvent<HTMLInputElement>) => onEvent(event, props.onFocus)}
+        onBlur={(event: React.FocusEvent<HTMLInputElement>) => onEvent(event, props.onBlur)}
+        onClick={(event: React.MouseEvent<HTMLInputElement>) => onEvent(event, props.onClick)}
+      />
+    </div>
+  );
 }

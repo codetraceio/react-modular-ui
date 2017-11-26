@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName, getElementName } from '../services/componentService';
 
 export interface ITextAreaProps {
   size?: string | number;
@@ -24,57 +21,56 @@ export interface ITextAreaProps {
   onBlur?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
-export default class TextArea extends AbstractComponent<ITextAreaProps, {}> {
-  getModifierObject(): IModifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      color: this.props.color,
-      disabled: this.props.disabled
-    };
-  }
+function getModifierObject(props: ITextAreaProps): IModifiers {
+  return {
+    size: props.size,
+    view: props.view,
+    color: props.color,
+    disabled: props.disabled
+  };
+}
 
-  getStyle() {
-    const style: React.CSSProperties = {};
-    if (this.props.height) {
-      style.height = `${this.props.height.toString()}px`;
-    }
-    return style;
+function getStyle(props: ITextAreaProps) {
+  const style: React.CSSProperties = {};
+  if (props.height) {
+    style.height = `${props.height.toString()}px`;
   }
+  return style;
+}
 
-  onEvent(
-    event: React.SyntheticEvent<HTMLTextAreaElement>,
-    callback: (value: string, event: React.SyntheticEvent<HTMLTextAreaElement>) => void
-  ) {
-    if (typeof callback === 'function') {
-      callback(event.currentTarget.value, event);
-    }
+function onEvent(
+  event: React.SyntheticEvent<HTMLTextAreaElement>,
+  callback: (value: string, event: React.SyntheticEvent<HTMLTextAreaElement>) => void
+) {
+  if (typeof callback === 'function') {
+    callback(event.currentTarget.value, event);
   }
+}
 
-  renderLabel() {
-    return this.props.label ? (
-      <div className={this.getElementName('textarea', 'label')}>{this.props.label}</div>
-    ) : null;
-  }
+function renderLabel(props: ITextAreaProps) {
+  return props.label ? (
+    <div className={getElementName('textarea', 'label')}>{props.label}</div>
+  ) : null;
+}
 
-  render() {
-    return (
-      <div className={this.getBlockName('textarea', this.getModifierObject())}>
-        {this.renderLabel()}
-        <textarea
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          value={this.props.value}
-          disabled={this.props.disabled}
-          style={this.getStyle()}
-          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => this.onEvent(event, this.props.onChange)}
-          onKeyDown={(event: React.KeyboardEvent<HTMLTextAreaElement>) => this.onEvent(event, this.props.onKeyDown)}
-          onKeyUp={(event: React.KeyboardEvent<HTMLTextAreaElement>) => this.onEvent(event, this.props.onKeyUp)}
-          onKeyPress={(event: React.KeyboardEvent<HTMLTextAreaElement>) => this.onEvent(event, this.props.onKeyPress)}
-          onFocus={(event: React.FocusEvent<HTMLTextAreaElement>) => this.onEvent(event, this.props.onFocus)}
-          onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => this.onEvent(event, this.props.onBlur)}
-        />
-      </div>
-    )
-  }
+export default function TextArea(props: ITextAreaProps) {
+
+  return (
+    <div className={getBlockName('textarea', getModifierObject(props))}>
+      {renderLabel(props)}
+      <textarea
+        name={props.name}
+        placeholder={props.placeholder}
+        value={props.value}
+        disabled={props.disabled}
+        style={getStyle(props)}
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onEvent(event, props.onChange)}
+        onKeyDown={(event: React.KeyboardEvent<HTMLTextAreaElement>) => onEvent(event, props.onKeyDown)}
+        onKeyUp={(event: React.KeyboardEvent<HTMLTextAreaElement>) => onEvent(event, props.onKeyUp)}
+        onKeyPress={(event: React.KeyboardEvent<HTMLTextAreaElement>) => onEvent(event, props.onKeyPress)}
+        onFocus={(event: React.FocusEvent<HTMLTextAreaElement>) => onEvent(event, props.onFocus)}
+        onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => onEvent(event, props.onBlur)}
+      />
+    </div>
+  );
 }

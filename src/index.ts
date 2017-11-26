@@ -1,4 +1,3 @@
-export {default as AbstractComponent} from './components/AbstractComponent';
 export {default as Block} from './components/Block';
 export {default as Button} from './components/Button';
 export {default as Checkbox} from './components/Checkbox';
@@ -20,12 +19,9 @@ export {default as Upload} from './components/Upload';
 export {default as Select} from './components/Select';
 
 export {default as clickOutsideService} from './services/clickOutsideService';
+export {default as componentService} from './services/componentService';
 export {default as dropDownService} from './services/dropDownService';
 export {default as settingService} from './services/settingService';
 export {default as tooltipService} from './services/tooltipService';
 export {default as utilService} from './services/utilService';
 
-// Deprecated: will be removed in 1.0.0
-export {default as Textarea} from './components/TextArea';
-export {default as settings} from './services/settingService';
-export {default as utils} from './services/utilService';

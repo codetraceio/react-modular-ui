@@ -6,7 +6,6 @@ export const DROP_DOWN_ORIENTATION_BOTTOM = 'bottom';
 export class DropDownService {
   updateDropDown(dropDownElement: HTMLElement, selectElement: HTMLElement, scroll: boolean, fixed: boolean) {
     const selectRect: ClientRect = selectElement.getBoundingClientRect();
-
     let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
     let scrollLeft: number = document.documentElement.scrollLeft || document.body.scrollLeft;
     let orientation: string = DROP_DOWN_ORIENTATION_BOTTOM;

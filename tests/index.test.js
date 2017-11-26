@@ -1,5 +1,6 @@
+import 'raf/polyfill';
+
 const components = [
-  'AbstractComponent',
   'Block',
   'Button',
   'Checkbox',
@@ -26,7 +27,8 @@ const services = [
   'dropDownService',
   'settingService',
   'tooltipService',
-  'utilService'
+  'utilService',
+  'componentService'
 ];
 
 components.forEach((component) => {

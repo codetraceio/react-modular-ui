@@ -5,7 +5,7 @@ import dropDownService from '../services/dropDownService';
 import settingService from '../services/settingService';
 import utilService from '../services/utilService';
 
-import AbstractComponent, {IModifiers} from './AbstractComponent';
+import { IModifiers, getBlockName, getElementName } from '../services/componentService';
 import Icon from './Icon';
 import Portal from './Portal';
 
@@ -35,7 +35,7 @@ export interface ISelectOption {
   value: string;
 }
 
-export default class Select extends AbstractComponent<ISelectProps, ISelectState> {
+export default class Select extends React.Component<ISelectProps, ISelectState> {
   private dropDownElement: HTMLElement;
   private selectElement: HTMLElement;
 
@@ -46,8 +46,8 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
   private onUpdateDropDownElementHandler: (element: HTMLElement) => void;
   private onCloseHandler: () => void;
 
-  constructor() {
-    super();
+  constructor(props: ISelectProps) {
+    super(props);
 
     this.state = {
       opened: false,
@@ -139,6 +139,9 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
   }
 
   onUpdateDropDown() {
+    if (!this.dropDownElement) {
+      return;
+    }
     dropDownService.updateDropDown(this.dropDownElement, this.selectElement, this.state.scroll, this.props.fixed);
 
     if (this.state.scroll) {
@@ -174,7 +177,7 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
     }
 
     return (
-      <div className={this.getElementName('select', 'label')}>
+      <div className={getElementName('select', 'label')}>
         {this.props.label}
       </div>
     );
@@ -185,7 +188,7 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
       return (
         <div
           key={option.value}
-          className={this.getElementName(
+          className={getElementName(
             'select', 'option', this.getOptionModifierObject(option.value)
           )}
           onClick={() => this.onChange(option.value, option)}
@@ -202,35 +205,37 @@ export default class Select extends AbstractComponent<ISelectProps, ISelectState
 
     return (
       <div
-        className={this.getBlockName('select', this.getModifierObject())}
+        className={getBlockName('select', this.getModifierObject())}
       >
         {this.renderLabel()}
         <div
-          className={this.getElementName('select', 'box')}
+          className={getElementName('select', 'box')}
           onClick={this.onClickHandler}
           data-inside={this.isOpened()}
           ref={this.onUpdateSelectElementHandler}
         >
-          <div className={this.getElementName('select', 'value')}>
+          <div className={getElementName('select', 'value')}>
             {this.getTitle()}
           </div>
-          <div className={this.getElementName('select', 'icon')}>
+          <div className={getElementName('select', 'icon')}>
             <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="drop-down" />
           </div>
         </div>
-        <Portal
-          show={this.isOpened()}
-          portal={this.props.portal}
-          portalKey={portalKey}
-        >
-          <div
-            className={this.getElementName('select', 'drop-down')}
-            ref={this.onUpdateDropDownElementHandler}
-            data-inside
+        {this.isOpened() ? (
+          <Portal
+            portal={this.props.portal}
+            portalKey={portalKey}
+            onUpdate={() => this.onUpdateDropDown()}
           >
-            {this.renderOptions()}
-          </div>
-        </Portal>
+            <div
+              className={getElementName('select', 'drop-down')}
+              ref={this.onUpdateDropDownElementHandler}
+              data-inside
+            >
+              {this.renderOptions()}
+            </div>
+          </Portal>
+         ) : null}
       </div>
     );
   }

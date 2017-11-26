@@ -1,3 +1,5 @@
+import 'raf/polyfill';
+
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
 

@@ -2,59 +2,38 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 
 import settings from '../services/settingService';
-import AbstractComponent from './AbstractComponent';
 
 export interface IPortalProps {
   portal?: JSX.Element[];
   portalKey?: string;
-  show: boolean;
+
+  onUpdate?: () => void;
 }
 
-export default class Portal extends AbstractComponent<IPortalProps, {}> {
+export default class Portal extends React.Component<IPortalProps, {}> {
   private portalElement: HTMLElement;
 
-  constructor() {
-    super();
+  constructor(props: IPortalProps) {
+    super(props);
 
-    this.portalElement = null;
+    this.portalElement = document.createElement('div');
   }
 
   componentDidMount() {
-    this.updatePortal();
+    window.document.body.appendChild(this.portalElement);
   }
 
   componentWillUnmount() {
-    this.removePortalElement();
+    window.document.body.removeChild(this.portalElement);
   }
 
   componentDidUpdate() {
-    this.updatePortal();
-  }
-
-  addPortalElement() {
-    if (!this.portalElement) {
-      this.portalElement = document.createElement('div');
-      window.document.body.appendChild(this.portalElement);
+    if (typeof this.props.onUpdate === 'function') {
+      this.props.onUpdate();
     }
   }
 
-  updatePortal() {
-    if (this.props.show) {
-      this.addPortalElement();
-      ReactDom.render(<div>{this.props.children}</div>, this.portalElement);
-    } else {
-      this.removePortalElement();
-    }
-  }
-
-  removePortalElement() {
-    if (this.portalElement) {
-      window.document.body.removeChild(this.portalElement);
-      this.portalElement = null;
-    }
-  }
-
-  render(): null {
+  render() {
     if (settings.isBackend() && Array.isArray(this.props.portal) && this.props.portalKey) {
       this.props.portal.push(
         <div key={this.props.portalKey} data-portal={this.props.portalKey} style={{display: 'none'}}>
@@ -63,6 +42,6 @@ export default class Portal extends AbstractComponent<IPortalProps, {}> {
       );
     }
 
-    return null;
+    return ReactDom.createPortal(this.props.children, this.portalElement);
   }
 }

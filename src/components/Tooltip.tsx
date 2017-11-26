@@ -3,8 +3,8 @@ import * as React from 'react';
 import settings from '../services/settingService';
 import utilService from '../services/utilService';
 import tooltipService from '../services/tooltipService';
+import {getBlockClassName} from '../services/componentService';
 
-import AbstractComponent from './AbstractComponent';
 import Portal from './Portal';
 
 export interface ITooltipProps {
@@ -19,12 +19,12 @@ export interface ITooltipState {
   show: boolean;
 }
 
-export default class Tooltip extends AbstractComponent<ITooltipProps, ITooltipState> {
+export default class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
   private wrapperElement: HTMLElement;
   private tooltipElement: HTMLElement;
 
-  constructor() {
-    super();
+  constructor(props: ITooltipProps) {
+    super(props);
 
     this.state = {
       show: false
@@ -70,18 +70,20 @@ export default class Tooltip extends AbstractComponent<ITooltipProps, ITooltipSt
 
     return (
       <div
-        className={this.getBlockClassName('tooltip-wrapper')}
+        className={getBlockClassName('tooltip-wrapper')}
         onMouseOver={() => this.onShowTooltip()}
         onMouseOut={() => this.onHideTooltip()}
         ref={(element) => this.updateWrapper(element)}
         data-portal-key={portalKey}
       >
         {this.props.children}
-        <Portal show={this.state.show} portal={this.props.portal} portalKey={portalKey}>
-          <div className={this.getBlockClassName('tooltip')} ref={(element) => this.updateTooltip(element)}>
-            {this.props.title}
-          </div>
-        </Portal>
+        {this.state.show ? (
+          <Portal portal={this.props.portal} portalKey={portalKey}>
+            <div className={getBlockClassName('tooltip')} ref={(element) => this.updateTooltip(element)}>
+              {this.props.title}
+            </div>
+          </Portal>
+        ) : null}
       </div>
     );
   }

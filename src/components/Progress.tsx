@@ -1,8 +1,5 @@
 import * as React from 'react';
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName, getElementName } from '../services/componentService';
 
 export interface IProgressProps {
   size?: string | number;
@@ -10,29 +7,27 @@ export interface IProgressProps {
   value: string | number;
 }
 
-export default class Progress extends AbstractComponent<IProgressProps, {}> {
-  getModifierObject(): IModifiers {
-    return {
-      size: this.props.size,
-      color: this.props.color
-    };
-  }
+function getModifierObject(props: IProgressProps): IModifiers {
+  return {
+    size: props.size,
+    color: props.color
+  };
+}
 
-  getValue() {
-    if (typeof this.props.value === 'string' || typeof this.props.value === 'number') {
-      return this.props.value.toString();
-    }
-    return '0';
+function getValue(props: IProgressProps) {
+  if (typeof props.value === 'string' || typeof props.value === 'number') {
+    return props.value.toString();
   }
+  return '0';
+}
 
-  render() {
-    return (
-      <div className={this.getBlockName('progress', this.getModifierObject())}>
-        <div
-          className={this.getElementName('progress', 'line')}
-          style={{width:`${this.getValue()}%`}}
-        />
-      </div>
-    );
-  }
+export default function Progress(props: IProgressProps) {
+  return (
+    <div className={getBlockName('progress', getModifierObject(props))}>
+      <div
+        className={getElementName('progress', 'line')}
+        style={{width:`${getValue(props)}%`}}
+      />
+    </div>
+  );
 }

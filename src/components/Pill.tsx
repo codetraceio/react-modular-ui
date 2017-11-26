@@ -1,34 +1,30 @@
 import * as React from 'react';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName } from '../services/componentService';
 
 export interface IPillProps {
   size?: string | number;
   color?: string;
+  children?: JSX.Element | JSX.Element[] | string;
 
   onChange?: (offset: number, page: number) => void;
 }
 
-export default class Pill extends AbstractComponent<IPillProps, {}> {
-  getModifierObject(): IModifiers {
-    return {
-      size: this.props.size,
-      color: this.props.color
-    };
-  }
+function getModifierObject(props: IPillProps): IModifiers {
+  return {
+    size: props.size,
+    color: props.color
+  };
+}
 
-  render() {
-    return (
-      <div
-        className={this.getBlockName('pill', this.getModifierObject())}
-      >
-        <div>
-          {this.props.children}
-        </div>
+export default function Pill(props: IPillProps) {
+  return (
+    <div
+      className={getBlockName('pill', getModifierObject(props))}
+    >
+      <div>
+        {props.children}
       </div>
-    )
-  }
+    </div>
+  );
 }

@@ -2,11 +2,11 @@ import * as express from 'express';
 import * as React from 'react';
 import * as ReactDomServer from 'react-dom/server';
 
-import {settings} from '../../index';
+import {settingService} from '../../index';
 import BaseView from '../views/BaseView';
 import AppView from '../views/AppView';
 
-settings.setBackend(true);
+settingService.setBackend(true);
 
 const app: express.Application = express();
 app.use('/', express.static(`${__dirname}/../build`));

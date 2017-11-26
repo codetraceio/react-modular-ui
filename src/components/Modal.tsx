@@ -1,35 +1,33 @@
 import * as React from 'react';
 
-import AbstractComponent from './AbstractComponent';
+import { getBlockClassName, getElementClassName } from '../services/componentService';
 import Portal from './Portal';
 
 export interface IModalProps {
-  show?: boolean;
   portal?: JSX.Element[];
   name?: string;
+  children: JSX.Element;
   onClose?: () => void;
 }
 
-export default class Modal extends AbstractComponent<IModalProps, {}> {
-  onClose() {
-    if (typeof this.props.onClose === 'function') {
-      this.props.onClose();
+export default function Modal(props: IModalProps) {
+  function onClose() {
+    if (typeof props.onClose === 'function') {
+      props.onClose();
     }
   }
 
-  onClickContent(event: React.MouseEvent<HTMLDivElement>) {
+  function onClickContent(event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation();
   }
 
-  render() {
-    return (
-      <Portal show={this.props.show} portal={this.props.portal} portalKey={this.props.name}>
-        <div className={this.getBlockClassName('modal')} onClick={() => this.onClose()}>
-          <div className={this.getElementClassName('modal', 'content')} onClick={(event) => this.onClickContent(event)}>
-            {this.props.children}
-          </div>
+  return (
+    <Portal portal={props.portal} portalKey={props.name}>
+      <div className={getBlockClassName('modal')} onClick={onClose}>
+        <div className={getElementClassName('modal', 'content')} onClick={onClickContent}>
+          {props.children}
         </div>
-      </Portal>
-    );
-  }
+      </div>
+    </Portal>
+  );
 }

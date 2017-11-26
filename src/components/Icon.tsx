@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName } from '../services/componentService';
 import settings from '../services/settingService';
 
 export interface IIconProps {
@@ -16,26 +13,24 @@ export interface IIconProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default class Button extends AbstractComponent<IIconProps, {}> {
-  getModifierObject(): IModifiers {
-    return {
-      size: this.props.size,
-      width: this.props.width,
-      height: this.props.height,
-      color: this.props.color,
-      rotate: this.props.rotate,
-      clickable: !!this.props.onClick,
-    };
-  }
+function getModifierObject(props: IIconProps): IModifiers {
+  return {
+    size: props.size,
+    width: props.width,
+    height: props.height,
+    color: props.color,
+    rotate: props.rotate,
+    clickable: !!props.onClick,
+  };
+}
 
-  render() {
-    return (
-      <div
-        className={this.getBlockName('icon', this.getModifierObject())}
-        onClick={this.props.onClick}
-      >
-        {settings.getIcon(this.props.name)}
-      </div>
-    )
-  }
+export default function Icon(props: IIconProps) {
+  return (
+    <div
+      className={getBlockName('icon', getModifierObject(props))}
+      onClick={props.onClick}
+    >
+      {settings.getIcon(props.name)}
+    </div>
+  );
 }

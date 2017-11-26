@@ -2,10 +2,7 @@ import * as React from 'react';
 
 import settings from '../services/settingService';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import {IModifiers, getBlockName, getElementName} from '../services/componentService';
 import Icon from './Icon';
 
 export interface IRadioProps {
@@ -13,78 +10,78 @@ export interface IRadioProps {
   view?: string;
   color?: string;
   disabled?: boolean;
-
   name?: string;
   value?: string | number | boolean;
   checked?: boolean;
   placeholder?: string;
+  children?: JSX.Element | JSX.Element[] | string;
+
   onChange?: (value: string | number | boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default class Radio extends AbstractComponent<IRadioProps, {}> {
-  getModifierObject(): IModifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      color: this.props.color,
-      disabled: this.props.disabled
-    };
-  }
+function getModifierObject(props: IRadioProps): IModifiers {
+  return {
+    size: props.size,
+    view: props.view,
+    color: props.color,
+    disabled: props.disabled
+  };
+}
 
-  onChange(e: React.MouseEvent<HTMLDivElement>) {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(this.props.value, e);
+export default function Radio(props: IRadioProps) {
+
+  function onChange(e: React.MouseEvent<HTMLDivElement>) {
+    if (typeof props.onChange === 'function') {
+      props.onChange(props.value, e);
     }
   }
 
-  render() {
-    if (settings.isBackend()) {
-      return (
-        <div
-          className={this.getBlockName('radio', this.getModifierObject())}
-          role="radio"
-          tabIndex={1}
-          data-name={this.props.name}
-          aria-checked={this.props.checked.toString()}
-        >
-          <div>
-            <div
-              className={this.getElementName('radio', 'icon', {
-                notChecked: true
-              })}
-            >
-              
-            </div>
-            <div
-              className={this.getElementName('radio', 'icon', {
-                checked: true
-              })}
-            >
-              <Icon size={this.props.size} name='radio' />
-            </div>
-          </div>
-          <div>{this.props.children}</div>
-        </div>
-      );
-    }
-
+  if (settings.isBackend()) {
     return (
       <div
-        className={this.getBlockName('radio', this.getModifierObject())}
-        data-name={this.props.name}
+        className={getBlockName('radio', getModifierObject(props))}
+        role="radio"
         tabIndex={1}
-        onClick={(e: React.MouseEvent<HTMLDivElement>) => this.onChange(e)}
+        data-name={props.name}
+        aria-checked={props.checked.toString()}
       >
-        <div className={this.getElementName('radio', 'icon')}>
-          {this.props.checked ? (
-            <Icon
-              size={this.props.size}
-              name="radio"
-            />
-          ) : null}
+        <div>
+          <div
+            className={getElementName('radio', 'icon', {
+              notChecked: true
+            })}
+          >
+
+          </div>
+          <div
+            className={getElementName('radio', 'icon', {
+              checked: true
+            })}
+          >
+            <Icon size={props.size} name='radio' />
+          </div>
         </div>
-        <div>{this.props.children}</div>
+        <div>{props.children}</div>
       </div>
-    )
+    );
   }
+
+  return (
+    <div
+      className={getBlockName('radio', getModifierObject(props))}
+      data-name={props.name}
+      tabIndex={1}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => onChange(e)}
+    >
+      <div className={getElementName('radio', 'icon')}>
+        {props.checked ? (
+          <Icon
+            size={props.size}
+            name="radio"
+          />
+        ) : null}
+      </div>
+      <div>{props.children}</div>
+    </div>
+  );
 }

@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName } from '../services/componentService';
 
 export interface IUploadProps {
   size?: string | number;
@@ -19,15 +16,15 @@ export interface IUploadState {
   active: boolean;
 }
 
-export default class Upload extends AbstractComponent<IUploadProps, IUploadState> {
+export default class Upload extends React.Component<IUploadProps, IUploadState> {
   private element: HTMLDivElement;
   private fileElement: HTMLInputElement;
   private onDragOverListener: (event: DragEvent) => void;
   private onDragLeaveListener: () => void;
   private onDropListener: (event: DragEvent) => void;
 
-  constructor() {
-    super();
+  constructor(props: IUploadProps) {
+    super(props);
 
     this.element = null;
     this.fileElement = null;
@@ -112,7 +109,7 @@ export default class Upload extends AbstractComponent<IUploadProps, IUploadState
   render() {
     return (
       <div
-        className={this.getBlockName('upload', this.getModifierObject())}
+        className={getBlockName('upload', this.getModifierObject())}
         ref={(element) => this.updateElement(element)}
         data-name={this.props.name}
         onClick={() => this.onClick()}

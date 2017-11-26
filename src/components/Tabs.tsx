@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import {
-  default as AbstractComponent,
-  IModifiers
-} from './AbstractComponent';
+import { IModifiers, getBlockName, getElementName } from '../services/componentService';
 
 export interface ITabsOption {
   title: string;
@@ -21,13 +18,13 @@ export interface ITabsProps {
   onChange?: (value: string | number, option: ITabsOption) => void;
 }
 
-export default class Button extends AbstractComponent<ITabsProps, {}> {
+export default class Tabs extends React.Component<ITabsProps> {
   private element: HTMLElement;
   private lineElement: HTMLElement;
   private optionElements: {[key: string]: HTMLElement};
 
-  constructor() {
-    super();
+  constructor(props: ITabsProps) {
+    super(props);
 
     this.element = null;
     this.lineElement = null;
@@ -94,7 +91,7 @@ export default class Button extends AbstractComponent<ITabsProps, {}> {
     return (
       <div
         ref={(element) => this.setLineElement(element)}
-        className={this.getElementName('tabs', 'line')}
+        className={getElementName('tabs', 'line')}
       />
     );
   }
@@ -105,7 +102,7 @@ export default class Button extends AbstractComponent<ITabsProps, {}> {
     }
     return (
       <div
-        className={this.getElementName('tabs', 'count', {
+        className={getElementName('tabs', 'count', {
           countColor: option.countColor
         })}
       >
@@ -120,7 +117,7 @@ export default class Button extends AbstractComponent<ITabsProps, {}> {
         <div
           key={option.value}
           ref={(element) => this.setOptionElement(option.value.toString(), element)}
-          className={this.getElementName('tabs', 'option', this.getOptionModifiers(option), true)}
+          className={getElementName('tabs', 'option', this.getOptionModifiers(option), true)}
           onClick={() => this.onChange(option.value, option)}
         >
           <div>{option.title}</div>
@@ -134,7 +131,7 @@ export default class Button extends AbstractComponent<ITabsProps, {}> {
     return (
       <div
         ref={(element) => this.setElement(element)}
-        className={this.getBlockName('tabs', this.getModifierObject())}
+        className={getBlockName('tabs', this.getModifierObject())}
       >
         {this.renderLine()}
         {this.renderOptions()}
