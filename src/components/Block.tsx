@@ -19,6 +19,7 @@ export interface IBlockProps {
   spaceVertical?: IProp<string | number>;
   height?: IProp<string | number>;
   width?: IProp<string | number>;
+  container?: IProp<string | number>;
   modifiers?: IModifiers;
 }
 
@@ -42,6 +43,7 @@ export default class Block extends React.PureComponent<IBlockProps, {}> {
       spaceVertical: this.props.spaceVertical,
       height: this.props.height,
       width: this.props.width,
+      container: this.props.container,
       ...this.props.modifiers
     };
   }
