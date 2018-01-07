@@ -14,7 +14,7 @@ export class ClickOutsideService {
     if (this.listenerAdded) {
       return;
     }
-    window.document.addEventListener('click', this.onDocumentClickHandler, true);
+    window.document.addEventListener("click", this.onDocumentClickHandler, true);
 
     this.listenerAdded = true;
   }
@@ -23,17 +23,17 @@ export class ClickOutsideService {
     if (!this.listenerAdded) {
       return;
     }
-    window.document.removeEventListener('click', this.onDocumentClickHandler, true);
+    window.document.removeEventListener("click", this.onDocumentClickHandler, true);
 
     this.listenerAdded = false;
   }
 
   isOwnElement(element: Element, isRecursive?: boolean): boolean {
-    if (!element.tagName || element.tagName.toLowerCase() === 'body') {
+    if (!element.tagName || element.tagName.toLowerCase() === "body") {
       return false;
     }
-    const inside: string = element.getAttribute('data-inside');
-    if (typeof inside === 'string' && inside !== 'false') {
+    const inside: string = element.getAttribute("data-inside");
+    if (typeof inside === "string" && inside !== "false") {
       return true;
     }
     return isRecursive ? this.isOwnElement(element.parentElement, true) : false;

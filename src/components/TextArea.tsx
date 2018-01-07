@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from '../services/componentService';
+import { IModifiers, getBlockName, getElementName } from "../services/componentService";
 
 export interface ITextAreaProps {
   size?: string | number;
@@ -21,56 +21,70 @@ export interface ITextAreaProps {
   onBlur?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
-function getModifierObject(props: ITextAreaProps): IModifiers {
-  return {
-    size: props.size,
-    view: props.view,
-    color: props.color,
-    disabled: props.disabled
-  };
-}
-
-function getStyle(props: ITextAreaProps) {
-  const style: React.CSSProperties = {};
-  if (props.height) {
-    style.height = `${props.height.toString()}px`;
-  }
-  return style;
-}
-
 function onEvent(
-  event: React.SyntheticEvent<HTMLTextAreaElement>,
   callback: (value: string, event: React.SyntheticEvent<HTMLTextAreaElement>) => void
 ) {
-  if (typeof callback === 'function') {
-    callback(event.currentTarget.value, event);
+  if (typeof callback === "function") {
+    return (event: React.SyntheticEvent<HTMLTextAreaElement>) => {
+      callback(event.currentTarget.value, event);
+    };
   }
 }
 
-function renderLabel(props: ITextAreaProps) {
-  return props.label ? (
-    <div className={getElementName('textarea', 'label')}>{props.label}</div>
-  ) : null;
-}
+export default class TextArea extends React.PureComponent<ITextAreaProps, {}> {
+  getModifierObject(): IModifiers {
+    return {
+      size: this.props.size,
+      view: this.props.view,
+      color: this.props.color,
+      disabled: this.props.disabled
+    };
+  }
 
-export default function TextArea(props: ITextAreaProps) {
+  getStyle() {
+    const style: React.CSSProperties = {};
+    if (this.props.height) {
+      style.height = `${this.props.height.toString()}px`;
+    }
+    return style;
+  }
 
-  return (
-    <div className={getBlockName('textarea', getModifierObject(props))}>
-      {renderLabel(props)}
-      <textarea
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
-        disabled={props.disabled}
-        style={getStyle(props)}
-        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onEvent(event, props.onChange)}
-        onKeyDown={(event: React.KeyboardEvent<HTMLTextAreaElement>) => onEvent(event, props.onKeyDown)}
-        onKeyUp={(event: React.KeyboardEvent<HTMLTextAreaElement>) => onEvent(event, props.onKeyUp)}
-        onKeyPress={(event: React.KeyboardEvent<HTMLTextAreaElement>) => onEvent(event, props.onKeyPress)}
-        onFocus={(event: React.FocusEvent<HTMLTextAreaElement>) => onEvent(event, props.onFocus)}
-        onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => onEvent(event, props.onBlur)}
-      />
-    </div>
-  );
+  onChange = onEvent(this.props.onChange);
+
+  onKeyDown = onEvent(this.props.onKeyDown);
+
+  onKeyUp = onEvent(this.props.onKeyUp);
+
+  onKeyPress = onEvent(this.props.onKeyPress);
+
+  onFocus = onEvent(this.props.onFocus);
+
+  onBlur = onEvent(this.props.onBlur);
+
+  renderLabel() {
+    return this.props.label ? (
+      <div className={getElementName("textarea", "label")}>{this.props.label}</div>
+    ) : null;
+  }
+
+  render() {
+    return (
+      <div className={getBlockName("textarea", this.getModifierObject())}>
+        {this.renderLabel()}
+        <textarea
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          value={this.props.value}
+          disabled={this.props.disabled}
+          style={this.getStyle()}
+          onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
+          onKeyUp={this.onKeyUp}
+          onKeyPress={this.onKeyPress}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+        />
+      </div>
+    );
+  }
 }

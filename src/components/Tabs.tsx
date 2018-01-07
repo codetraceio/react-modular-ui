@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from '../services/componentService';
+import { IModifiers, getBlockName, getElementName } from "../services/componentService";
 
 export interface ITabsOption {
   title: string;
@@ -18,18 +18,10 @@ export interface ITabsProps {
   onChange?: (value: string | number, option: ITabsOption) => void;
 }
 
-export default class Tabs extends React.Component<ITabsProps> {
-  private element: HTMLElement;
-  private lineElement: HTMLElement;
-  private optionElements: {[key: string]: HTMLElement};
-
-  constructor(props: ITabsProps) {
-    super(props);
-
-    this.element = null;
-    this.lineElement = null;
-    this.optionElements = {};
-  }
+export default class Tabs extends React.PureComponent<ITabsProps> {
+  private element: HTMLElement = null;
+  private lineElement: HTMLElement = null;
+  private optionElements: {[key: string]: HTMLElement} = {};
 
   componentDidMount() {
     this.updateLine();
@@ -70,19 +62,25 @@ export default class Tabs extends React.Component<ITabsProps> {
     const element = this.element;
     const lineElement = this.lineElement;
     const optionElement = this.optionElements[this.props.value];
-    if (!element || !lineElement || !optionElement) {
+    if (!element || !lineElement) {
       return;
     }
-    const elementRect = element.getBoundingClientRect();
-    const optionRect = optionElement.getBoundingClientRect();
-    const left = optionRect.left - elementRect.left;
-    const width = optionRect.right - optionRect.left;
+
+    let left = 0;
+    let width = 0;
+    if (optionElement) {
+      const elementRect = element.getBoundingClientRect();
+      const optionRect = optionElement.getBoundingClientRect();
+      left = optionRect.left - elementRect.left;
+      width = optionRect.right - optionRect.left;
+    }
+
     lineElement.style.left = `${left}px`;
     lineElement.style.width = `${width}px`;
   }
 
   onChange(value: string | number, option: ITabsOption) {
-    if (typeof this.props.onChange === 'function') {
+    if (typeof this.props.onChange === "function") {
       this.props.onChange(value, option);
     }
   }
@@ -91,18 +89,18 @@ export default class Tabs extends React.Component<ITabsProps> {
     return (
       <div
         ref={(element) => this.setLineElement(element)}
-        className={getElementName('tabs', 'line')}
+        className={getElementName("tabs", "line")}
       />
     );
   }
 
   renderCount(option: ITabsOption) {
-    if (typeof option.count !== 'string' && typeof option.count !== 'number') {
+    if (typeof option.count !== "string" && typeof option.count !== "number") {
       return null;
     }
     return (
       <div
-        className={getElementName('tabs', 'count', {
+        className={getElementName("tabs", "count", {
           countColor: option.countColor
         })}
       >
@@ -117,7 +115,12 @@ export default class Tabs extends React.Component<ITabsProps> {
         <div
           key={option.value}
           ref={(element) => this.setOptionElement(option.value.toString(), element)}
-          className={getElementName('tabs', 'option', this.getOptionModifiers(option), true)}
+          className={getElementName(
+            "tabs",
+            "option",
+            this.getOptionModifiers(option),
+            true
+          )}
           onClick={() => this.onChange(option.value, option)}
         >
           <div>{option.title}</div>
@@ -131,7 +134,7 @@ export default class Tabs extends React.Component<ITabsProps> {
     return (
       <div
         ref={(element) => this.setElement(element)}
-        className={getBlockName('tabs', this.getModifierObject())}
+        className={getBlockName("tabs", this.getModifierObject())}
       >
         {this.renderLine()}
         {this.renderOptions()}

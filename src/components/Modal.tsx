@@ -6,28 +6,30 @@ import Portal from './Portal';
 export interface IModalProps {
   portal?: JSX.Element[];
   name?: string;
-  children: JSX.Element;
+
   onClose?: () => void;
 }
 
-export default function Modal(props: IModalProps) {
-  function onClose() {
-    if (typeof props.onClose === 'function') {
-      props.onClose();
+export default class Modal extends React.PureComponent<IModalProps, {}> {
+  onClose = () => {
+    if (typeof this.props.onClose === 'function') {
+      this.props.onClose();
     }
-  }
+  };
 
-  function onClickContent(event: React.MouseEvent<HTMLDivElement>) {
+  onClickContent = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-  }
+  };
 
-  return (
-    <Portal portal={props.portal} portalKey={props.name}>
-      <div className={getBlockClassName('modal')} onClick={onClose}>
-        <div className={getElementClassName('modal', 'content')} onClick={onClickContent}>
-          {props.children}
+  render() {
+    return (
+      <Portal portal={this.props.portal} portalKey={this.props.name}>
+        <div className={getBlockClassName('modal')} onClick={this.onClose}>
+          <div className={getElementClassName('modal', 'content')} onClick={this.onClickContent}>
+            {this.props.children}
+          </div>
         </div>
-      </div>
-    </Portal>
-  );
+      </Portal>
+    );
+  }
 }

@@ -1,13 +1,13 @@
-import React = require('react');
+import React = require("react");
 
-import clickOutsideService from '../services/clickOutsideService';
-import dropDownService from '../services/dropDownService';
-import settingService from '../services/settingService';
-import utilService from '../services/utilService';
+import clickOutsideService from "../services/clickOutsideService";
+import { updateDropDown } from "../services/dropDownService";
+import settingService from "../services/settingService";
+import { generateKey } from "../services/utilService";
 
-import { IModifiers, getBlockName, getElementName } from '../services/componentService';
-import Icon from './Icon';
-import Portal from './Portal';
+import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import Icon from "./Icon";
+import Portal from "./Portal";
 
 export interface ISelectProps {
   placeholder?: string;
@@ -35,43 +35,25 @@ export interface ISelectOption {
   value: string;
 }
 
-export default class Select extends React.Component<ISelectProps, ISelectState> {
+export default class Select extends React.PureComponent<ISelectProps, ISelectState> {
   private dropDownElement: HTMLElement;
   private selectElement: HTMLElement;
 
-  private onClickHandler: () => void;
-  private onUpdateDropDownHandler: (event: Event) => void;
-  private onWindowScrollHandler: () => void;
-  private onUpdateSelectElementHandler: (element: HTMLElement) => void;
-  private onUpdateDropDownElementHandler: (element: HTMLElement) => void;
-  private onCloseHandler: () => void;
-
-  constructor(props: ISelectProps) {
-    super(props);
-
-    this.state = {
-      opened: false,
-      scroll: false,
-    };
-
-    this.onClickHandler = this.onClick.bind(this);
-    this.onUpdateDropDownHandler = this.onUpdateDropDown.bind(this);
-    this.onWindowScrollHandler = this.onWindowScroll.bind(this);
-    this.onCloseHandler = this.onClose.bind(this);
-    this.onUpdateDropDownElementHandler = this.onUpdateDropDownElement.bind(this);
-    this.onUpdateSelectElementHandler = this.onUpdateSelectElement.bind(this);
-  }
+  state = {
+    opened: false,
+    scroll: false,
+  };
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onWindowScrollHandler, true);
-    window.addEventListener('resize', this.onUpdateDropDownHandler, true);
-    clickOutsideService.on(this.onCloseHandler);
+    window.addEventListener("scroll", this.onWindowScroll, true);
+    window.addEventListener("resize", this.onUpdateDropDown, true);
+    clickOutsideService.on(this.onClose);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onWindowScrollHandler, true);
-    window.removeEventListener('resize', this.onUpdateDropDownHandler, true);
-    clickOutsideService.off(this.onCloseHandler);
+    window.removeEventListener("scroll", this.onWindowScroll, true);
+    window.removeEventListener("resize", this.onUpdateDropDown, true);
+    clickOutsideService.off(this.onClose);
   }
 
   getModifierObject(): IModifiers {
@@ -109,25 +91,25 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
     return this.props.opened || this.state.opened;
   }
 
-  onClose() {
+  onClose = () => {
     this.onSetOpened(false);
-  }
+  };
 
-  onUpdateDropDownElement(element: HTMLElement) {
+  onUpdateDropDownElement = (element: HTMLElement) => {
     this.dropDownElement = element;
 
     this.onUpdateDropDown();
-  }
+  };
 
-  onUpdateSelectElement(element: HTMLElement) {
+  onUpdateSelectElement = (element: HTMLElement) => {
     this.selectElement = element;
-  }
+  };
 
-  onClick() {
+  onClick = () => {
     this.onSetOpened(!this.isOpened());
-  }
+  };
 
-  onSetOpened(opened: boolean) {
+  onSetOpened = (opened: boolean) => {
     this.setState({
       opened: opened,
       scroll: opened
@@ -136,22 +118,22 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
     if (this.props.onChangeOpened) {
       this.props.onChangeOpened(opened);
     }
-  }
+  };
 
-  onUpdateDropDown() {
+  onUpdateDropDown = () => {
     if (!this.dropDownElement) {
       return;
     }
-    dropDownService.updateDropDown(this.dropDownElement, this.selectElement, this.state.scroll, this.props.fixed);
+    updateDropDown(this.dropDownElement, this.selectElement, this.state.scroll, this.props.fixed);
 
     if (this.state.scroll) {
       this.setState({
         scroll: false
       });
     }
-  }
+  };
 
-  onWindowScroll() {
+  onWindowScroll = () => {
     if (this.isOpened()) {
       const selectElement = this.selectElement.getBoundingClientRect();
 
@@ -161,15 +143,15 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
         this.onUpdateDropDown();
       }
     }
-  }
+  };
 
-  onChange(value: string, option: ISelectOption) {
-    if (typeof this.props.onChange === 'function') {
+  onChange = (value: string, option: ISelectOption) => {
+    if (typeof this.props.onChange === "function") {
       this.props.onChange(value, option);
     }
 
     this.onClose();
-  }
+  };
 
   renderLabel() {
     if (!this.props.label) {
@@ -177,7 +159,7 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
     }
 
     return (
-      <div className={getElementName('select', 'label')}>
+      <div className={getElementName("select", "label")}>
         {this.props.label}
       </div>
     );
@@ -189,7 +171,7 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
         <div
           key={option.value}
           className={getElementName(
-            'select', 'option', this.getOptionModifierObject(option.value)
+            "select", "option", this.getOptionModifierObject(option.value)
           )}
           onClick={() => this.onChange(option.value, option)}
           data-selected={option.value === this.props.value}
@@ -201,23 +183,23 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
   }
 
   render() {
-    const portalKey: string = settingService.isBackend() ? utilService.generateKey() : '';
+    const portalKey: string = settingService.isBackend() ? generateKey() : "";
 
     return (
       <div
-        className={getBlockName('select', this.getModifierObject())}
+        className={getBlockName("select", this.getModifierObject())}
       >
         {this.renderLabel()}
         <div
-          className={getElementName('select', 'box')}
-          onClick={this.onClickHandler}
+          className={getElementName("select", "box")}
+          onClick={this.onClick}
           data-inside={this.isOpened()}
-          ref={this.onUpdateSelectElementHandler}
+          ref={this.onUpdateSelectElement}
         >
-          <div className={getElementName('select', 'value')}>
+          <div className={getElementName("select", "value")}>
             {this.getTitle()}
           </div>
-          <div className={getElementName('select', 'icon')}>
+          <div className={getElementName("select", "icon")}>
             <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="drop-down" />
           </div>
         </div>
@@ -225,11 +207,11 @@ export default class Select extends React.Component<ISelectProps, ISelectState> 
           <Portal
             portal={this.props.portal}
             portalKey={portalKey}
-            onUpdate={() => this.onUpdateDropDown()}
+            onUpdate={this.onUpdateDropDown}
           >
             <div
-              className={getElementName('select', 'drop-down')}
-              ref={this.onUpdateDropDownElementHandler}
+              className={getElementName("select", "drop-down")}
+              ref={this.onUpdateDropDownElement}
               data-inside
             >
               {this.renderOptions()}

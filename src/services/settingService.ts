@@ -1,33 +1,24 @@
 export interface IClasses {
   block: string;
   element: string;
-  blockModifier: string;
-  elementModifier: string;
+  modifier: string;
   separator: string;
 }
 
 export interface IIcons {
-  [key: string]: any
+  [key: string]: any;
 }
 
 export class SettingService {
-  private prefix: string;
-  private classes: IClasses;
-  private icons: {[key: string]: any};
-  private backend: boolean;
-
-  constructor() {
-    this.prefix = 'c-';
-    this.classes = {
-      block: '{b}',
-      element: '{b}--{e}',
-      blockModifier: '-{m}',
-      elementModifier: '-{m}',
-      separator: '-'
-    };
-    this.icons = {};
-    this.backend = false;
-  }
+  private prefix: string = "c-";
+  private classes: IClasses = {
+    block: "{b}",
+    element: "{b}--{e}",
+    modifier: "-{m}",
+    separator: "-",
+  };
+  private icons: {[key: string]: any} = {};
+  private backend: boolean = false;
 
   public getClasses(): IClasses {
     return this.classes;

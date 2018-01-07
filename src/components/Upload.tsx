@@ -16,27 +16,13 @@ export interface IUploadState {
   active: boolean;
 }
 
-export default class Upload extends React.Component<IUploadProps, IUploadState> {
-  private element: HTMLDivElement;
-  private fileElement: HTMLInputElement;
-  private onDragOverListener: (event: DragEvent) => void;
-  private onDragLeaveListener: () => void;
-  private onDropListener: (event: DragEvent) => void;
+export default class Upload extends React.PureComponent<IUploadProps, IUploadState> {
+  private element: HTMLDivElement = null;
+  private fileElement: HTMLInputElement = null;
 
-  constructor(props: IUploadProps) {
-    super(props);
-
-    this.element = null;
-    this.fileElement = null;
-
-    this.onDragOverListener = this.onDragOver.bind(this);
-    this.onDragLeaveListener = this.onDragLeave.bind(this);
-    this.onDropListener = this.onDrop.bind(this);
-
-    this.state = {
-      active: false
-    };
-  }
+  state = {
+    active: false
+  };
 
   getModifierObject(): IModifiers {
     return {
@@ -50,9 +36,9 @@ export default class Upload extends React.Component<IUploadProps, IUploadState> 
     }
 
     if (this.element !== element) {
-      element.addEventListener('dragover', this.onDragOverListener, false);
-      element.addEventListener('dragleave', this.onDragLeaveListener, false);
-      element.addEventListener('drop', this.onDropListener, false);
+      element.addEventListener('dragover', this.onDragOver, false);
+      element.addEventListener('dragleave', this.onDragLeave, false);
+      element.addEventListener('drop', this.onDrop, false);
     }
 
     this.element = element;
@@ -62,20 +48,20 @@ export default class Upload extends React.Component<IUploadProps, IUploadState> 
     this.fileElement = element;
   }
 
-  onDragOver(event: React.DragEvent<HTMLDivElement>) {
+  onDragOver = (event: Event) => {
     event.preventDefault();
     this.setState({
       active: true
     });
-  }
+  };
 
-  onDragLeave() {
+  onDragLeave = () => {
     this.setState({
       active: false
     });
-  }
+  };
 
-  onDrop(event: React.DragEvent<HTMLDivElement>) {
+  onDrop = (event: DragEvent) => {
     event.stopPropagation();
     event.preventDefault();
 
@@ -88,23 +74,23 @@ export default class Upload extends React.Component<IUploadProps, IUploadState> 
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(files);
     }
-  }
+  };
 
-  onClick() {
+  onClick = () => {
     if (!this.fileElement) {
       return;
     }
 
     this.fileElement.click();
-  }
+  };
 
-  onChange() {
+  onChange = () => {
     const files = this.fileElement.files;
 
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(files);
     }
-  }
+  };
 
   render() {
     return (

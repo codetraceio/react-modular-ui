@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName } from '../services/componentService';
-import settings from '../services/settingService';
+import { IModifiers, getBlockName } from "../services/componentService";
+import settings from "../services/settingService";
 
 export interface IIconProps {
   size?: string | number;
@@ -10,6 +10,7 @@ export interface IIconProps {
   color?: string;
   rotate?: string | number;
   name?: string;
+
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -24,13 +25,15 @@ function getModifierObject(props: IIconProps): IModifiers {
   };
 }
 
-export default function Icon(props: IIconProps) {
-  return (
-    <div
-      className={getBlockName('icon', getModifierObject(props))}
-      onClick={props.onClick}
-    >
-      {settings.getIcon(props.name)}
-    </div>
-  );
+export default class Icon extends React.PureComponent<IIconProps, {}> {
+  render() {
+    return (
+      <div
+        className={getBlockName("icon", getModifierObject(this.props))}
+        onClick={this.props.onClick}
+      >
+        {settings.getIcon(this.props.name)}
+      </div>
+    );
+  }
 }

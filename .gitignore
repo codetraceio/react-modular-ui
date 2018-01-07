@@ -1,5 +1,6 @@
-/node_modules
 /.webpack_cache
+/.idea
+/node_modules
 /coverage
 /dist
 /typescript

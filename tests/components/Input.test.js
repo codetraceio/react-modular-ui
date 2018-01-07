@@ -11,6 +11,13 @@ describe('Input', () => {
         color="primary"
         view="flat"
         disabled
+        onClick={() => {}}
+        onBlur={() => {}}
+        onChange={() => {}}
+        onFocus={() => {}}
+        onKeyDown={() => {}}
+        onKeyUp={() => {}}
+        onKeyPress={() => {}}
       />
     ).toJSON();
 

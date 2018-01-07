@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { IModifiers, getBlockName, getElementName } from '../services/componentService';
+import * as React from "react";
+import { IModifiers, getBlockName, getElementName } from "../services/componentService";
 
 export interface IProgressProps {
   size?: string | number;
@@ -7,27 +7,29 @@ export interface IProgressProps {
   value: string | number;
 }
 
-function getModifierObject(props: IProgressProps): IModifiers {
-  return {
-    size: props.size,
-    color: props.color
-  };
-}
-
-function getValue(props: IProgressProps) {
-  if (typeof props.value === 'string' || typeof props.value === 'number') {
-    return props.value.toString();
+export default class Progress extends React.PureComponent<IProgressProps, {}> {
+  getModifierObject(): IModifiers {
+    return {
+      size: this.props.size,
+      color: this.props.color
+    };
   }
-  return '0';
-}
 
-export default function Progress(props: IProgressProps) {
-  return (
-    <div className={getBlockName('progress', getModifierObject(props))}>
-      <div
-        className={getElementName('progress', 'line')}
-        style={{width:`${getValue(props)}%`}}
-      />
-    </div>
-  );
+  getValue() {
+    if (typeof this.props.value === "string" || typeof this.props.value === "number") {
+      return this.props.value.toString();
+    }
+    return "0";
+  }
+
+  render() {
+    return (
+      <div className={getBlockName("progress", this.getModifierObject())}>
+        <div
+          className={getElementName("progress", "line")}
+          style={{width: `${this.getValue()}%`}}
+        />
+      </div>
+    );
+  }
 }

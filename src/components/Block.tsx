@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { IProp, IModifiers, getBlockName } from '../services/componentService';
+import * as React from "react";
+import { IProp, IModifiers, getBlockName } from "../services/componentService";
 
 export interface IBlockProps {
   layout?: IProp<string>;
@@ -20,36 +20,37 @@ export interface IBlockProps {
   height?: IProp<string | number>;
   width?: IProp<string | number>;
   modifiers?: IModifiers;
-  children?: JSX.Element | JSX.Element[] | string;
 }
 
-function getModifierObject(props: IBlockProps): IModifiers {
-  return {
-    layout: props.layout,
-    wrap: props.wrap,
-    padding: props.padding,
-    margin: props.margin,
-    hide: props.hide,
-    fit: props.fit,
-    grow: props.grow,
-    shrink: props.shrink,
-    order: props.order,
-    grid: props.grid,
-    align: props.align,
-    justify: props.justify,
-    scroll: props.scroll,
-    spaceHorizontal: props.spaceHorizontal,
-    spaceVertical: props.spaceVertical,
-    height: props.height,
-    width: props.width,
-    ...props.modifiers
-  };
-}
+export default class Block extends React.PureComponent<IBlockProps, {}> {
+  getModifierObject(): IModifiers {
+    return {
+      layout: this.props.layout,
+      wrap: this.props.wrap,
+      padding: this.props.padding,
+      margin: this.props.margin,
+      hide: this.props.hide,
+      fit: this.props.fit,
+      grow: this.props.grow,
+      shrink: this.props.shrink,
+      order: this.props.order,
+      grid: this.props.grid,
+      align: this.props.align,
+      justify: this.props.justify,
+      scroll: this.props.scroll,
+      spaceHorizontal: this.props.spaceHorizontal,
+      spaceVertical: this.props.spaceVertical,
+      height: this.props.height,
+      width: this.props.width,
+      ...this.props.modifiers
+    };
+  }
 
-export default function Block(props: IBlockProps) {
-  return (
-    <div className={getBlockName('block', getModifierObject(props))}>
-      {props.children}
-    </div>
-  );
+  render() {
+    return (
+      <div className={getBlockName("block", this.getModifierObject())}>
+        {this.props.children}
+      </div>
+    );
+  }
 }

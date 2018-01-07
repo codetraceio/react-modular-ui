@@ -1,45 +1,45 @@
-window.addEventListener('DOMContentLoaded', () => {
-  const elements = window.document.querySelectorAll('.c-upload');
+window.addEventListener("DOMContentLoaded", () => {
+  const elements = window.document.querySelectorAll(".c-upload");
   for (let i = 0; i < elements.length; i++) {
-    const element: HTMLDivElement = <HTMLDivElement>elements[i];
-    element.addEventListener('dragover', (event: DragEvent) => {
+    const element: HTMLDivElement = elements[i] as HTMLDivElement;
+    element.addEventListener("dragover", (event: DragEvent) => {
       event.preventDefault();
-      const currentElement: HTMLElement = <HTMLElement>event.currentTarget;
-      currentElement.classList.add('-active');
+      const currentElement: HTMLElement = event.currentTarget as HTMLElement;
+      currentElement.classList.add("-active");
     }, false);
 
-    element.addEventListener('dragleave', (event: DragEvent) => {
+    element.addEventListener("dragleave", (event: DragEvent) => {
       event.preventDefault();
-      const currentElement: HTMLElement = <HTMLElement>event.currentTarget;
-      currentElement.classList.remove('-active');
+      const currentElement: HTMLElement = event.currentTarget as HTMLElement;
+      currentElement.classList.remove("-active");
     }, false);
 
-    element.addEventListener('drop', (event: DragEvent) => {
+    element.addEventListener("drop", (event: DragEvent) => {
       event.stopPropagation();
       event.preventDefault();
-      const currentElement: HTMLElement = <HTMLElement>event.currentTarget;
-      currentElement.classList.remove('-active');
+      const currentElement: HTMLElement = event.currentTarget as HTMLElement;
+      currentElement.classList.remove("-active");
 
       const files = event.dataTransfer.files;
-      const customEvent = new CustomEvent('upload', {
-        detail: files
+      const customEvent = new CustomEvent("upload", {
+        detail: files,
       });
 
       currentElement.dispatchEvent(customEvent);
 
     }, false);
 
-    element.addEventListener('click', (event: MouseEvent) => {
-      const currentElement: HTMLElement = <HTMLElement>event.currentTarget;
-      currentElement.querySelector('input').click();
+    element.addEventListener("click", (event: MouseEvent) => {
+      const currentElement: HTMLElement = event.currentTarget as HTMLElement;
+      currentElement.querySelector("input").click();
     }, false);
 
-    const input: HTMLInputElement = <HTMLInputElement>element.querySelector('input');
-    input.addEventListener('change', (event: Event) => {
-      const currentElement: HTMLInputElement = <HTMLInputElement>event.currentTarget;
+    const input: HTMLInputElement = element.querySelector("input") as HTMLInputElement;
+    input.addEventListener("change", (event: Event) => {
+      const currentElement: HTMLInputElement = event.currentTarget as HTMLInputElement;
       const files: FileList = currentElement.files;
-      const customEvent: CustomEvent = new CustomEvent('upload', {
-        detail: files
+      const customEvent: CustomEvent = new CustomEvent("upload", {
+        detail: files,
       });
 
       currentElement.parentNode.dispatchEvent(customEvent);

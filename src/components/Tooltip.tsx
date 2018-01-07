@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import settings from '../services/settingService';
-import utilService from '../services/utilService';
-import tooltipService from '../services/tooltipService';
+import { generateKey } from '../services/utilService';
+import { updateTooltip } from '../services/tooltipService';
 import {getBlockClassName} from '../services/componentService';
 
 import Portal from './Portal';
@@ -19,20 +19,13 @@ export interface ITooltipState {
   show: boolean;
 }
 
-export default class Tooltip extends React.Component<ITooltipProps, ITooltipState> {
-  private wrapperElement: HTMLElement;
-  private tooltipElement: HTMLElement;
+export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltipState> {
+  private wrapperElement: HTMLElement = null;
+  private tooltipElement: HTMLElement = null;
 
-  constructor(props: ITooltipProps) {
-    super(props);
-
-    this.state = {
-      show: false
-    };
-
-    this.wrapperElement = null;
-    this.tooltipElement = null;
-  }
+  state = {
+    show: false
+  };
 
   updateWrapper(element: HTMLElement) {
     this.wrapperElement = element;
@@ -50,7 +43,7 @@ export default class Tooltip extends React.Component<ITooltipProps, ITooltipStat
       return;
     }
 
-    tooltipService.updateTooltip(wrapperElement, tooltipElement, this.props.prefer);
+    updateTooltip(wrapperElement, tooltipElement, this.props.prefer);
   }
 
   onShowTooltip() {
@@ -66,7 +59,7 @@ export default class Tooltip extends React.Component<ITooltipProps, ITooltipStat
   }
 
   render() {
-    const portalKey: string = settings.isBackend() ? utilService.generateKey() : '';
+    const portalKey: string = settings.isBackend() ? generateKey() : '';
 
     return (
       <div

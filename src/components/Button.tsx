@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName } from '../services/componentService';
+import { IModifiers, getBlockName } from "../services/componentService";
 
 export interface IButtonProps {
   size?: string | number;
@@ -12,33 +12,34 @@ export interface IButtonProps {
   paddingLeft?: string | number;
   paddingRight?: string | number;
   name?: string;
-  children?: JSX.Element | JSX.Element[] | string;
 
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-function getModifierObject(props: IButtonProps): IModifiers {
-  return {
-    size: props.size,
-    view: props.view,
-    color: props.color,
-    shape: props.shape,
-    disabled: props.disabled,
-    padding: props.padding,
-    paddingLeft: props.paddingLeft,
-    paddingRight: props.paddingRight
-  };
-}
+export default class Button extends React.PureComponent<IButtonProps, {}> {
+  getModifierObject(): IModifiers {
+    return {
+      size: this.props.size,
+      view: this.props.view,
+      color: this.props.color,
+      shape: this.props.shape,
+      disabled: this.props.disabled,
+      padding: this.props.padding,
+      paddingLeft: this.props.paddingLeft,
+      paddingRight: this.props.paddingRight
+    };
+  }
 
-export default function Button(props: IButtonProps) {
-  return (
-    <div
-      className={getBlockName('button', getModifierObject(props))}
-      data-name={props.name}
-      tabIndex={1}
-      onClick={props.onClick}
-    >
-      {props.children}
-    </div>
-  );
+  render() {
+    return (
+      <div
+        className={getBlockName("button", this.getModifierObject())}
+        data-name={this.props.name}
+        tabIndex={1}
+        onClick={this.props.onClick}
+      >
+        {this.props.children}
+      </div>
+    );
+  }
 }

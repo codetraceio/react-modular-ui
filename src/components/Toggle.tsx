@@ -7,49 +7,49 @@ export interface IToggleProps {
   color?: string;
   disabled?: boolean;
   checked?: boolean;
-  children?: JSX.Element | JSX.Element[] | string;
 
   onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-function getModifierObject(props: IToggleProps): IModifiers {
-  return {
-    size: props.size,
-    color: props.color,
-    checked: props.checked,
-    disabled: props.disabled
-  };
-}
-
-function isChecked(props: IToggleProps): boolean {
-  return props.checked || false;
-}
-
-export default function Toggle(props: IToggleProps) {
-
-  function onClick(e: React.MouseEvent<HTMLDivElement>) {
-    if (typeof props.onChange === 'function') {
-      props.onChange(!props.checked, e);
-    }
+export default class Toggle extends React.PureComponent<IToggleProps, {}> {
+  getModifierObject(): IModifiers {
+    return {
+      size: this.props.size,
+      color: this.props.color,
+      checked: this.props.checked,
+      disabled: this.props.disabled
+    };
   }
 
-  return (
-    <div
-      className={getBlockName('toggle', getModifierObject(props))}
-      role="checkbox"
-      tabIndex={0}
-      aria-checked={isChecked(props).toString()}
-      onClick={(e) => onClick(e)}
-    >
-      <div className={getElementName('toggle', 'container')}>
-        <div className={getElementName('toggle', 'line')} />
-        <div className={getElementName('toggle', 'handle')} />
-      </div>
-      {props.children ? (
-        <div className={getElementName('toggle', 'label')}>
-          {props.children}
+  isChecked(): boolean {
+    return this.props.checked || false;
+  }
+
+  onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(!this.props.checked, e);
+    }
+  };
+
+  render() {
+    return (
+      <div
+        className={getBlockName('toggle', this.getModifierObject())}
+        role="checkbox"
+        tabIndex={0}
+        aria-checked={this.isChecked().toString()}
+        onClick={this.onClick}
+      >
+        <div className={getElementName('toggle', 'container')}>
+          <div className={getElementName('toggle', 'line')} />
+          <div className={getElementName('toggle', 'handle')} />
         </div>
-      ) :  null}
-    </div>
-  );
+        {this.props.children ? (
+          <div className={getElementName('toggle', 'label')}>
+            {this.props.children}
+          </div>
+        ) :  null}
+      </div>
+    );
+  }
 }

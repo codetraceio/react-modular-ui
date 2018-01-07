@@ -11,6 +11,13 @@ describe('TextArea', () => {
         color="primary"
         view="flat"
         disabled
+        onClick={() => {}}
+        onBlur={() => {}}
+        onChange={() => {}}
+        onFocus={() => {}}
+        onKeyDown={() => {}}
+        onKeyUp={() => {}}
+        onKeyPress={() => {}}
       />
     ).toJSON();
 
@@ -25,6 +32,13 @@ describe('TextArea', () => {
         view="flat"
         height="200"
         disabled
+        onClick={() => {}}
+        onBlur={() => {}}
+        onChange={() => {}}
+        onFocus={() => {}}
+        onKeyDown={() => {}}
+        onKeyUp={() => {}}
+        onKeyPress={() => {}}
       />
     ).toJSON();
 
