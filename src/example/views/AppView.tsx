@@ -478,13 +478,21 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
           </Block>
           <h2>Progress</h2>
           <Block spaceVertical="8" padding="8">
-            <Progress size="4" value="40" />
-            <Progress size="4" color="primary" value="40" />
-            <Progress size="4" color="success" value="40" />
-            <Progress size="4" color="danger" value="40" />
+            <Block padding="8">
+              <Progress size="4" value="40" />
+            </Block>
+            <Block padding="8">
+              <Progress size="4" color="primary" value="40" />
+            </Block>
+            <Block padding="8">
+              <Progress size="4" color="success" value="40" />
+            </Block>
+            <Block padding="8">
+              <Progress size="4" color="danger" value="40" />
+            </Block>
           </Block>
           <div style={{backgroundColor:'#777777'}}>
-            <Block spaceVertical="8" padding="8">
+            <Block padding="8 16">
               <Progress size="4" color="light" value="40" />
             </Block>
           </div>
@@ -595,6 +603,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
         <h2>Select</h2>
         <Block layout="horizontal" spaceHorizontal="8">
           <Select
+            size="32"
             label="Select"
             placeholder="Select"
             value={this.state.selectValue}
@@ -602,6 +611,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             onChange={(value: string) => this.onChangeSelect(value)}
           />
           <Select
+            size="32"
             label="Select"
             placeholder="Select"
             value={this.state.selectValue}
@@ -609,6 +619,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             onChange={(value: string) => this.onChangeSelect(value)}
           />
           <Input
+            size="32"
             label="Input"
             placeholder="Input"
           />

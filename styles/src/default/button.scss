@@ -1,0 +1,210 @@
+@import "./constants.scss";
+
+@mixin button-default($background, $hover-background, $text-color) {
+  background: $background;
+  color: $text-color;
+  &:hover {
+    background: $hover-background;
+  }
+  &:active {
+    background: $background;
+  }
+}
+
+@mixin button-flat($text-color) {
+  min-width: initial;
+  background: transparent;
+  color: $text-color;
+  padding: 0;
+  &:hover {
+    background: transparent;
+    @if ($text-color == #ffffff) {
+      color: rgba($text-color, .9);
+    }
+    @else {
+      color: lighten($text-color, 10);
+    }
+  }
+  &:active {
+    background: transparent;
+    color: darken($text-color, 10);
+  }
+}
+
+@mixin button-glass($text-color) {
+  background: rgba(#ffffff, 0.4);
+  color: $text-color;
+  &:hover {
+    background: rgba(#ffffff, 0.5);
+  }
+  &:active {
+    background: rgba(#ffffff, 0.3);
+  }
+}
+
+@mixin button-outline($color, $text-color) {
+  border: 2px solid $color;
+  color: $text-color;
+  background: transparent;
+  &:hover {
+    background: rgba($color-light, .2);
+    border: 2px solid lighten($color, 10);
+    color: lighten($text-color, 10);
+  }
+}
+
+@mixin button-size($size, $padding, $font-size) {
+  height: $size;
+  padding: 0 $padding;
+  font-size: $font-size;
+  & > * {
+    margin-left: ($size / 8);
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+.c-button {
+  @include button-default($color-default, lighten($color-default, 15), #ffffff);
+  @include button-size(24px, 8px, 14px);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: #{$border-radius}px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  min-width: 100px;
+
+  &.-size-24 {
+    @include button-size(24px, 8px, 14px);
+  }
+
+  &.-size-32 {
+    @include button-size(32px, 12px, 16px);
+  }
+
+  &.-size-40 {
+    @include button-size(40px, 24px, 18px);
+  }
+
+  &.-size-48 {
+    @include button-size(48px, 24px, 20px);
+  }
+
+  &.-size-56 {
+    @include button-size(56px, 24px, 24px);
+  }
+
+  &.-padding-left-8 {
+    padding-left: 8px;
+  }
+
+  &.-shape-rounded {
+    border-radius: 12px;
+  }
+
+  &.-shape-rounded.-size-24 {
+    border-radius: 12px;
+  }
+
+  &.-shape-rounded.-size-32 {
+    border-radius: 16px;
+  }
+
+  &.-shape-rounded.-size-48 {
+    border-radius: 24px;
+  }
+
+  &.-shape-rounded.-size-56 {
+    border-radius: 28px;
+  }
+
+  &.-shape-rectangle {
+    border-radius: 0;
+  }
+
+  &.-color-primary {
+    @include button-default($color-primary, rgba($color-primary, .9), #ffffff);
+  }
+
+  &.-color-success {
+    @include button-default($color-success, rgba($color-success, .9), #ffffff);
+  }
+
+  &.-color-light {
+    @include button-default($color-light, rgba($color-light, .9), $color-default);
+  }
+
+  &.-color-danger {
+    @include button-default($color-danger, rgba($color-danger, .9), $color-light);
+  }
+
+  &.-view-flat {
+    @include button-flat($color-default);
+  }
+
+  &.-view-flat.-color-primary {
+    @include button-flat($color-primary);
+  }
+
+  &.-view-flat.-color-success {
+    @include button-flat($color-success);
+  }
+
+  &.-view-flat.-color-danger {
+    @include button-flat($color-danger);
+  }
+
+  &.-view-flat.-color-light {
+    @include button-flat($color-light);
+  }
+
+  &.-view-glass {
+    @include button-glass($color-default);
+  }
+
+  &.-view-glass.-color-primary {
+    @include button-glass($color-primary);
+  }
+
+  &.-view-glass.-color-success {
+    @include button-glass($color-success);
+  }
+
+  &.-view-glass.-color-danger {
+    @include button-glass($color-danger);
+  }
+
+  &.-view-glass.-color-light {
+    @include button-glass($color-light);
+  }
+
+  &.-view-outline {
+    @include button-outline($color-primary, $color-dark);
+  }
+
+  &.-view-outline.-color-primary {
+    @include button-outline($color-primary, $color-dark-grey);
+  }
+
+  &.-view-outline.-color-passive {
+    @include button-outline($color-primary, $color-grey);
+  }
+
+  &.-view-outline.-color-light {
+    @include button-outline($color-light, $color-light);
+  }
+
+  &.-size-24.-view-outline {
+    border-width: 1px;
+  }
+
+  &.-disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
+}

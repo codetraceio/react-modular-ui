@@ -1,0 +1,300 @@
+@import "./constants.scss";
+
+@mixin make-layout($postfix) {
+  // horizontal layout
+  &.-layout-horizontal#{$postfix} {
+    display: flex;
+    flex-direction: row;
+  }
+
+  // reverse horizontal layout
+  &.-layout-horizontal-reverse#{$postfix} {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  // vertical layout
+  &.-layout-vertical#{$postfix} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  //  reverse vertical layout
+  &.-layout-vertical-reverse#{$postfix} {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  &.-wrap#{$postfix} {
+    flex-wrap: wrap;
+  }
+
+  // hide an element
+  &.-hide#{$postfix} {
+    display: none !important;
+  }
+
+  // Fix to the parent object
+  &.-fit#{$postfix} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  @for $i from 1 through 12 {
+    // grow of element
+    &.-grow-#{$i}#{$postfix} {
+      min-width: 0;
+      flex-grow: $i;
+    }
+
+    // shrink of elements
+    &.-shrink-#{$i}#{$postfix} {
+      flex-shrink: $i;
+    }
+
+    // order of elements
+    &.-order-#{$i}#{$postfix} {
+      order: $i;
+    }
+
+    // 12 column grid
+    &.-grid-#{$i}#{$postfix} {
+      flex-basis: 100% / 12 * $i;
+      max-width: 100% / 12 * $i;
+    }
+  }
+
+  &.-grow#{$postfix} {
+    flex-grow: 1;
+  }
+
+  &.-shrink#{$postfix} {
+    flex-shrink: 1;
+  }
+
+  // alignment in cross axis
+  &.-align-start#{$postfix} {
+    align-items: flex-start;
+  }
+
+  &.-align-center#{$postfix}, &.-center#{$postfix} {
+    align-items: center;
+  }
+
+  &.-align-end#{$postfix} {
+    align-items: flex-end;
+  }
+
+  &.-align-stretch#{$postfix} {
+    align-items: stretch;
+  }
+
+  // alignment in main axis
+  &.-justify-start#{$postfix} {
+    justify-content: flex-start;
+  }
+
+  &.-justify-center#{$postfix}, &.-center#{$postfix} {
+    justify-content: center;
+  }
+
+  &.-justify-end#{$postfix} {
+    justify-content: flex-end;
+  }
+
+  &.-justify-around#{$postfix} {
+    justify-content: space-around;
+  }
+
+  &.-justify-between#{$postfix}, &.-justify#{$postfix} {
+    justify-content: space-between;
+  }
+
+  &.-justify-stretch#{$postfix} {
+    justify-content: stretch;
+  }
+
+  &.-scroll-on#{$postfix} {
+    overflow: auto;
+  }
+
+  &.-scroll-off#{$postfix} {
+    overflow: hidden;
+  }
+
+  @each $size in $space-sizes {
+    &.-padding-#{$size}#{$postfix} {
+      padding: #{$size}px;
+    }
+
+    &.-padding-horizontal-#{$size}#{$postfix} {
+      padding-left: #{$size}px;
+      padding-right: #{$size}px;
+    }
+
+    &.-padding-vertical-#{$size}#{$postfix} {
+      padding-top: #{$size}px;
+      padding-bottom: #{$size}px;
+    }
+
+    &.-padding-top-#{$size}#{$postfix} {
+      padding-top: #{$size}px;
+    }
+
+    &.-padding-bottom-#{$size}#{$postfix} {
+      padding-bottom: #{$size}px;
+    }
+
+    &.-padding-left-#{$size}#{$postfix} {
+      padding-left: #{$size}px;
+    }
+
+    &.-padding-right-#{$size}#{$postfix} {
+      padding-right: #{$size}px;
+    }
+
+    &.-margin-#{$size}#{$postfix} {
+      margin: #{$size}px;
+    }
+
+    &.-margin-horizontal-#{$size}#{$postfix} {
+      margin-left: #{$size}px;
+      margin-right: #{$size}px;
+    }
+
+    &.-margin-vertical-#{$size}#{$postfix} {
+      margin-top: #{$size}px;
+      margin-bottom: #{$size}px;
+    }
+
+    &.-margin-top-#{$size}#{$postfix} {
+      margin-top: #{$size}px;
+    }
+
+    &.-margin-bottom-#{$size}#{$postfix} {
+      margin-bottom: #{$size}px;
+    }
+
+    &.-margin-left-#{$size}#{$postfix} {
+      margin-left: #{$size}px;
+    }
+
+    &.-margin-right-#{$size}#{$postfix} {
+      margin-right: #{$size}px;
+    }
+
+    &.-space-horizontal-#{$size}#{$postfix} {
+      & > * {
+        margin-right: #{$size}px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &.-space-vertical-#{$size}#{$postfix} {
+      & > * {
+        margin-bottom: #{$size}px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  @each $size in $block-sizes {
+    &.-width-#{$size}#{$postfix} {
+      width: #{$size}px;
+      min-width: #{$size}px;
+      max-width: #{$size}px;
+    }
+
+    &.-height-#{$size}#{$postfix} {
+      height: #{$size}px;
+      min-height: #{$size}px;
+      max-height: #{$size}px;
+    }
+  }
+}
+
+@mixin make-fixed($postfix) {
+  @include make-layout($postfix);
+}
+
+@mixin make-responsive() {
+  @include make-fixed('');
+
+  @media (max-width: $xxsmall) {
+    @include make-fixed('-xxs-down');
+  }
+
+  @media (max-width: $xsmall) {
+    @include make-fixed('-xs-down');
+  }
+
+  @media (max-width: $small) {
+    @include make-fixed('-s-down');
+  }
+
+  @media (max-width: $medium) {
+    @include make-fixed('-m-down');
+  }
+
+  @media (max-width: $large) {
+    @include make-fixed('-l-down');
+  }
+
+  @media (max-width: $xlarge) {
+  @include make-fixed('-xl-down');
+  }
+
+  @media (max-width: $xxlarge) {
+    @include make-fixed('-xxl-down');
+  }
+
+  @media (min-width: $xxsmall + 1) {
+    @include make-fixed('-xxs-up');
+  }
+
+  @media (min-width: $xsmall + 1) {
+    @include make-fixed('-xs-up');
+  }
+
+  @media (min-width: $small + 1) {
+    @include make-fixed('-s-up');
+  }
+
+  @media (min-width: $medium + 1) {
+    @include make-fixed('-m-up');
+  }
+
+  @media (min-width: $large + 1) {
+    @include make-fixed('-l-up');
+  }
+
+  @media (min-width: $xlarge + 1) {
+    @include make-fixed('-xl-up');
+  }
+
+  @media (min-width: $xxlarge + 1) {
+    @include make-fixed('-xxl-up');
+  }
+}
+
+.c-block {
+  @include make-responsive();
+  box-sizing: border-box;
+
+  @each $size in $container-sizes {
+    &.-container-#{$size} {
+      width: 100%;
+      max-width: #{$size}px;
+      margin-right: auto;
+      margin-left: auto;
+      flex-grow: 1;
+    }
+  }
+}

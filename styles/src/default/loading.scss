@@ -1,7 +1,7 @@
-@import "constants.styl";
+@import "./constants.scss";
 
 .c-loading {
-  display: inline-flex;
+  display: flex;
 
   svg {
     width: 24px;
@@ -9,7 +9,7 @@
   }
 
   circle {
-    stroke: $color-default;
+    stroke: $color-primary;
   }
 
   &.-size-16 svg {
@@ -22,9 +22,19 @@
     width: 24px;
   }
 
+  &.-size-20 svg {
+    height: 20px;
+    width: 20px;
+  }
+
   &.-size-32 svg {
     height: 32px;
     width: 32px;
+  }
+
+  &.-size-40 svg {
+    height: 40px;
+    width: 40px;
   }
 
   &.-size-48 svg {
@@ -32,19 +42,11 @@
     width: 48px;
   }
 
-  &.-color-primary circle {
-    stroke: $color-primary;
+  &.-color-light circle {
+    stroke: $color-light;
   }
 
   &.-color-success circle {
     stroke: $color-success;
-  }
-
-  &.-color-danger circle {
-    stroke: $color-danger;
-  }
-
-  &.-color-light circle {
-    stroke: $color-light;
   }
 }

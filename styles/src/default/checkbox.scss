@@ -1,15 +1,21 @@
+@import "./constants.scss";
+
 .c-checkbox {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   cursor: pointer;
-  color: $color-dark-grey;
+  color: $color-grey;
   outline: none;
 
   &--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
-    background: $color-white;
-    border: 1px solid $color-light-grey;
+    background: $color-light-grey;
+    border: 1px solid $color-grey;
+    border-radius: #{$border-radius}px;
   }
 
   &.-disabled {

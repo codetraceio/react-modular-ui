@@ -42,7 +42,7 @@ export default class Radio extends React.PureComponent<IRadioProps, {}> {
           role="radio"
           tabIndex={1}
           data-name={this.props.name}
-          aria-checked={this.props.checked.toString()}
+          aria-checked={this.props.checked}
         >
           <div>
             <div

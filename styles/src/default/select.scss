@@ -1,6 +1,7 @@
-@import "constants.styl"
+@import "./constants.scss";
+@import "./mixins.scss";
 
-select-size($size, $font-size) {
+@mixin select-size($size, $font-size) {
   height: $size;
   padding: 0 ($size / 4);
   font-size: $font-size;
@@ -14,19 +15,29 @@ select-size($size, $font-size) {
 
 .c-select {
   &--box {
-    select-size(24px, 14px);
+    @include select-size(24px, 14px);
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: white;
     border: 1px solid $color-grey;
+    border-radius: #{$border-radius}px;
+    cursor: pointer;
   }
   &--drop-down {
+    @include scroll-bar();
     position: absolute;
-    background: $color-white;
-    box-shadow: 0 0 5px rgba($color-black, 0.2);
     overflow-x: auto;
+    background: $color-light;
+    box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
+    border-radius: #{$border-radius}px;
+    &.-orientation-top {
+      margin-top: -4px;
+    }
+    &.-orientation-bottom {
+      margin-top: 4px;
+    }
   }
   &--option {
     padding: 8px;
@@ -42,11 +53,22 @@ select-size($size, $font-size) {
     padding-left: 4px;
   }
   &--label {
-    font-size: 14px;
+    font-size: 16px;
     color: $color-dark-grey;
-    padding: 4px 0;
+    padding: 0 0 8px 0;
   }
   &.-selected &--box {
     border: 1px solid $color-primary;
+  }
+  &.-size-32 &--box {
+    @include select-size(32px, 16px);
+  }
+  &.-size-40 &--box {
+    @include select-size(40px, 16px);
+  }
+  &.-view-flat &--box {
+    background: none;
+    border: none;
+    padding: 0;
   }
 }

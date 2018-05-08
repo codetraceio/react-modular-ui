@@ -1,0 +1,57 @@
+@import "./constants.scss";
+
+@mixin pill-default($background-color, $color) {
+  background-color: $background-color;
+  color: $color;
+}
+
+@mixin pill-size($size, $font-size) {
+  font-size: $font-size;
+  height: $size;
+  padding: 0 ($size / 2);
+  border-radius: ($size / 2);
+  min-width: ($size / 2);
+  font-weight: bold;
+}
+
+.c-pill {
+  @include pill-size(24px, 14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-dark-grey;
+  color: #ffffff;
+  border-radius: 50%;
+
+  &.-color-primary {
+    @include pill-default($color-primary, #ffffff);
+  }
+
+  &.-color-success {
+    @include pill-default($color-success, #ffffff);
+  }
+
+  &.-color-danger {
+    @include pill-default($color-danger, #ffffff);
+  }
+
+  &.-color-light {
+    @include pill-default($color-light, $color-default);
+  }
+
+  &.-size-16 {
+    @include pill-size(16px, 12px);
+  }
+
+  &.-size-24 {
+    @include pill-size(24px, 14px);
+  }
+
+  &.-size-32 {
+    @include pill-size(32px, 16px);
+  }
+
+  &.-size-48 {
+    @include pill-size(48px, 20px);
+  }
+}

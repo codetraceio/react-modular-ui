@@ -45,7 +45,7 @@ export default class Button extends React.PureComponent<ICheckboxProps, {}> {
           role="checkbox"
           tabIndex={1}
           data-name={this.props.name}
-          aria-checked={this.isChecked().toString()}
+          aria-checked={this.isChecked()}
         >
           <div>
             <div
@@ -72,7 +72,7 @@ export default class Button extends React.PureComponent<ICheckboxProps, {}> {
       <div
         className={getBlockName("checkbox", this.getModifierObject())}
         data-name={this.props.name}
-        aria-checked={this.isChecked().toString()}
+        aria-checked={this.isChecked()}
         tabIndex={1}
         onClick={this.onChange}
       >

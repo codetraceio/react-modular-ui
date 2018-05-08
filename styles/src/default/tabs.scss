@@ -1,12 +1,12 @@
-@import "constants.styl";
+@import "./constants.scss";
 
-tabs-option-size($size, $font-size) {
-  height: ($size - 1);
+@mixin tabs-option-size($size, $font-size, $space) {
+  height: $size;
   font-size: $font-size;
-  padding: 0 ($size / 4);
+  padding: 0 $space;
 
   & > * {
-    margin-left: ($size / 4);
+    margin-left: $space;
     &:first-child {
       margin-left: 0;
     }
@@ -16,18 +16,21 @@ tabs-option-size($size, $font-size) {
 .c-tabs {
   display: flex;
   position: relative;
-  border-bottom: 1px solid $color-light-grey;
+  border-bottom: 1px solid $color-grey;
   &--option {
-    tabs-option-size(24px, 14px);
+    @include tabs-option-size(24px, 14px, 12px);
     display: flex;
     align-items: center;
     user-select: none;
     cursor: pointer;
+    &.-selected {
+      font-weight: bold;
+    }
   }
   &--line {
     position: absolute;
     bottom: -1px;
-    height: 2px;
+    height: 3px;
     background-color: $color-primary;
     transition: left .3s ease-in-out, width .3s ease-in-out;
   }
@@ -39,14 +42,18 @@ tabs-option-size($size, $font-size) {
     padding: 0 8px;
     line-height: 16px;
     color: $color-light;
+    font-weight: bold;
   }
   &.-size-24 &--option {
-    tabs-option-size(24px, 14px);
+    @include tabs-option-size(24px, 14px, 12px);
   }
   &.-size-32 &--option {
-    tabs-option-size(32px, 16px);
+    @include tabs-option-size(32px, 14px, 14px);
   }
   &.-size-48 &--option {
-    tabs-option-size(48px, 20px);
+    @include tabs-option-size(48px, 16px, 16px);
+  }
+  &.-size-56 &--option {
+    @include tabs-option-size(56px, 16px, 20px);
   }
 }

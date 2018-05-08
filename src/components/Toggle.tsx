@@ -37,7 +37,7 @@ export default class Toggle extends React.PureComponent<IToggleProps, {}> {
         className={getBlockName('toggle', this.getModifierObject())}
         role="checkbox"
         tabIndex={0}
-        aria-checked={this.isChecked().toString()}
+        aria-checked={this.isChecked()}
         onClick={this.onClick}
       >
         <div className={getElementName('toggle', 'container')}>

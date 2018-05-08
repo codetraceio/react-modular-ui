@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid should render Grid 1`] = `
+<div
+  className="c-grid -columns-3 -space-16"
+  style={
+    Object {
+      "gridTemplateColumns": undefined,
+    }
+  }
+/>
+`;

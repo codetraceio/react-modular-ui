@@ -1,13 +1,15 @@
-@import "constants.styl";
+@import "./constants.scss";
 
 .c-progress {
   background: $color-light-grey;
   width: 100%;
   flex: 1;
+  border-radius: #{$border-radius}px;
 
   &--line {
     height: 4px;
     background: $color-default;
+    border-radius: #{$border-radius}px;
   }
 
   &.-size-4 &--line {

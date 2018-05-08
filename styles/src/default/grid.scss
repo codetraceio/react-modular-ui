@@ -1,0 +1,98 @@
+@mixin make-grid($postfix) {
+  &.-columns-1#{$postfix} {
+    grid-template-columns: 1fr;
+  }
+
+  &.-columns-2#{$postfix} {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &.-columns-3#{$postfix} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  &.-columns-4#{$postfix} {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  &.-space-8#{$postfix} {
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+  }
+
+  &.-space-12#{$postfix} {
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+  }
+
+  &.-space-16#{$postfix} {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+  }
+}
+
+@mixin make-responsive-grid() {
+  @include make-grid('');
+
+  @media (max-width: $xxsmall) {
+    @include make-grid('-xxs-down');
+  }
+
+  @media (max-width: $xsmall) {
+    @include make-grid('-xs-down');
+  }
+
+  @media (max-width: $small) {
+    @include make-grid('-s-down');
+  }
+
+  @media (max-width: $medium) {
+    @include make-grid('-m-down');
+  }
+
+  @media (max-width: $large) {
+    @include make-grid('-l-down');
+  }
+
+  @media (max-width: $xlarge) {
+    @include make-grid('-xl-down');
+  }
+
+  @media (max-width: $xxlarge) {
+    @include make-grid('-xxl-down');
+  }
+
+  @media (min-width: $xxsmall + 1) {
+    @include make-grid('-xxs-up');
+  }
+
+  @media (min-width: $xsmall + 1) {
+    @include make-grid('-xs-up');
+  }
+
+  @media (min-width: $small + 1) {
+    @include make-grid('-s-up');
+  }
+
+  @media (min-width: $medium + 1) {
+    @include make-grid('-m-up');
+  }
+
+  @media (min-width: $large + 1) {
+    @include make-grid('-l-up');
+  }
+
+  @media (min-width: $xlarge + 1) {
+    @include make-grid('-xl-up');
+  }
+
+  @media (min-width: $xxlarge + 1) {
+    @include make-grid('-xxl-up');
+  }
+}
+
+.c-grid {
+  display: grid;
+
+  @include make-responsive-grid();
+}

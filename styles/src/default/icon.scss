@@ -1,0 +1,88 @@
+@import "./constants.scss";
+
+@mixin icon-size($size) {
+  width: $size;
+  min-width: $size;
+  height: $size;
+  min-height: $size;
+}
+
+@mixin icon-width($size) {
+  width: $size;
+  min-width: $size;
+  height: auto;
+  min-height: auto;
+}
+
+@mixin icon-height($size) {
+  width: auto;
+  min-width: auto;
+  height: $size;
+  min-height: $size;
+}
+
+.c-icon {
+  display: block;
+  fill: currentColor;
+  transition: transform .3s ease-in-out;
+  transform-style: preserve-3d;
+
+  svg {
+    display: block;
+  }
+
+  &, svg {
+    @include icon-size(24px);
+  }
+
+
+  @each $i in (12 16 24 32 48 64) {
+    &.-size-#{$i}, &.-size-#{$i} svg {
+      @include icon-size(#{$i}px);
+    }
+
+    &.-width-#{$i}, &.-width-#{$i} svg {
+      @include icon-width(#{$i}px);
+    }
+
+    &.-height-#{$i}, &.-height-#{$i} svg {
+      @include icon-height(#{$i}px);
+    }
+  }
+
+  &.-color-primary {
+    fill: $color-primary;
+  }
+
+  &.-color-success {
+    fill: $color-success;
+  }
+
+  &.-color-danger {
+    fill: $color-danger;
+  }
+
+  &.-color-light {
+    fill: $color-light;
+  }
+
+  &.-color-dark {
+    fill: $color-dark;
+  }
+
+  &.-rotate-90 {
+    transform: rotate(90deg);
+  }
+
+  &.-rotate-180 {
+    transform: rotate(180deg);
+  }
+
+  &.-rotate-270 {
+    transform: rotate(270deg);
+  }
+
+  &.-clickable {
+    cursor: pointer;
+  }
+}

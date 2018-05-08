@@ -1,0 +1,17 @@
+@import "./constants.scss";
+
+@mixin shadow() {
+  box-shadow: 0 1px 4px 0 rgba($color-black, 0.25);
+}
+
+@mixin scroll-bar() {
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: rgba(0,0,0,0);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+}
