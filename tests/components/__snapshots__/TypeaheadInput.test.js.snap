@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TypeaheadInput should render TypeaheadInput 1`] = `
+<div
+  className="c-typeahead-input"
+>
+  <div
+    className="c-input -color-success"
+  >
+    <input
+      disabled={undefined}
+      name={undefined}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onClick={[Function]}
+      onFocus={undefined}
+      onKeyDown={[Function]}
+      onKeyPress={undefined}
+      onKeyUp={undefined}
+      placeholder="Test"
+      value="a"
+    />
+  </div>
+</div>
+`;

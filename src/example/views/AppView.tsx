@@ -17,6 +17,7 @@ import TextArea from '../../components/TextArea';
 import Toggle from '../../components/Toggle';
 import Tooltip from '../../components/Tooltip';
 import Upload from '../../components/Upload';
+import TypeaheadInput from '../../components/TypeaheadInput';
 
 import settingService from '../../services/settingService';
 
@@ -25,15 +26,16 @@ export interface IAppViewProps {
 }
 
 export interface IAppViewState {
-  tabValue: string;
-  inputValue: string;
-  checked: boolean;
-  selected: string;
-  showModal: boolean;
-  count: number;
-  offset: number;
-  limit: number;
-  selectValue: string;
+  tabValue?: string;
+  inputValue?: string;
+  checked?: boolean;
+  selected?: string;
+  showModal?: boolean;
+  count?: number;
+  offset?: number;
+  limit?: number;
+  selectValue?: string;
+  typeaheadValue?: string;
 }
 
 settingService.setIcons({
@@ -57,7 +59,8 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
       count: 100000,
       offset: 10,
       limit: 10,
-      selectValue: ''
+      selectValue: '',
+      typeaheadValue: '',
     };
   }
 
@@ -79,6 +82,16 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     ];
   }
 
+  getTypeaheadOptions(): string[] {
+    return [
+      'Owl',
+      'Coala',
+      'Pinguin',
+      'Bear',
+      'Lion',
+    ];
+  }
+
   getSelectOptions(): ISelectOption[] {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((item) => {
       return {
@@ -88,43 +101,49 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     });
   }
 
-  onChangeTab(value: string) {
+  onChangeTab = (value: string) => {
     this.setState({
-      tabValue: value
+      tabValue: value,
     });
   }
 
-  onChangeInput(value: string) {
+  onChangeInput = (value: string) => {
     this.setState({
       inputValue: value
     });
   }
 
-  onToggleChecked(value: boolean) {
+  onToggleChecked = (value: boolean) => {
     this.setState({
-      checked: value
+      checked: value,
     })
   }
-  onChangeSelected(value: string){
+  onChangeSelected = (value: string) => {
     this.setState({
-      selected: value
+      selected: value,
     })
   }
-  onToggleModal() {
+  onToggleModal = () => {
     this.setState({
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
     });
   }
 
-  onChangeOffset(offset: number) {
+  onChangeOffset = (offset: number) => {
     this.setState({
-      offset: offset
+      offset: offset,
     });
   }
 
-  onChangeSelect(value: string) {
+  onChangeSelect = (value: string) => {
     this.setState({
-      selectValue: value
+      selectValue: value,
+    });
+  }
+
+  onChangeTypeahead = (value: string) => {
+    this.setState({
+      typeaheadValue: value,
     });
   }
 
@@ -622,6 +641,14 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             size="32"
             label="Input"
             placeholder="Input"
+          />
+        </Block>
+        <h2>Typeahead Input</h2>
+        <Block>
+          <TypeaheadInput
+            value={this.state.typeaheadValue}
+            options={this.getTypeaheadOptions()}
+            onChange={this.onChangeTypeahead}
           />
         </Block>
       </div>

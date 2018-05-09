@@ -9,7 +9,7 @@
   }
 
   circle {
-    stroke: $color-primary;
+    stroke: $color-dark-grey;
   }
 
   &.-size-16 svg {
@@ -46,7 +46,15 @@
     stroke: $color-light;
   }
 
+  &.-color-primary circle {
+    stroke: $color-primary;
+  }
+
   &.-color-success circle {
     stroke: $color-success;
+  }
+
+  &.-color-danger circle {
+    stroke: $color-danger;
   }
 }

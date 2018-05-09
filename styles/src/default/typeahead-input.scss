@@ -1,0 +1,26 @@
+.c-typeahead-input {
+  &--drop-down {
+    @include scroll-bar();
+    position: absolute;
+    overflow-x: auto;
+    background: $color-light;
+    box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
+    border-radius: #{$border-radius}px;
+    &.-orientation-top {
+      margin-top: -4px;
+    }
+    &.-orientation-bottom {
+      margin-top: 4px;
+    }
+  }
+  &--option {
+    padding: 8px;
+    cursor: pointer;
+    &.-selected {
+      font-weight: bold;
+    }
+    &:hover {
+      background: $color-grey;
+    }
+  }
+}

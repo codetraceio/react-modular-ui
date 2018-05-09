@@ -19,7 +19,8 @@ const components = [
   'TextArea',
   'Toggle',
   'Tooltip',
-  'Upload'
+  'Upload',
+  'TypeaheadInput',
 ];
 
 const services = [
@@ -28,7 +29,7 @@ const services = [
   'settingService',
   'tooltipService',
   'utilService',
-  'componentService'
+  'componentService',
 ];
 
 components.forEach((component) => {
