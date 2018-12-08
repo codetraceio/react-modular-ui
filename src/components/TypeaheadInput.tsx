@@ -159,6 +159,9 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
 
   onSelectOption = (option: string) => {
     this.onChange(option, null);
+    if (typeof this.props.onSubmit === "function") {
+      this.props.onSubmit(option, null);
+    }
   };
 
   onClick = () => {
