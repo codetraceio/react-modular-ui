@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Loading from '../../src/components/Loading';
+import Loading from "../../src/components/Loading";
 
-describe('Loading', () => {
-  it('should render Loading', () => {
+describe("Loading", () => {
+  it("should render Loading", () => {
     const tree = renderer.create(
       <Loading
         size="32"

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from '../services/componentService';
+import { IModifiers, getBlockName, getElementName } from "../services/componentService";
 
 export interface IToggleProps {
   size?: string | number;
@@ -26,7 +26,7 @@ export default class Toggle extends React.PureComponent<IToggleProps, {}> {
   }
 
   onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof this.props.onChange === 'function') {
+    if (typeof this.props.onChange === "function") {
       this.props.onChange(!this.props.checked, e);
     }
   };
@@ -34,18 +34,18 @@ export default class Toggle extends React.PureComponent<IToggleProps, {}> {
   render() {
     return (
       <div
-        className={getBlockName('toggle', this.getModifierObject())}
+        className={getBlockName("toggle", this.getModifierObject())}
         role="checkbox"
         tabIndex={0}
         aria-checked={this.isChecked()}
         onClick={this.onClick}
       >
-        <div className={getElementName('toggle', 'container')}>
-          <div className={getElementName('toggle', 'line')} />
-          <div className={getElementName('toggle', 'handle')} />
+        <div className={getElementName("toggle", "container")}>
+          <div className={getElementName("toggle", "line")} />
+          <div className={getElementName("toggle", "handle")} />
         </div>
         {this.props.children ? (
-          <div className={getElementName('toggle', 'label')}>
+          <div className={getElementName("toggle", "label")}>
             {this.props.children}
           </div>
         ) :  null}

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Pill from '../../src/components/Pill';
+import Pill from "../../src/components/Pill";
 
-describe('index', () => {
-  it('should render Pill', () => {
+describe("index", () => {
+  it("should render Pill", () => {
     const tree = renderer.create(
       <Pill
         size="32"

@@ -20,8 +20,8 @@ yarn add react-modular-ui
 ## Example
  
 ```
-import React from 'react';
-import {Button} from 'react-modular-ui';
+import React from "react";
+import {Button} from "react-modular-ui";
 
 class Example extends React.Component {
   render() {

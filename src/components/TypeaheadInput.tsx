@@ -21,6 +21,8 @@ export interface IInputTypeaheadProps {
   opened?: boolean;
   fixed?: boolean;
   options?: string[];
+  matchingOptionsOnly?: boolean;
+  hideInitialOptions?: boolean;
 
   portal?: JSX.Element[];
 
@@ -171,8 +173,13 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
   }
 
   getOptions() {
-    if (!this.props.options) {
+    if (!this.props.options || this.props.hideInitialOptions && this.props.value === "") {
       return [];
+    }
+
+    if (this.props.matchingOptionsOnly) {
+      const currentValue = this.props.value.toLowerCase();
+      return this.props.options.filter((value) => value.toLowerCase().includes(currentValue));
     }
 
     return this.props.options;

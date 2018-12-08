@@ -1,1 +1,1 @@
-module.exports = require('./dist/static.js');
+module.exports = require("./dist/static.js");

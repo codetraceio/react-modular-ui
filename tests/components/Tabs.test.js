@@ -1,20 +1,20 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Tabs from '../../src/components/Tabs';
+import Tabs from "../../src/components/Tabs";
 
-describe('Tabs', () => {
-  it('should render Tabs', () => {
+describe("Tabs", () => {
+  it("should render Tabs", () => {
     const tree = renderer.create(
       <Tabs
         size="32"
         color="primary"
         options={[{
-          title: 'title1',
-          value: 'value1'
+          title: "title1",
+          value: "value1"
         }, {
-          title: 'title2',
-          value: 'value2'
+          title: "title2",
+          value: "value2"
         }]}
         value="value1"
       />

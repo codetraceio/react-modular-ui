@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { getBlockClassName, getElementClassName } from '../services/componentService';
-import Portal from './Portal';
+import { getBlockClassName, getElementClassName } from "../services/componentService";
+import Portal from "./Portal";
 
 export interface IModalProps {
   portal?: JSX.Element[];
@@ -12,7 +12,7 @@ export interface IModalProps {
 
 export default class Modal extends React.PureComponent<IModalProps, {}> {
   onClose = () => {
-    if (typeof this.props.onClose === 'function') {
+    if (typeof this.props.onClose === "function") {
       this.props.onClose();
     }
   };
@@ -24,8 +24,8 @@ export default class Modal extends React.PureComponent<IModalProps, {}> {
   render() {
     return (
       <Portal portal={this.props.portal} portalKey={this.props.name}>
-        <div className={getBlockClassName('modal')} onClick={this.onClose}>
-          <div className={getElementClassName('modal', 'content')} onClick={this.onClickContent}>
+        <div className={getBlockClassName("modal")} onClick={this.onClose}>
+          <div className={getElementClassName("modal", "content")} onClick={this.onClickContent}>
             {this.props.children}
           </div>
         </div>

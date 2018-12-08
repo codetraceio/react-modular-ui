@@ -1,25 +1,25 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Button from '../../components/Button';
-import Block from '../../components/Block';
-import Checkbox from '../../components/Checkbox';
-import Input from '../../components/Input';
-import Icon from '../../components/Icon';
-import Loading from '../../components/Loading';
-import Modal from '../../components/Modal';
-import Pagination from '../../components/Pagination';
-import Pill from '../../components/Pill';
-import Progress from '../../components/Progress';
-import Radio from '../../components/Radio';
-import Select, {ISelectOption} from '../../components/Select';
-import Tabs, {ITabsOption} from '../../components/Tabs';
-import TextArea from '../../components/TextArea';
-import Toggle from '../../components/Toggle';
-import Tooltip from '../../components/Tooltip';
-import Upload from '../../components/Upload';
-import TypeaheadInput from '../../components/TypeaheadInput';
+import Button from "../../components/Button";
+import Block from "../../components/Block";
+import Checkbox from "../../components/Checkbox";
+import Input from "../../components/Input";
+import Icon from "../../components/Icon";
+import Loading from "../../components/Loading";
+import Modal from "../../components/Modal";
+import Pagination from "../../components/Pagination";
+import Pill from "../../components/Pill";
+import Progress from "../../components/Progress";
+import Radio from "../../components/Radio";
+import Select, {ISelectOption} from "../../components/Select";
+import Tabs, {ITabsOption} from "../../components/Tabs";
+import TextArea from "../../components/TextArea";
+import Toggle from "../../components/Toggle";
+import Tooltip from "../../components/Tooltip";
+import Upload from "../../components/Upload";
+import TypeaheadInput from "../../components/TypeaheadInput";
 
-import settingService from '../../services/settingService';
+import settingService from "../../services/settingService";
 
 export interface IAppViewProps {
   portal?: JSX.Element[]
@@ -39,11 +39,11 @@ export interface IAppViewState {
 }
 
 settingService.setIcons({
-  'github': <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></svg>,
-  'checkbox': <svg viewBox="0 0 24 24"><path d="M20.785 5.745l-2.346-1.85c-.074-.06-.164-.103-.266-.103-.103 0-.197.043-.27.107L9.37 14.865s-3.356-3.227-3.45-3.32c-.094-.095-.218-.253-.406-.253-.188 0-.273.132-.37.23-.074.077-1.27 1.334-1.86 1.958-.035.04-.056.06-.086.09-.05.073-.085.155-.085.244 0 .094.034.17.085.244l.12.11s5.953 5.72 6.05 5.818c.1.098.22.222.395.222.17 0 .312-.184.393-.265L20.802 6.267c.05-.073.085-.154.085-.248 0-.108-.042-.198-.102-.275z" /></svg>,
-  'radio': <svg viewBox="0 0 24 24"><path d="M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>,
-  'pagination': <svg viewBox="0 0 24 24"><path d="M5.875 11.998l8.214-8.553c.205-.212.2-.56-.01-.777l-1.47-1.503c-.21-.216-.555-.22-.762-.01L1.818 11.6c-.11.108-.158.255-.15.398-.003.147.046.29.15.397l10.03 10.45c.207.21.55.206.762-.01l1.47-1.503c.21-.217.215-.565.01-.777l-8.215-8.557z"/></svg>,
-  'drop-down': <svg viewBox="0 0 12 6"><path d="M12 0L6 6 0 0" /></svg>
+  "github": <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></svg>,
+  "checkbox": <svg viewBox="0 0 24 24"><path d="M20.785 5.745l-2.346-1.85c-.074-.06-.164-.103-.266-.103-.103 0-.197.043-.27.107L9.37 14.865s-3.356-3.227-3.45-3.32c-.094-.095-.218-.253-.406-.253-.188 0-.273.132-.37.23-.074.077-1.27 1.334-1.86 1.958-.035.04-.056.06-.086.09-.05.073-.085.155-.085.244 0 .094.034.17.085.244l.12.11s5.953 5.72 6.05 5.818c.1.098.22.222.395.222.17 0 .312-.184.393-.265L20.802 6.267c.05-.073.085-.154.085-.248 0-.108-.042-.198-.102-.275z" /></svg>,
+  "radio": <svg viewBox="0 0 24 24"><path d="M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>,
+  "pagination": <svg viewBox="0 0 24 24"><path d="M5.875 11.998l8.214-8.553c.205-.212.2-.56-.01-.777l-1.47-1.503c-.21-.216-.555-.22-.762-.01L1.818 11.6c-.11.108-.158.255-.15.398-.003.147.046.29.15.397l10.03 10.45c.207.21.55.206.762-.01l1.47-1.503c.21-.217.215-.565.01-.777l-8.215-8.557z"/></svg>,
+  "drop-down": <svg viewBox="0 0 12 6"><path d="M12 0L6 6 0 0" /></svg>
 });
 
 export default class App extends React.Component<IAppViewProps, IAppViewState> {
@@ -51,32 +51,32 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     super(props);
 
     this.state = {
-      tabValue: 'profile',
-      inputValue: '',
+      tabValue: "profile",
+      inputValue: "",
       checked: false,
-      selected: '',
+      selected: "",
       showModal: false,
       count: 100000,
       offset: 10,
       limit: 10,
-      selectValue: '',
-      typeaheadValue: '',
+      selectValue: "",
+      typeaheadValue: "",
     };
   }
 
   getTabOptions(): ITabsOption[] {
     return [
       {
-        title: 'Profile',
-        value: 'profile'
+        title: "Profile",
+        value: "profile"
       }, {
-        title: 'Followers',
-        value: 'followers',
+        title: "Followers",
+        value: "followers",
         count: 151,
-        countColor: 'primary'
+        countColor: "primary"
       }, {
-        title: 'Following',
-        value: 'following',
+        title: "Following",
+        value: "following",
         count: 1
       }
     ];
@@ -84,11 +84,11 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
 
   getTypeaheadOptions(): string[] {
     return [
-      'Owl',
-      'Coala',
-      'Pinguin',
-      'Bear',
-      'Lion',
+      "Owl",
+      "Coala",
+      "Pinguin",
+      "Bear",
+      "Lion",
     ];
   }
 
@@ -152,8 +152,8 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
       <div className="app">
         <Block
           padding={{
-            xsUp: '64 0',
-            xsDown: '32 0'
+            xsUp: "64 0",
+            xsDown: "32 0"
           }}
         >
           <h1>React Modular UI</h1>
@@ -183,7 +183,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               <Button size="48" color="danger">danger</Button>
               <Button size="48" color="danger" disabled>danger</Button>
             </Block>
-            <div style={{backgroundColor:'#777777'}}>
+            <div style={{backgroundColor:"#777777"}}>
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                   <Button size="24" color="light">light</Button>
                   <Button size="32" color="light">light</Button>
@@ -218,7 +218,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               <Button size="48" color="danger" view="flat">danger</Button>
               <Button size="48" color="danger" view="flat" disabled>danger</Button>
             </Block>
-            <div style={{backgroundColor:'#777777'}}>
+            <div style={{backgroundColor:"#777777"}}>
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                 <Button size="24" color="light" view="flat">light</Button>
                 <Button size="32" color="light" view="flat">light</Button>
@@ -228,7 +228,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             </div>
           </Block>
           <h2>Glass buttons</h2>
-          <div style={{backgroundColor:'#777777'}}>
+          <div style={{backgroundColor:"#777777"}}>
             <Block layout="horizontal" align="center" spaceHorizontal="8">
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                 <Button size="24" view="glass">default</Button>
@@ -284,7 +284,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               <Icon name="github" size="32" color="danger" />
               <Icon name="github" size="48" color="danger" />
             </Block>
-            <div style={{backgroundColor:'#777777'}}>
+            <div style={{backgroundColor:"#777777"}}>
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                 <Icon name="github" size="24" color="light" />
                 <Icon name="github" size="32" color="light" />
@@ -366,7 +366,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
                 <div>danger</div>
               </Button>
             </Block>
-            <div style={{backgroundColor:'#777777'}}>
+            <div style={{backgroundColor:"#777777"}}>
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                 <Button size="24" color="light">
                   <Icon name="github" size="16" />
@@ -437,7 +437,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               <Loading size="32" color="danger" />
               <Loading size="48" color="danger" />
             </Block>
-            <div style={{backgroundColor:'#777777'}}>
+            <div style={{backgroundColor:"#777777"}}>
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                 <Loading size="16" color="light" />
                 <Loading size="24" color="light" />
@@ -487,7 +487,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               <Pill size="32" color="danger">danger</Pill>
               <Pill size="48" color="danger">danger</Pill>
             </Block>
-            <div style={{backgroundColor:'#777777'}}>
+            <div style={{backgroundColor:"#777777"}}>
               <Block layout="vertical" align="center" spaceVertical="8" padding="8">
                 <Pill size="24" color="light">light</Pill>
                 <Pill size="32" color="light">light</Pill>
@@ -510,7 +510,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               <Progress size="4" color="danger" value="40" />
             </Block>
           </Block>
-          <div style={{backgroundColor:'#777777'}}>
+          <div style={{backgroundColor:"#777777"}}>
             <Block padding="8 16">
               <Progress size="4" color="light" value="40" />
             </Block>
@@ -526,7 +526,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
           <Block layout="vertical" spaceVertical="8" align="start">
             <Radio
               size="16"
-              checked={this.state.selected === 'first'}
+              checked={this.state.selected === "first"}
               name="radio"
               value="first"
               onChange={(value: string) => this.onChangeSelected(value)}
@@ -535,7 +535,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             </Radio>
             <Radio 
               size="24"
-              checked={this.state.selected === 'second'}
+              checked={this.state.selected === "second"}
               name="radio"
               value="second"
               onChange={(value: string) => this.onChangeSelected(value)}
@@ -544,7 +544,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             </Radio>
             <Radio 
               size="32"
-              checked={this.state.selected === 'third'}
+              checked={this.state.selected === "third"}
               name="radio"
               value="third"
               onChange={(value: string) => this.onChangeSelected(value)}
@@ -553,7 +553,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
               </Radio>
             <Radio 
               size="32"
-              checked={this.state.selected === 'fourth'}
+              checked={this.state.selected === "fourth"}
               name="radio"
               value="fourth"
               onChange={(value: string) => this.onChangeSelected(value)} disabled
@@ -644,11 +644,13 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
           />
         </Block>
         <h2>Typeahead Input</h2>
-        <Block>
+        <Block>          
           <TypeaheadInput
             value={this.state.typeaheadValue}
             options={this.getTypeaheadOptions()}
             onChange={this.onChangeTypeahead}
+            matchingOptionsOnly
+            hideInitialOptions
           />
         </Block>
       </div>

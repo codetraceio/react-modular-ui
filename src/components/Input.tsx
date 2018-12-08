@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName} from '../services/componentService';
+import { IModifiers, getBlockName, getElementName} from "../services/componentService";
 
 export interface IInputProps {
   size?: string | number;
@@ -26,7 +26,7 @@ export interface IInputProps {
 function onEvent<T>(
   callback: (value: string, event: T) => void
 ) {
-  if (typeof callback === 'function') {
+  if (typeof callback === "function") {
     return (event: T) => {
       callback((event as any).currentTarget.value, event);
     }
@@ -45,15 +45,15 @@ export default class Input extends React.PureComponent<IInputProps, {}> {
   }
 
   onKeyDownEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (typeof this.props.onKeyDown === 'function') {
+    if (typeof this.props.onKeyDown === "function") {
       this.props.onKeyDown(event.currentTarget.value, event);
     }
     if (event.isPropagationStopped()) {
       return;
     }
     if (
-      typeof this.props.onSubmit === 'function' &&
-      ['Enter', 'NumpadEnter'].indexOf(event.key) !== -1 && !event.shiftKey
+      typeof this.props.onSubmit === "function" &&
+      ["Enter", "NumpadEnter"].indexOf(event.key) !== -1 && !event.shiftKey
     ) {
       this.props.onSubmit(event.currentTarget.value, event);
     }
@@ -73,13 +73,13 @@ export default class Input extends React.PureComponent<IInputProps, {}> {
 
   renderLabel() {
     return this.props.label ? (
-      <div className={getElementName('input', 'label')}>{this.props.label}</div>
+      <div className={getElementName("input", "label")}>{this.props.label}</div>
     ) : null;
   }
 
   render() {
     return (
-      <div className={getBlockName('input', this.getModifierObject())}>
+      <div className={getBlockName("input", this.getModifierObject())}>
         {this.renderLabel()}
         <input
           name={this.props.name}

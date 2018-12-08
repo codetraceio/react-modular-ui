@@ -1,35 +1,35 @@
-import 'raf/polyfill';
+import "raf/polyfill";
 
 const components = [
-  'Block',
-  'Button',
-  'Checkbox',
-  'Form',
-  'Icon',
-  'Input',
-  'Loading',
-  'Modal',
-  'Pagination',
-  'Pill',
-  'Portal',
-  'Progress',
-  'Radio',
-  'Select',
-  'Tabs',
-  'TextArea',
-  'Toggle',
-  'Tooltip',
-  'Upload',
-  'TypeaheadInput',
+  "Block",
+  "Button",
+  "Checkbox",
+  "Form",
+  "Icon",
+  "Input",
+  "Loading",
+  "Modal",
+  "Pagination",
+  "Pill",
+  "Portal",
+  "Progress",
+  "Radio",
+  "Select",
+  "Tabs",
+  "TextArea",
+  "Toggle",
+  "Tooltip",
+  "Upload",
+  "TypeaheadInput",
 ];
 
 const services = [
-  'clickOutsideService',
-  'dropDownService',
-  'settingService',
-  'tooltipService',
-  'utilService',
-  'componentService',
+  "clickOutsideService",
+  "dropDownService",
+  "settingService",
+  "tooltipService",
+  "utilService",
+  "componentService",
 ];
 
 components.forEach((component) => {
@@ -48,8 +48,8 @@ services.forEach((service) => {
   });
 });
 
-describe('index', () => {
-  const index = require('../src/index');
+describe("index", () => {
+  const index = require("../src/index");
   components.forEach((component) => {
     it(`should contain ${component}`, () => {
       expect(index[component]).toBeDefined();

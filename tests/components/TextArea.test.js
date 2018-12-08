@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import TextArea from '../../src/components/TextArea';
+import TextArea from "../../src/components/TextArea";
 
-describe('TextArea', () => {
-  it('should render TextArea', () => {
+describe("TextArea", () => {
+  it("should render TextArea", () => {
     const tree = renderer.create(
       <TextArea
         size="128"
@@ -24,7 +24,7 @@ describe('TextArea', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render TextArea with height', () => {
+  it("should render TextArea with height", () => {
     const tree = renderer.create(
       <TextArea
         size="128"

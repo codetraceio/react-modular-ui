@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-import settings from '../services/settingService';
-import { generateKey } from '../services/utilService';
-import { updateTooltip } from '../services/tooltipService';
-import {getBlockClassName} from '../services/componentService';
+import settings from "../services/settingService";
+import { generateKey } from "../services/utilService";
+import { updateTooltip } from "../services/tooltipService";
+import {getBlockClassName} from "../services/componentService";
 
-import Portal from './Portal';
+import Portal from "./Portal";
 
 export interface ITooltipProps {
   title: string | JSX.Element;
@@ -59,11 +59,11 @@ export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltip
   }
 
   render() {
-    const portalKey: string = settings.isBackend() ? generateKey() : '';
+    const portalKey: string = settings.isBackend() ? generateKey() : "";
 
     return (
       <div
-        className={getBlockClassName('tooltip-wrapper')}
+        className={getBlockClassName("tooltip-wrapper")}
         onMouseOver={() => this.onShowTooltip()}
         onMouseOut={() => this.onHideTooltip()}
         ref={(element) => this.updateWrapper(element)}
@@ -72,7 +72,7 @@ export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltip
         {this.props.children}
         {this.state.show ? (
           <Portal portal={this.props.portal} portalKey={portalKey}>
-            <div className={getBlockClassName('tooltip')} ref={(element) => this.updateTooltip(element)}>
+            <div className={getBlockClassName("tooltip")} ref={(element) => this.updateTooltip(element)}>
               {this.props.title}
             </div>
           </Portal>

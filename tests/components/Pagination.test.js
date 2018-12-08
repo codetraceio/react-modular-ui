@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Pagination from '../../src/components/Pagination';
+import Pagination from "../../src/components/Pagination";
 
-describe('Pagination', () => {
-  it('should render Pagination', () => {
+describe("Pagination", () => {
+  it("should render Pagination", () => {
     const tree = renderer.create(
       <Pagination
         size="32"

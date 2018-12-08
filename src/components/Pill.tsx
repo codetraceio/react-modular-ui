@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName } from '../services/componentService';
+import { IModifiers, getBlockName } from "../services/componentService";
 
 export interface IPillProps {
   size?: string | number;
@@ -20,7 +20,7 @@ export default class Pill extends React.PureComponent<IPillProps, {}> {
   render() {
     return (
       <div
-        className={getBlockName('pill', this.getModifierObject())}
+        className={getBlockName("pill", this.getModifierObject())}
       >
         <div>
           {this.props.children}

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName } from '../services/componentService';
+import { IModifiers, getBlockName } from "../services/componentService";
 
 export interface ILoadingProps {
   size?: string | number;
@@ -18,7 +18,7 @@ export default class Loading extends React.PureComponent<ILoadingProps, {}> {
   render() {
     return (
       <div
-        className={getBlockName('loading', this.getModifierObject())}
+        className={getBlockName("loading", this.getModifierObject())}
       >
         <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
           <circle cx="50" cy="50" r="40" stroke="none" fill="none" strokeWidth="10">

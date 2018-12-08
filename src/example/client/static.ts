@@ -1,1 +1,1 @@
-import '../../static';
+import "../../static";

@@ -1,9 +1,9 @@
-import clickOutsideService from '../../src/services/clickOutsideService';
+import clickOutsideService from "../../src/services/clickOutsideService";
 
-describe('clickOutsideService', () => {
-  describe('should work correctly with window listener', () =>{
-    it('should add window listener first time', () => {
-      const addEventListener = jest.spyOn(window.document, 'addEventListener');
+describe("clickOutsideService", () => {
+  describe("should work correctly with window listener", () =>{
+    it("should add window listener first time", () => {
+      const addEventListener = jest.spyOn(window.document, "addEventListener");
 
       clickOutsideService.addListener();
 
@@ -12,8 +12,8 @@ describe('clickOutsideService', () => {
       addEventListener.mockRestore();
     });
 
-    it('should not add window listener second time', () => {
-      const addEventListener = jest.spyOn(window.document, 'addEventListener');
+    it("should not add window listener second time", () => {
+      const addEventListener = jest.spyOn(window.document, "addEventListener");
 
       clickOutsideService.addListener();
 
@@ -22,8 +22,8 @@ describe('clickOutsideService', () => {
       addEventListener.mockRestore();
     });
 
-    it('should not remove window listener first time', () => {
-      const removeEventListener = jest.spyOn(window.document, 'removeEventListener');
+    it("should not remove window listener first time", () => {
+      const removeEventListener = jest.spyOn(window.document, "removeEventListener");
 
       clickOutsideService.removeListener();
 
@@ -32,8 +32,8 @@ describe('clickOutsideService', () => {
       removeEventListener.mockRestore();
     });
 
-    it('should not remove window listener first time', () => {
-      const removeEventListener = jest.spyOn(window.document, 'removeEventListener');
+    it("should not remove window listener first time", () => {
+      const removeEventListener = jest.spyOn(window.document, "removeEventListener");
 
       clickOutsideService.removeListener();
 
@@ -43,11 +43,11 @@ describe('clickOutsideService', () => {
     });
   });
 
-  describe('should add and remove event listeners', () => {
+  describe("should add and remove event listeners", () => {
     const handler1 = jest.fn();
     const handler2 = jest.fn();
-    it('should add window listener when event added first time', () => {
-      const addListener = jest.spyOn(clickOutsideService, 'addListener');
+    it("should add window listener when event added first time", () => {
+      const addListener = jest.spyOn(clickOutsideService, "addListener");
 
       clickOutsideService.on(handler1);
 
@@ -56,8 +56,8 @@ describe('clickOutsideService', () => {
       addListener.mockRestore();
     });
 
-    it('should not add window listener when event added second time', () => {
-      const addListener = jest.spyOn(clickOutsideService, 'addListener');
+    it("should not add window listener when event added second time", () => {
+      const addListener = jest.spyOn(clickOutsideService, "addListener");
 
       clickOutsideService.on(handler2);
 
@@ -66,8 +66,8 @@ describe('clickOutsideService', () => {
       addListener.mockRestore();
     });
 
-    it('should not remove window listener when there are events in the list', () => {
-      const removeListener = jest.spyOn(clickOutsideService, 'removeListener');
+    it("should not remove window listener when there are events in the list", () => {
+      const removeListener = jest.spyOn(clickOutsideService, "removeListener");
 
       clickOutsideService.off(handler1);
 
@@ -76,8 +76,8 @@ describe('clickOutsideService', () => {
       removeListener.mockRestore();
     });
 
-    it('should remove window listener when there is no events in the list', () => {
-      const removeListener = jest.spyOn(clickOutsideService, 'removeListener');
+    it("should remove window listener when there is no events in the list", () => {
+      const removeListener = jest.spyOn(clickOutsideService, "removeListener");
 
       clickOutsideService.off(handler2);
 

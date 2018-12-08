@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Checkbox from '../../src/components/Checkbox';
+import Checkbox from "../../src/components/Checkbox";
 
-describe('Checkbox', () => {
-  it('should render Checkbox', () => {
+describe("Checkbox", () => {
+  it("should render Checkbox", () => {
     const tree = renderer.create(
       <Checkbox
         size="32"

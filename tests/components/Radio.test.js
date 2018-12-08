@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Radio from '../../src/components/Radio';
+import Radio from "../../src/components/Radio";
 
-describe('Radio', () => {
-  it('should render Radio', () => {
+describe("Radio", () => {
+  it("should render Radio", () => {
     const tree = renderer.create(
       <Radio
         size="32"

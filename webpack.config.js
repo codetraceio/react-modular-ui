@@ -1,16 +1,26 @@
 module.exports = {
   entry: {
-    'index': './dist/example/client/index.js',
-    'static': './dist/example/client/static.js'
+    "index": "./src/example/client/index.tsx",
+    "static": "./src/example/client/static.ts"
   },
   output: {
-    filename: 'dist/example/build/[name].js',
+    filename: "./example/build/[name].js",
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: [".ts", ".tsx", ".jsx", ".js"],
   },
   module: {
+    rules: [{
+      test: /\.tsx?$/,
+      use: [{
+        loader: "ts-loader",
+        options: {
+          transpileOnly: true,
+          experimentalWatchApi: true,
+        },
+      }],
+    }],
   },
-  devtool: 'inline-source-map',
-  mode: 'production'
+  devtool: "inline-source-map",
+  mode: "production"
 };

@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from '../services/componentService';
-import Icon from './Icon';
+import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import Icon from "./Icon";
 
 export interface IPaginationProps {
   size?: string | number;
@@ -32,28 +32,28 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
   }
 
   getLimit(): number {
-    if (typeof this.props.limit === 'string' || typeof this.props.limit === 'number') {
+    if (typeof this.props.limit === "string" || typeof this.props.limit === "number") {
       return parseInt(this.props.limit.toString(), 10);
     }
     return 10;
   }
 
   getSize(): number {
-    if (typeof this.props.size === 'string' || typeof this.props.size === 'number') {
+    if (typeof this.props.size === "string" || typeof this.props.size === "number") {
       return parseInt(this.props.size.toString(), 10);
     }
     return 24;
   }
 
   getCount(): number {
-    if (typeof this.props.count === 'string' || typeof this.props.count === 'number') {
+    if (typeof this.props.count === "string" || typeof this.props.count === "number") {
       return parseInt(this.props.count.toString(), 10);
     }
     return 0;
   }
 
   getOffset(): number {
-    if (typeof this.props.offset === 'string' || typeof this.props.offset === 'number') {
+    if (typeof this.props.offset === "string" || typeof this.props.offset === "number") {
       return parseInt(this.props.offset.toString(), 10);
     }
     return 0;
@@ -107,7 +107,7 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
 
   onChange = (page: number) => {
     const offset: number = (page - 1) * this.getLimit();
-    if (typeof this.props.onChange === 'function') {
+    if (typeof this.props.onChange === "function") {
       this.props.onChange(offset, page);
     }
   };
@@ -115,7 +115,7 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
   renderPrev(page: number, onChange: (page: number) => void) {
     return (
       <div
-        className={getElementName('pagination', 'prev', {
+        className={getElementName("pagination", "prev", {
           disabled: page === 1
         })}
         onClick={() => onChange(page - 1)}
@@ -128,7 +128,7 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
   renderNext(page: number, lastPage: number, onChange: (page: number) => void) {
     return (
       <div
-        className={getElementName('pagination', 'next', {
+        className={getElementName("pagination", "next", {
           disabled: page === lastPage
         })}
         onClick={() => onChange(page + 1)}
@@ -146,8 +146,8 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
       if (page !== (prevPage + 1)) {
         result.push(
           <div
-            key={'ellipsis.' + page}
-            className={getElementName('pagination', 'ellipsis')}
+            key={"ellipsis." + page}
+            className={getElementName("pagination", "ellipsis")}
           >
             …
           </div>
@@ -157,17 +157,17 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
 
       if (!(index === pages.length - 1 && afterEllipsis && this.props.hideLastPage)) {
         const characterLength: number = page.toString().length;
-        let characters: string = 'single';
+        let characters: string = "single";
         if (characterLength === 2) {
-          characters = 'double';
+          characters = "double";
         }
         if (characterLength > 2) {
-          characters = 'multiple';
+          characters = "multiple";
         }
         result.push(
           <div
             key={page}
-            className={getElementName('pagination', 'item', {
+            className={getElementName("pagination", "item", {
               current: page === currentPage,
               characters: characters
             })}
@@ -190,7 +190,7 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
 
     return (
       <div
-        className={getBlockName('pagination', this.getModifierObject())}
+        className={getBlockName("pagination", this.getModifierObject())}
       >
         {this.renderPrev(info.page, this.onChange)}
         {this.renderPages(info.pages, info.page, this.onChange)}

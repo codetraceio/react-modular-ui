@@ -225,62 +225,62 @@
 }
 
 @mixin make-responsive() {
-  @include make-fixed('');
+  @include make-fixed("");
 
   @media (max-width: $xxsmall) {
-    @include make-fixed('-xxs-down');
+    @include make-fixed("-xxs-down");
   }
 
   @media (max-width: $xsmall) {
-    @include make-fixed('-xs-down');
+    @include make-fixed("-xs-down");
   }
 
   @media (max-width: $small) {
-    @include make-fixed('-s-down');
+    @include make-fixed("-s-down");
   }
 
   @media (max-width: $medium) {
-    @include make-fixed('-m-down');
+    @include make-fixed("-m-down");
   }
 
   @media (max-width: $large) {
-    @include make-fixed('-l-down');
+    @include make-fixed("-l-down");
   }
 
   @media (max-width: $xlarge) {
-  @include make-fixed('-xl-down');
+  @include make-fixed("-xl-down");
   }
 
   @media (max-width: $xxlarge) {
-    @include make-fixed('-xxl-down');
+    @include make-fixed("-xxl-down");
   }
 
   @media (min-width: $xxsmall + 1) {
-    @include make-fixed('-xxs-up');
+    @include make-fixed("-xxs-up");
   }
 
   @media (min-width: $xsmall + 1) {
-    @include make-fixed('-xs-up');
+    @include make-fixed("-xs-up");
   }
 
   @media (min-width: $small + 1) {
-    @include make-fixed('-s-up');
+    @include make-fixed("-s-up");
   }
 
   @media (min-width: $medium + 1) {
-    @include make-fixed('-m-up');
+    @include make-fixed("-m-up");
   }
 
   @media (min-width: $large + 1) {
-    @include make-fixed('-l-up');
+    @include make-fixed("-l-up");
   }
 
   @media (min-width: $xlarge + 1) {
-    @include make-fixed('-xl-up');
+    @include make-fixed("-xl-up");
   }
 
   @media (min-width: $xxlarge + 1) {
-    @include make-fixed('-xxl-up');
+    @include make-fixed("-xxl-up");
   }
 }
 

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Block from '../../src/components/Block';
+import Block from "../../src/components/Block";
 
-describe('Block', () => {
-  it('should render Block', () => {
+describe("Block", () => {
+  it("should render Block", () => {
     const tree = renderer.create(
       <Block
         layout="horizontal"

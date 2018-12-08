@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Icon from '../../src/components/Icon';
+import Icon from "../../src/components/Icon";
 
-describe('Icon', () => {
-  it('should render Icon', () => {
+describe("Icon", () => {
+  it("should render Icon", () => {
     const tree = renderer.create(
       <Icon
         size="32"

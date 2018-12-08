@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as renderer from 'react-test-renderer';
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Toggle from '../../src/components/Toggle';
+import Toggle from "../../src/components/Toggle";
 
-describe('Toggle', () => {
-  it('should render Toggle', () => {
+describe("Toggle", () => {
+  it("should render Toggle", () => {
     const tree = renderer.create(
       <Toggle
         size="32"

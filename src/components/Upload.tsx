@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { IModifiers, getBlockName } from '../services/componentService';
+import { IModifiers, getBlockName } from "../services/componentService";
 
 export interface IUploadProps {
   size?: string | number;
@@ -36,9 +36,9 @@ export default class Upload extends React.PureComponent<IUploadProps, IUploadSta
     }
 
     if (this.element !== element) {
-      element.addEventListener('dragover', this.onDragOver, false);
-      element.addEventListener('dragleave', this.onDragLeave, false);
-      element.addEventListener('drop', this.onDrop, false);
+      element.addEventListener("dragover", this.onDragOver, false);
+      element.addEventListener("dragleave", this.onDragLeave, false);
+      element.addEventListener("drop", this.onDrop, false);
     }
 
     this.element = element;
@@ -71,7 +71,7 @@ export default class Upload extends React.PureComponent<IUploadProps, IUploadSta
       active: false
     });
 
-    if (typeof this.props.onChange === 'function') {
+    if (typeof this.props.onChange === "function") {
       this.props.onChange(files);
     }
   };
@@ -87,7 +87,7 @@ export default class Upload extends React.PureComponent<IUploadProps, IUploadSta
   onChange = () => {
     const files = this.fileElement.files;
 
-    if (typeof this.props.onChange === 'function') {
+    if (typeof this.props.onChange === "function") {
       this.props.onChange(files);
     }
   };
@@ -95,7 +95,7 @@ export default class Upload extends React.PureComponent<IUploadProps, IUploadSta
   render() {
     return (
       <div
-        className={getBlockName('upload', this.getModifierObject())}
+        className={getBlockName("upload", this.getModifierObject())}
         ref={(element) => this.updateElement(element)}
         data-name={this.props.name}
         onClick={() => this.onClick()}
@@ -103,7 +103,7 @@ export default class Upload extends React.PureComponent<IUploadProps, IUploadSta
         <input
           type="file"
           name={this.props.name}
-          style={{display: 'none'}}
+          style={{display: "none"}}
           ref={(element) => this.updateFileElement(element)}
           onChange={() => this.onChange()}
         />
