@@ -5,15 +5,19 @@ import { IModifiers, getBlockName } from "../services/componentService";
 export interface IPillProps {
   size?: string | number;
   color?: string;
+  paddingLeft?: string | number;
+  paddingRight?: string | number;
 
-  onChange?: (offset: number, page: number) => void;
+  onClick?: () => void;
 }
 
 export default class Pill extends React.PureComponent<IPillProps, {}> {
   getModifierObject(): IModifiers {
     return {
       size: this.props.size,
-      color: this.props.color
+      color: this.props.color,
+      paddingLeft: this.props.paddingLeft,
+      paddingRight: this.props.paddingRight,
     };
   }
 
@@ -21,6 +25,7 @@ export default class Pill extends React.PureComponent<IPillProps, {}> {
     return (
       <div
         className={getBlockName("pill", this.getModifierObject())}
+        onClick={this.props.onClick}
       >
         <div>
           {this.props.children}
