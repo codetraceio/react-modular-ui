@@ -27,9 +27,7 @@ export default class Pill extends React.PureComponent<IPillProps, {}> {
         className={getBlockName("pill", this.getModifierObject())}
         onClick={this.props.onClick}
       >
-        <div>
-          {this.props.children}
-        </div>
+        {this.props.children}
       </div>
     );
   }

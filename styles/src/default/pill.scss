@@ -12,6 +12,12 @@
   border-radius: ($size / 2);
   min-width: ($size / 2);
   font-weight: bold;
+  & > * {
+    margin-left: ($size / 8);
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }
 
 .c-pill {
@@ -53,5 +59,9 @@
 
   &.-size-48 {
     @include pill-size(48px, 20px);
+  }
+
+  &.-padding-right-4 {
+    padding-right: 4px;
   }
 }

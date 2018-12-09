@@ -468,7 +468,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
           <h2>Pills</h2>
           <Block layout="horizontal" align="center" spaceHorizontal="8">
             <Block layout="vertical" align="center" spaceVertical="8" padding="8">
-              <Pill size="24">default</Pill>
+              <Pill size="24" paddingRight="4"><div>default</div><Icon name="github" size="16" /></Pill>
               <Pill size="32">default</Pill>
               <Pill size="48">default</Pill>
             </Block>
