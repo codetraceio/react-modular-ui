@@ -70,7 +70,7 @@ export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltip
         data-portal-key={portalKey}
       >
         {this.props.children}
-        {this.state.show ? (
+        {this.state.show || settings.isBackend() ? (
           <Portal portal={this.props.portal} portalKey={portalKey}>
             <div className={getBlockClassName("tooltip")} ref={(element) => this.updateTooltip(element)}>
               {this.props.title}

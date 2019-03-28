@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "typings": "typescript/index.d.ts",
   "repository": {
@@ -17,15 +17,15 @@
     "watch": "./run/watch.sh"
   },
   "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@types/express": "^4.11.1",
     "@types/jest": "^22.2.3",
     "@types/node": "^8.0.10",
-    "@types/react": "^16.3.14",
-    "@types/react-dom": "^16.0.5",
+    "@types/react": "^16.8.10",
+    "@types/react-dom": "^16.8.3",
     "coveralls": "^3.0.1",
     "express": "^4.16.3",
     "jest": "^22.4.3",

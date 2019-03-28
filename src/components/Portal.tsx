@@ -11,7 +11,15 @@ export interface IPortalProps {
 }
 
 export default class Portal extends React.PureComponent<IPortalProps, {}> {
-  private portalElement: HTMLElement = document.createElement("div");
+  private portalElement: HTMLElement;
+
+  constructor(props: IPortalProps) {
+    super(props);
+
+    if (typeof window === "object" && window.document) {
+      this.portalElement = window.document.createElement("div");
+    }
+  }
 
   componentDidMount() {
     window.document.body.appendChild(this.portalElement);
@@ -34,6 +42,7 @@ export default class Portal extends React.PureComponent<IPortalProps, {}> {
           {this.props.children}
         </div>
       );
+      return null;
     }
 
     return ReactDom.createPortal(this.props.children, this.portalElement);
