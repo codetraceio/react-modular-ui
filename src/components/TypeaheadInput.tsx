@@ -71,9 +71,6 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
     if (props.options !== this.props.options) {
       this.updateOptionMap(props.options);
     }
-    if (this.isValid(props.value)) {
-      this.onClose();
-    }
   }
   
   updateOptionMap(options: string[]) {
@@ -89,6 +86,12 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
 
   isOpened(): boolean {
     return this.props.opened || this.state.opened;
+  }
+
+  triggerExtenalChange(value: string, event: React.ChangeEvent<HTMLInputElement>) {
+    if (typeof this.props.onChange === "function") {
+      this.props.onChange(value, event);
+    }
   }
 
   onUpdateDropDownElement = (element: HTMLElement) => {
@@ -115,9 +118,7 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
   };
 
   onChange = (value: string, event: React.ChangeEvent<HTMLInputElement>) => {
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(value, event);
-    }
+    this.triggerExtenalChange(value, event);
 
     this.onOpen();
   };
@@ -160,7 +161,8 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
   };
 
   onSelectOption = (option: string) => {
-    this.onChange(option, null);
+    this.triggerExtenalChange(option, null);
+    this.onClose();
     if (typeof this.props.onSubmit === "function") {
       this.props.onSubmit(option, null);
     }
