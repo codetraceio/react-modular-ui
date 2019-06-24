@@ -8,7 +8,30 @@ import { getElementName, getBlockName } from "../services/componentService";
 import { updateDropDown } from "../services/dropDownService";
 import { clickOutsideService } from "..";
 
-export interface IInputTypeaheadProps {
+type TypeaheadInputCallback<T> = (
+  option: string | ITypeaheadInputOption,
+  event: T
+) => void;
+
+export type ChangeCallback = TypeaheadInputCallback<React.ChangeEvent<HTMLInputElement>>;
+
+export type KeyboardCallback = TypeaheadInputCallback<React.KeyboardEvent<HTMLInputElement>>;
+
+export type FocusCallback = TypeaheadInputCallback<React.FocusEvent<HTMLInputElement>>;
+
+export type MouseCallback = TypeaheadInputCallback<React.MouseEvent<HTMLInputElement>>;
+
+export type InputEvent = (
+  React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> |
+  React.FocusEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>
+);
+
+export interface ITypeaheadInputOption {
+  value: string; // visible value
+  key: string;   // key
+}
+
+export interface ITypeaheadInputProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -20,31 +43,32 @@ export interface IInputTypeaheadProps {
   shape?: string;
   opened?: boolean;
   fixed?: boolean;
-  options?: string[];
+  options?: (string | ITypeaheadInputOption)[];
   matchingOptionsOnly?: boolean;
   hideInitialOptions?: boolean;
 
   portal?: JSX.Element[];
 
-  onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onKeyUp?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onKeyPress?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onFocus?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
-  onSubmit?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onClick?: (value: string, event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange?: ChangeCallback;
+  onKeyDown?: KeyboardCallback;
+  onKeyUp?: KeyboardCallback;
+  onKeyPress?: KeyboardCallback;
+  onSubmit?: KeyboardCallback;
+  onFocus?: FocusCallback;
+  onBlur?: FocusCallback;
+  onClick?: MouseCallback;
 }
 
-export interface IInputTypeaheadState {
+export interface ITypeaheadInputState {
   opened?: boolean;
   scroll?: boolean;
 }
 
-export default class InputTypeahead extends React.Component<IInputTypeaheadProps, IInputTypeaheadState> {
+export default class TypeaheadInput extends React.Component<ITypeaheadInputProps, ITypeaheadInputState> {
   private dropDownElement: HTMLElement;
   private visibleElement: HTMLElement;
-  private optionMap: {[key: string]: boolean};
+  private optionMap: {[key: string]: string};
+  private isOptionObject: boolean = false;
 
   state = {
     opened: false,
@@ -67,30 +91,42 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
     clickOutsideService.off(this.onClose);
   }
 
-  componentWillReceiveProps(props: IInputTypeaheadProps) {
+  componentWillReceiveProps(props: ITypeaheadInputProps) {
     if (props.options !== this.props.options) {
       this.updateOptionMap(props.options);
     }
   }
   
-  updateOptionMap(options: string[]) {
+  updateOptionMap(options: (string | ITypeaheadInputOption)[]) {
     this.optionMap = {};
-    options.forEach((option: string) => {
-      this.optionMap[option] = true;
+    if (options && typeof options[0] === "object") {
+      this.isOptionObject = true;
+    }
+    options.forEach((option: string | ITypeaheadInputOption) => {
+      const value = typeof option === "string" ? option : option.value;
+      const key = typeof option === "string" ? option : option.key;
+      this.optionMap[value] = key;
     });
   }
 
   isValid(value: string): boolean {
-    return this.optionMap[value];
+    return typeof this.optionMap[value] === "string";
   }
 
   isOpened(): boolean {
     return this.props.opened || this.state.opened;
   }
 
-  triggerExtenalChange(value: string, event: React.ChangeEvent<HTMLInputElement>) {
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(value, event);
+  triggerExtenalEvent(callback: TypeaheadInputCallback<InputEvent>) {
+    return (value: string, event: InputEvent) => {
+      if (typeof callback === "function") {
+        const key = this.optionMap[value];
+        const option = this.isOptionObject ? {
+          key: key,
+          value: value,
+        } : value;
+        callback(option, event);
+      }
     }
   }
 
@@ -118,15 +154,33 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
   };
 
   onChange = (value: string, event: React.ChangeEvent<HTMLInputElement>) => {
-    this.triggerExtenalChange(value, event);
+    this.triggerExtenalEvent(this.props.onChange)(value, event);
 
     this.onOpen();
   };
 
+  onKeyDown = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onKeyDown)(value, event);
+  }
+
+  onKeyUp = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onKeyUp)(value, event);
+  }
+
+  onKeyPress = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onKeyPress)(value, event);
+  }
+
+  onSubmit = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onSubmit)(value, event);
+  }
+
+  onFocus = (value: string, event:  React.FocusEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onFocus)(value, event);
+  }
+
   onBlur = (value: string, event: React.FocusEvent<HTMLInputElement>) => {
-    if (typeof this.props.onBlur === "function") {
-      this.props.onBlur(value, event);
-    }
+    this.triggerExtenalEvent(this.props.onBlur)(value, event);
 
     if (event.relatedTarget) {
       this.onClose();
@@ -161,7 +215,7 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
   };
 
   onSelectOption = (option: string) => {
-    this.triggerExtenalChange(option, null);
+    this.triggerExtenalEvent(this.props.onChange)(option, null);
     this.onClose();
     if (typeof this.props.onSubmit === "function") {
       this.props.onSubmit(option, null);
@@ -181,21 +235,25 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
 
     if (this.props.matchingOptionsOnly) {
       const currentValue = this.props.value.toLowerCase();
-      return this.props.options.filter((value) => value.toLowerCase().includes(currentValue));
+      return this.props.options.filter((option: string | ITypeaheadInputOption) => {
+        const value: string = typeof option === "string" ? option : option.value;
+        return value.toLowerCase().includes(currentValue);
+      });
     }
 
     return this.props.options;
   }
 
   renderOptions() {
-    return this.getOptions().map((option: string) => {
+    return this.getOptions().map((option: string | ITypeaheadInputOption) => {
+      const value = typeof option === "string" ? option : option.value;
       return (
         <div
-          key={option}
+          key={value}
           className={getElementName("typeahead-input", "option")}
-          onClick={() => this.onSelectOption(option)}
+          onClick={() => this.onSelectOption(value)}
         >
-          {option}
+          {value}
         </div>
       );
     });
@@ -221,12 +279,12 @@ export default class InputTypeahead extends React.Component<IInputTypeaheadProps
           shape={this.props.shape}
 
           onChange={this.onChange}
-          onKeyDown={this.props.onKeyDown}
-          onKeyUp={this.props.onKeyUp}
-          onKeyPress={this.props.onKeyPress}
-          onFocus={this.props.onFocus}
+          onKeyDown={this.onKeyDown}
+          onKeyUp={this.onKeyUp}
+          onKeyPress={this.onKeyPress}
+          onFocus={this.onFocus}
           onBlur={this.onBlur}
-          onSubmit={this.props.onSubmit}
+          onSubmit={this.onSubmit}
           onClick={this.onClick}
         />
         {this.isOpened() ? (

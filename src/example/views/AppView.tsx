@@ -17,7 +17,7 @@ import TextArea from "../../components/TextArea";
 import Toggle from "../../components/Toggle";
 import Tooltip from "../../components/Tooltip";
 import Upload from "../../components/Upload";
-import TypeaheadInput from "../../components/TypeaheadInput";
+import TypeaheadInput, { ITypeaheadInputOption } from "../../components/TypeaheadInput";
 
 import settingService from "../../services/settingService";
 
@@ -36,6 +36,8 @@ export interface IAppViewState {
   limit?: number;
   selectValue?: string;
   typeaheadValue?: string;
+  typeaheadValue2?: string;
+  typeaheadKey2?: string;
 }
 
 settingService.setIcons({
@@ -61,6 +63,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
       limit: 10,
       selectValue: "",
       typeaheadValue: "",
+      typeaheadValue2: "",
     };
   }
 
@@ -89,6 +92,31 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
       "Pinguin",
       "Bear",
       "Lion",
+    ];
+  }
+
+  getTypeaheadOptions2(): ITypeaheadInputOption[] {
+    return [
+      {
+        value: "Owl",
+        key: "owl",
+      },
+      {
+        value: "Coala",
+        key: "coala",
+      },
+      {
+        value: "Pinguin",
+        key: "pinguin",
+      },
+      {
+        value: "Bear",
+        key: "bear",
+      },
+      {
+        value: "Lion",
+        key: "lion",
+      },
     ];
   }
 
@@ -144,6 +172,13 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
   onChangeTypeahead = (value: string) => {
     this.setState({
       typeaheadValue: value,
+    });
+  }
+
+  onChangeTypeahead2 = (option: ITypeaheadInputOption) => {
+    this.setState({
+      typeaheadKey2: option.key,
+      typeaheadValue2: option.value,
     });
   }
 
@@ -653,6 +688,17 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
             hideInitialOptions
           />
         </Block>
+        <h3>Typeahead Input With Keys</h3>
+        <Block>          
+          <TypeaheadInput
+            value={this.state.typeaheadValue2}
+            options={this.getTypeaheadOptions2()}
+            onChange={this.onChangeTypeahead2}
+            matchingOptionsOnly
+            hideInitialOptions
+          />
+        </Block>
+        <Block padding="8 0">Key: {this.state.typeaheadKey2}</Block>
       </div>
     );
   }

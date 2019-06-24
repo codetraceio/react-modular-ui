@@ -13,10 +13,10 @@ exports[`TypeaheadInput should render TypeaheadInput 1`] = `
       onBlur={[Function]}
       onChange={[Function]}
       onClick={[Function]}
-      onFocus={undefined}
+      onFocus={[Function]}
       onKeyDown={[Function]}
-      onKeyPress={undefined}
-      onKeyUp={undefined}
+      onKeyPress={[Function]}
+      onKeyUp={[Function]}
       placeholder="Test"
       value="a"
     />
