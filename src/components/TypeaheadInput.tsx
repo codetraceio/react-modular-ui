@@ -8,7 +8,7 @@ import { getElementName, getBlockName } from "../services/componentService";
 import { updateDropDown } from "../services/dropDownService";
 import { clickOutsideService } from "..";
 
-type TypeaheadInputCallback<T> = (
+export type TypeaheadInputCallback<T> = (
   option: string | ITypeaheadInputOption,
   event: T
 ) => void;
