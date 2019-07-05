@@ -3,7 +3,7 @@ import * as React from "react";
 import settings from "../services/settingService";
 import { generateKey } from "../services/utilService";
 import { updateTooltip } from "../services/tooltipService";
-import {getBlockClassName} from "../services/componentService";
+import { getBlockClassName } from "../services/componentService";
 
 import Portal from "./Portal";
 
@@ -33,6 +33,12 @@ export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltip
 
   updateTooltip(element: HTMLElement) {
     this.tooltipElement = element;
+  }
+
+  componentDidUpdate(prevProps: ITooltipProps) {
+    if (this.props.title !== prevProps.title) {
+      this.onUpdateTooltip();
+    }
   }
 
   onUpdateTooltip() {

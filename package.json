@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "dist/index.js",
   "typings": "typescript/index.d.ts",
   "repository": {
