@@ -107,7 +107,7 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
 
   static getDerivedStateFromProps(props: ITypeaheadInputProps, state: ITypeaheadInputState) {
     if (state.options === props.options) {
-      return;
+      return null;
     }
 
     return {
