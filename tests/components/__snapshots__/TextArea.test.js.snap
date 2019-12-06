@@ -6,16 +6,13 @@ exports[`TextArea should render TextArea 1`] = `
 >
   <textarea
     disabled={true}
-    name={undefined}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
     onKeyPress={[Function]}
     onKeyUp={[Function]}
-    placeholder={undefined}
     style={Object {}}
-    value={undefined}
   />
 </div>
 `;
@@ -26,20 +23,17 @@ exports[`TextArea should render TextArea with height 1`] = `
 >
   <textarea
     disabled={true}
-    name={undefined}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
     onKeyPress={[Function]}
     onKeyUp={[Function]}
-    placeholder={undefined}
     style={
       Object {
         "height": "200px",
       }
     }
-    value={undefined}
   />
 </div>
 `;

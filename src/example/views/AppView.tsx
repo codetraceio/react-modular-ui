@@ -35,9 +35,9 @@ export interface IAppViewState {
   offset?: number;
   limit?: number;
   selectValue?: string;
-  typeaheadValue?: string;
-  typeaheadValue2?: string;
-  typeaheadKey2?: string;
+  typeaheadTitle?: string;
+  secondTypeaheadTitle?: string;
+  secondTypeaheadValue?: string;
 }
 
 settingService.setIcons({
@@ -62,8 +62,9 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
       offset: 10,
       limit: 10,
       selectValue: "",
-      typeaheadValue: "",
-      typeaheadValue2: "",
+      typeaheadTitle: "",
+      secondTypeaheadTitle: "",
+      secondTypeaheadValue: "",
     };
   }
 
@@ -98,24 +99,24 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
   getTypeaheadOptions2(): ITypeaheadInputOption[] {
     return [
       {
-        value: "Owl",
-        key: "owl",
+        title: "Owl",
+        value: "owl",
       },
       {
-        value: "Coala",
-        key: "coala",
+        title: "Coala",
+        value: "coala",
       },
       {
-        value: "Pinguin",
-        key: "pinguin",
+        title: "Pinguin",
+        value: "pinguin",
       },
       {
-        value: "Bear",
-        key: "bear",
+        title: "Bear",
+        value: "bear",
       },
       {
-        value: "Lion",
-        key: "lion",
+        title: "Lion",
+        value: "lion",
       },
     ];
   }
@@ -169,16 +170,16 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     });
   }
 
-  onChangeTypeahead = (value: string) => {
+  onChangeTypeahead = (title: string) => {
     this.setState({
-      typeaheadValue: value,
+      typeaheadTitle: title,
     });
   }
 
   onChangeTypeahead2 = (option: ITypeaheadInputOption) => {
     this.setState({
-      typeaheadKey2: option.key,
-      typeaheadValue2: option.value,
+      secondTypeaheadTitle: option.title,
+      secondTypeaheadValue: option.value,
     });
   }
 
@@ -681,7 +682,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
         <h2>Typeahead Input</h2>
         <Block>          
           <TypeaheadInput
-            value={this.state.typeaheadValue}
+            title={this.state.typeaheadTitle}
             options={this.getTypeaheadOptions()}
             onChange={this.onChangeTypeahead}
             matchingOptionsOnly
@@ -691,14 +692,14 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
         <h3>Typeahead Input With Keys</h3>
         <Block>          
           <TypeaheadInput
-            value={this.state.typeaheadValue2}
+            title={this.state.secondTypeaheadTitle}
             options={this.getTypeaheadOptions2()}
             onChange={this.onChangeTypeahead2}
             matchingOptionsOnly
             hideInitialOptions
           />
         </Block>
-        <Block padding="8 0">Key: {this.state.typeaheadKey2}</Block>
+        <Block padding="8 0">Value: {this.state.secondTypeaheadValue}</Block>
       </div>
     );
   }

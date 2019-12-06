@@ -3,6 +3,5 @@
 exports[`Icon should render Icon 1`] = `
 <div
   className="c-icon -size-32 -width-32 -height-32 -color-primary -rotate-180"
-  onClick={undefined}
 />
 `;

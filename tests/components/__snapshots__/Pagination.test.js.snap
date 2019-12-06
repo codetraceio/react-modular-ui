@@ -10,7 +10,6 @@ exports[`Pagination should render Pagination 1`] = `
   >
     <div
       className="c-icon -height-32"
-      onClick={undefined}
     />
   </div>
   <div
@@ -60,7 +59,6 @@ exports[`Pagination should render Pagination 1`] = `
   >
     <div
       className="c-icon -height-32 -rotate-180"
-      onClick={undefined}
     />
   </div>
 </div>

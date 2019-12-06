@@ -5,11 +5,9 @@ exports[`TypeaheadInput should render TypeaheadInput 1`] = `
   className="c-typeahead-input"
 >
   <div
-    className="c-input -color-success"
+    className="c-input"
   >
     <input
-      disabled={undefined}
-      name={undefined}
       onBlur={[Function]}
       onChange={[Function]}
       onClick={[Function]}
@@ -18,7 +16,6 @@ exports[`TypeaheadInput should render TypeaheadInput 1`] = `
       onKeyPress={[Function]}
       onKeyUp={[Function]}
       placeholder="Test"
-      value="a"
     />
   </div>
 </div>

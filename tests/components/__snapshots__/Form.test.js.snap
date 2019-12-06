@@ -2,13 +2,8 @@
 
 exports[`Form should render Form 1`] = `
 <form
-  action={undefined}
   className="c-form"
-  method={undefined}
-  name={undefined}
   onChange={[Function]}
-  onSubmit={undefined}
-  target={undefined}
 >
   <input
     style={

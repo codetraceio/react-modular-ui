@@ -27,8 +27,8 @@ export type InputEvent = (
 );
 
 export interface ITypeaheadInputOption {
-  value: string; // visible value
-  key: string;   // key
+  title: string;
+  value: string;
 }
 
 export interface ITypeaheadInputProps {
@@ -38,7 +38,7 @@ export interface ITypeaheadInputProps {
   disabled?: boolean;
   name?: string;
   label?: string;
-  value?: string;
+  title?: string;
   placeholder?: string;
   shape?: string;
   opened?: boolean;
@@ -62,21 +62,35 @@ export interface ITypeaheadInputProps {
 export interface ITypeaheadInputState {
   opened?: boolean;
   scroll?: boolean;
+  options?: (string | ITypeaheadInputOption)[];
+  optionMap?: Record<string, string>
+}
+
+function getOptionMap(options: (string | ITypeaheadInputOption)[]) {
+  const optionMap: Record<string, string> = {};
+  options.forEach((option) => {
+    const title = typeof option === "string" ? option : option.title;
+    const value = typeof option === "string" ? option : option.value;
+    optionMap[title] = value;
+  });
+  return optionMap;
 }
 
 export default class TypeaheadInput extends React.Component<ITypeaheadInputProps, ITypeaheadInputState> {
   private dropDownElement: HTMLElement;
   private visibleElement: HTMLElement;
-  private optionMap: {[key: string]: string};
-  private isOptionObject: boolean = false;
 
-  state = {
+  state: ITypeaheadInputState = {
     opened: false,
     scroll: false,
-  }
+    options: [],
+    optionMap: {},
+  };
 
-  componentWillMount() {
-    this.updateOptionMap(this.props.options);
+  constructor(props: ITypeaheadInputProps) {
+    super(props);
+  
+    this.state.optionMap = getOptionMap(props.options);
   }
 
   componentDidMount() {
@@ -91,26 +105,23 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
     clickOutsideService.off(this.onClose);
   }
 
-  componentWillReceiveProps(props: ITypeaheadInputProps) {
-    if (props.options !== this.props.options) {
-      this.updateOptionMap(props.options);
+  static getDerivedStateFromProps(props: ITypeaheadInputProps, state: ITypeaheadInputState) {
+    if (state.options === props.options) {
+      return;
     }
-  }
-  
-  updateOptionMap(options: (string | ITypeaheadInputOption)[]) {
-    this.optionMap = {};
-    if (options && typeof options[0] === "object") {
-      this.isOptionObject = true;
-    }
-    options.forEach((option: string | ITypeaheadInputOption) => {
-      const value = typeof option === "string" ? option : option.value;
-      const key = typeof option === "string" ? option : option.key;
-      this.optionMap[value] = key;
-    });
+
+    return {
+      options: props.options,
+      optionMap: getOptionMap(props.options),
+    };
   }
 
-  isValid(value: string): boolean {
-    return typeof this.optionMap[value] === "string";
+  isOptionObject() {
+    return this.props.options && typeof this.props.options[0] === "object";
+  }
+
+  isValid(title: string): boolean {
+    return typeof this.state.optionMap[title] === "string";
   }
 
   isOpened(): boolean {
@@ -118,13 +129,13 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
   }
 
   triggerExtenalEvent(callback: TypeaheadInputCallback<InputEvent>) {
-    return (value: string, event: InputEvent) => {
+    return (title: string, event: InputEvent) => {
       if (typeof callback === "function") {
-        const key = this.optionMap[value];
-        const option = this.isOptionObject ? {
-          key: key,
-          value: value,
-        } : value;
+        const value = this.state.optionMap[title];
+        const option: ITypeaheadInputOption | string = this.isOptionObject() ? {
+          title,
+          value,
+        } : title;
         callback(option, event);
       }
     }
@@ -153,34 +164,34 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
     }
   };
 
-  onChange = (value: string, event: React.ChangeEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onChange)(value, event);
+  onChange = (title: string, event: React.ChangeEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onChange)(title, event);
 
     this.onOpen();
   };
 
-  onKeyDown = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onKeyDown)(value, event);
+  onKeyDown = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onKeyDown)(title, event);
   }
 
-  onKeyUp = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onKeyUp)(value, event);
+  onKeyUp = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onKeyUp)(title, event);
   }
 
-  onKeyPress = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onKeyPress)(value, event);
+  onKeyPress = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onKeyPress)(title, event);
   }
 
-  onSubmit = (value: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onSubmit)(value, event);
+  onSubmit = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onSubmit)(title, event);
   }
 
-  onFocus = (value: string, event:  React.FocusEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onFocus)(value, event);
+  onFocus = (title: string, event:  React.FocusEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onFocus)(title, event);
   }
 
-  onBlur = (value: string, event: React.FocusEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onBlur)(value, event);
+  onBlur = (title: string, event: React.FocusEvent<HTMLInputElement>) => {
+    this.triggerExtenalEvent(this.props.onBlur)(title, event);
 
     if (event.relatedTarget) {
       this.onClose();
@@ -223,21 +234,21 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
   };
 
   onClick = () => {
-    if (!this.isValid(this.props.value)) {
+    if (!this.isValid(this.props.title)) {
       this.onOpen();
     }
   }
 
   getOptions() {
-    if (!this.props.options || this.props.hideInitialOptions && this.props.value === "") {
+    if (!this.props.options || this.props.hideInitialOptions && this.props.title === "") {
       return [];
     }
 
     if (this.props.matchingOptionsOnly) {
-      const currentValue = this.props.value.toLowerCase();
+      const currentTitle = this.props.title.toLowerCase();
       return this.props.options.filter((option: string | ITypeaheadInputOption) => {
-        const value: string = typeof option === "string" ? option : option.value;
-        return value.toLowerCase().includes(currentValue);
+        const title: string = typeof option === "string" ? option : option.title;
+        return title.toLowerCase().includes(currentTitle);
       });
     }
 
@@ -246,14 +257,14 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
 
   renderOptions() {
     return this.getOptions().map((option: string | ITypeaheadInputOption) => {
-      const value = typeof option === "string" ? option : option.value;
+      const title = typeof option === "string" ? option : option.title;
       return (
         <div
-          key={value}
+          key={title}
           className={getElementName("typeahead-input", "option")}
-          onClick={() => this.onSelectOption(value)}
+          onClick={() => this.onSelectOption(title)}
         >
-          {value}
+          {title}
         </div>
       );
     });
@@ -270,11 +281,11 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
         <Input
           size={this.props.size}
           view={this.props.view}
-          color={this.props.color || this.isValid(this.props.value) && "success"}
+          color={this.props.color || this.isValid(this.props.title) && "success"}
           disabled={this.props.disabled}
           name={this.props.name}
           label={this.props.label}
-          value={this.props.value}
+          value={this.props.title}
           placeholder={this.props.placeholder}
           shape={this.props.shape}
 

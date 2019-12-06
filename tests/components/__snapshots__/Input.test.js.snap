@@ -6,7 +6,6 @@ exports[`Input should render Input 1`] = `
 >
   <input
     disabled={true}
-    name={undefined}
     onBlur={[Function]}
     onChange={[Function]}
     onClick={[Function]}
@@ -14,8 +13,6 @@ exports[`Input should render Input 1`] = `
     onKeyDown={[Function]}
     onKeyPress={[Function]}
     onKeyUp={[Function]}
-    placeholder={undefined}
-    value={undefined}
   />
 </div>
 `;

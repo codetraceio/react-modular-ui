@@ -19,7 +19,6 @@ exports[`Select should render Select 1`] = `
     >
       <div
         className="c-icon -width-12"
-        onClick={undefined}
       />
     </div>
   </div>

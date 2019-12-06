@@ -13,7 +13,7 @@ app.use("/", express.static(`${__dirname}/../build`));
 app.use("/", express.static(`${__dirname}/../../../styles/dist/default`));
 
 const router = express.Router();
-router.get("/", (req: express.Request, res: express.Response): express.Application => {
+router.get("/", (req: express.Request, res: express.Response) => {
   res.end(`<!DOCTYPE html>${ReactDomServer.renderToStaticMarkup(
     <BaseView
       title="React Modular UI"
@@ -23,10 +23,9 @@ router.get("/", (req: express.Request, res: express.Response): express.Applicati
       <div className="app" />
     </BaseView>
   )}`);
-  return this;
 });
 
-router.get("/static", (req: express.Request, res: express.Response): express.Application => {
+router.get("/static", (req: express.Request, res: express.Response) => {
   const portal: JSX.Element[] = [];
   const appView: string = ReactDomServer.renderToStaticMarkup(<AppView portal={portal} />);
   res.end(`<!DOCTYPE html>${ReactDomServer.renderToStaticMarkup(
@@ -39,7 +38,6 @@ router.get("/static", (req: express.Request, res: express.Response): express.App
       {portal}
     </BaseView>
   )}`);
-  return this;
 });
 
 app.use(router);
