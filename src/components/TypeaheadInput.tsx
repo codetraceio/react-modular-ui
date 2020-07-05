@@ -6,7 +6,7 @@ import settingService from "../services/settingService";
 import { generateKey } from "../services/utilService";
 import { getElementName, getBlockName } from "../services/componentService";
 import { updateDropDown } from "../services/dropDownService";
-import { clickOutsideService } from "..";
+import clickOutsideService from "../services/clickOutsideService";
 
 export type TypeaheadInputCallback<T> = (
   option: string | ITypeaheadInputOption,

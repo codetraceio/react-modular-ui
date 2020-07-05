@@ -21,8 +21,8 @@ export {default as TypeaheadInput} from "./components/TypeaheadInput";
 
 export {default as clickOutsideService} from "./services/clickOutsideService";
 export {default as componentService} from "./services/componentService";
-export {default as dropDownService} from "./services/dropDownService";
+export * from "./services/dropDownService";
 export {default as settingService} from "./services/settingService";
-export {default as tooltipService} from "./services/tooltipService";
-export {default as utilService} from "./services/utilService";
+export * from "./services/tooltipService";
+export * from "./services/utilService";
 
