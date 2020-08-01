@@ -228,6 +228,7 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
   onSelectOption = (option: string) => {
     this.triggerExtenalEvent(this.props.onChange)(option, null);
     this.onClose();
+    this.triggerExtenalEvent(this.props.onSubmit)(option, null);
   };
 
   onClick = () => {
