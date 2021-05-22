@@ -79,7 +79,7 @@ export default class Tabs extends React.PureComponent<TabsProps> {
     lineElement.style.width = `${width}px`;
   }
 
-  onChange(value: string | number, option: ITabsOption) {
+  onChange(value: string | number, option: TabsOption) {
     if (typeof this.props.onChange === "function") {
       this.props.onChange(value, option);
     }
@@ -94,7 +94,7 @@ export default class Tabs extends React.PureComponent<TabsProps> {
     );
   }
 
-  renderCount(option: ITabsOption) {
+  renderCount(option: TabsOption) {
     if (typeof option.count !== "string" && typeof option.count !== "number") {
       return null;
     }
