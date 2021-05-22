@@ -11,21 +11,21 @@ import Pagination from "../../components/Pagination";
 import Pill from "../../components/Pill";
 import Progress from "../../components/Progress";
 import Radio from "../../components/Radio";
-import Select, {ISelectOption} from "../../components/Select";
-import Tabs, {ITabsOption} from "../../components/Tabs";
+import Select, { SelectOption } from "../../components/Select";
+import Tabs, { TabsOption } from "../../components/Tabs";
 import TextArea from "../../components/TextArea";
 import Toggle from "../../components/Toggle";
 import Tooltip from "../../components/Tooltip";
 import Upload from "../../components/Upload";
-import TypeaheadInput, { ITypeaheadInputOption } from "../../components/TypeaheadInput";
+import TypeaheadInput, { TypeaheadInputOption } from "../../components/TypeaheadInput";
 
 import settingService from "../../services/settingService";
 
-export interface IAppViewProps {
+export interface AppViewProps {
   portal?: JSX.Element[]
 }
 
-export interface IAppViewState {
+export interface AppViewState {
   tabValue?: string;
   inputValue?: string;
   checked?: boolean;
@@ -48,8 +48,8 @@ settingService.setIcons({
   "drop-down": <svg viewBox="0 0 12 6"><path d="M12 0L6 6 0 0" /></svg>
 });
 
-export default class App extends React.Component<IAppViewProps, IAppViewState> {
-  constructor(props: IAppViewProps) {
+export default class App extends React.Component<AppViewProps, AppViewState> {
+  constructor(props: AppViewProps) {
     super(props);
 
     this.state = {
@@ -68,7 +68,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     };
   }
 
-  getTabOptions(): ITabsOption[] {
+  getTabOptions(): TabsOption[] {
     return [
       {
         title: "Profile",
@@ -96,7 +96,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     ];
   }
 
-  getTypeaheadOptions2(): ITypeaheadInputOption[] {
+  getTypeaheadOptions2(): TypeaheadInputOption[] {
     return [
       {
         title: "Owl",
@@ -121,7 +121,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     ];
   }
 
-  getSelectOptions(): ISelectOption[] {
+  getSelectOptions(): SelectOption[] {
     return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((item) => {
       return {
         title: `Option ${item}`,
@@ -176,7 +176,7 @@ export default class App extends React.Component<IAppViewProps, IAppViewState> {
     });
   }
 
-  onChangeTypeahead2 = (option: ITypeaheadInputOption) => {
+  onChangeTypeahead2 = (option: TypeaheadInputOption) => {
     this.setState({
       secondTypeaheadTitle: option.title,
       secondTypeaheadValue: option.value,

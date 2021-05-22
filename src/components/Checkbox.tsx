@@ -2,9 +2,9 @@ import * as React from "react";
 
 import settings from "../services/settingService";
 
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 
-export interface ICheckboxProps {
+export interface CheckboxProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -17,8 +17,8 @@ export interface ICheckboxProps {
 
 import Icon from "./Icon";
 
-export default class Button extends React.PureComponent<ICheckboxProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Button extends React.PureComponent<CheckboxProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       view: this.props.view,

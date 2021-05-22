@@ -3,6 +3,7 @@
   "rules": {
     "prefer-for-of": false,
     "object-literal-sort-keys": false,
-    "member-access": false
+    "member-access": false,
+    "interface-name": [true, "never-prefix"]
   }
 }

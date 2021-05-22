@@ -2,10 +2,10 @@ import * as React from "react";
 
 import settings from "../services/settingService";
 
-import {IModifiers, getBlockName, getElementName} from "../services/componentService";
+import {Modifiers, getBlockName, getElementName} from "../services/componentService";
 import Icon from "./Icon";
 
-export interface IRadioProps {
+export interface RadioProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -18,8 +18,8 @@ export interface IRadioProps {
   onChange?: (value: string | number | boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default class Radio extends React.PureComponent<IRadioProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Radio extends React.PureComponent<RadioProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       view: this.props.view,

@@ -3,17 +3,17 @@ import * as ReactDom from "react-dom";
 
 import settings from "../services/settingService";
 
-export interface IPortalProps {
+export interface PortalProps {
   portal?: JSX.Element[];
   portalKey?: string;
 
   onUpdate?: () => void;
 }
 
-export default class Portal extends React.PureComponent<IPortalProps, {}> {
+export default class Portal extends React.PureComponent<PortalProps, {}> {
   private portalElement: HTMLElement;
 
-  constructor(props: IPortalProps) {
+  constructor(props: PortalProps) {
     super(props);
 
     if (typeof window === "object" && window.document) {

@@ -1,6 +1,6 @@
 import settings from "../services/settingService";
 
-export interface ISpace {
+export interface Space {
   vertical?: string;
   horizontal?: string;
   top?: string;
@@ -11,11 +11,11 @@ export interface ISpace {
   [key: string]: string;
 }
 
-export interface IModifiers {
-  [key: string]: IProp<string | number | boolean>;
+export interface Modifiers {
+  [key: string]: Prop<string | number | boolean>;
 }
 
-export type IProp<T> = T | {[key: string]: T};
+export type Prop<T> = T | {[key: string]: T};
 
 export function getModifier(...modifiers: string[]): string {
   return modifiers.filter((m) => m !== "").join(settings.getClasses().separator);
@@ -38,7 +38,7 @@ export function getModifierClassName(prefix: string, modifierName: string): stri
     .replace("{m}", camelCaseToDashCase(modifierName));
 }
 
-export function getComplexModifierValues(modifierValue: string): ISpace {
+export function getComplexModifierValues(modifierValue: string): Space {
   const modifierValues = modifierValue.split(" ");
   if (modifierValues.length === 1) {
     return {
@@ -74,7 +74,7 @@ export function getBlockModifierWithComplexValueClassName(
   modifierValue: string,
   modifierMedia: string = "",
 ) {
-  const modifierValues: ISpace = getComplexModifierValues(modifierValue);
+  const modifierValues: Space = getComplexModifierValues(modifierValue);
   return Object.keys(modifierValues)
   .filter((key: string) => modifierValues[key] !== "0")
   .map((key) => {
@@ -92,7 +92,7 @@ export function getElementModifierWithComplexValueClassName(
   modifierValue: string,
   modifierMedia: string = "",
 ) {
-  const modifierValues: ISpace = getComplexModifierValues(modifierValue);
+  const modifierValues: Space = getComplexModifierValues(modifierValue);
   return Object.keys(modifierValues)
   .filter((key) => modifierValues[key] !== "0")
   .map((key) => {
@@ -103,7 +103,7 @@ export function getElementModifierWithComplexValueClassName(
   }).join(" ");
 }
 
-export function getBlockName(blockName: string, modifiers: IModifiers = {}): string {
+export function getBlockName(blockName: string, modifiers: Modifiers = {}): string {
   const blockNameClass: string = getBlockClassName(blockName);
   const modifiersClass: string = getModifiers(blockName, null, modifiers);
 
@@ -117,7 +117,7 @@ export function getBlockName(blockName: string, modifiers: IModifiers = {}): str
 export function getElementName(
   blockName: string,
   elementName: string,
-  modifiers: IModifiers = {},
+  modifiers: Modifiers = {},
   isStatic: boolean = false,
 ) {
   const elementNameClass: string = getElementClassName(blockName, elementName);
@@ -134,7 +134,7 @@ export function getElementName(
 export function getModifiers(
   blockName: string,
   elementName: string,
-  modifiers: IModifiers,
+  modifiers: Modifiers,
   isStatic: boolean = false,
 ): string {
   if (typeof modifiers !== "object") {
@@ -142,7 +142,7 @@ export function getModifiers(
   }
 
   return Object.keys(modifiers).map((key) => {
-    const value: IProp<string | number | boolean> = modifiers[key];
+    const value: Prop<string | number | boolean> = modifiers[key];
     if ((typeof value === "boolean" && value === true) || isStatic) {
       if (elementName) {
         return getModifierClassName(getElementClassName(blockName, elementName), key);

@@ -1,14 +1,14 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName } from "../services/componentService";
+import { Modifiers, getBlockName } from "../services/componentService";
 
-export interface ILoadingProps {
+export interface LoadingProps {
   size?: string | number;
   color?: string;
 }
 
-export default class Loading extends React.PureComponent<ILoadingProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Loading extends React.PureComponent<LoadingProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       color: this.props.color

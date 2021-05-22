@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "typings": "typescript/index.d.ts",
   "repository": {
@@ -27,8 +27,8 @@
     "jest": "^26.1.0",
     "node-sass": "^4.14.1",
     "raf": "^3.4.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-test-renderer": "^16.13.1",
     "ts-loader": "^7.0.5",
     "tslint": "^6.1.2",
@@ -39,8 +39,8 @@
     "webpack-cli": "^3.3.12"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "jest": {
     "collectCoverageFrom": [

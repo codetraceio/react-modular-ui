@@ -1,30 +1,30 @@
 import * as React from "react";
-import { IProp, IModifiers, getBlockName } from "../services/componentService";
+import { Prop, Modifiers, getBlockName } from "../services/componentService";
 
-export interface IBlockProps {
-  layout?: IProp<string>;
-  wrap?: IProp<boolean>;
-  padding?: IProp<string | number>;
-  hide?: IProp<boolean>;
-  margin?: IProp<string | number>;
-  fit?: IProp<boolean>;
-  grow?: IProp<string | number>;
-  shrink?: IProp<string | number>;
-  order?: IProp<string | number>;
-  grid?: IProp<string | number>;
-  align?: IProp<string>;
-  justify?: IProp<string>;
-  scroll?: IProp<string>;
-  spaceHorizontal?: IProp<string | number>;
-  spaceVertical?: IProp<string | number>;
-  height?: IProp<string | number>;
-  width?: IProp<string | number>;
-  container?: IProp<string | number>;
-  modifiers?: IModifiers;
+export interface BlockProps {
+  layout?: Prop<string>;
+  wrap?: Prop<boolean>;
+  padding?: Prop<string | number>;
+  hide?: Prop<boolean>;
+  margin?: Prop<string | number>;
+  fit?: Prop<boolean>;
+  grow?: Prop<string | number>;
+  shrink?: Prop<string | number>;
+  order?: Prop<string | number>;
+  grid?: Prop<string | number>;
+  align?: Prop<string>;
+  justify?: Prop<string>;
+  scroll?: Prop<string>;
+  spaceHorizontal?: Prop<string | number>;
+  spaceVertical?: Prop<string | number>;
+  height?: Prop<string | number>;
+  width?: Prop<string | number>;
+  container?: Prop<string | number>;
+  modifiers?: Modifiers;
 }
 
-export default class Block extends React.PureComponent<IBlockProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Block extends React.PureComponent<BlockProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       layout: this.props.layout,
       wrap: this.props.wrap,

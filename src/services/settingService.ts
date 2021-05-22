@@ -1,17 +1,17 @@
-export interface IClasses {
+export interface Classes {
   block: string;
   element: string;
   modifier: string;
   separator: string;
 }
 
-export interface IIcons {
+export interface Icons {
   [key: string]: any;
 }
 
 export class SettingService {
   private prefix: string = "c-";
-  private classes: IClasses = {
+  private classes: Classes = {
     block: "{b}",
     element: "{b}--{e}",
     modifier: "-{m}",
@@ -20,11 +20,11 @@ export class SettingService {
   private icons: {[key: string]: any} = {};
   private backend: boolean = false;
 
-  public getClasses(): IClasses {
+  public getClasses(): Classes {
     return this.classes;
   }
 
-  public setClasses(classes: IClasses) {
+  public setClasses(classes: Classes) {
     this.classes = classes;
   }
 
@@ -36,11 +36,11 @@ export class SettingService {
     this.prefix = prefix;
   }
 
-  public getIcons(): IIcons {
+  public getIcons(): Icons {
     return this.icons;
   }
 
-  public setIcons(icons: IIcons) {
+  public setIcons(icons: Icons) {
     this.icons = icons;
   }
 

@@ -1,24 +1,24 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 
-export interface ITabsOption {
+export interface TabsOption {
   title: string;
   value: string | number;
   count?: number;
   countColor?: string;
 }
 
-export interface ITabsProps {
+export interface TabsProps {
   size?: string | number;
   color?: string;
-  options: ITabsOption[];
+  options: TabsOption[];
   value: string | number;
 
-  onChange?: (value: string | number, option: ITabsOption) => void;
+  onChange?: (value: string | number, option: TabsOption) => void;
 }
 
-export default class Tabs extends React.PureComponent<ITabsProps> {
+export default class Tabs extends React.PureComponent<TabsProps> {
   private element: HTMLElement = null;
   private lineElement: HTMLElement = null;
   private optionElements: {[key: string]: HTMLElement} = {};
@@ -30,14 +30,14 @@ export default class Tabs extends React.PureComponent<ITabsProps> {
     this.updateLine();
   }
 
-  getModifierObject(): IModifiers {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       color: this.props.color
     };
   }
 
-  getOptionModifiers(option: ITabsOption): IModifiers {
+  getOptionModifiers(option: TabsOption): Modifiers {
     if (option.value === this.props.value) {
       return {
         selected: true

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName } from "../services/componentService";
+import { Modifiers, getBlockName } from "../services/componentService";
 
-export interface IPillProps {
+export interface PillProps {
   size?: string | number;
   color?: string;
   paddingLeft?: string | number;
@@ -11,8 +11,8 @@ export interface IPillProps {
   onClick?: () => void;
 }
 
-export default class Pill extends React.PureComponent<IPillProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Pill extends React.PureComponent<PillProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       color: this.props.color,

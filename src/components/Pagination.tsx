@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 import Icon from "./Icon";
 
-export interface IPaginationProps {
+export interface PaginationProps {
   size?: string | number;
   color?: string;
   count?: string | number;
@@ -14,7 +14,7 @@ export interface IPaginationProps {
   onChange?: (offset: number, page: number) => void;
 }
 
-export interface IPaginationInfo {
+export interface PaginationInfo {
   count: number;
   limit: number;
   offset: number;
@@ -23,8 +23,8 @@ export interface IPaginationInfo {
   pages: number[];
 }
 
-export default class Pagination extends React.PureComponent<IPaginationProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Pagination extends React.PureComponent<PaginationProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       color: this.props.color,
@@ -59,7 +59,7 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
     return 0;
   }
 
-  getInfo(): IPaginationInfo {
+  getInfo(): PaginationInfo {
     const count: number = this.getCount();
     const limit: number = this.getLimit();
     if (count <= limit) {
@@ -183,7 +183,7 @@ export default class Pagination extends React.PureComponent<IPaginationProps, {}
   }
 
   render() {
-    const info: IPaginationInfo = this.getInfo();
+    const info: PaginationInfo = this.getInfo();
     if (!info) {
       return null;
     }

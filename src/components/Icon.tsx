@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName } from "../services/componentService";
+import { Modifiers, getBlockName } from "../services/componentService";
 import settings from "../services/settingService";
 
-export interface IIconProps {
+export interface IconProps {
   size?: string | number;
   width?: string | number;
   height?: string | number;
@@ -14,7 +14,7 @@ export interface IIconProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-function getModifierObject(props: IIconProps): IModifiers {
+function getModifierObject(props: IconProps): Modifiers {
   return {
     size: props.size,
     width: props.width,
@@ -25,7 +25,7 @@ function getModifierObject(props: IIconProps): IModifiers {
   };
 }
 
-export default class Icon extends React.PureComponent<IIconProps, {}> {
+export default class Icon extends React.PureComponent<IconProps, {}> {
   render() {
     return (
       <div

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 
-export interface ITextAreaProps {
+export interface TextAreaProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -31,8 +31,8 @@ function onEvent(
   }
 }
 
-export default class TextArea extends React.PureComponent<ITextAreaProps, {}> {
-  getModifierObject(): IModifiers {
+export default class TextArea extends React.PureComponent<TextAreaProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       view: this.props.view,

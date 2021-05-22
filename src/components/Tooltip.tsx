@@ -7,7 +7,7 @@ import { getBlockClassName } from "../services/componentService";
 
 import Portal from "./Portal";
 
-export interface ITooltipProps {
+export interface TooltipProps {
   title: string | JSX.Element;
   prefer?: string;
   portal?: JSX.Element[];
@@ -15,11 +15,11 @@ export interface ITooltipProps {
   onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export interface ITooltipState {
+export interface TooltipState {
   show: boolean;
 }
 
-export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltipState> {
+export default class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
   private wrapperElement: HTMLElement = null;
   private tooltipElement: HTMLElement = null;
 
@@ -35,7 +35,7 @@ export default class Tooltip extends React.PureComponent<ITooltipProps, ITooltip
     this.tooltipElement = element;
   }
 
-  componentDidUpdate(prevProps: ITooltipProps) {
+  componentDidUpdate(prevProps: TooltipProps) {
     if (this.props.title !== prevProps.title) {
       this.onUpdateTooltip();
     }

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName } from "../services/componentService";
+import { Modifiers, getBlockName } from "../services/componentService";
 
-export interface IUploadProps {
+export interface UploadProps {
   size?: string | number;
   color?: string;
   disabled?: boolean;
@@ -12,11 +12,11 @@ export interface IUploadProps {
   onChange?: (files: FileList) => void
 }
 
-export interface IUploadState {
+export interface UploadState {
   active: boolean;
 }
 
-export default class Upload extends React.PureComponent<IUploadProps, IUploadState> {
+export default class Upload extends React.PureComponent<UploadProps, UploadState> {
   private element: HTMLDivElement = null;
   private fileElement: HTMLInputElement = null;
 
@@ -24,7 +24,7 @@ export default class Upload extends React.PureComponent<IUploadProps, IUploadSta
     active: false
   };
 
-  getModifierObject(): IModifiers {
+  getModifierObject(): Modifiers {
     return {
       active: this.state.active
     };

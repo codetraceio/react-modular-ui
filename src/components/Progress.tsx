@@ -1,14 +1,14 @@
 import * as React from "react";
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 
-export interface IProgressProps {
+export interface ProgressProps {
   size?: string | number;
   color?: string;
   value: string | number;
 }
 
-export default class Progress extends React.PureComponent<IProgressProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Progress extends React.PureComponent<ProgressProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       color: this.props.color

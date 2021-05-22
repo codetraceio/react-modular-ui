@@ -5,11 +5,11 @@ import { updateDropDown } from "../services/dropDownService";
 import settingService from "../services/settingService";
 import { generateKey } from "../services/utilService";
 
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 import Icon from "./Icon";
 import Portal from "./Portal";
 
-export interface ISelectProps {
+export interface SelectProps {
   placeholder?: string;
   label?: string;
   size?: string | number;
@@ -18,24 +18,24 @@ export interface ISelectProps {
   opened?: boolean;
   fixed?: boolean;
   portal?: JSX.Element[];
-  options?: ISelectOption[];
+  options?: SelectOption[];
   value?: string;
 
   onChangeOpened?: (opened: boolean) => void;
-  onChange?: (value: string, option: ISelectOption) => void;
+  onChange?: (value: string, option: SelectOption) => void;
 }
 
-export interface ISelectState {
+export interface SelectState {
   opened: boolean;
   scroll: boolean;
 }
 
-export interface ISelectOption {
+export interface SelectOption {
   title: string;
   value: string;
 }
 
-export default class Select extends React.PureComponent<ISelectProps, ISelectState> {
+export default class Select extends React.PureComponent<SelectProps, SelectState> {
   private dropDownElement: HTMLElement;
   private selectElement: HTMLElement;
 
@@ -56,7 +56,7 @@ export default class Select extends React.PureComponent<ISelectProps, ISelectSta
     clickOutsideService.off(this.onClose);
   }
 
-  getModifierObject(): IModifiers {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       view: this.props.view,
@@ -65,19 +65,19 @@ export default class Select extends React.PureComponent<ISelectProps, ISelectSta
     };
   }
 
-  getOptionModifierObject(value: string): IModifiers {
+  getOptionModifierObject(value: string): Modifiers {
     return {
       selected: value === this.props.value,
     };
   }
 
-  getOptions(): ISelectOption[] {
+  getOptions(): SelectOption[] {
     return this.props.options || [];
   }
 
   getTitle() {
     if (this.props.value) {
-      const option: ISelectOption = this.props.options.find((option: ISelectOption) => {
+      const option: SelectOption = this.props.options.find((option: SelectOption) => {
         return option.value === this.props.value;
       });
       if (option) {
@@ -145,7 +145,7 @@ export default class Select extends React.PureComponent<ISelectProps, ISelectSta
     }
   };
 
-  onChange = (value: string, option: ISelectOption) => {
+  onChange = (value: string, option: SelectOption) => {
     if (typeof this.props.onChange === "function") {
       this.props.onChange(value, option);
     }
@@ -166,7 +166,7 @@ export default class Select extends React.PureComponent<ISelectProps, ISelectSta
   }
 
   renderOptions() {
-    return this.getOptions().map((option: ISelectOption) => {
+    return this.getOptions().map((option: SelectOption) => {
       return (
         <div
           key={option.value}

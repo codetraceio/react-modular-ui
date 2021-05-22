@@ -1,13 +1,13 @@
 import * as React from "react";
 
-export interface IBaseViewProps {
+export interface BaseViewProps {
   styles?: string;
   scripts?: string;
   title?: string;
   html?: string;
 }
 
-export default class BaseView extends React.Component<IBaseViewProps, {}> {
+export default class BaseView extends React.Component<BaseViewProps, {}> {
   renderStyle() {
     return this.props.styles ? (
       <link rel="stylesheet" href={this.props.styles} />

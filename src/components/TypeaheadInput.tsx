@@ -9,7 +9,7 @@ import { updateDropDown } from "../services/dropDownService";
 import clickOutsideService from "../services/clickOutsideService";
 
 export type TypeaheadInputCallback<T> = (
-  option: string | ITypeaheadInputOption,
+  option: string | TypeaheadInputOption,
   event: T
 ) => void;
 
@@ -26,12 +26,12 @@ export type InputEvent = (
   React.FocusEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>
 );
 
-export interface ITypeaheadInputOption {
+export interface TypeaheadInputOption {
   title: string;
   value: string;
 }
 
-export interface ITypeaheadInputProps {
+export interface TypeaheadInputProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -43,7 +43,7 @@ export interface ITypeaheadInputProps {
   shape?: string;
   opened?: boolean;
   fixed?: boolean;
-  options?: (string | ITypeaheadInputOption)[];
+  options?: (string | TypeaheadInputOption)[];
   matchingOptionsOnly?: boolean;
   hideInitialOptions?: boolean;
 
@@ -59,14 +59,14 @@ export interface ITypeaheadInputProps {
   onClick?: MouseCallback;
 }
 
-export interface ITypeaheadInputState {
+export interface TypeaheadInputState {
   opened?: boolean;
   scroll?: boolean;
-  options?: (string | ITypeaheadInputOption)[];
+  options?: (string | TypeaheadInputOption)[];
   optionMap?: Record<string, string>
 }
 
-function getOptionMap(options: (string | ITypeaheadInputOption)[]) {
+function getOptionMap(options: (string | TypeaheadInputOption)[]) {
   const optionMap: Record<string, string> = {};
   options.forEach((option) => {
     const title = typeof option === "string" ? option : option.title;
@@ -76,18 +76,18 @@ function getOptionMap(options: (string | ITypeaheadInputOption)[]) {
   return optionMap;
 }
 
-export default class TypeaheadInput extends React.Component<ITypeaheadInputProps, ITypeaheadInputState> {
+export default class TypeaheadInput extends React.Component<TypeaheadInputProps, TypeaheadInputState> {
   private dropDownElement: HTMLElement;
   private visibleElement: HTMLElement;
 
-  state: ITypeaheadInputState = {
+  state: TypeaheadInputState = {
     opened: false,
     scroll: false,
     options: [],
     optionMap: {},
   };
 
-  constructor(props: ITypeaheadInputProps) {
+  constructor(props: TypeaheadInputProps) {
     super(props);
   
     this.state.optionMap = getOptionMap(props.options);
@@ -105,7 +105,7 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
     clickOutsideService.off(this.onClose);
   }
 
-  static getDerivedStateFromProps(props: ITypeaheadInputProps, state: ITypeaheadInputState) {
+  static getDerivedStateFromProps(props: TypeaheadInputProps, state: TypeaheadInputState) {
     if (state.options === props.options) {
       return null;
     }
@@ -132,7 +132,7 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
     return (title: string, event: InputEvent) => {
       if (typeof callback === "function") {
         const value = this.state.optionMap[title];
-        const option: ITypeaheadInputOption | string = this.isOptionObject() ? {
+        const option: TypeaheadInputOption | string = this.isOptionObject() ? {
           title,
           value,
         } : title;
@@ -244,7 +244,7 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
 
     if (this.props.matchingOptionsOnly) {
       const currentTitle = this.props.title.toLowerCase();
-      return this.props.options.filter((option: string | ITypeaheadInputOption) => {
+      return this.props.options.filter((option: string | TypeaheadInputOption) => {
         const title: string = typeof option === "string" ? option : option.title;
         return title.toLowerCase().includes(currentTitle);
       });
@@ -254,7 +254,7 @@ export default class TypeaheadInput extends React.Component<ITypeaheadInputProps
   }
 
   renderOptions() {
-    return this.getOptions().map((option: string | ITypeaheadInputOption) => {
+    return this.getOptions().map((option: string | TypeaheadInputOption) => {
       const title = typeof option === "string" ? option : option.title;
       return (
         <div

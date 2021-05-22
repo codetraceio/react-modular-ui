@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName } from "../services/componentService";
+import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 
-export interface IToggleProps {
+export interface ToggleProps {
   size?: string | number;
   color?: string;
   disabled?: boolean;
@@ -11,8 +11,8 @@ export interface IToggleProps {
   onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default class Toggle extends React.PureComponent<IToggleProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Toggle extends React.PureComponent<ToggleProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       color: this.props.color,

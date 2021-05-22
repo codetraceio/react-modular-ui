@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { getBlockName } from "../services/componentService";
 
-export interface IFormProps {
+export interface FormProps {
   action?: string;
   method?: string;
   target?: string;
@@ -12,7 +12,7 @@ export interface IFormProps {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export default class Form extends React.PureComponent<IFormProps, {}> {
+export default class Form extends React.PureComponent<FormProps, {}> {
   onChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     if (typeof this.props.onChange === "function") {
       this.props.onChange(event.target.name, event.target.value, event);

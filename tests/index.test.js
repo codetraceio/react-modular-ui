@@ -25,10 +25,7 @@ const components = [
 
 const services = [
   "clickOutsideService",
-  "dropDownService",
   "settingService",
-  "tooltipService",
-  "utilService",
   "componentService",
 ];
 

@@ -1,14 +1,14 @@
 import React = require("react");
 
-import componentService, { IProp } from "../services/componentService";
+import componentService, { Prop } from "../services/componentService";
 
-interface IGridProps {
-  columns?: IProp<string | number>;
-  space?: IProp<string | number>;
+interface GridProps {
+  columns?: Prop<string | number>;
+  space?: Prop<string | number>;
   templateColumns?: string;
 }
 
-export default class Grid extends React.PureComponent<IGridProps, {}> {
+export default class Grid extends React.PureComponent<GridProps, {}> {
   getModifiers() {
     return {
       columns: this.props.columns,

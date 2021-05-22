@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName } from "../services/componentService";
+import { Modifiers, getBlockName } from "../services/componentService";
 
-export interface IButtonProps {
+export interface ButtonProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -16,8 +16,8 @@ export interface IButtonProps {
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default class Button extends React.PureComponent<IButtonProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Button extends React.PureComponent<ButtonProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       view: this.props.view,

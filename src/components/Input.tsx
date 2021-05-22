@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { IModifiers, getBlockName, getElementName} from "../services/componentService";
+import { Modifiers, getBlockName, getElementName} from "../services/componentService";
 
-export interface IInputProps {
+export interface InputProps {
   size?: string | number;
   view?: string;
   color?: string;
@@ -33,8 +33,8 @@ function onEvent<T>(
   }
 }
 
-export default class Input extends React.PureComponent<IInputProps, {}> {
-  getModifierObject(): IModifiers {
+export default class Input extends React.PureComponent<InputProps, {}> {
+  getModifierObject(): Modifiers {
     return {
       size: this.props.size,
       view: this.props.view,
