@@ -1,4 +1,4 @@
-import React, { DragEvent, useCallback } from "react";
+import * as React from "react";
 import { getDragged, getPlaceholder, setDragged, setPlaceholder } from "../services/dragService";
 
 export interface SortableItem {
@@ -82,14 +82,14 @@ export default function Sortable<T>(props: SortableProps<T>) {
   const isHorizontal = props.layout === "horizontal";
   const lastIndex = props.items.length - 1;
 
-  const getItemStyle = useCallback((index: number) => {
+  const getItemStyle = React.useCallback((index: number) => {
     return {
       marginBottom: !isHorizontal && index !== lastIndex && props.space ? `${props.space}px` : "",
       marginRight: isHorizontal && index !== lastIndex && props.space ? `${props.space}px` : "",
     };
   }, [isHorizontal, lastIndex, props.space]);
 
-  const onDragStart = useCallback((e: DragEvent<HTMLDivElement>) => {
+  const onDragStart = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
     const dragged = e.currentTarget;
     const placeholder = ensurePlacehoder();
     e.dataTransfer.effectAllowed = "move";
@@ -98,7 +98,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
     dragged.parentElement.insertBefore(placeholder, dragged.nextElementSibling);
   }, [props.items, props.useHandle]);
 
-  const onDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
+  const onDragOver = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const dragged = getDragged();
 
@@ -139,7 +139,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
     }
   }, [props.items, isHorizontal]);
 
-  const onMouseDown = useCallback((e: DragEvent<HTMLDivElement>) => {
+  const onMouseDown = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
     if (props.disabled || props.useHandle && !getHandleElement(e.target as HTMLElement)) {
       return;
     }
@@ -150,7 +150,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
     draggable.draggable = true;
   }, [props.items]);
 
-  const onDragEnd = useCallback((e) => {
+  const onDragEnd = React.useCallback((e) => {
     e.preventDefault();
     const dragged = getDragged();
     const placeholder = ensurePlacehoder();
