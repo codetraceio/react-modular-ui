@@ -12,6 +12,7 @@ export interface InputProps {
   value?: string;
   placeholder?: string;
   shape?: string;
+  type?: string;
 
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -86,6 +87,7 @@ export default class Input extends React.PureComponent<InputProps, {}> {
           placeholder={this.props.placeholder}
           value={this.props.value}
           disabled={this.props.disabled}
+          type={this.props.type}
           onChange={this.onChange}
           onKeyDown={this.onKeyDownEvent}
           onKeyUp={this.onKeyUp}
