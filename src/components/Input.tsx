@@ -60,18 +60,6 @@ export default class Input extends React.PureComponent<InputProps, {}> {
     }
   };
 
-  onChange = onEvent<React.ChangeEvent<HTMLInputElement>>(this.props.onChange);
-
-  onKeyUp = onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyUp);
-
-  onKeyDown = onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyDown);
-
-  onFocus = onEvent<React.FocusEvent<HTMLInputElement>>(this.props.onFocus);
-
-  onBlur = onEvent<React.FocusEvent<HTMLInputElement>>(this.props.onBlur);
-
-  onClick = onEvent<React.MouseEvent<HTMLInputElement>>(this.props.onClick);
-
   renderLabel() {
     return this.props.label ? (
       <div className={getElementName("input", "label")}>{this.props.label}</div>
@@ -88,13 +76,13 @@ export default class Input extends React.PureComponent<InputProps, {}> {
           value={this.props.value}
           disabled={this.props.disabled}
           type={this.props.type}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDownEvent}
-          onKeyUp={this.onKeyUp}
-          onKeyPress={this.onKeyDown}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          onClick={this.onClick}
+          onChange={onEvent<React.ChangeEvent<HTMLInputElement>>(this.props.onChange)}
+          onKeyDown={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyDown)}
+          onKeyUp={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyUp)}
+          onKeyPress={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyPress)}
+          onFocus={onEvent<React.FocusEvent<HTMLInputElement>>(this.props.onFocus)}
+          onBlur={onEvent<React.FocusEvent<HTMLInputElement>>(this.props.onBlur)}
+          onClick={onEvent<React.MouseEvent<HTMLInputElement>>(this.props.onClick)}
         />
       </div>
     );
