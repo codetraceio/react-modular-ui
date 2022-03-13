@@ -12,6 +12,7 @@ export interface TabsOption {
 export interface TabsProps {
   size?: string | number;
   color?: string;
+  type?: string;
   options: TabsOption[];
   value: string | number;
 
@@ -33,7 +34,8 @@ export default class Tabs extends React.PureComponent<TabsProps> {
   getModifierObject(): Modifiers {
     return {
       size: this.props.size,
-      color: this.props.color
+      color: this.props.color,
+      type: this.props.type,
     };
   }
 
