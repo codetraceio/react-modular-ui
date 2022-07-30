@@ -47,6 +47,6 @@ export default class Portal extends React.PureComponent<PortalProps, {}> {
       return null;
     }
 
-    return ReactDom.createPortal(this.props.children, this.portalElement);
+    return !settings.isServer() ? ReactDom.createPortal(this.props.children, this.portalElement) : null;
   }
 }

@@ -19,6 +19,7 @@ export class SettingService {
   };
   private icons: {[key: string]: any} = {};
   private backend: boolean = false;
+  private server: boolean = false;
 
   public getClasses(): Classes {
     return this.classes;
@@ -54,6 +55,14 @@ export class SettingService {
 
   public setBackend(backend: boolean) {
     this.backend = backend;
+  }
+
+  public isServer(): boolean {
+    return this.server;
+  }
+
+  public setServer(server: boolean) {
+    this.server = server;
   }
 }
 
