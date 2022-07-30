@@ -6,7 +6,7 @@ import settings from "../services/settingService";
 export interface PortalProps {
   portal?: JSX.Element[];
   portalKey?: string;
-  children: React.ReactElement;
+  children?: JSX.Element | JSX.Element[];
   onUpdate?: () => void;
 }
 
