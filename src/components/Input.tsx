@@ -13,6 +13,8 @@ export interface InputProps {
   placeholder?: string;
   shape?: string;
   type?: string;
+  inputMode?: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
+  pattern?: string;
 
   onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
@@ -76,6 +78,8 @@ export default class Input extends React.PureComponent<InputProps, {}> {
           value={this.props.value}
           disabled={this.props.disabled}
           type={this.props.type}
+          inputMode={this.props.inputMode}
+          pattern={this.props.pattern}
           onChange={onEvent<React.ChangeEvent<HTMLInputElement>>(this.props.onChange)}
           onKeyDown={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyDown)}
           onKeyUp={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyUp)}
