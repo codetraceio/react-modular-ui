@@ -73,7 +73,7 @@ export default class Tabs extends React.PureComponent<TabsProps> {
     if (optionElement) {
       const elementRect = element.getBoundingClientRect();
       const optionRect = optionElement.getBoundingClientRect();
-      left = optionRect.left - elementRect.left;
+      left = optionRect.left - elementRect.left + element.scrollLeft;
       width = optionRect.right - optionRect.left;
     }
 
