@@ -32,7 +32,7 @@ export default {
       control: { type: "boolean" },
     },
     children: {
-      defaultValue: 'Button',
+      defaultValue: "Button",
       control: { type: "text" },
     },
   },
