@@ -5,7 +5,7 @@
   "typings": "typescript/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codetraceio/react-modular-ui"
+    "url": "git+https://github.com/codetraceio/react-modular-ui.git"
   },
   "scripts": {
     "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -14,7 +14,8 @@
     "build": "./run/build.sh",
     "watch": "./run/watch.sh",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=ba6f18b77375"
   },
   "dependencies": {},
   "devDependencies": {
@@ -31,6 +32,7 @@
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "babel-loader": "^8.3.0",
+    "chromatic": "^6.11.4",
     "coveralls": "^3.1.0",
     "jest": "^26.1.0",
     "node-sass": "^4.14.1",
