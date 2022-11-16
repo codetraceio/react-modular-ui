@@ -26,35 +26,22 @@ import {Button} from "react-modular-ui";
 class Example extends React.Component {
   render() {
     return (
-      <Block layout="horizontal" justify="center">
+      <div>
         <Button color="primary">Sign up</Button>
         <Button>Sign in</Button>
-      </Block>
+      </div>
     );
   }
 }
 ```
 
-## Preact support
-
-You can use `preact-modular-ui` package in case you are using preact.
-
-```
-npm install preact-modular-ui --save
-```
-
-or
-
-```
-yarn add preact-modular-ui
-```
 
 # Development
 
 ## Set up
 
 ```
-npm install
+yarn
 ```
 
 ## Run
@@ -62,17 +49,8 @@ npm install
 Build:
 
 ```
-gulp
+yarn build
 ```
-
-Start server:
-
-```
-npm start
-```
-
-Client side rendering example: http://localhost:3000
-Server side rendering example: http://localhost:3000/static
 
 ## Test
 

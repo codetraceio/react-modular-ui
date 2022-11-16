@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "2.1.11",
+  "version": "3.0.0",
   "main": "dist/index.js",
   "typings": "typescript/index.d.ts",
   "repository": {
@@ -8,35 +8,25 @@
     "url": "https://github.com/codetraceio/react-modular-ui"
   },
   "scripts": {
-    "start": "node dist/example/server/index.js",
     "test": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test-dev": "jest --coverage",
     "test-update": "jest --coverage -u",
-    "lint": "./node_modules/tslint/bin/tslint -c tslint.json -t stylish src/**/*.ts",
     "build": "./run/build.sh",
     "watch": "./run/watch.sh"
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/express": "^4.17.6",
     "@types/jest": "^26.0.3",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "coveralls": "^3.1.0",
-    "express": "^4.17.1",
     "jest": "^26.1.0",
     "node-sass": "^4.14.1",
     "raf": "^3.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^16.13.1",
-    "ts-loader": "^7.0.5",
-    "tslint": "^6.1.2",
-    "tslint-react": "^5.0.0",
-    "typescript": "^3.9.6",
-    "uglify-js": "^3.10.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "typescript": "^4.9.3"
   },
   "peerDependencies": {
     "react": "^17.0.2",
