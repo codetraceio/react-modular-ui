@@ -6,8 +6,8 @@
   &:hover {
     background: $hover-background;
   }
-  &:active {
-    background: $background;
+  &:focus {
+    background: $hover-background;
   }
 }
 
@@ -25,7 +25,7 @@
       color: lighten($text-color, 10);
     }
   }
-  &:active {
+  &:focus {
     background: transparent;
     color: darken($text-color, 10);
   }
@@ -37,7 +37,7 @@
   &:hover {
     background: rgba(#ffffff, 0.5);
   }
-  &:active {
+  &:focus {
     background: rgba(#ffffff, 0.3);
   }
 }
@@ -58,7 +58,7 @@
   padding: 0 $padding;
   font-size: $font-size;
   & > * {
-    margin-left: ($size / 8);
+    margin-left: calc($size / 8);
     &:first-child {
       margin-left: 0;
     }
@@ -73,73 +73,41 @@
   align-items: center;
   text-transform: uppercase;
   font-weight: bold;
-  border-radius: #{$border-radius}px;
+  border-radius: $border-radius;
   cursor: pointer;
   user-select: none;
   outline: none;
   min-width: 100px;
 
-  &.-size-24 {
+  &[data-size='24'] {
     @include button-size(24px, 8px, 14px);
   }
 
-  &.-size-32 {
+  &[data-size='32'] {
     @include button-size(32px, 12px, 16px);
   }
 
-  &.-size-40 {
-    @include button-size(40px, 24px, 18px);
-  }
-
-  &.-size-48 {
+  &[data-size='48'] {
     @include button-size(48px, 24px, 20px);
   }
 
-  &.-size-56 {
+  &[data-size='56'] {
     @include button-size(56px, 24px, 24px);
   }
 
-  &.-padding-left-8 {
-    padding-left: 8px;
-  }
-
-  &.-shape-rounded {
-    border-radius: 12px;
-  }
-
-  &.-shape-rounded.-size-24 {
-    border-radius: 12px;
-  }
-
-  &.-shape-rounded.-size-32 {
-    border-radius: 16px;
-  }
-
-  &.-shape-rounded.-size-48 {
-    border-radius: 24px;
-  }
-
-  &.-shape-rounded.-size-56 {
-    border-radius: 28px;
-  }
-
-  &.-shape-rectangle {
+  &[data-shape='rectangle'] {
     border-radius: 0;
   }
 
-  &.-color-primary {
+  &[data-color=primary] {
     @include button-default($color-primary, rgba($color-primary, .9), #ffffff);
   }
 
-  &.-color-success {
+  &[data-color=success] {
     @include button-default($color-success, rgba($color-success, .9), #ffffff);
   }
 
-  &.-color-light {
-    @include button-default($color-light, rgba($color-light, .9), $color-default);
-  }
-
-  &.-color-danger {
+  &[data-color=danger] {
     @include button-default($color-danger, rgba($color-danger, .9), $color-light);
   }
 
@@ -203,7 +171,7 @@
     border-width: 1px;
   }
 
-  &.-disabled {
+  &[aria-disabled=true] {
     opacity: .5;
     pointer-events: none;
   }

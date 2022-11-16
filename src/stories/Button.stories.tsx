@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentMeta } from "@storybook/react";
 
 import UiButton, { ButtonProps } from "../components/Button";
-import "../../styles/dist/default/index.css";
+import "../../styles/src/default/button.scss";
 
 export default {
   title: "Button",
@@ -13,16 +13,27 @@ export default {
       control: { type: "select" },
     },
     color: {
-      options: ["primary", "secondary", "warning", "danger", "success"],
+      defaultValue: "primary",
+      options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
     variant: {
-      options: ["outlined", "contained"],
+      defaultValue: "contained",
+      options: ["contained", "outlined"],
+      control: { type: "select" },
+    },
+    shape: {
+      defaultValue: "default",
+      options: ["default", "rectangle"],
       control: { type: "select" },
     },
     disabled: {
       defaultValue: false,
       control: { type: "boolean" },
+    },
+    children: {
+      defaultValue: 'Button',
+      control: { type: "text" },
     },
   },
 } as ComponentMeta<typeof UiButton>;
