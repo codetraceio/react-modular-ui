@@ -3,7 +3,6 @@
 Customizable Isomorphic React UI library.   
 
 [![Coverage Status](https://coveralls.io/repos/github/codetraceio/react-modular-ui/badge.svg?branch=master)](https://coveralls.io/github/codetraceio/react-modular-ui?branch=master)
-[![Stories in Ready](https://img.shields.io/waffle/label/codetraceio/react-modular-ui.svg)](https://waffle.io/codetraceio/react-modular-ui)
 
 ## Installation
 
