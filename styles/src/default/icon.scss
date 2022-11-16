@@ -35,19 +35,28 @@
     @include icon-size(24px);
   }
 
+  &.-size-16, &.-size-16 svg {
+    @include icon-size(16px);
+  }
 
-  @each $i in (12 16 24 32 48 64) {
-    &.-size-#{$i}, &.-size-#{$i} svg {
-      @include icon-size(#{$i}px);
-    }
+  &.-width-16, &.-width-16 svg {
+    @include icon-width(16px);
+  }
 
-    &.-width-#{$i}, &.-width-#{$i} svg {
-      @include icon-width(#{$i}px);
-    }
+  &.-height-16, &.-height-16 svg {
+    @include icon-height(16px);
+  }
 
-    &.-height-#{$i}, &.-height-#{$i} svg {
-      @include icon-height(#{$i}px);
-    }
+  &.-size-32, &.-size-32 svg {
+    @include icon-size(32px);
+  }
+
+  &.-width-32, &.-width-32 svg {
+    @include icon-width(32px);
+  }
+
+  &.-height-32, &.-height-32 svg {
+    @include icon-height(32px);
   }
 
   &.-color-primary {
