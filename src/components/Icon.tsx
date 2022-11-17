@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, { MouseEvent } from "react";
 
-import { Modifiers, getBlockName } from "../services/componentService";
 import settings from "../services/settingService";
+import { className } from "../utils/className";
 
 export interface IconProps {
   size?: string | number;
@@ -9,31 +9,23 @@ export interface IconProps {
   height?: string | number;
   color?: string;
   rotate?: string | number;
-  name?: string;
+  icon?: string;
 
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-function getModifierObject(props: IconProps): Modifiers {
-  return {
-    size: props.size,
-    width: props.width,
-    height: props.height,
-    color: props.color,
-    rotate: props.rotate,
-    clickable: !!props.onClick,
-  };
-}
-
-export default class Icon extends React.PureComponent<IconProps, {}> {
-  render() {
-    return (
-      <div
-        className={getBlockName("icon", getModifierObject(this.props))}
-        onClick={this.props.onClick}
-      >
-        {settings.getIcon(this.props.name)}
-      </div>
-    );
-  }
+export default function Icon(props: IconProps) {
+  return (
+    <span
+      className={className("icon")}
+      data-size={props.size}
+      data-width={props.width}
+      data-height={props.height}
+      data-color={props.color}
+      data-rotate={props.rotate}
+      onClick={props.onClick}
+    >
+      {settings.getIcon(props.icon)}
+    </span>
+  );
 }

@@ -3,6 +3,7 @@ import { ComponentMeta } from "@storybook/react";
 
 import UiButton, { ButtonProps } from "../components/Button";
 import "../../styles/src/default/button.scss";
+import { ThemeDecorator } from "./ThemeDecorator";
 
 export default {
   title: "Button",
@@ -18,8 +19,8 @@ export default {
       control: { type: "select" },
     },
     variant: {
-      defaultValue: "contained",
-      options: ["contained", "outlined"],
+      defaultValue: "default",
+      options: ["default", "outline"],
       control: { type: "select" },
     },
     shape: {
@@ -36,7 +37,8 @@ export default {
       control: { type: "text" },
     },
   },
-} as ComponentMeta<typeof UiButton>;
+  decorators: [ThemeDecorator],
+};
 
 export const Button = (props: ButtonProps) => {
   return <UiButton {...props} />

@@ -3,6 +3,7 @@ import { ComponentMeta } from "@storybook/react";
 
 import UiIcon, { IconProps } from "../components/Icon";
 import "../../styles/src/default/icon.scss";
+import { ThemeDecorator } from "./ThemeDecorator";
 
 export default {
   title: "Icon",
@@ -17,26 +18,13 @@ export default {
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
-    variant: {
-      defaultValue: "contained",
-      options: ["contained", "outlined"],
-      control: { type: "select" },
-    },
-    shape: {
-      defaultValue: "default",
-      options: ["default", "rectangle"],
-      control: { type: "select" },
-    },
     disabled: {
       defaultValue: false,
       control: { type: "boolean" },
     },
-    children: {
-      defaultValue: "Button",
-      control: { type: "text" },
-    },
   },
-} as ComponentMeta<typeof UiIcon>;
+  decorators: [ThemeDecorator],
+};
 
 export const Icon = (props: IconProps) => {
   return <UiIcon {...props} />
