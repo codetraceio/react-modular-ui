@@ -1,6 +1,7 @@
 @import "./constants.scss";
 
 .c-checkbox {
+  font-family: sans-serif;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -15,36 +16,36 @@
     height: 24px;
     background: $color-light-grey;
     border: 1px solid $color-grey;
-    border-radius: #{$border-radius}px;
+    border-radius: $border-radius;
   }
 
-  &.-disabled {
+  &[aria-disabled='true'] {
     opacity: .5;
     pointer-events: none;
   }
-  &.-size-16 {
+  &[data-size='16'] {
     font-size: 14px;
   }
 
-  &.-size-16 &--icon {
+  &[data-size='16'] &--icon {
     width: 16px;
     height: 16px;
   }
 
-  &.-size-24 {
+  &[data-size='24'] {
     font-size: 16px;
   }
 
-  &.-size-24 &--icon {
+  &[data-size='24'] &--icon {
     width: 24px;
     height: 24px;
   }
 
-  &.-size-32 {
+  &[data-size='32'] {
     font-size: 20px;
   }
 
-  &.-size-32 &--icon {
+  &[data-size='32'] &--icon {
     width: 32px;
     height: 32px;
   }
@@ -56,11 +57,11 @@
     }
   }
 
-  &[aria-checked=true] &--icon.-checked {
+  &[aria-checked='true'] &--icon.-checked {
     display: none;
   }
 
-  &[aria-checked=false] &--icon.-not-checked {
+  &[aria-checked='false'] &--icon.-not-checked {
     display: none;
   }
 }

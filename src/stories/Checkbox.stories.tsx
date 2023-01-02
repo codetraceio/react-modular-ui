@@ -1,33 +1,16 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 
-import UiIcon, { IconProps } from "../components/Icon";
-import "../../styles/src/default/icon.scss";
+import UiCheckbox, { CheckboxProps } from "../components/Checkbox";
+import "../../styles/src/default/checkbox.scss";
 import { ThemeDecorator } from "./ThemeDecorator";
 import settingService from "../services/settingService";
 
 export default {
-  title: "Icon",
-  component: UiIcon,
+  title: "Checkbox",
+  component: UiCheckbox,
   argTypes: {
-    icon: {
-      options: ["checkbox", "radio", "pagination", "drop-down", "handle"],
-      control: { type: "select" },
-      defaultValue: "checkbox",
-    },
     size: {
       options: [16, 24, 32],
-      control: { type: "select" },
-    },
-    width: {
-      options: [16, 24, 32],
-      control: { type: "select" },
-    },
-    height: {
-      options: [16, 24, 32],
-      control: { type: "select" },
-    },
-    rotate: {
-      options: [0, 90, 180, 270],
       control: { type: "select" },
     },
     color: {
@@ -35,9 +18,21 @@ export default {
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
+    variant: {
+      defaultValue: "default",
+      options: ["default", "outline"],
+      control: { type: "select" },
+    },
     disabled: {
       defaultValue: false,
       control: { type: "boolean" },
+    },
+    checked: {
+      control: { type: "none" },
+    },
+    children: {
+      defaultValue: "Checkbox",
+      control: { type: "text" },
     },
   },
   decorators: [ThemeDecorator],
@@ -51,6 +46,12 @@ settingService.setIcons({
   "handle": <svg viewBox="0 0 14 24"><path d="M3 3h3v3H3zM3 8h3v3H3zM3 13h3v3H3zM3 18h3v3H3zM8 3h3v3H8zM8 8h3v3H8zM8 13h3v3H8zM8 18h3v3H8z" /></svg>,
 });
 
-export const Icon = (props: IconProps) => {
-  return <UiIcon {...props} />
+export const Checkbox = (props: CheckboxProps) => {
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = useCallback((checked: boolean) => {
+    setChecked(checked);
+  }, []);
+
+  return <UiCheckbox {...props} checked={checked} onChange={handleChange} />
 };

@@ -3,22 +3,28 @@ import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
 export interface ButtonProps {
-  size?: number;
+  size?: string | number;
   variant?: string;
   color?: string;
   disabled?: boolean;
   shape?: string;
   name?: string;
+  href?: string;
+  target?: string;
 
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 export default function Button<T extends ButtonProps>(props: PropsWithChildren<T>) {
   const theme = useContext(ThemeContext);
 
+  const TagName = props.href ? "a" : "div";
+
   return (
-    <div
+    <TagName
       className={className("button")}
+      href={props.href}
+      target={props.target}
       data-name={props.name}
       data-size={props.size}
       data-variant={props.variant}
@@ -30,6 +36,6 @@ export default function Button<T extends ButtonProps>(props: PropsWithChildren<T
       onClick={props.onClick}
     >
       {props.children}
-    </div>
+    </TagName>
   );
 }
