@@ -1,4 +1,7 @@
+@import "./constants.scss";
+
 .c-modal {
+  font-family: sans-serif;
   position: fixed;
   top: 0;
   right: 0;
@@ -14,5 +17,7 @@
     background: white;
     max-width: calc(100% - 32px);
     max-height: calc(100% - 32px);
+    border-radius: $border-radius;
+    padding: 8px;
   }
 }

@@ -1,35 +1,44 @@
-import * as React from "react";
-
-import { getBlockClassName, getElementClassName } from "../services/componentService";
-import Portal from "./Portal";
+import React, { PropsWithChildren, useCallback, useContext, useMemo } from "react";
+import { createPortal } from "react-dom";
+import { getConfig } from "../services/configService";
+import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface ModalProps {
-  portal?: JSX.Element[];
+  show?: boolean;
   name?: string;
 
   onClose?: () => void;
 }
 
-export default class Modal extends React.PureComponent<ModalProps, {}> {
-  onClose = () => {
-    if (typeof this.props.onClose === "function") {
-      this.props.onClose();
-    }
-  };
+export default function Modal(props: PropsWithChildren<ModalProps>) {
+  const { onClose, children } = props;
 
-  onClickContent = (event: React.MouseEvent<HTMLDivElement>) => {
+  const theme = useContext(ThemeContext);
+
+  const handleClose = useCallback(() => {
+    if (typeof onClose === "function") {
+      onClose();
+    }
+  }, [onClose]);
+
+  const handleClickInside = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
 
-  render() {
+  const modalElement = useMemo(() => {
     return (
-      <Portal portal={this.props.portal} portalKey={this.props.name}>
-        <div className={getBlockClassName("modal")} onClick={this.onClose}>
-          <div className={getElementClassName("modal", "content")} onClick={this.onClickContent}>
-            {this.props.children}
-          </div>
+      <div className={className("modal")} data-theme={theme} onClick={handleClose}>
+        <div className={className("modal", "content")} onClick={handleClickInside}>
+          {children}
         </div>
-      </Portal>
+      </div>
     );
+  }, [children]);
+
+  if (!props.show || getConfig().server) {
+    return null;
   }
+
+  return createPortal(modalElement, document.body);
 }

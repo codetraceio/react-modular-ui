@@ -1,6 +1,6 @@
 import React, { MouseEvent } from "react";
+import { getConfig } from "../services/configService";
 
-import settings from "../services/settingService";
 import { className } from "../utils/className";
 
 export interface IconProps {
@@ -10,6 +10,7 @@ export interface IconProps {
   color?: string;
   rotate?: string | number;
   icon?: string;
+  disabled?: boolean;
 
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
@@ -23,9 +24,11 @@ export default function Icon(props: IconProps) {
       data-height={props.height}
       data-color={props.color}
       data-rotate={props.rotate}
+      aria-disabled={props.disabled}
+      tabIndex={props.onClick && !props.disabled ? 1 : -1}
       onClick={props.onClick}
     >
-      {settings.getIcon(props.icon)}
+      {getConfig().icons[props.icon]}
     </span>
   );
 }

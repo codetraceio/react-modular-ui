@@ -47,7 +47,7 @@ export default function Input(props: InputProps) {
 
   const labelElement = useCallback(() => {
     return label ? (
-      <div className={className("input--label")}>{label}</div>
+      <div className={className("input", "label")}>{label}</div>
     ) : null;
   }, [label]);
 
