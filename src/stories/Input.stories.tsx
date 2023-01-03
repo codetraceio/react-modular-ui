@@ -1,16 +1,17 @@
 import React from "react";
 
-import UiButton, { ButtonProps } from "../components/Button";
-import "../../styles/src/default/button.scss";
+import UiInput, { InputProps } from "../components/Input";
+import "../../styles/src/default/input.scss";
 import { ThemeDecorator } from "./ThemeDecorator";
 
 export default {
-  title: "Button",
-  component: UiButton,
+  title: "Input",
+  component: UiInput,
   argTypes: {
     size: {
-      options: [32, 48, 56],
+      options: [24, 32, 48],
       control: { type: "select" },
+      defaultValue: 24,
     },
     color: {
       defaultValue: "primary",
@@ -31,14 +32,10 @@ export default {
       defaultValue: false,
       control: { type: "boolean" },
     },
-    children: {
-      defaultValue: "Button",
-      control: { type: "text" },
-    },
   },
   decorators: [ThemeDecorator],
 };
 
-export const Button = (props: ButtonProps) => {
-  return <UiButton {...props} />
+export const Input = (props: InputProps) => {
+  return <UiInput {...props} />
 };

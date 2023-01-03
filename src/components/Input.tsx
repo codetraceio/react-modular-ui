@@ -1,10 +1,11 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 
-import { Modifiers, getBlockName, getElementName} from "../services/componentService";
+import { className } from "../utils/className";
+import { useEvent } from "../utils/useEvent";
 
 export interface InputProps {
   size?: string | number;
-  view?: string;
+  variant?: string;
   color?: string;
   disabled?: boolean;
   name?: string;
@@ -26,69 +27,55 @@ export interface InputProps {
   onClick?: (value: string, event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
-function onEvent<T>(
-  callback: (value: string, event: T) => void
-) {
-  if (typeof callback === "function") {
-    return (event: T) => {
-      callback((event as any).currentTarget.value, event);
-    }
-  }
-}
+export default function Input(props: InputProps) {
+  const { label, onSubmit, onKeyDown } = props;
 
-export default class Input extends React.PureComponent<InputProps, {}> {
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      color: this.props.color,
-      disabled: this.props.disabled,
-      shape: this.props.shape,
-    };
-  }
-
-  onKeyDownEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (typeof this.props.onKeyDown === "function") {
-      this.props.onKeyDown(event.currentTarget.value, event);
+  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (typeof onKeyDown === "function") {
+      onKeyDown(event.currentTarget.value, event);
     }
     if (event.isPropagationStopped()) {
       return;
     }
     if (
-      typeof this.props.onSubmit === "function" &&
+      typeof onSubmit === "function" &&
       ["Enter", "NumpadEnter"].indexOf(event.key) !== -1 && !event.shiftKey
     ) {
-      this.props.onSubmit(event.currentTarget.value, event);
+      onSubmit(event.currentTarget.value, event);
     }
-  };
+  }, []);
 
-  renderLabel() {
-    return this.props.label ? (
-      <div className={getElementName("input", "label")}>{this.props.label}</div>
+  const labelElement = useCallback(() => {
+    return label ? (
+      <div className={className("input--label")}>{label}</div>
     ) : null;
-  }
+  }, [label]);
 
-  render() {
-    return (
-      <div className={getBlockName("input", this.getModifierObject())}>
-        {this.renderLabel()}
-        <input
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          value={this.props.value}
-          disabled={this.props.disabled}
-          type={this.props.type}
-          inputMode={this.props.inputMode}
-          pattern={this.props.pattern}
-          onChange={onEvent<React.ChangeEvent<HTMLInputElement>>(this.props.onChange)}
-          onKeyDown={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyDown)}
-          onKeyUp={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyUp)}
-          onKeyPress={onEvent<React.KeyboardEvent<HTMLInputElement>>(this.props.onKeyPress)}
-          onFocus={onEvent<React.FocusEvent<HTMLInputElement>>(this.props.onFocus)}
-          onBlur={onEvent<React.FocusEvent<HTMLInputElement>>(this.props.onBlur)}
-          onClick={onEvent<React.MouseEvent<HTMLInputElement>>(this.props.onClick)}
-        />
-      </div>
-    );
-  }
+  return (
+    <div
+      className={className("input")}
+      data-size={props.size}
+      data-variant={props.variant}
+      data-color={props.color}
+      data-shape={props.shape}
+    >
+      {labelElement}
+      <input
+        name={props.name}
+        placeholder={props.placeholder}
+        value={props.value}
+        disabled={props.disabled}
+        type={props.type}
+        inputMode={props.inputMode}
+        pattern={props.pattern}
+        onChange={useEvent(props.onChange)}
+        onKeyDown={handleKeyDown}
+        onKeyUp={useEvent(props.onKeyUp)}
+        onKeyPress={useEvent(props.onKeyPress)}
+        onFocus={useEvent(props.onFocus)}
+        onBlur={useEvent(props.onBlur)}
+        onClick={useEvent(props.onClick)}
+      />
+    </div>
+  );
 }
