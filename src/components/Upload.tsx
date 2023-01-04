@@ -14,7 +14,6 @@ export interface UploadProps {
 
 export default function Upload(props: PropsWithChildren<UploadProps>) {
   const { onChange } = props;
-  const elementRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [active, setActive] = useState(false);
