@@ -4,43 +4,43 @@
   background: $color-light-grey;
   width: 100%;
   flex: 1;
-  border-radius: #{$border-radius}px;
+  border-radius: $border-radius;
 
   &--line {
     height: 4px;
     background: $color-default;
-    border-radius: #{$border-radius}px;
+    border-radius: $border-radius;
   }
 
-  &.-size-4 &--line {
+  &[data-size='4'] &--line {
     height: 4px;
   }
 
-  &.-size-8 &--line {
+  &[data-size='8'] &--line {
     height: 8px;
   }
 
-  &.-size-16 &--line {
+  &[data-size='16'] &--line {
     height: 16px;
   }
 
-  &.-color-primary &--line {
+  &[data-color='primary'] &--line {
     background: $color-primary;
   }
 
-  &.-color-success &--line {
+  &[data-color='success'] &--line {
     background: $color-success;
   }
 
-  &.-color-danger &--line {
+  &[data-color='danger'] &--line {
     background: $color-danger;
   }
 
-  &.-color-light {
+  &[data-color='light'] {
     background: rgba($color-white, .5);
   }
 
-  &.-color-light &--line {
+  &[data-color='light'] &--line {
     background: $color-white;
   }
 }
