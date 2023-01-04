@@ -35,63 +35,63 @@
     @include icon-size(24px);
   }
 
-  &.-size-16, &.-size-16 svg {
+  &[data-size='16'], &[data-size='16'] svg {
     @include icon-size(16px);
   }
 
-  &.-width-16, &.-width-16 svg {
+  &[data-width='16'], &[data-width='16'] svg {
     @include icon-width(16px);
   }
 
-  &.-height-16, &.-height-16 svg {
+  &[data-height='16'], &[data-height='16'] svg {
     @include icon-height(16px);
   }
 
-  &.-size-32, &.-size-32 svg {
+  &[data-size='32'], &[data-size='32'] svg {
     @include icon-size(32px);
   }
 
-  &.-width-32, &.-width-32 svg {
+  &[data-width='32'], &[data-width='32'] svg {
     @include icon-width(32px);
   }
 
-  &.-height-32, &.-height-32 svg {
+  &[data-height='32'], &[data-height='32'] svg {
     @include icon-height(32px);
   }
 
-  &.-color-primary {
+  &[data-color='primary'] {
     fill: $color-primary;
   }
 
-  &.-color-success {
+  &[data-color='success'] {
     fill: $color-success;
   }
 
-  &.-color-danger {
+  &[data-color='danger'] {
     fill: $color-danger;
   }
 
-  &.-color-light {
+  &[data-color='light'] {
     fill: $color-light;
   }
 
-  &.-color-dark {
+  &[data-color='dark'] {
     fill: $color-dark;
   }
 
-  &.-rotate-90 {
+  &[data-rotate='90'] {
     transform: rotate(90deg);
   }
 
-  &.-rotate-180 {
+  &[data-rotate='180'] {
     transform: rotate(180deg);
   }
 
-  &.-rotate-270 {
+  &[data-rotate='270'] {
     transform: rotate(270deg);
   }
 
-  &.-clickable {
+  &[data-clickable='true'] {
     cursor: pointer;
   }
 }

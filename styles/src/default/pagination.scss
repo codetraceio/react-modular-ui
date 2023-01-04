@@ -1,6 +1,7 @@
 @import "./constants.scss";
 
 .c-pagination {
+  font-family: sans-serif;
   display: flex;
   flex-direction: row;
 
@@ -25,7 +26,7 @@
     cursor: default;
   }
 
-  &--item.-current {
+  &--item[data-current='true'] {
     background: $color-primary;
     color: white;
     border-radius: 12px;
