@@ -14,6 +14,7 @@
 }
 
 .c-select {
+  font-family: sans-serif;
   &--box {
     @include select-size(24px, 14px);
     box-sizing: border-box;
@@ -22,27 +23,28 @@
     justify-content: space-between;
     background: white;
     border: 1px solid $color-grey;
-    border-radius: #{$border-radius}px;
+    border-radius: $border-radius;
     cursor: pointer;
   }
-  &--drop-down {
+  &--dropdown {
     @include scroll-bar();
+    font-family: sans-serif;
     position: absolute;
     overflow-x: auto;
     background: $color-light;
     box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
-    border-radius: #{$border-radius}px;
-    &.-orientation-top {
+    border-radius: $border-radius;
+    &[data-orientation='top'] {
       margin-top: -4px;
     }
-    &.-orientation-bottom {
+    &[data-orientation='bottom'] {
       margin-top: 4px;
     }
   }
   &--option {
     padding: 8px;
     cursor: pointer;
-    &.-selected {
+    &[aria-selected='true'] {
       font-weight: bold;
     }
     &:hover {
@@ -57,18 +59,13 @@
     color: $color-dark-grey;
     padding: 0 0 8px 0;
   }
-  &.-selected &--box {
+  &:focus &--box {
     border: 1px solid $color-primary;
   }
-  &.-size-32 &--box {
+  &[data-size='32'] &--box {
     @include select-size(32px, 16px);
   }
-  &.-size-40 &--box {
+  &[data-size='40'] &--box {
     @include select-size(40px, 16px);
-  }
-  &.-view-flat &--box {
-    background: none;
-    border: none;
-    padding: 0;
   }
 }

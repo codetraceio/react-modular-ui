@@ -303,7 +303,7 @@ export default class TypeaheadInput extends React.Component<TypeaheadInputProps,
             onUpdate={this.onUpdateDropDown}
           >
             <div
-              className={getElementName("typeahead-input", "drop-down")}
+              className={getElementName("typeahead-input", "dropdown")}
               ref={this.onUpdateDropDownElement}
               data-inside
             >

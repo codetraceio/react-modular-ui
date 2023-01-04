@@ -1,23 +1,19 @@
-import settingService from "../services/settingService";
-
 export const DROP_DOWN_ORIENTATION_TOP = "top";
 export const DROP_DOWN_ORIENTATION_BOTTOM = "bottom";
 
 export function updateDropDown(
   dropDownElement: HTMLElement,
   selectElement: HTMLElement,
-  scroll: boolean,
-  fixed: boolean,
 ) {
-  const selectRect: ClientRect = selectElement.getBoundingClientRect();
+  const selectRect = selectElement.getBoundingClientRect();
   let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
   let scrollLeft: number = document.documentElement.scrollLeft || document.body.scrollLeft;
   let orientation: string = DROP_DOWN_ORIENTATION_BOTTOM;
 
-  if (fixed) {
-    dropDownElement.style.position = "fixed";
-    scrollLeft = scrollTop = 0;
-  }
+  // if (fixed) {
+  //   dropDownElement.style.position = "fixed";
+  //   scrollLeft = scrollTop = 0;
+  // }
 
   const maxHeight: number = Math.min(Math.max(window.innerHeight - selectRect.bottom - 32, 256), 512);
 
@@ -43,21 +39,13 @@ export function updateDropDown(
   dropDownElement.style.left = left ? `${left}px` : "auto";
   dropDownElement.style.right = right ? `${right}px` : "auto";
 
-  const separator: string = settingService.getClasses().separator;
-  const orientationTopClassName: string = `${separator}orientation${separator}${DROP_DOWN_ORIENTATION_TOP}`;
-  const orientationBottomClassName: string = `${separator}orientation${separator}${DROP_DOWN_ORIENTATION_BOTTOM}`;
-  dropDownElement.classList.add(
-    orientation === DROP_DOWN_ORIENTATION_TOP ? orientationTopClassName : orientationBottomClassName,
-  );
-  dropDownElement.classList.remove(
-    orientation === DROP_DOWN_ORIENTATION_TOP ? orientationBottomClassName : orientationTopClassName,
-  );
-  if (scroll) {
-    const selectedElement: HTMLDivElement = (
-      dropDownElement.querySelector("[data-selected=true]") as HTMLDivElement
-    );
-    if (selectedElement) {
-      dropDownElement.scrollTop = selectedElement.offsetTop;
-    }
-  }
+  dropDownElement.setAttribute("data-orientation", orientation);
+  // if (scroll) {
+  //   const selectedElement: HTMLDivElement = (
+  //     dropDownElement.querySelector("[data-selected=true]") as HTMLDivElement
+  //   );
+  //   if (selectedElement) {
+  //     dropDownElement.scrollTop = selectedElement.offsetTop;
+  //   }
+  // }
 }

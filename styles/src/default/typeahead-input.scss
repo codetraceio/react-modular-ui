@@ -1,5 +1,5 @@
 .c-typeahead-input {
-  &--drop-down {
+  &--dropdown {
     @include scroll-bar();
     position: absolute;
     overflow-x: auto;

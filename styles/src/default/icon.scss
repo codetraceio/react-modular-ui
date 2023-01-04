@@ -35,6 +35,10 @@
     @include icon-size(24px);
   }
 
+  &[data-size='12'], &[data-size='12'] svg {
+    @include icon-size(16px);
+  }
+
   &[data-size='16'], &[data-size='16'] svg {
     @include icon-size(16px);
   }
