@@ -1,7 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 
 import { className } from "../utils/className";
 import { useEvent } from "../utils/useEvent";
+import { ThemeContext } from "./ThemeContext";
 
 export interface InputProps {
   size?: string | number;
@@ -29,6 +30,8 @@ export interface InputProps {
 
 export default function Input(props: InputProps) {
   const { label, onSubmit, onKeyDown } = props;
+
+  const theme = useContext(ThemeContext);
 
   const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     if (typeof onKeyDown === "function") {
@@ -58,6 +61,7 @@ export default function Input(props: InputProps) {
       data-variant={props.variant}
       data-color={props.color}
       data-shape={props.shape}
+      data-theme={theme}
     >
       {labelElement}
       <input

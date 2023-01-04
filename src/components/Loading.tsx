@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface LoadingProps {
   size?: string | number;
@@ -8,11 +9,14 @@ export interface LoadingProps {
 }
 
 export default function Loading(props: LoadingProps) {
+  const theme = useContext(ThemeContext);
+
   return (
     <div
       className={className("loading")}
       data-size={props.size}
       data-color={props.color}
+      data-theme={theme}
     >
       <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
         <circle cx="50" cy="50" r="40" stroke="none" fill="none" strokeWidth="10">

@@ -1,4 +1,4 @@
-import React, { useCallback, PropsWithChildren, MouseEvent } from "react";
+import React, { useCallback, PropsWithChildren, MouseEvent, useContext } from "react";
 
 export interface CheckboxProps {
   size?: string | number;
@@ -13,9 +13,12 @@ export interface CheckboxProps {
 
 import Icon from "./Icon";
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
   const { checked, onChange } = props;
+
+  const theme = useContext(ThemeContext);
 
   const handleChange = useCallback((e: MouseEvent<HTMLDivElement>) => {
     if (typeof onChange === "function") {
@@ -29,6 +32,7 @@ export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
       data-name={props.name}
       data-size={props.size}
       data-variant={props.variant}
+      data-theme={theme}
       aria-checked={props.checked}
       aria-disabled={props.disabled}
       tabIndex={props.disabled ? -1 : 1}

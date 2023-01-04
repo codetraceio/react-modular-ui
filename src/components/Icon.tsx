@@ -1,7 +1,8 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useContext } from "react";
 import { getConfig } from "../services/configService";
 
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface IconProps {
   size?: string | number;
@@ -16,6 +17,8 @@ export interface IconProps {
 }
 
 export default function Icon(props: IconProps) {
+  const theme = useContext(ThemeContext);
+
   return (
     <span
       className={className("icon")}
@@ -24,6 +27,7 @@ export default function Icon(props: IconProps) {
       data-height={props.height}
       data-color={props.color}
       data-rotate={props.rotate}
+      data-theme={theme}
       aria-disabled={props.disabled}
       tabIndex={props.onClick && !props.disabled ? 1 : -1}
       onClick={props.onClick}

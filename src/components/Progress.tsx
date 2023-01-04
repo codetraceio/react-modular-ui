@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface ProgressProps {
   size?: string | number;
@@ -8,11 +9,14 @@ export interface ProgressProps {
 }
 
 export default function Progress(props: ProgressProps) {
+  const theme = useContext(ThemeContext);
+
   return (
     <div
       className={className("progress")}
       data-size={props.size}
       data-color={props.color}
+      data-theme={theme}
     >
       <div
         className={className("progress", "line")}

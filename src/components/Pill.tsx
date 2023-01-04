@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useContext } from "react";
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface PillProps {
   size?: string | number;
@@ -12,6 +13,8 @@ export interface PillProps {
 }
 
 export default function Pill(props: PropsWithChildren<PillProps>) {
+  const theme = useContext(ThemeContext);
+
   return (
     <span
       className={className("pill")}
@@ -20,6 +23,7 @@ export default function Pill(props: PropsWithChildren<PillProps>) {
       data-variant={props.variant}
       data-padding-left={props.paddingLeft}
       data-padding-right={props.paddingRight}
+      data-theme={theme}
       onClick={props.onClick}
     >
       {props.children}
