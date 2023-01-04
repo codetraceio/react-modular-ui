@@ -9,7 +9,7 @@
   min-height: 80px;
   cursor: pointer;
 
-  &.-active {
+  &[data-active='true'] {
     border-color: $color-primary;
   }
 }
