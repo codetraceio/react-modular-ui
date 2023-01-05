@@ -1,10 +1,10 @@
-import * as React from "react";
+import React, { PropsWithChildren, useLayoutEffect, useCallback, useMemo, useRef  } from "react";
 
-import { Modifiers, getBlockName, getElementName } from "../services/componentService";
+import { className } from "../utils/className";
 
 export interface TabsOption {
   title: string;
-  value: string | number;
+  value: string;
   count?: number;
   countColor?: string;
 }
@@ -12,136 +12,99 @@ export interface TabsOption {
 export interface TabsProps {
   size?: string | number;
   color?: string;
-  type?: string;
+  variant?: string;
+  disabled?: boolean;
   options: TabsOption[];
-  value: string | number;
+  value: string;
 
   onChange?: (value: string | number, option: TabsOption) => void;
 }
 
-export default class Tabs extends React.PureComponent<TabsProps> {
-  private element: HTMLElement = null;
-  private lineElement: HTMLElement = null;
-  private optionElements: {[key: string]: HTMLElement} = {};
-
-  componentDidMount() {
-    this.updateLine();
-  }
-  componentDidUpdate() {
-    this.updateLine();
+function updateLine(tabs: HTMLDivElement, line: HTMLDivElement, value: string) {
+  const tab = tabs?.querySelector(`[data-name='${value}']`);
+  if (!tabs || !line || !tab) {
+    return;
   }
 
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      color: this.props.color,
-      type: this.props.type,
-    };
+  let left = 0;
+  let width = 0;
+  if (tab) {
+    const elementRect = tabs.getBoundingClientRect();
+    const optionRect = tab.getBoundingClientRect();
+    left = optionRect.left - elementRect.left + tabs.scrollLeft;
+    width = optionRect.right - optionRect.left;
   }
 
-  getOptionModifiers(option: TabsOption): Modifiers {
-    if (option.value === this.props.value) {
-      return {
-        selected: true
-      };
+  line.style.left = `${left}px`;
+  line.style.width = `${width}px`;
+}
+
+export default function Tabs(props: PropsWithChildren<TabsProps>) {
+  const { options, value, onChange } = props;
+
+  const tabsRef = useRef<HTMLDivElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    updateLine(tabsRef.current, lineRef.current, value);
+  }, [value]);
+
+  const handleChangeCreator = useCallback((value: string | number, option: TabsOption) => () => {
+    if (typeof onChange === "function") {
+      onChange(value, option);
     }
-    return {};
-  }
+  }, []);
 
-  setElement(element: HTMLElement) {
-    this.element = element;
-  }
-
-  setLineElement(element: HTMLElement) {
-    this.lineElement = element;
-  }
-
-  setOptionElement(name: string, element: HTMLElement) {
-    this.optionElements[name] = element;
-  }
-
-  updateLine() {
-    const element = this.element;
-    const lineElement = this.lineElement;
-    const optionElement = this.optionElements[this.props.value];
-    if (!element || !lineElement) {
-      return;
-    }
-
-    let left = 0;
-    let width = 0;
-    if (optionElement) {
-      const elementRect = element.getBoundingClientRect();
-      const optionRect = optionElement.getBoundingClientRect();
-      left = optionRect.left - elementRect.left + element.scrollLeft;
-      width = optionRect.right - optionRect.left;
-    }
-
-    lineElement.style.left = `${left}px`;
-    lineElement.style.width = `${width}px`;
-  }
-
-  onChange(value: string | number, option: TabsOption) {
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(value, option);
-    }
-  }
-
-  renderLine() {
+  const lineElement = useMemo(() => {
     return (
       <div
-        ref={(element) => this.setLineElement(element)}
-        className={getElementName("tabs", "line")}
+        ref={lineRef}
+        className={className("tabs", "line")}
       />
     );
-  }
+  }, []);
 
-  renderCount(option: TabsOption) {
+  const renderCount = useCallback((option: TabsOption) => {
     if (typeof option.count !== "string" && typeof option.count !== "number") {
       return null;
     }
     return (
-      <div
-        className={getElementName("tabs", "count", {
-          countColor: option.countColor
-        })}
-      >
+      <div className={className("tabs", "count")}>
         {option.count}
       </div>
     );
-  }
+  }, []);
 
-  renderOptions() {
-    return this.props.options.map((option) => {
+  const optionsElement = useMemo(() => {
+    return options.map((option) => {
       return (
         <div
           key={option.value}
-          ref={(element) => this.setOptionElement(option.value.toString(), element)}
-          className={getElementName(
-            "tabs",
-            "option",
-            this.getOptionModifiers(option),
-            true
-          )}
-          onClick={() => this.onChange(option.value, option)}
+          className={className("tabs", "option")}
+          data-name={option.value}
+          data-selected={option.value === props.value}
+          onClick={handleChangeCreator(option.value, option)}
         >
           <div>{option.title}</div>
-          {this.renderCount(option)}
+          {renderCount(option)}
         </div>
       );
     });
-  }
+  }, [options, renderCount]);
 
-  render() {
-    return (
-      <div
-        ref={(element) => this.setElement(element)}
-        className={getBlockName("tabs", this.getModifierObject())}
-      >
-        {this.renderLine()}
-        {this.renderOptions()}
-        {this.props.children}
+  return (
+    <div
+      className={className("tabs")}
+      data-size={props.size}
+      data-color={props.color}
+      data-variant={props.variant}
+      data-disabled={props.disabled}
+    >
+      <div ref={tabsRef} className={className("tabs", "options")}>
+        {optionsElement}
+        {lineElement}
       </div>
-    );
-  }
+      {props.children}
+    </div>
+  );
 }

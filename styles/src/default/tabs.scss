@@ -14,21 +14,35 @@
 }
 
 .c-tabs {
-  display: flex;
+  font-family: sans-serif;
   position: relative;
-  border-bottom: 1px solid $color-grey;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid $color-grey;
+    bottom: 0;
+  }
+  &--options {
+    display: flex;
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
   &--option {
     @include tabs-option-size(24px, 14px, 12px);
     display: flex;
     align-items: center;
     user-select: none;
     cursor: pointer;
+    white-space: nowrap;
     &.-selected {
       font-weight: bold;
     }
   }
   &--line {
     position: absolute;
+    z-index: 1;
     bottom: -1px;
     height: 3px;
     background-color: $color-primary;
@@ -44,16 +58,16 @@
     color: $color-light;
     font-weight: bold;
   }
-  &.-size-24 &--option {
+  &[data-size='24'] &--option {
     @include tabs-option-size(24px, 14px, 12px);
   }
-  &.-size-32 &--option {
+  &[data-size='32'] &--option {
     @include tabs-option-size(32px, 14px, 14px);
   }
-  &.-size-48 &--option {
+  &[data-size='48'] &--option {
     @include tabs-option-size(48px, 16px, 16px);
   }
-  &.-size-56 &--option {
+  &[data-size='56'] &--option {
     @include tabs-option-size(56px, 16px, 20px);
   }
 }
