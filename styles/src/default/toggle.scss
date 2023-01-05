@@ -1,6 +1,7 @@
 @import "./constants.scss";
 
 .c-toggle {
+  font-family: sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,40 +46,40 @@
     transition: background .3s ease-in-out;
   }
 
-  &.-checked &--handle, &[aria-checked=true] &--handle {
+  &[aria-checked='true'] &--handle {
     left: 24px;
   }
 
-  &.-checked &--line, &[aria-checked=true] &--line {
+  &[aria-checked='true'] &--line {
     background: $color-primary;
   }
 
-  &.-size-32 &--label {
+  &[data-size='32'] &--label {
     font-size: 16px;
   }
 
-  &.-size-32 &--container{
+  &[data-size='32'] &--container{
     height: 32px;
     width: 48px;
   }
 
-  &.-size-32 &--handle {
+  &[data-size='32'] &--handle {
     height: 26px;
     width: 26px;
   }
 
-  &.-size-32 &--line {
+  &[data-size='32'] &--line {
     top: 6px;
     height: 20px;
     width: 48px;
     border-radius: 10px;
   }
 
-  &.-size-32.-checked &--handle, &.-size-32[aria-checked=true] &--handle {
+  &[data-size='32'][aria-checked=true] &--handle {
     left: 22px;
   }
 
-  &.-disabled {
+  &[aria-disabled=true] {
     opacity: .5;
     pointer-events: none;
   }

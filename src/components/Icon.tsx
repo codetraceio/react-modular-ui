@@ -29,7 +29,7 @@ export default function Icon(props: IconProps) {
       data-rotate={props.rotate}
       data-theme={theme}
       aria-disabled={props.disabled}
-      tabIndex={props.onClick && !props.disabled ? 1 : -1}
+      tabIndex={props.onClick && !props.disabled ? 0 : -1}
       onClick={props.onClick}
     >
       {getConfig().icons[props.icon]}

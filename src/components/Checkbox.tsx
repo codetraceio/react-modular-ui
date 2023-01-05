@@ -35,7 +35,7 @@ export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
       data-theme={theme}
       aria-checked={props.checked}
       aria-disabled={props.disabled}
-      tabIndex={props.disabled ? -1 : 1}
+      tabIndex={props.disabled ? -1 : 0}
       onClick={handleChange}
     >
       <div className={className("checkbox", "icon")}>

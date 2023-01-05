@@ -33,7 +33,7 @@ export default function Radio(props: PropsWithChildren<RadioProps>) {
       data-color={props.color}
       aria-disabled={props.disabled}
       aria-checked={props.checked}
-      tabIndex={1}
+      tabIndex={0}
       onClick={handleChange}
     >
       <div className={className("radio", "icon")}>

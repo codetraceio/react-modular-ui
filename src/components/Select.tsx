@@ -96,7 +96,7 @@ export default function Select(props: SelectProps) {
               key={option.value}
               className={className("select", "option")}
               aria-selected={option.value === value}
-              tabIndex={1}
+              tabIndex={0}
               onClick={handleOptionClickCreator(option.value, option)}
             >
               {option.title}
@@ -120,7 +120,7 @@ export default function Select(props: SelectProps) {
       data-size={props.size}
       data-variant={props.variant}
       aria-disabled={props.disabled}
-      tabIndex={props.disabled ? -1 : 1}
+      tabIndex={props.disabled ? -1 : 0}
     >
       {labelElement}
       <div
