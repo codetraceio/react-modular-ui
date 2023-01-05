@@ -8,7 +8,7 @@ export {default as Loading} from "./components/Loading";
 export {default as Modal} from "./components/Modal";
 export {default as Pill} from "./components/Pill";
 export {default as Tabs} from "./components/Tabs";
-export {default as TextArea} from "./components/TextArea";
+export {default as TextArea} from "./components/Textarea";
 export {default as Toggle} from "./components/Toggle";
 export {default as Tooltip} from "./components/Tooltip";
 export {default as Pagination} from "./components/Pagination";

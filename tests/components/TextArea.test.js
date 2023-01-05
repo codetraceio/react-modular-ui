@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 
-import TextArea from "../../src/components/TextArea";
+import TextArea from "../../src/components/Textarea";
 
 describe("TextArea", () => {
   it("should render TextArea", () => {

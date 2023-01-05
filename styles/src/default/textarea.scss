@@ -19,8 +19,8 @@
     background: $color-light;
     border: 1px solid $color-grey;
     outline: none;
-    border-radius: #{$border-radius}px;
-    font-family: "Source Sans Pro", sans-serif;
+    border-radius: $border-radius;
+    font-family: sans-serif;
     resize: vertical;
     &:focus {
       border: 1px solid $color-primary;
@@ -31,13 +31,13 @@
     color: $color-dark-grey;
     padding: 0 0 8px 0;
   }
-  &.-size-48 textarea {
+  &[data-size='48'] textarea {
     @include textarea-size(48px, 16px);
   }
-  &.-size-64 textarea {
+  &[data-size='64'] textarea {
     @include textarea-size(64px, 16px);
   }
-  &.-size-128 textarea {
+  &[data-size='128'] textarea {
     @include textarea-size(128px, 16px);
   }
 }
