@@ -1,5 +1,5 @@
 import React, { DragEvent, useCallback } from "react";
-import { getDragged, getPlaceholder, setDragged, setPlaceholder } from "../services/dragService";
+import dragService from "../services/dragService";
 
 export interface SortableItem {
   key: string;
@@ -75,7 +75,7 @@ function createPlaceholder() {
 }
 
 function ensurePlaceholder() {
-  return getPlaceholder() || setPlaceholder(createPlaceholder());
+  return dragService.getPlaceholder() || dragService.setPlaceholder(createPlaceholder());
 }
 
 export default function Sortable<T>(props: SortableProps<T>) {
@@ -94,13 +94,13 @@ export default function Sortable<T>(props: SortableProps<T>) {
     const placeholder = ensurePlaceholder();
     e.dataTransfer.effectAllowed = "move";
     placeholder.style.height = `${dragged.offsetHeight}px`;
-    setDragged(dragged);
+    dragService.setDragged(dragged);
     dragged.parentElement.insertBefore(placeholder, dragged.nextElementSibling);
   }, [props.items, props.useHandle]);
 
   const onDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const dragged = getDragged();
+    const dragged = dragService.getDragged();
 
     dragged.style.display = "none";
     const element = getDraggableElement(e.target as HTMLElement);
@@ -152,7 +152,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
 
   const onDragEnd = useCallback((e) => {
     e.preventDefault();
-    const dragged = getDragged();
+    const dragged = dragService.getDragged();
     const placeholder = ensurePlaceholder();
     dragged.style.display = "block";
     dragged.draggable = false;

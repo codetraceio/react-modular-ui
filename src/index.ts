@@ -12,17 +12,15 @@ export {default as TextArea} from "./components/Textarea";
 export {default as Toggle} from "./components/Toggle";
 export {default as Tooltip} from "./components/Tooltip";
 export {default as Pagination} from "./components/Pagination";
-export {default as Portal} from "./components/Portal";
 export {default as Progress} from "./components/Progress";
 export {default as Upload} from "./components/Upload";
 export {default as Select} from "./components/Select";
 export {default as TypeaheadInput} from "./components/TypeaheadInput";
 export {default as Sortable, removeElement, insertElement} from "./components/Sortable";
 
-export {default as clickOutsideService} from "./services/clickOutsideService";
-export {default as componentService} from "./services/componentService";
+export { default as clickOutsideService } from "./services/clickOutsideService";
+export { default as dragService } from "./services/dragService";
+export { default as configService } from "./services/configService";
 export * from "./utils/updateDropDown";
-export {default as settingService} from "./services/settingService";
-export * from "./services/tooltipService";
-export * from "./services/utilService";
+export * from "./utils/updateTooltip";
 

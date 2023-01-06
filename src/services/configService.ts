@@ -5,17 +5,26 @@ interface Config {
   icons: Record<string, JSX.Element>;
 }
 
-let config: Config = {
-  server: false,
-  prefix: "c-",
-  separator: "--",
-  icons: {},
-};
+function configService() {
+  let config: Config = {
+    server: false,
+    prefix: "c-",
+    separator: "--",
+    icons: {},
+  };
+  
+  function getConfig() {
+    return config;
+  }
+  
+  function setConfig(newConfig: Partial<Config>) {
+    config = {...config, ...newConfig};
+  }
 
-export function getConfig() {
-  return config;
+  return {
+    getConfig,
+    setConfig,
+  };
 }
 
-export function setConfig(newConfig: Partial<Config>) {
-  config = {...config, ...newConfig};
-}
+export default configService();

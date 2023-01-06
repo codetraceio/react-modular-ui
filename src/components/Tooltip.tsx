@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { updateTooltip } from "../services/tooltipService";
+import { updateTooltip } from "../utils/updateTooltip";
 import { className } from "../utils/className";
 
 export interface TooltipProps {

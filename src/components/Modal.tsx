@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useCallback, useContext, useMemo } from "react";
 import { createPortal } from "react-dom";
-import { getConfig } from "../services/configService";
+import configService from "../services/configService";
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
@@ -36,7 +36,7 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
     );
   }, [children]);
 
-  if (!props.show || getConfig().server) {
+  if (!props.show || configService.getConfig().server) {
     return null;
   }
 

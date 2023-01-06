@@ -1,5 +1,5 @@
 import React, { MouseEvent, useContext } from "react";
-import { getConfig } from "../services/configService";
+import configService from "../services/configService";
 
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
@@ -32,7 +32,7 @@ export default function Icon(props: IconProps) {
       tabIndex={props.onClick && !props.disabled ? 0 : -1}
       onClick={props.onClick}
     >
-      {getConfig().icons[props.icon]}
+      {configService.getConfig().icons[props.icon]}
     </span>
   );
 }
