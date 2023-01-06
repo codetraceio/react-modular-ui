@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import UiSelect, { SelectProps } from "../components/Select";
 import "../../styles/src/default/select.scss";
@@ -52,5 +52,11 @@ const options = [
 ];
 
 export const Select = (props: SelectProps) => {
-  return <UiSelect {...props} options={options} />
+  const [value, setValue] = useState("value1");
+
+  const handleChange = useCallback((value: string) => {
+    setValue(value);
+  }, []);
+
+  return <UiSelect {...props} options={options} value={value} onChange={handleChange} />
 };

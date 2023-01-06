@@ -2,7 +2,7 @@
 
 @mixin input-size($size, $font-size) {
   height: $size;
-  padding: 0 ($size / 4);
+  padding: 0 calc($size / 4);
   font-size: $font-size;
 }
 

@@ -48,7 +48,6 @@ export const TypeaheadInput = (props: TypeaheadInputProps) => {
   const [value, setValue] = useState(options[0]);
 
   const handleChange = useCallback((newValue: string) => {
-    console.log(newValue);
     setValue(newValue);
   }, []);
 

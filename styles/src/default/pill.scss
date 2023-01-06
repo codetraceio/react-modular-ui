@@ -8,12 +8,12 @@
 @mixin pill-size($size, $font-size) {
   font-size: $font-size;
   height: $size;
-  padding: 0 ($size / 2);
-  border-radius: ($size / 2);
-  min-width: ($size / 2);
+  padding: 0 calc($size / 2);
+  border-radius: calc($size / 2);
+  min-width: calc($size / 2);
   font-weight: bold;
   & > * {
-    margin-left: ($size / 8);
+    margin-left: calc($size / 8);
     &:first-child {
       margin-left: 0;
     }

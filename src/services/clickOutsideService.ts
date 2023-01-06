@@ -7,13 +7,14 @@ function clickOutsideService() {
     });
   }
 
-  function on(element: HTMLElement | null, callback: () => void) {
+  function on(element: HTMLElement | null, innerElements: (HTMLElement | null)[], callback: () => void) {
     if (events.size < 1) {
       document.addEventListener('click', emit);
     }
 
     const eventCallback = (event: MouseEvent) => {
-      if (!element.contains(event.target as HTMLElement)) {
+      const target = event.target as HTMLElement;
+      if (!element.contains(target) && !innerElements.some((innerElement) => innerElement.contains(target))) {
         callback();
       }
     };

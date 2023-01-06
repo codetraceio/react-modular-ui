@@ -60,13 +60,15 @@ export default function Select(props: SelectProps) {
     const handleClickOutside = () => {
       setOpen(false);
     };
-    if (open && dropdownRef.current) {
-      clickOutsideService.on(dropdownRef.current, handleClickOutside);
+    const dropdown = dropdownRef.current;
+    const select = selectRef.current;
+    if (open && dropdown) {
+      clickOutsideService.on(dropdown, [select], handleClickOutside);
     }
     return () => {
-      clickOutsideService.off(dropdownRef.current);
+      clickOutsideService.off(dropdown);
     };
-  });
+  }, [open]);
 
   const titleElement = useMemo(() => {
     if (value) {
