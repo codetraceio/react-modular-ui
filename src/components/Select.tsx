@@ -64,7 +64,7 @@ export default function Select(props: SelectProps) {
     };
   }, [open]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (open) {
       updateDropDown(dropdownRef.current, selectRef.current);
     }

@@ -34,6 +34,8 @@
     background: $color-light;
     box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
     border-radius: $border-radius;
+    top: -100%;
+    left: -100%;
     &[data-orientation='top'] {
       margin-top: -4px;
     }
