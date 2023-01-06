@@ -1,317 +1,155 @@
-import React = require("react");
+import React, { useRef, useState, useMemo, useCallback, KeyboardEvent, MouseEvent, ChangeEvent, FocusEvent, useLayoutEffect, useEffect } from "react";
 
 import Input from "./Input";
-import Portal from "./Portal";
-import settingService from "../services/settingService";
-import { generateKey } from "../services/utilService";
-import { getElementName, getBlockName } from "../services/componentService";
-import { updateDropDown } from "../services/dropDownService";
-import clickOutsideService from "../services/clickOutsideService";
-
-export type TypeaheadInputCallback<T> = (
-  option: string | TypeaheadInputOption,
-  event: T
-) => void;
-
-export type ChangeCallback = TypeaheadInputCallback<React.ChangeEvent<HTMLInputElement>>;
-
-export type KeyboardCallback = TypeaheadInputCallback<React.KeyboardEvent<HTMLInputElement>>;
-
-export type FocusCallback = TypeaheadInputCallback<React.FocusEvent<HTMLInputElement>>;
-
-export type MouseCallback = TypeaheadInputCallback<React.MouseEvent<HTMLInputElement>>;
-
-export type InputEvent = (
-  React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement> |
-  React.FocusEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>
-);
-
-export interface TypeaheadInputOption {
-  title: string;
-  value: string;
-}
-
+import { updateDropDown } from "../utils/updateDropDown";
+import { className } from "../utils/className";
+import { createPortal } from "react-dom";
 export interface TypeaheadInputProps {
   size?: string | number;
-  view?: string;
+  variant?: string;
   color?: string;
   disabled?: boolean;
   name?: string;
   label?: string;
-  title?: string;
+  value?: string;
   placeholder?: string;
   shape?: string;
-  opened?: boolean;
   fixed?: boolean;
-  options?: (string | TypeaheadInputOption)[];
+  options?: string[];
   matchingOptionsOnly?: boolean;
   hideInitialOptions?: boolean;
 
   portal?: JSX.Element[];
 
-  onChange?: ChangeCallback;
-  onKeyDown?: KeyboardCallback;
-  onKeyUp?: KeyboardCallback;
-  onKeyPress?: KeyboardCallback;
-  onSubmit?: KeyboardCallback;
-  onFocus?: FocusCallback;
-  onBlur?: FocusCallback;
-  onClick?: MouseCallback;
+  onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyUp?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyPress?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onSubmit?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onFocus?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
+  onClick?: (value: string, event: MouseEvent<HTMLInputElement>) => void;
 }
 
-export interface TypeaheadInputState {
-  opened?: boolean;
-  scroll?: boolean;
-  options?: (string | TypeaheadInputOption)[];
-  optionMap?: Record<string, string>
-}
+export default function TypeaheadInput(props: TypeaheadInputProps) {
+  const dropdownRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef<HTMLDivElement>();
 
-function getOptionMap(options: (string | TypeaheadInputOption)[]) {
-  const optionMap: Record<string, string> = {};
-  options.forEach((option) => {
-    const title = typeof option === "string" ? option : option.title;
-    const value = typeof option === "string" ? option : option.value;
-    optionMap[title] = value;
-  });
-  return optionMap;
-}
+  const { options, value, onBlur, onFocus, onChange } = props;
 
-export default class TypeaheadInput extends React.Component<TypeaheadInputProps, TypeaheadInputState> {
-  private dropDownElement: HTMLElement;
-  private visibleElement: HTMLElement;
+  const [open, setOpen] = useState(false);
 
-  state: TypeaheadInputState = {
-    opened: false,
-    scroll: false,
-    options: [],
-    optionMap: {},
-  };
-
-  constructor(props: TypeaheadInputProps) {
-    super(props);
+  const matchingOptions = useMemo(() => {
+    return options.filter((option) => option.toLowerCase().includes(value.toLowerCase()));
+  }, [options, value]);
   
-    this.state.optionMap = getOptionMap(props.options);
-  }
+  const optionSet = useMemo(() => {
+    const set = new Set<string>();
+    options.forEach((option) => {
+      set.add(option);
+    });
+    return set;
+  }, [options]);
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.onWindowScroll, true);
-    window.addEventListener("resize", this.onUpdateDropDown, true);
-    clickOutsideService.on(this.onClose);
-  }
+  const handleUpdate = useCallback(() => {
+    updateDropDown(dropdownRef.current, wrapperRef.current);
+  }, []);
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.onWindowScroll, true);
-    window.removeEventListener("resize", this.onUpdateDropDown, true);
-    clickOutsideService.off(this.onClose);
-  }
-
-  static getDerivedStateFromProps(props: TypeaheadInputProps, state: TypeaheadInputState) {
-    if (state.options === props.options) {
-      return null;
+  useLayoutEffect(() => {
+    if (open) {
+      updateDropDown(dropdownRef.current, wrapperRef.current);
     }
+  }, [open]);
 
-    return {
-      options: props.options,
-      optionMap: getOptionMap(props.options),
+  useEffect(() => {
+    window.addEventListener("scroll", handleUpdate, true);
+    window.addEventListener("resize", handleUpdate, true);
+
+    return () => {
+      window.removeEventListener("scroll", handleUpdate, true);
+      window.removeEventListener("resize", handleUpdate, true);
     };
-  }
+  }, []);
 
-  isOptionObject() {
-    return this.props.options && typeof this.props.options[0] === "object";
-  }
+  const handleClickCreator = useCallback((option: string) => () => {
+    onChange(option, null);
 
-  isValid(title: string): boolean {
-    return typeof this.state.optionMap[title] === "string";
-  }
+    setOpen(false);
+  }, [onChange]);
 
-  isOpened(): boolean {
-    return this.props.opened || this.state.opened;
-  }
+  const handleFocus = useCallback((value, event) => {
+    setOpen(true);
 
-  triggerExtenalEvent(callback: TypeaheadInputCallback<InputEvent>) {
-    return (title: string, event: InputEvent) => {
-      if (typeof callback === "function") {
-        const value = this.state.optionMap[title];
-        const option: TypeaheadInputOption | string = this.isOptionObject() ? {
-          title,
-          value,
-        } : title;
-        callback(option, event);
-      }
-    }
-  }
+    onFocus(value, event);
+  }, [setOpen, onFocus]);
 
-  onUpdateDropDownElement = (element: HTMLElement) => {
-    this.dropDownElement = element;
-
-    this.onUpdateDropDown();
-  };
-
-  onUpdateVisibleElement = (element: HTMLElement) => {
-    this.visibleElement = element;
-  };
-
-  onUpdateDropDown = () => {
-    if (!this.dropDownElement) {
+  const handleBlur = useCallback((value, event) => {
+    if (event.relatedTarget && (
+      event.relatedTarget.classList.contains(className("typeahead-input", "dropdown")) ||
+      event.relatedTarget.classList.contains(className("typeahead-input", "option"))
+    )) {
       return;
     }
-    updateDropDown(this.dropDownElement, this.visibleElement, this.state.scroll, this.props.fixed);
+    setOpen(false);
 
-    if (this.state.scroll) {
-      this.setState({
-        scroll: false
-      });
-    }
-  };
+    onBlur(value, event);
+  }, [setOpen, onBlur]);
 
-  onChange = (title: string, event: React.ChangeEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onChange)(title, event);
-
-    this.onOpen();
-  };
-
-  onKeyDown = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onKeyDown)(title, event);
-  }
-
-  onKeyUp = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onKeyUp)(title, event);
-  }
-
-  onKeyPress = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onKeyPress)(title, event);
-  }
-
-  onSubmit = (title: string, event:  React.KeyboardEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onSubmit)(title, event);
-  }
-
-  onFocus = (title: string, event:  React.FocusEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onFocus)(title, event);
-  }
-
-  onBlur = (title: string, event: React.FocusEvent<HTMLInputElement>) => {
-    this.triggerExtenalEvent(this.props.onBlur)(title, event);
-
-    if (event.relatedTarget) {
-      this.onClose();
-    }
-  };
-
-  onWindowScroll = () => {
-    if (this.isOpened()) {
-      const selectElement = this.visibleElement.getBoundingClientRect();
-
-      if (selectElement.bottom < 32 || selectElement.top > window.innerHeight) {
-        this.onClose();
-      } else {
-        this.onUpdateDropDown();
-      }
-    }
-  };
-
-
-  onOpen = () => {
-    this.setState({
-      opened: true,
-    }, () => {
-      this.onUpdateDropDown();
-    });
-  }
-
-  onClose = () => {
-    this.setState({
-      opened: false,
-    });
-  };
-
-  onSelectOption = (option: string) => {
-    this.triggerExtenalEvent(this.props.onChange)(option, null);
-    this.onClose();
-    this.triggerExtenalEvent(this.props.onSubmit)(option, null);
-  };
-
-  onClick = () => {
-    if (!this.isValid(this.props.title)) {
-      this.onOpen();
-    }
-  }
-
-  getOptions() {
-    if (!this.props.options || this.props.hideInitialOptions && this.props.title === "") {
-      return [];
-    }
-
-    if (this.props.matchingOptionsOnly) {
-      const currentTitle = this.props.title.toLowerCase();
-      return this.props.options.filter((option: string | TypeaheadInputOption) => {
-        const title: string = typeof option === "string" ? option : option.title;
-        return title.toLowerCase().includes(currentTitle);
-      });
-    }
-
-    return this.props.options;
-  }
-
-  renderOptions() {
-    return this.getOptions().map((option: string | TypeaheadInputOption) => {
-      const title = typeof option === "string" ? option : option.title;
-      return (
-        <div
-          key={title}
-          className={getElementName("typeahead-input", "option")}
-          onClick={() => this.onSelectOption(title)}
-        >
-          {title}
-        </div>
-      );
-    });
-  }
-
-  render() {
-    const portalKey: string = settingService.isBackend() ? generateKey() : "";
-
+  const dropdownElement = useMemo(() => {
     return (
       <div
-        className={getBlockName("typeahead-input")}
-        ref={this.onUpdateVisibleElement}
+        className={className("typeahead-input", "dropdown")}
+        ref={dropdownRef}
       >
-        <Input
-          size={this.props.size}
-          view={this.props.view}
-          color={this.props.color || this.isValid(this.props.title) && "success"}
-          disabled={this.props.disabled}
-          name={this.props.name}
-          label={this.props.label}
-          value={this.props.title}
-          placeholder={this.props.placeholder}
-          shape={this.props.shape}
-
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown}
-          onKeyUp={this.onKeyUp}
-          onKeyPress={this.onKeyPress}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          onSubmit={this.onSubmit}
-          onClick={this.onClick}
-        />
-        {this.isOpened() ? (
-          <Portal
-            portal={this.props.portal}
-            portalKey={portalKey}
-            onUpdate={this.onUpdateDropDown}
-          >
+        {matchingOptions.map((option: string) => {
+          return (
             <div
-              className={getElementName("typeahead-input", "dropdown")}
-              ref={this.onUpdateDropDownElement}
-              data-inside
+              key={option}
+              className={className("typeahead-input", "option")}
+              tabIndex={0}
+              onClick={handleClickCreator(option)}
             >
-              {this.renderOptions()}
+              {option}
             </div>
-          </Portal>
-         ) : null}
+          );
+        })}
       </div>
     );
-  }
+  }, [matchingOptions, handleClickCreator]);
+
+  const portalElement = useMemo(() => {
+    if (!open) {
+      return;
+    }
+    return createPortal(dropdownElement, document.body);
+  }, [open, dropdownElement]);
+
+  return (
+    <div
+      className={className("typeahead-input")}
+      ref={wrapperRef}
+    >
+      <Input
+        size={props.size}
+        variant={props.variant}
+        color={props.color || optionSet.has(props.value) && "success"}
+        disabled={props.disabled}
+        name={props.name}
+        label={props.label}
+        value={props.value}
+        placeholder={props.placeholder}
+        shape={props.shape}
+
+        onChange={props.onChange}
+        onKeyDown={props.onKeyDown}
+        onKeyUp={props.onKeyUp}
+        onKeyPress={props.onKeyPress}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onSubmit={props.onSubmit}
+        onClick={props.onClick}
+      />
+      {portalElement}
+    </div>
+  );
 }

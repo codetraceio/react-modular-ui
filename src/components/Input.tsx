@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent, useCallback, useContext, useMemo } from "react";
 
 import { className } from "../utils/className";
 import { useEvent } from "../utils/useEvent";
@@ -18,14 +18,14 @@ export interface InputProps {
   inputMode?: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
   pattern?: string;
 
-  onChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onKeyUp?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onKeyPress?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onFocus?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (value: string, event: React.FocusEvent<HTMLInputElement>) => void;
-  onSubmit?: (value: string, event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onClick?: (value: string, event: React.MouseEvent<HTMLInputElement>) => void;
+  onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyUp?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyPress?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onFocus?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
+  onSubmit?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: (value: string, event: MouseEvent<HTMLInputElement>) => void;
 }
 
 export default function Input(props: InputProps) {
@@ -33,7 +33,7 @@ export default function Input(props: InputProps) {
 
   const theme = useContext(ThemeContext);
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
     if (typeof onKeyDown === "function") {
       onKeyDown(event.currentTarget.value, event);
     }
@@ -48,7 +48,7 @@ export default function Input(props: InputProps) {
     }
   }, []);
 
-  const labelElement = useCallback(() => {
+  const labelElement = useMemo(() => {
     return label ? (
       <div className={className("input", "label")}>{label}</div>
     ) : null;

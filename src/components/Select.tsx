@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-import { updateDropDown } from "../services/dropDownService";
+import { updateDropDown } from "../utils/updateDropDown";
 
 import Icon from "./Icon";
 import { className } from "../utils/className";

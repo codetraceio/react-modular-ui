@@ -21,7 +21,7 @@ export {default as Sortable, removeElement, insertElement} from "./components/So
 
 export {default as clickOutsideService} from "./services/clickOutsideService";
 export {default as componentService} from "./services/componentService";
-export * from "./services/dropDownService";
+export * from "./utils/updateDropDown";
 export {default as settingService} from "./services/settingService";
 export * from "./services/tooltipService";
 export * from "./services/utilService";

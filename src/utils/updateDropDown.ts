@@ -5,6 +5,10 @@ export function updateDropDown(
   dropDownElement: HTMLElement,
   selectElement: HTMLElement,
 ) {
+  if (!dropDownElement || !selectElement) {
+    return;
+  }
+
   const selectRect = selectElement.getBoundingClientRect();
   let scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
   let scrollLeft: number = document.documentElement.scrollLeft || document.body.scrollLeft;
