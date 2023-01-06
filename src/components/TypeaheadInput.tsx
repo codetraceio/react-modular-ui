@@ -77,13 +77,13 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
     setOpen(false);
   }, [onChange]);
 
-  const handleFocus = useCallback((value, event) => {
+  const handleFocus = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
     setOpen(true);
 
     onFocus(value, event);
   }, [setOpen, onFocus]);
 
-  const handleBlur = useCallback((value, event) => {
+  const handleBlur = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
     if (event.relatedTarget && (
       event.relatedTarget.classList.contains(className("typeahead-input", "dropdown")) ||
       event.relatedTarget.classList.contains(className("typeahead-input", "option"))

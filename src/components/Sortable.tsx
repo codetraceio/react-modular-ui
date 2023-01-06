@@ -150,7 +150,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
     draggable.draggable = true;
   }, [props.items]);
 
-  const onDragEnd = useCallback((e) => {
+  const onDragEnd = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const dragged = dragService.getDragged();
     const placeholder = ensurePlaceholder();
