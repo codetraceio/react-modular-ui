@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import UiCheckbox, { CheckboxProps } from "../components/Checkbox";
 import "../../styles/src/default/checkbox.scss";
 import { ThemeDecorator } from "./ThemeDecorator";
-import { setConfig } from "../services/configService";
+import configService from "../services/configService";
 
 export default {
   title: "Checkbox",
@@ -38,7 +38,7 @@ export default {
   decorators: [ThemeDecorator],
 };
 
-setConfig({
+configService.setConfig({
   icons: {
     "checkbox": <svg viewBox="0 0 24 24"><path d="M20.785 5.745l-2.346-1.85c-.074-.06-.164-.103-.266-.103-.103 0-.197.043-.27.107L9.37 14.865s-3.356-3.227-3.45-3.32c-.094-.095-.218-.253-.406-.253-.188 0-.273.132-.37.23-.074.077-1.27 1.334-1.86 1.958-.035.04-.056.06-.086.09-.05.073-.085.155-.085.244 0 .094.034.17.085.244l.12.11s5.953 5.72 6.05 5.818c.1.098.22.222.395.222.17 0 .312-.184.393-.265L20.802 6.267c.05-.073.085-.154.085-.248 0-.108-.042-.198-.102-.275z" /></svg>,
     "radio": <svg viewBox="0 0 24 24"><path d="M12 6c-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6z"/></svg>,
