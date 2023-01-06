@@ -5,6 +5,7 @@ import { updateDropDown } from "../utils/updateDropDown";
 import Icon from "./Icon";
 import { className } from "../utils/className";
 import { createPortal } from "react-dom";
+import clickOutsideService from "../../lib/services/clickOutsideService";
 
 export interface SelectProps {
   placeholder?: string;
@@ -43,7 +44,7 @@ export default function Select(props: SelectProps) {
     if (open) {
       updateDropDown(dropdownRef.current, selectRef.current);
     }
-  }, [open]);
+  });
 
   useEffect(() => {
     window.addEventListener("scroll", handleUpdate, true);
@@ -54,6 +55,18 @@ export default function Select(props: SelectProps) {
       window.removeEventListener("resize", handleUpdate, true);
     };
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOpen(false);
+    };
+    if (open && dropdownRef.current) {
+      clickOutsideService.on(dropdownRef.current, handleClickOutside);
+    }
+    return () => {
+      clickOutsideService.off(dropdownRef.current);
+    };
+  });
 
   const titleElement = useMemo(() => {
     if (value) {
