@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { updateDropDown } from "../utils/updateDropDown";
+import { className } from "../utils/className";
+import clickOutsideService from "../services/clickOutsideService";
 
 import Icon from "./Icon";
-import { className } from "../utils/className";
-import { createPortal } from "react-dom";
-import clickOutsideService from "../../lib/services/clickOutsideService";
 
 export interface SelectProps {
   placeholder?: string;
