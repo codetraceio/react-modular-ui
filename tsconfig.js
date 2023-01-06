@@ -2,7 +2,7 @@ module.exports = {
   "target": "ES5",
   "lib": ["ES6", "dom"],
   "noImplicitAny": true,
-  "module": "esnext",
+  "module": "commonjs",
   "moduleResolution": "node",
   "jsx": "react",
   "allowSyntheticDefaultImports": true,
