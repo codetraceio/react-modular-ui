@@ -40,12 +40,6 @@ export default function Select(props: SelectProps) {
     updateDropDown(dropdownRef.current, selectRef.current);
   }, []);
 
-  useLayoutEffect(() => {
-    if (open) {
-      updateDropDown(dropdownRef.current, selectRef.current);
-    }
-  });
-
   useEffect(() => {
     window.addEventListener("scroll", handleUpdate, true);
     window.addEventListener("resize", handleUpdate, true);
@@ -68,6 +62,12 @@ export default function Select(props: SelectProps) {
     return () => {
       clickOutsideService.off(dropdown);
     };
+  }, [open]);
+
+  useLayoutEffect(() => {
+    if (open) {
+      updateDropDown(dropdownRef.current, selectRef.current);
+    }
   }, [open]);
 
   const titleElement = useMemo(() => {
