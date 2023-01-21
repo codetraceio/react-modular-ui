@@ -1,8 +1,7 @@
 {
   "name": "react-modular-ui",
-  "version": "3.0.0-alpha.14",
-  "main": "lib/index.js",
-  "typings": "typescript/index.d.ts",
+  "version": "3.0.0-alpha.15",
+  "main": "lib/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codetraceio/react-modular-ui.git"
