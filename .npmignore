@@ -4,3 +4,8 @@
 /tests
 /run
 /.idea
+/src
+
+jest.config.js
+tsconfig.build.json
+tsconfig.json
