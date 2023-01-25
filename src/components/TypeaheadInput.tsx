@@ -96,6 +96,10 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
   }, [setOpen, onBlur]);
 
   const dropdownElement = useMemo(() => {
+    if (matchingOptions.length === 0 || matchingOptions.length === 1 && matchingOptions[0] === value) {
+      return;
+    }
+
     return (
       <div
         className={className("typeahead-input", "dropdown")}
@@ -107,6 +111,7 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
               key={option}
               className={className("typeahead-input", "option")}
               tabIndex={0}
+              aria-selected={value === option}
               onClick={handleClickCreator(option)}
             >
               {option}
@@ -115,7 +120,7 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
         })}
       </div>
     );
-  }, [matchingOptions, handleClickCreator]);
+  }, [matchingOptions, handleClickCreator, value]);
 
   const portalElement = useMemo(() => {
     if (!open) {
