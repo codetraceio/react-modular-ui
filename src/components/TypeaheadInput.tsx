@@ -71,17 +71,18 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
     };
   }, []);
 
-  const handleClickCreator = useCallback((option: string) => () => {
+    const handleClickCreator = useCallback((option: string) => () => {
     onChange(option, null);
+    onBlur(option, null);
 
     setOpen(false);
-  }, [onChange]);
+  }, [setOpen, onChange, onBlur]);
 
   const handleFocus = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
     setOpen(true);
 
     onFocus(value, event);
-  }, [setOpen, onFocus]);
+  }, [setOpen, setOpen, onFocus]);
 
   const handleBlur = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
     if (event.relatedTarget && (
