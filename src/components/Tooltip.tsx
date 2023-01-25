@@ -1,89 +1,70 @@
-import * as React from "react";
+import React, { PropsWithChildren, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
-import settings from "../services/settingService";
-import { generateKey } from "../services/utilService";
-import { updateTooltip } from "../services/tooltipService";
-import { getBlockClassName } from "../services/componentService";
-
-import Portal from "./Portal";
+import { updateTooltip } from "../utils/updateTooltip";
+import { className } from "../utils/className";
 
 export interface TooltipProps {
   title: string | JSX.Element;
   prefer?: string;
-  portal?: JSX.Element[];
-
-  onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export interface TooltipState {
-  show: boolean;
-}
+export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
-export default class Tooltip extends React.PureComponent<TooltipProps, TooltipState> {
-  private wrapperElement: HTMLElement = null;
-  private tooltipElement: HTMLElement = null;
+  const { title } = props;
 
-  state = {
-    show: false
-  };
+  const [open, setOpen] = useState(false);
 
-  updateWrapper(element: HTMLElement) {
-    this.wrapperElement = element;
-  }
+  useLayoutEffect(() => {
+    updateTooltip(wrapperRef.current, tooltipRef.current, props.prefer);
+  }, [open, props.prefer]);
 
-  updateTooltip(element: HTMLElement) {
-    this.tooltipElement = element;
-  }
+  const handleUpdate = useCallback(() => {
+    updateTooltip(wrapperRef.current, tooltipRef.current, props.prefer);
+  }, [props.prefer]);
 
-  componentDidUpdate(prevProps: TooltipProps) {
-    if (this.props.title !== prevProps.title) {
-      this.onUpdateTooltip();
-    }
-  }
+  useEffect(() => {
+    window.addEventListener("scroll", handleUpdate, true);
+    window.addEventListener("resize", handleUpdate, true);
+    return () => {
+      window.removeEventListener("scroll", handleUpdate, true);
+      window.removeEventListener("resize", handleUpdate, true);
+    };
+  }, [handleUpdate]);
 
-  onUpdateTooltip() {
-    const wrapperElement: HTMLElement = this.wrapperElement;
-    const tooltipElement: HTMLElement = this.tooltipElement;
+  const handleOver = useCallback(() => {
+    setOpen(true);
+  }, []);
 
-    if (!wrapperElement || !tooltipElement) {
-      return;
-    }
+  const handleOut = useCallback(() => {
+    setOpen(false);
+  }, []);
 
-    updateTooltip(wrapperElement, tooltipElement, this.props.prefer);
-  }
-
-  onShowTooltip() {
-    this.setState({
-      show: true
-    }, () => this.onUpdateTooltip());
-  }
-
-  onHideTooltip() {
-    this.setState({
-      show: false
-    });
-  }
-
-  render() {
-    const portalKey: string = settings.isBackend() ? generateKey() : "";
-
+  const tooltipElement = useMemo(() => {
     return (
-      <div
-        className={getBlockClassName("tooltip-wrapper")}
-        onMouseOver={() => this.onShowTooltip()}
-        onMouseOut={() => this.onHideTooltip()}
-        ref={(element) => this.updateWrapper(element)}
-        data-portal-key={portalKey}
-      >
-        {this.props.children}
-        {this.state.show || settings.isBackend() ? (
-          <Portal portal={this.props.portal} portalKey={portalKey}>
-            <div className={getBlockClassName("tooltip")} ref={(element) => this.updateTooltip(element)}>
-              {this.props.title}
-            </div>
-          </Portal>
-        ) : null}
+      <div className={className("tooltip")} ref={tooltipRef}>
+        {title}
       </div>
     );
-  }
+  }, [title]);
+
+  const portalElement = useMemo(() => {
+    if (!open) {
+      return;
+    }
+    return createPortal(tooltipElement, document.body);
+  }, [open]);
+
+  return (
+    <span
+      onMouseOver={handleOver}
+      onMouseOut={handleOut}
+      ref={wrapperRef}
+    >
+      {props.children}
+      {portalElement}
+    </span>
+  );
 }

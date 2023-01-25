@@ -1,153 +1,90 @@
-import * as React from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 
-import { Modifiers, getBlockName, getElementName } from "../services/componentService";
+import { className } from "../utils/className";
 import Icon from "./Icon";
+import { ThemeContext } from "./ThemeContext";
 
 export interface PaginationProps {
   size?: string | number;
   color?: string;
-  count?: string | number;
-  limit?: string | number;
-  offset?: string | number;
+  count?: number;
+  limit?: number;
+  offset?: number;
   hideLastPage?: boolean;
 
   onChange?: (offset: number, page: number) => void;
 }
 
-export interface PaginationInfo {
-  count: number;
-  limit: number;
-  offset: number;
-  page: number;
-  lastPage: number;
-  pages: number[];
-}
 
-export default class Pagination extends React.PureComponent<PaginationProps, {}> {
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      color: this.props.color,
-    };
-  }
+export default function Pagination(props: PaginationProps) {
+  const { onChange, hideLastPage } = props;
 
-  getLimit(): number {
-    if (typeof this.props.limit === "string" || typeof this.props.limit === "number") {
-      return parseInt(this.props.limit.toString(), 10);
-    }
-    return 10;
-  }
+  const theme = useContext(ThemeContext);
 
-  getSize(): number {
-    if (typeof this.props.size === "string" || typeof this.props.size === "number") {
-      return parseInt(this.props.size.toString(), 10);
-    }
-    return 24;
-  }
+  const limit = props.limit ?? 10;
+  const count = props.count ?? 0;
+  const offset = Math.max(Math.min(props.offset ?? 0, count - 1), 0);
+  const size = props.size ?? 24;
+  const page = limit > 0 ? Math.ceil(offset / limit) + 1 : 0;
+  const lastPage =  limit > 0 ? Math.ceil(count / limit) : 0;
+  const startPage = Math.max(page - 2, 1);
+  const endPage = Math.min(page + 2, lastPage);
 
-  getCount(): number {
-    if (typeof this.props.count === "string" || typeof this.props.count === "number") {
-      return parseInt(this.props.count.toString(), 10);
-    }
-    return 0;
-  }
-
-  getOffset(): number {
-    if (typeof this.props.offset === "string" || typeof this.props.offset === "number") {
-      return parseInt(this.props.offset.toString(), 10);
-    }
-    return 0;
-  }
-
-  getInfo(): PaginationInfo {
-    const count: number = this.getCount();
-    const limit: number = this.getLimit();
-    if (count <= limit) {
-      return null;
-    }
-
-    let offset: number = this.getOffset();
-    if (offset < 0) {
-      offset = 0;
-    }
-    if (offset > count - 2) {
-      offset = count - 2;
-    }
-
-    const page = Math.ceil(offset / limit) + 1;
-    const lastPage = Math.ceil(count / limit) || 1;
-    let startPage = page - 2;
-    if (startPage < 1) {
-      startPage = 1;
-    }
-    let endPage = page + 2;
-    if (endPage > lastPage) {
-      endPage = lastPage;
-    }
-    let pages = [];
-    pages.push(1);
+  const pages = useMemo(() => {
+    let result = [];
+    result.push(1);
     for (let i = startPage; i <= endPage; i++) {
       if (i !== 1 && i !== lastPage) {
-        pages.push(i);
+        result.push(i);
       }
     }
     if (lastPage !== 1) {
-      pages.push(lastPage);
+      result.push(lastPage);
     }
+    return result;
+  }, [startPage, endPage, lastPage]);
 
-    return {
-      count: count,
-      limit: limit,
-      offset: offset,
-      page: page,
-      lastPage: lastPage,
-      pages: pages
-    };
-  };
-
-  onChange = (page: number) => {
-    const offset: number = (page - 1) * this.getLimit();
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(offset, page);
+  const handleChangeCreator = useCallback((newPage: number) => () => {
+    const newOffset: number = (newPage - 1) * limit;
+    if (typeof onChange === "function") {
+      onChange(newOffset, newPage);
     }
-  };
+  }, [limit, onChange]);
 
-  renderPrev(page: number, onChange: (page: number) => void) {
+  const prevElement = useMemo(() => {
     return (
       <div
-        className={getElementName("pagination", "prev", {
-          disabled: page === 1
-        })}
-        onClick={() => onChange(page - 1)}
+        className={className("pagination", "prev")}
+        aria-disabled={page === 1}
+        onClick={handleChangeCreator(page - 1)}
       >
-        <Icon height={this.getSize()} name="pagination" />
+        <Icon height={size} icon="pagination" />
       </div>
     );
-  }
+  }, [page, size, handleChangeCreator]);
 
-  renderNext(page: number, lastPage: number, onChange: (page: number) => void) {
+  const nextElement = useMemo(() => {
     return (
       <div
-        className={getElementName("pagination", "next", {
-          disabled: page === lastPage
-        })}
-        onClick={() => onChange(page + 1)}
+        className={className("pagination", "next")}
+        aria-disabled={page === lastPage}
+        onClick={handleChangeCreator(page + 1)}
       >
-        <Icon height={this.getSize()} name="pagination" rotate="180" />
+        <Icon height={size} icon="pagination" rotate={180} />
       </div>
     );
-  }
+  }, [page, size, lastPage, handleChangeCreator]);
 
-  renderPages(pages: number[], currentPage: number, onChange: (page: number) => void) {
+  const pagesElement = useMemo(() => {
     let prevPage: number = 0;
     const result: JSX.Element[] = [];
-    pages.forEach((page, index) => {
+    pages.forEach((currentPage, index) => {
       let afterEllipsis: boolean = false;
-      if (page !== (prevPage + 1)) {
+      if (currentPage !== (prevPage + 1)) {
         result.push(
           <div
-            key={"ellipsis." + page}
-            className={getElementName("pagination", "ellipsis")}
+            key={"ellipsis." + currentPage}
+            className={className("pagination", "ellipsis")}
           >
             …
           </div>
@@ -155,8 +92,8 @@ export default class Pagination extends React.PureComponent<PaginationProps, {}>
         afterEllipsis = true;
       }
 
-      if (!(index === pages.length - 1 && afterEllipsis && this.props.hideLastPage)) {
-        const characterLength: number = page.toString().length;
+      if (!(index === pages.length - 1 && afterEllipsis && hideLastPage)) {
+        const characterLength: number = currentPage.toString().length;
         let characters: string = "single";
         if (characterLength === 2) {
           characters = "double";
@@ -166,36 +103,35 @@ export default class Pagination extends React.PureComponent<PaginationProps, {}>
         }
         result.push(
           <div
-            key={page}
-            className={getElementName("pagination", "item", {
-              current: page === currentPage,
-              characters: characters
-            })}
-            onClick={() => onChange(page)}
+            key={currentPage}
+            className={className("pagination", "item")}
+            data-current={page === currentPage}
+            data-characters={characters}
+            onClick={handleChangeCreator(currentPage)}
           >
-            {page}
+            {currentPage}
           </div>
         );
       }
-      prevPage = page;
+      prevPage = currentPage;
     });
     return result;
+  }, [pages, page, hideLastPage]);
+
+  if (!page || count <= limit) {
+    return null;
   }
 
-  render() {
-    const info: PaginationInfo = this.getInfo();
-    if (!info) {
-      return null;
-    }
-
-    return (
-      <div
-        className={getBlockName("pagination", this.getModifierObject())}
-      >
-        {this.renderPrev(info.page, this.onChange)}
-        {this.renderPages(info.pages, info.page, this.onChange)}
-        {this.renderNext(info.page, info.lastPage, this.onChange)}
-      </div>
-    );
-  }
+  return (
+    <div
+      className={className("pagination")}
+      data-size={props.size}
+      data-color={props.color}
+      data-theme={theme}
+    >
+      {prevElement}
+      {pagesElement}
+      {nextElement}
+    </div>
+  );
 }

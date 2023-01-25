@@ -1,35 +1,27 @@
-import * as React from "react";
-import { Modifiers, getBlockName, getElementName } from "../services/componentService";
+import React, { useContext } from "react";
+import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface ProgressProps {
   size?: string | number;
   color?: string;
-  value: string | number;
+  value: number;
 }
 
-export default class Progress extends React.PureComponent<ProgressProps, {}> {
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      color: this.props.color
-    };
-  }
+export default function Progress(props: ProgressProps) {
+  const theme = useContext(ThemeContext);
 
-  getValue() {
-    if (typeof this.props.value === "string" || typeof this.props.value === "number") {
-      return this.props.value.toString();
-    }
-    return "0";
-  }
-
-  render() {
-    return (
-      <div className={getBlockName("progress", this.getModifierObject())}>
-        <div
-          className={getElementName("progress", "line")}
-          style={{width: `${this.getValue()}%`}}
-        />
-      </div>
-    );
-  }
+  return (
+    <div
+      className={className("progress")}
+      data-size={props.size}
+      data-color={props.color}
+      data-theme={theme}
+    >
+      <div
+        className={className("progress", "line")}
+        style={{width: `${Math.round(props.value || 0)}%`}}
+      />
+    </div>
+  );
 }

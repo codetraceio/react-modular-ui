@@ -1,4 +1,7 @@
+@import "./constants.scss";
+
 .c-radio {
+  font-family: sans-serif;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -13,33 +16,33 @@
     border-radius: 50%;
   }
 
-  &.-disabled {
+  &[aria-disabled='true'] {
     opacity: .5;
     pointer-events: none;
   }
-  &.-size-16 {
+  &[data-size='16'] {
     font-size: 14px;
   }
 
-  &.-size-16 &--icon {
+  &[data-size='16'] &--icon {
     width: 16px;
     height: 16px;
   }
 
-  &.-size-24 {
+  &[data-size='24'] {
     font-size: 16px;
   }
 
-  &.-size-24 &--icon {
+  &[data-size='24'] &--icon {
     width: 24px;
     height: 24px;
   }
 
-  &.-size-32 {
+  &[data-size='32'] {
     font-size: 20px;
   }
 
-  &.-size-32 &--icon {
+  &[data-size='32'] &--icon {
     width: 32px;
     height: 32px;
   }
@@ -49,13 +52,5 @@
     &:first-child {
       margin-left: 0;
     }
-  }
-
-  &[aria-checked=true] &--icon.-not-checked {
-    display: none;
-  }
-
-  &[aria-checked=false] &--icon.-checked {
-    display: none;
   }
 }

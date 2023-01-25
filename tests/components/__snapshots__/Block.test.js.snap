@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Block should render Block 1`] = `
-<div
-  className="c-block -layout-horizontal -wrap -padding-horizontal-16 -margin-48-l-up -margin-vertical-48-s-up -margin-horizontal-24-s-up -margin-top-48-xs-up -margin-horizontal-24-xs-up -margin-bottom-16-xs-up -margin-top-48-xs-down -margin-right-24-xs-down -margin-bottom-16-xs-down -margin-left-8-xs-down -hide-xs-down -fit -grow-1 -shrink-1 -order-1 -grid-4 -align-center -justify-center -scroll-on -space-horizontal-8 -space-vertical-8 -height-32 -width-32"
-/>
-`;

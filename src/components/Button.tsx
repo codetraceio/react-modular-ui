@@ -1,45 +1,41 @@
-import * as React from "react";
-
-import { Modifiers, getBlockName } from "../services/componentService";
+import React, { PropsWithChildren, MouseEvent, useContext } from "react";
+import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface ButtonProps {
   size?: string | number;
-  view?: string;
+  variant?: string;
   color?: string;
-  shape?: string;
   disabled?: boolean;
-  padding?: string | number;
-  paddingLeft?: string | number;
-  paddingRight?: string | number;
+  shape?: string;
   name?: string;
+  href?: string;
+  target?: string;
 
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
 
-export default class Button extends React.PureComponent<ButtonProps, {}> {
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      color: this.props.color,
-      shape: this.props.shape,
-      disabled: this.props.disabled,
-      padding: this.props.padding,
-      paddingLeft: this.props.paddingLeft,
-      paddingRight: this.props.paddingRight
-    };
-  }
+export default function Button<T extends ButtonProps>(props: PropsWithChildren<T>) {
+  const theme = useContext(ThemeContext);
 
-  render() {
-    return (
-      <div
-        className={getBlockName("button", this.getModifierObject())}
-        data-name={this.props.name}
-        tabIndex={1}
-        onClick={this.props.onClick}
-      >
-        {this.props.children}
-      </div>
-    );
-  }
+  const TagName = props.href ? "a" : "div";
+
+  return (
+    <TagName
+      className={className("button")}
+      href={props.href}
+      target={props.target}
+      data-name={props.name}
+      data-size={props.size}
+      data-variant={props.variant}
+      data-color={props.color}
+      data-shape={props.shape}
+      data-theme={theme}
+      aria-disabled={props.disabled}
+      tabIndex={props.disabled ? -1 : 0}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </TagName>
+  );
 }

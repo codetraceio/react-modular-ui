@@ -1,5 +1,5 @@
-import * as React from "react";
-import { getDragged, getPlaceholder, setDragged, setPlaceholder } from "../services/dragService";
+import React, { DragEvent, useCallback } from "react";
+import dragService from "../services/dragService";
 
 export interface SortableItem {
   key: string;
@@ -74,38 +74,38 @@ function createPlaceholder() {
   return element;
 }
 
-function ensurePlacehoder() {
-  return getPlaceholder() || setPlaceholder(createPlaceholder());
+function ensurePlaceholder() {
+  return dragService.getPlaceholder() || dragService.setPlaceholder(createPlaceholder());
 }
 
 export default function Sortable<T>(props: SortableProps<T>) {
   const isHorizontal = props.layout === "horizontal";
   const lastIndex = props.items.length - 1;
 
-  const getItemStyle = React.useCallback((index: number) => {
+  const getItemStyle = useCallback((index: number) => {
     return {
       marginBottom: !isHorizontal && index !== lastIndex && props.space ? `${props.space}px` : "",
       marginRight: isHorizontal && index !== lastIndex && props.space ? `${props.space}px` : "",
     };
   }, [isHorizontal, lastIndex, props.space]);
 
-  const onDragStart = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
+  const onDragStart = useCallback((e: DragEvent<HTMLDivElement>) => {
     const dragged = e.currentTarget;
-    const placeholder = ensurePlacehoder();
+    const placeholder = ensurePlaceholder();
     e.dataTransfer.effectAllowed = "move";
     placeholder.style.height = `${dragged.offsetHeight}px`;
-    setDragged(dragged);
+    dragService.setDragged(dragged);
     dragged.parentElement.insertBefore(placeholder, dragged.nextElementSibling);
   }, [props.items, props.useHandle]);
 
-  const onDragOver = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
+  const onDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const dragged = getDragged();
+    const dragged = dragService.getDragged();
 
     dragged.style.display = "none";
     const element = getDraggableElement(e.target as HTMLElement);
     const sortable = getSortableElement(e.target as HTMLElement);
-    const placeholder = ensurePlacehoder();
+    const placeholder = ensurePlaceholder();
 
     if (element === dragged || e.target === placeholder) {
       return;
@@ -139,7 +139,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
     }
   }, [props.items, isHorizontal]);
 
-  const onMouseDown = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
+  const onMouseDown = useCallback((e: DragEvent<HTMLDivElement>) => {
     if (props.disabled || props.useHandle && !getHandleElement(e.target as HTMLElement)) {
       return;
     }
@@ -150,10 +150,10 @@ export default function Sortable<T>(props: SortableProps<T>) {
     draggable.draggable = true;
   }, [props.items]);
 
-  const onDragEnd = React.useCallback((e) => {
+  const onDragEnd = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const dragged = getDragged();
-    const placeholder = ensurePlacehoder();
+    const dragged = dragService.getDragged();
+    const placeholder = ensurePlaceholder();
     dragged.style.display = "block";
     dragged.draggable = false;
 

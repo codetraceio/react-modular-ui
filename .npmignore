@@ -3,6 +3,9 @@
 /coverage
 /tests
 /run
-/dist/example
-/src/example
 /.idea
+/src
+
+jest.config.js
+tsconfig.build.json
+tsconfig.json

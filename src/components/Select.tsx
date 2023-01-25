@@ -1,33 +1,22 @@
-import React = require("react");
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
+import { updateDropDown } from "../utils/updateDropDown";
+import { className } from "../utils/className";
 import clickOutsideService from "../services/clickOutsideService";
-import { updateDropDown } from "../services/dropDownService";
-import settingService from "../services/settingService";
-import { generateKey } from "../services/utilService";
 
-import { Modifiers, getBlockName, getElementName } from "../services/componentService";
 import Icon from "./Icon";
-import Portal from "./Portal";
 
 export interface SelectProps {
   placeholder?: string;
   label?: string;
   size?: string | number;
-  view?: string;
+  variant?: string;
   disabled?: boolean;
-  opened?: boolean;
-  fixed?: boolean;
-  portal?: JSX.Element[];
   options?: SelectOption[];
   value?: string;
 
-  onChangeOpened?: (opened: boolean) => void;
   onChange?: (value: string, option: SelectOption) => void;
-}
-
-export interface SelectState {
-  opened: boolean;
-  scroll: boolean;
 }
 
 export interface SelectOption {
@@ -35,190 +24,133 @@ export interface SelectOption {
   value: string;
 }
 
-export default class Select extends React.PureComponent<SelectProps, SelectState> {
-  private dropDownElement: HTMLElement;
-  private selectElement: HTMLElement;
+export default function Select(props: SelectProps) {
+  const { label, value, options, placeholder, onChange } = props;
 
-  state = {
-    opened: false,
-    scroll: false,
-  };
+  const dropdownRef = useRef<HTMLDivElement>();
+  const selectRef = useRef<HTMLDivElement>();
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.onWindowScroll, true);
-    window.addEventListener("resize", this.onUpdateDropDown, true);
-    clickOutsideService.on(this.onClose);
-  }
+  const [open, setOpen] = useState(false);
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.onWindowScroll, true);
-    window.removeEventListener("resize", this.onUpdateDropDown, true);
-    clickOutsideService.off(this.onClose);
-  }
+  const handleClick = useCallback(() => {
+    setOpen(state => !state);
+  }, [setOpen]);
 
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      disabled: this.props.disabled,
-      selected: this.isOpened(),
+  const handleUpdate = useCallback(() => {
+    updateDropDown(dropdownRef.current, selectRef.current);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleUpdate, true);
+    window.addEventListener("resize", handleUpdate, true);
+
+    return () => {
+      window.removeEventListener("scroll", handleUpdate, true);
+      window.removeEventListener("resize", handleUpdate, true);
     };
-  }
+  }, []);
 
-  getOptionModifierObject(value: string): Modifiers {
-    return {
-      selected: value === this.props.value,
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOpen(false);
     };
-  }
+    const dropdown = dropdownRef.current;
+    const select = selectRef.current;
+    if (open && dropdown) {
+      clickOutsideService.on(dropdown, [select], handleClickOutside);
+    }
+    return () => {
+      clickOutsideService.off(dropdown);
+    };
+  }, [open]);
 
-  getOptions(): SelectOption[] {
-    return this.props.options || [];
-  }
+  useLayoutEffect(() => {
+    if (open) {
+      updateDropDown(dropdownRef.current, selectRef.current);
+    }
+  }, [open]);
 
-  getTitle() {
-    if (this.props.value) {
-      const option: SelectOption = this.props.options.find((option: SelectOption) => {
-        return option.value === this.props.value;
+  const titleElement = useMemo(() => {
+    if (value) {
+      const option: SelectOption = options.find((option: SelectOption) => {
+        return option.value === value;
       });
       if (option) {
         return option.title;
       }
     }
-    return this.props.placeholder;
-  }
+    return placeholder;
+  }, [value, options, placeholder]);
 
-  isOpened(): boolean {
-    return this.props.opened || this.state.opened;
-  }
-
-  onClose = () => {
-    this.onSetOpened(false);
-  };
-
-  onUpdateDropDownElement = (element: HTMLElement) => {
-    this.dropDownElement = element;
-
-    this.onUpdateDropDown();
-  };
-
-  onUpdateSelectElement = (element: HTMLElement) => {
-    this.selectElement = element;
-  };
-
-  onClick = () => {
-    this.onSetOpened(!this.isOpened());
-  };
-
-  onSetOpened = (opened: boolean) => {
-    this.setState({
-      opened: opened,
-      scroll: opened
-    });
-
-    if (this.props.onChangeOpened) {
-      this.props.onChangeOpened(opened);
-    }
-  };
-
-  onUpdateDropDown = () => {
-    if (!this.dropDownElement) {
-      return;
-    }
-    updateDropDown(this.dropDownElement, this.selectElement, this.state.scroll, this.props.fixed);
-
-    if (this.state.scroll) {
-      this.setState({
-        scroll: false
-      });
-    }
-  };
-
-  onWindowScroll = () => {
-    if (this.isOpened()) {
-      const selectElement = this.selectElement.getBoundingClientRect();
-
-      if (selectElement.bottom < 32 || selectElement.top > window.innerHeight) {
-        this.onClose();
-      } else {
-        this.onUpdateDropDown();
-      }
-    }
-  };
-
-  onChange = (value: string, option: SelectOption) => {
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(value, option);
+  const handleOptionClickCreator = useCallback((value: string, option: SelectOption) => () => {
+    if (typeof onChange === "function") {
+      onChange(value, option);
     }
 
-    this.onClose();
-  };
+    setOpen(false);
+  }, []);
 
-  renderLabel() {
-    if (!this.props.label) {
+  const labelElement = useMemo(() => {
+    if (!label) {
       return null;
     }
 
     return (
-      <div className={getElementName("select", "label")}>
-        {this.props.label}
+      <div className={className("select", "label")}>
+        {label}
       </div>
     );
-  }
+  }, [label]);
 
-  renderOptions() {
-    return this.getOptions().map((option: SelectOption) => {
-      return (
-        <div
-          key={option.value}
-          className={getElementName(
-            "select", "option", this.getOptionModifierObject(option.value)
-          )}
-          onClick={() => this.onChange(option.value, option)}
-          data-selected={option.value === this.props.value}
-        >
-          {option.title}
-        </div>
-      );
-    });
-  }
-
-  render() {
-    const portalKey: string = settingService.isBackend() ? generateKey() : "";
-
+  const optionsElement = useMemo(() => {
     return (
-      <div
-        className={getBlockName("select", this.getModifierObject())}
-      >
-        {this.renderLabel()}
-        <div
-          className={getElementName("select", "box")}
-          onClick={this.onClick}
-          data-inside={this.isOpened()}
-          ref={this.onUpdateSelectElement}
-        >
-          <div className={getElementName("select", "value")}>
-            {this.getTitle()}
-          </div>
-          <div className={getElementName("select", "icon")}>
-            <Icon width="12" rotate={this.isOpened() ? 180 : 0} name="drop-down" />
-          </div>
-        </div>
-        {this.isOpened() ? (
-          <Portal
-            portal={this.props.portal}
-            portalKey={portalKey}
-            onUpdate={this.onUpdateDropDown}
-          >
+      <div className={className("select", "dropdown")} ref={dropdownRef}>
+        {options.map((option: SelectOption) => {
+          return (
             <div
-              className={getElementName("select", "drop-down")}
-              ref={this.onUpdateDropDownElement}
-              data-inside
+              key={option.value}
+              className={className("select", "option")}
+              aria-selected={option.value === value}
+              tabIndex={0}
+              onClick={handleOptionClickCreator(option.value, option)}
             >
-              {this.renderOptions()}
+              {option.title}
             </div>
-          </Portal>
-         ) : null}
+          );
+        })}
       </div>
     );
-  }
+  }, [options, value]);
+
+  const portalElement = useMemo(() => {
+    if (!open || !options || options.length === 0) {
+      return null;
+    }
+    return createPortal(optionsElement, document.body);
+  }, [open, options]);
+
+  return (
+    <div
+      className={className("select")}
+      data-size={props.size}
+      data-variant={props.variant}
+      aria-disabled={props.disabled}
+      tabIndex={props.disabled ? -1 : 0}
+    >
+      {labelElement}
+      <div
+        className={className("select", "box")}
+        onClick={handleClick}
+        ref={selectRef}
+      >
+        <div className={className("select", "value")}>
+          {titleElement}
+        </div>
+        <div className={className("select", "icon")}>
+          <Icon size="12" rotate={open ? 180 : 0} icon="dropdown" />
+        </div>
+      </div>
+      {portalElement}
+    </div>
+  );
 }

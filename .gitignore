@@ -2,8 +2,8 @@
 /.idea
 /node_modules
 /coverage
-/dist
+/lib
 /typescript
-/styles/dist
-/preact/dist
-/preact/typescript
+/styles/lib
+
+build-storybook.log

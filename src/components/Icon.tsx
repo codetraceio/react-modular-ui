@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { MouseEvent, useContext } from "react";
+import configService from "../services/configService";
 
-import { Modifiers, getBlockName } from "../services/componentService";
-import settings from "../services/settingService";
+import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface IconProps {
   size?: string | number;
@@ -9,31 +10,29 @@ export interface IconProps {
   height?: string | number;
   color?: string;
   rotate?: string | number;
-  name?: string;
+  icon?: string;
+  disabled?: boolean;
 
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-function getModifierObject(props: IconProps): Modifiers {
-  return {
-    size: props.size,
-    width: props.width,
-    height: props.height,
-    color: props.color,
-    rotate: props.rotate,
-    clickable: !!props.onClick,
-  };
-}
+export default function Icon(props: IconProps) {
+  const theme = useContext(ThemeContext);
 
-export default class Icon extends React.PureComponent<IconProps, {}> {
-  render() {
-    return (
-      <div
-        className={getBlockName("icon", getModifierObject(this.props))}
-        onClick={this.props.onClick}
-      >
-        {settings.getIcon(this.props.name)}
-      </div>
-    );
-  }
+  return (
+    <span
+      className={className("icon")}
+      data-size={props.size}
+      data-width={props.width}
+      data-height={props.height}
+      data-color={props.color}
+      data-rotate={props.rotate}
+      data-theme={theme}
+      aria-disabled={props.disabled}
+      tabIndex={props.onClick && !props.disabled ? 0 : -1}
+      onClick={props.onClick}
+    >
+      {configService.getConfig().icons[props.icon]}
+    </span>
+  );
 }

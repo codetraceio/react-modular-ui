@@ -1,91 +1,52 @@
-import * as React from "react";
-
-import settings from "../services/settingService";
-
-import { Modifiers, getBlockName, getElementName } from "../services/componentService";
+import React, { useCallback, PropsWithChildren, MouseEvent, useContext } from "react";
 
 export interface CheckboxProps {
   size?: string | number;
-  view?: string;
+  variant?: string;
   color?: string;
   disabled?: boolean;
   checked?: boolean;
   name?: string;
 
-  onChange?: (checked: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
+  onChange?: (checked: boolean, event: MouseEvent<HTMLDivElement>) => void;
 }
 
 import Icon from "./Icon";
+import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
-export default class Button extends React.PureComponent<CheckboxProps, {}> {
-  getModifierObject(): Modifiers {
-    return {
-      size: this.props.size,
-      view: this.props.view,
-      color: this.props.color,
-      disabled: this.props.disabled
-    };
-  }
+export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
+  const { checked, onChange } = props;
 
-  isChecked(): boolean {
-    return this.props.checked || false;
-  }
+  const theme = useContext(ThemeContext);
 
-  onChange = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(!this.props.checked, e);
+  const handleChange = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    if (typeof onChange === "function") {
+      onChange(!checked, e);
     }
-  };
+  }, [checked, onChange]);
 
-  render() {
-    if (settings.isBackend()) {
-      return (
-        <div
-          className={getBlockName("checkbox", this.getModifierObject())}
-          role="checkbox"
-          tabIndex={1}
-          data-name={this.props.name}
-          aria-checked={this.isChecked()}
-        >
-          <div>
-            <div
-              className={getElementName("checkbox", "icon", {
-                checked: true
-              })}
-            >
-              <Icon size={this.props.size} name="checkbox-checked"/>
-            </div>
-            <div
-              className={getElementName("checkbox", "icon", {
-                notChecked: true
-              })}
-            >
-              <Icon size={this.props.size} name="checkbox"/>
-            </div>
-          </div>
-          <div>{this.props.children}</div>
-        </div>
-      );
-    }
-
-    return (
-      <div
-        className={getBlockName("checkbox", this.getModifierObject())}
-        data-name={this.props.name}
-        aria-checked={this.isChecked()}
-        tabIndex={1}
-        onClick={this.onChange}
-      >
-        <div className={getElementName("checkbox", "icon")}>
-          {this.props.checked ? (
-            <Icon
-              size={this.props.size}
-              name="checkbox"
-            />
-          ) : null}
-        </div>
-        <div>{this.props.children}</div>
+  return (
+    <div
+      className={className("checkbox")}
+      data-name={props.name}
+      data-size={props.size}
+      data-variant={props.variant}
+      data-theme={theme}
+      aria-checked={props.checked}
+      aria-disabled={props.disabled}
+      tabIndex={props.disabled ? -1 : 0}
+      onClick={handleChange}
+    >
+      <div className={className("checkbox", "icon")}>
+        {props.checked ? (
+          <Icon
+            size={props.size}
+            icon="checkbox"
+          />
+        ) : null}
       </div>
-    );
-  }
+      <div>{props.children}</div>
+    </div>
+  );
 }

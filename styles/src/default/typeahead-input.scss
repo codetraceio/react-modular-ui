@@ -1,22 +1,25 @@
+@import "./mixins.scss";
+
 .c-typeahead-input {
-  &--drop-down {
+  &--dropdown {
     @include scroll-bar();
+    font-family: sans-serif;
     position: absolute;
     overflow-x: auto;
     background: $color-light;
     box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
-    border-radius: #{$border-radius}px;
-    &.-orientation-top {
+    border-radius: $border-radius;
+    &[data-orientation='top'] {
       margin-top: -4px;
     }
-    &.-orientation-bottom {
+    &[data-orientation='bottom'] {
       margin-top: 4px;
     }
   }
   &--option {
     padding: 8px;
     cursor: pointer;
-    &.-selected {
+    &:focus {
       font-weight: bold;
     }
     &:hover {

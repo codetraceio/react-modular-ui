@@ -12,49 +12,39 @@
     stroke: $color-dark-grey;
   }
 
-  &.-size-16 svg {
+  &[data-size='16'] svg {
     height: 16px;
     width: 16px;
   }
 
-  &.-size-24 svg {
+  &[data-size='24'] svg {
     height: 24px;
     width: 24px;
   }
 
-  &.-size-20 svg {
-    height: 20px;
-    width: 20px;
-  }
-
-  &.-size-32 svg {
+  &[data-size='32'] svg {
     height: 32px;
     width: 32px;
   }
 
-  &.-size-40 svg {
-    height: 40px;
-    width: 40px;
-  }
-
-  &.-size-48 svg {
+  &[data-size='48'] svg {
     height: 48px;
     width: 48px;
   }
 
-  &.-color-light circle {
+  &[data-color='light'] circle {
     stroke: $color-light;
   }
 
-  &.-color-primary circle {
+  &[data-color='primary'] circle {
     stroke: $color-primary;
   }
 
-  &.-color-success circle {
+  &[data-color='success'] circle {
     stroke: $color-success;
   }
 
-  &.-color-danger circle {
+  &[data-color='danger'] circle {
     stroke: $color-danger;
   }
 }

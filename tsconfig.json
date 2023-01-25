@@ -1,18 +1,20 @@
 {
-    "compilerOptions": {
-      "outDir": "./dist/",
-      "noImplicitAny": true,
-      "module": "commonjs",
-      "target": "es5",
-      "jsx": "react",
-      "allowJs": true,
-      "lib": ["es2017", "dom"],
-      "experimentalDecorators": true,
-      "allowSyntheticDefaultImports": true,
-      "typeRoots": [
-        "./typings",
-        "./node_modules/@types"
-      ]
-    }
-  }
-  
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "lib": ["es2017", "dom"],
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types"
+    ]
+  },
+  "include": ["src/**/*"],
+}

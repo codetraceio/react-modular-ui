@@ -8,12 +8,12 @@
 @mixin pill-size($size, $font-size) {
   font-size: $font-size;
   height: $size;
-  padding: 0 ($size / 2);
-  border-radius: ($size / 2);
-  min-width: ($size / 2);
+  padding: 0 calc($size / 2);
+  border-radius: calc($size / 2);
+  min-width: calc($size / 2);
   font-weight: bold;
   & > * {
-    margin-left: ($size / 8);
+    margin-left: calc($size / 8);
     &:first-child {
       margin-left: 0;
     }
@@ -22,46 +22,43 @@
 
 .c-pill {
   @include pill-size(24px, 14px);
-  display: flex;
+  font-family: sans-serif;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: $color-dark-grey;
   color: #ffffff;
-  border-radius: 50%;
+  border-radius: 12px;
 
-  &.-color-primary {
+  &[data-color='primary'] {
     @include pill-default($color-primary, #ffffff);
   }
 
-  &.-color-success {
+  &[data-color='success'] {
     @include pill-default($color-success, #ffffff);
   }
 
-  &.-color-danger {
+  &[data-color='danger'] {
     @include pill-default($color-danger, #ffffff);
   }
 
-  &.-color-light {
+  &[data-color='light'] {
     @include pill-default($color-light, $color-default);
   }
 
-  &.-size-16 {
+  &[data-size='16'] {
     @include pill-size(16px, 12px);
   }
 
-  &.-size-24 {
+  &[data-size='24'] {
     @include pill-size(24px, 14px);
   }
 
-  &.-size-32 {
+  &[data-size='32'] {
     @include pill-size(32px, 16px);
   }
 
-  &.-size-48 {
+  &[data-size='48'] {
     @include pill-size(48px, 20px);
-  }
-
-  &.-padding-right-4 {
-    padding-right: 4px;
   }
 }

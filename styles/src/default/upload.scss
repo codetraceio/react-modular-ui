@@ -1,6 +1,7 @@
 @import "./constants.scss";
 
 .c-upload {
+  font-family: sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +9,7 @@
   min-height: 80px;
   cursor: pointer;
 
-  &.-active {
+  &[data-active='true'] {
     border-color: $color-primary;
   }
 }

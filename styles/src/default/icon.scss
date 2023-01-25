@@ -35,54 +35,67 @@
     @include icon-size(24px);
   }
 
-
-  @each $i in (12 16 24 32 48 64) {
-    &.-size-#{$i}, &.-size-#{$i} svg {
-      @include icon-size(#{$i}px);
-    }
-
-    &.-width-#{$i}, &.-width-#{$i} svg {
-      @include icon-width(#{$i}px);
-    }
-
-    &.-height-#{$i}, &.-height-#{$i} svg {
-      @include icon-height(#{$i}px);
-    }
+  &[data-size='12'], &[data-size='12'] svg {
+    @include icon-size(16px);
   }
 
-  &.-color-primary {
+  &[data-size='16'], &[data-size='16'] svg {
+    @include icon-size(16px);
+  }
+
+  &[data-width='16'], &[data-width='16'] svg {
+    @include icon-width(16px);
+  }
+
+  &[data-height='16'], &[data-height='16'] svg {
+    @include icon-height(16px);
+  }
+
+  &[data-size='32'], &[data-size='32'] svg {
+    @include icon-size(32px);
+  }
+
+  &[data-width='32'], &[data-width='32'] svg {
+    @include icon-width(32px);
+  }
+
+  &[data-height='32'], &[data-height='32'] svg {
+    @include icon-height(32px);
+  }
+
+  &[data-color='primary'] {
     fill: $color-primary;
   }
 
-  &.-color-success {
+  &[data-color='success'] {
     fill: $color-success;
   }
 
-  &.-color-danger {
+  &[data-color='danger'] {
     fill: $color-danger;
   }
 
-  &.-color-light {
+  &[data-color='light'] {
     fill: $color-light;
   }
 
-  &.-color-dark {
+  &[data-color='dark'] {
     fill: $color-dark;
   }
 
-  &.-rotate-90 {
+  &[data-rotate='90'] {
     transform: rotate(90deg);
   }
 
-  &.-rotate-180 {
+  &[data-rotate='180'] {
     transform: rotate(180deg);
   }
 
-  &.-rotate-270 {
+  &[data-rotate='270'] {
     transform: rotate(270deg);
   }
 
-  &.-clickable {
+  &[data-clickable='true'] {
     cursor: pointer;
   }
 }

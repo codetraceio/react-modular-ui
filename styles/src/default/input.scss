@@ -2,7 +2,7 @@
 
 @mixin input-size($size, $font-size) {
   height: $size;
-  padding: 0 ($size / 4);
+  padding: 0 calc($size / 4);
   font-size: $font-size;
 }
 
@@ -14,7 +14,7 @@
     background: $color-light;
     border: 1px solid $color-grey;
     outline: none;
-    border-radius: #{$border-radius}px;
+    border-radius: $border-radius;
     font-family: "Source Sans Pro", sans-serif;
     &:focus {
       border: 1px solid $color-primary;
@@ -25,34 +25,25 @@
     color: $color-dark-grey;
     padding: 0 0 8px 0;
   }
-  &.-size-24 input {
+  &[data-size='24'] input {
     @include input-size(24px, 14px);
   }
-  &.-size-32 input {
+  &[data-size='32'] input {
     @include input-size(32px, 16px);
   }
-  &.-size-40 input {
-    @include input-size(40px, 16px);
-  }
-  &.-size-48 input {
+  &[data-size='48'] input {
     @include input-size(48px, 18px);
   }
-  &.-size-24.-shape-rounded input {
+  &[data-size='24'][data-shape='rounded'] input {
     border-radius: 12px;
   }
-  &.-size-32.-shape-rounded input {
+  &[data-size='32'][data-shape='rounded'] input {
     border-radius: 16px;
   }
-  &.-size-40.-shape-rounded input {
-    border-radius: 20px;
-  }
-  &.-size-48.-shape-rounded input {
+  &[data-size='48'][data-shape='rounded'] input {
     border-radius: 24px;
   }
-  &.-color-success input {
+  &[data-color='success'] input {
     border-color: $color-success;
-  }
-  &.-view-glass input {
-    border: 0;
   }
 }

@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { DragEvent, PropsWithChildren, useRef, useState, useCallback } from "react";
 
-import { Modifiers, getBlockName } from "../services/componentService";
+import { className } from "../utils/className";
 
 export interface UploadProps {
   size?: string | number;
@@ -12,105 +12,70 @@ export interface UploadProps {
   onChange?: (files: FileList) => void
 }
 
-export interface UploadState {
-  active: boolean;
-}
+export default function Upload(props: PropsWithChildren<UploadProps>) {
+  const { onChange } = props;
+  const inputRef = useRef<HTMLInputElement>(null);
 
-export default class Upload extends React.PureComponent<UploadProps, UploadState> {
-  private element: HTMLDivElement = null;
-  private fileElement: HTMLInputElement = null;
+  const [active, setActive] = useState(false);
 
-  state = {
-    active: false
-  };
-
-  getModifierObject(): Modifiers {
-    return {
-      active: this.state.active
-    };
-  }
-
-  updateElement(element: HTMLDivElement) {
-    if (!element) {
-      return;
-    }
-
-    if (this.element !== element) {
-      element.addEventListener("dragover", this.onDragOver, false);
-      element.addEventListener("dragleave", this.onDragLeave, false);
-      element.addEventListener("drop", this.onDrop, false);
-    }
-
-    this.element = element;
-  }
-
-  updateFileElement(element: HTMLInputElement) {
-    this.fileElement = element;
-  }
-
-  onDragOver = (event: Event) => {
+  const handleDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    this.setState({
-      active: true
-    });
-  };
+    setActive(true);
+  }, [setActive]);
 
-  onDragLeave = () => {
-    this.setState({
-      active: false
-    });
-  };
+  const handleDragLeave = useCallback(() => {
+    setActive(false);
+  }, []);
 
-  onDrop = (event: DragEvent) => {
+  const handleDrop = useCallback((event: DragEvent<HTMLDivElement>) => {
     event.stopPropagation();
     event.preventDefault();
 
     const files = event.dataTransfer.files;
 
-    this.setState({
-      active: false
-    });
+    setActive(false);
 
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(files);
+    if (typeof onChange === "function") {
+      onChange(files);
     }
-  };
+  }, [setActive, onChange]);
 
-  onClick = () => {
-    if (!this.fileElement) {
+  const handleClick = useCallback(() => {
+    if (!inputRef.current) {
       return;
     }
 
-    this.fileElement.click();
-  };
+    inputRef.current.click();
+  }, []);
 
-  onChange = () => {
-    const files = this.fileElement.files;
+  const handleChange = useCallback(() => {
+    const files = inputRef.current.files;
 
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange(files);
+    if (typeof onChange === "function") {
+      onChange(files);
     }
-  };
+  }, []);
 
-  render() {
-    return (
-      <div
-        className={getBlockName("upload", this.getModifierObject())}
-        ref={(element) => this.updateElement(element)}
-        data-name={this.props.name}
-        onClick={() => this.onClick()}
-      >
-        <input
-          type="file"
-          name={this.props.name}
-          style={{display: "none"}}
-          ref={(element) => this.updateFileElement(element)}
-          onChange={() => this.onChange()}
-        />
-        <div>
-          {this.props.children}
-        </div>
+  return (
+    <div
+      className={className("upload")}
+      data-name={props.name}
+      data-active={active}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      onClick={handleClick}
+    >
+      <input
+        type="file"
+        name={props.name}
+        style={{display: "none"}}
+        ref={inputRef}
+        onChange={handleChange}
+      />
+      <div>
+        {props.children}
       </div>
-    );
-  }
+    </div>
+  );
 }
