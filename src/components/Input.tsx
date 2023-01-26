@@ -46,7 +46,7 @@ export default function Input(props: InputProps) {
     ) {
       onSubmit(event.currentTarget.value, event);
     }
-  }, []);
+  }, [onKeyDown, onSubmit]);
 
   const labelElement = useMemo(() => {
     return label ? (

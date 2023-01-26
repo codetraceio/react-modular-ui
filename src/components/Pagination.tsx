@@ -31,7 +31,7 @@ export default function Pagination(props: PaginationProps) {
   const endPage = Math.min(page + 2, lastPage);
 
   const pages = useMemo(() => {
-    let result = [];
+    const result = [];
     result.push(1);
     for (let i = startPage; i <= endPage; i++) {
       if (i !== 1 && i !== lastPage) {
@@ -76,10 +76,10 @@ export default function Pagination(props: PaginationProps) {
   }, [page, size, lastPage, handleChangeCreator]);
 
   const pagesElement = useMemo(() => {
-    let prevPage: number = 0;
+    let prevPage = 0;
     const result: JSX.Element[] = [];
     pages.forEach((currentPage, index) => {
-      let afterEllipsis: boolean = false;
+      let afterEllipsis = false;
       if (currentPage !== (prevPage + 1)) {
         result.push(
           <div
@@ -94,7 +94,7 @@ export default function Pagination(props: PaginationProps) {
 
       if (!(index === pages.length - 1 && afterEllipsis && hideLastPage)) {
         const characterLength: number = currentPage.toString().length;
-        let characters: string = "single";
+        let characters = "single";
         if (characterLength === 2) {
           characters = "double";
         }
@@ -116,7 +116,7 @@ export default function Pagination(props: PaginationProps) {
       prevPage = currentPage;
     });
     return result;
-  }, [pages, page, hideLastPage]);
+  }, [pages, page, hideLastPage, handleChangeCreator]);
 
   if (!page || count <= limit) {
     return null;

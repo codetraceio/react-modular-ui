@@ -48,7 +48,7 @@ export default function Select(props: SelectProps) {
       window.removeEventListener("scroll", handleUpdate, true);
       window.removeEventListener("resize", handleUpdate, true);
     };
-  }, []);
+  }, [handleUpdate]);
 
   useEffect(() => {
     const handleClickOutside = () => {
@@ -88,7 +88,7 @@ export default function Select(props: SelectProps) {
     }
 
     setOpen(false);
-  }, []);
+  }, [onChange]);
 
   const labelElement = useMemo(() => {
     if (!label) {
@@ -120,14 +120,14 @@ export default function Select(props: SelectProps) {
         })}
       </div>
     );
-  }, [options, value]);
+  }, [options, value, handleOptionClickCreator]);
 
   const portalElement = useMemo(() => {
     if (!open || !options || options.length === 0) {
       return null;
     }
     return createPortal(optionsElement, document.body);
-  }, [open, options]);
+  }, [open, options, optionsElement]);
 
   return (
     <div

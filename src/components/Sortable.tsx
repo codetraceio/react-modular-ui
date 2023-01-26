@@ -28,7 +28,7 @@ interface SortableProps<T> {
 
 export function removeElement<T>(elements: T[], elementKey: string, unique: keyof T): [T[], T] {
   const element = elements.find((e) => e[unique].toString() === elementKey);
-  const updatedElements = elements.filter((e) => e[unique]  as any !== elementKey);
+  const updatedElements = elements.filter((e) => e[unique] as string !== elementKey);
   return [updatedElements, element];
 }
 
@@ -81,6 +81,7 @@ function ensurePlaceholder() {
 export default function Sortable<T>(props: SortableProps<T>) {
   const isHorizontal = props.layout === "horizontal";
   const lastIndex = props.items.length - 1;
+  const { onChange } = props;
 
   const getItemStyle = useCallback((index: number) => {
     return {
@@ -96,7 +97,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
     placeholder.style.height = `${dragged.offsetHeight}px`;
     dragService.setDragged(dragged);
     dragged.parentElement.insertBefore(placeholder, dragged.nextElementSibling);
-  }, [props.items, props.useHandle]);
+  }, []);
 
   const onDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -137,7 +138,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
         sortable.insertBefore(placeholder, element);
       }
     }
-  }, [props.items, isHorizontal]);
+  }, [isHorizontal]);
 
   const onMouseDown = useCallback((e: DragEvent<HTMLDivElement>) => {
     if (props.disabled || props.useHandle && !getHandleElement(e.target as HTMLElement)) {
@@ -148,7 +149,7 @@ export default function Sortable<T>(props: SortableProps<T>) {
       return;
     }
     draggable.draggable = true;
-  }, [props.items]);
+  }, [props.disabled, props.useHandle]);
 
   const onDragEnd = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -171,9 +172,9 @@ export default function Sortable<T>(props: SortableProps<T>) {
       placeholder.parentNode.removeChild(placeholder);
     }
     if (sourceKey !== targetKey) {
-      props.onChange({ sourceKey, targetKey, sourceSortableName, targetSortableName });
+      onChange({ sourceKey, targetKey, sourceSortableName, targetSortableName });
     }
-  }, [props.items]);
+  }, [onChange]);
 
   return (
     <div

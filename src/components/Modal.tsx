@@ -34,7 +34,7 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
         </div>
       </div>
     );
-  }, [children]);
+  }, [children, theme, handleClose]);
 
   if (!props.show || configService.getConfig().server) {
     return null;

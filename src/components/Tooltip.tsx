@@ -55,7 +55,7 @@ export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
       return;
     }
     return createPortal(tooltipElement, document.body);
-  }, [open]);
+  }, [tooltipElement, open]);
 
   return (
     <span

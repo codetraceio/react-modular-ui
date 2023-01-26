@@ -54,7 +54,7 @@ export default function Upload(props: PropsWithChildren<UploadProps>) {
     if (typeof onChange === "function") {
       onChange(files);
     }
-  }, []);
+  }, [onChange]);
 
   return (
     <div

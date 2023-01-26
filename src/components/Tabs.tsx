@@ -53,7 +53,7 @@ export default function Tabs(props: PropsWithChildren<TabsProps>) {
     if (typeof onChange === "function") {
       onChange(value, option);
     }
-  }, []);
+  }, [onChange]);
 
   const lineElement = useMemo(() => {
     return (
@@ -90,7 +90,7 @@ export default function Tabs(props: PropsWithChildren<TabsProps>) {
         </div>
       );
     });
-  }, [options, renderCount]);
+  }, [options, renderCount, handleChangeCreator, props.value]);
 
   return (
     <div

@@ -1,5 +1,5 @@
 function clickOutsideService() {
-  let events = new Map<HTMLElement, (event: MouseEvent) => void>();
+  const events = new Map<HTMLElement, (event: MouseEvent) => void>();
   
   function emit(event: MouseEvent) {
     events.forEach((listener) => {

@@ -18,7 +18,7 @@ export default function Toggle(props: PropsWithChildren<ToggleProps>) {
     if (typeof onChange === "function") {
       onChange(!checked, e);
     }
-  }, [checked]);
+  }, [checked, onChange]);
 
   return (
     <div

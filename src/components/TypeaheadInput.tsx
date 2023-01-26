@@ -1,9 +1,10 @@
 import React, { useRef, useState, useMemo, useCallback, KeyboardEvent, MouseEvent, ChangeEvent, FocusEvent, useLayoutEffect, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 import Input from "./Input";
 import { updateDropDown } from "../utils/updateDropDown";
 import { className } from "../utils/className";
-import { createPortal } from "react-dom";
+
 export interface TypeaheadInputProps {
   size?: string | number;
   variant?: string;
@@ -59,7 +60,7 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
     if (open) {
       updateDropDown(dropdownRef.current, wrapperRef.current);
     }
-  }, [open]);
+  }, [open, value]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleUpdate, true);
@@ -69,11 +70,15 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
       window.removeEventListener("scroll", handleUpdate, true);
       window.removeEventListener("resize", handleUpdate, true);
     };
-  }, []);
+  }, [handleUpdate]);
 
     const handleClickCreator = useCallback((option: string) => () => {
-    onChange(option, null);
-    onBlur(option, null);
+    if (onChange) {
+      onChange(option, null);
+    }
+    if (onBlur) {
+      onBlur(option, null);
+    }
 
     setOpen(false);
   }, [setOpen, onChange, onBlur]);
@@ -81,8 +86,10 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
   const handleFocus = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
     setOpen(true);
 
-    onFocus(value, event);
-  }, [setOpen, setOpen, onFocus]);
+    if (onFocus) {
+      onFocus(value, event);
+    }
+  }, [setOpen, onFocus]);
 
   const handleBlur = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
     if (event.relatedTarget && (
@@ -93,7 +100,9 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
     }
     setOpen(false);
 
-    onBlur(value, event);
+    if (onBlur) {
+      onBlur(value, event);
+    }
   }, [setOpen, onBlur]);
 
   const dropdownElement = useMemo(() => {

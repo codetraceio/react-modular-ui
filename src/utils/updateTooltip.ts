@@ -3,22 +3,22 @@ export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLE
     return;
   }
   const rect = wrapperElement.getBoundingClientRect();
-  const wrapperWidth: number = wrapperElement.offsetWidth;
-  const wrapperHeight: number = wrapperElement.offsetHeight;
-  const width: number = tooltipElement.offsetWidth;
-  const height: number = tooltipElement.offsetHeight;
-  const tailSize: number = 8;
-  const fitsRight: boolean = rect.left + width + tailSize < window.innerWidth;
-  const fitsRightHalf: boolean = rect.left + width / 2 + tailSize < window.innerWidth;
-  const fitsBottom: boolean = rect.bottom + height + tailSize < window.innerHeight;
-  const fitsLeft: boolean = rect.left - width - tailSize > 0;
-  const fitsLeftHalf: boolean = rect.left - width - tailSize / 2 > 0;
-  const fitsTop: boolean = rect.top - height - tailSize > 0;
-  const scrollTop: number = document.documentElement.scrollTop || document.body.scrollTop;
-  const scrollLeft: number = document.documentElement.scrollLeft || document.body.scrollLeft;
+  const wrapperWidth = wrapperElement.offsetWidth;
+  const wrapperHeight = wrapperElement.offsetHeight;
+  const width = tooltipElement.offsetWidth;
+  const height = tooltipElement.offsetHeight;
+  const tailSize = 8;
+  const fitsRight = rect.left + width + tailSize < window.innerWidth;
+  const fitsRightHalf = rect.left + width / 2 + tailSize < window.innerWidth;
+  const fitsBottom = rect.bottom + height + tailSize < window.innerHeight;
+  const fitsLeft = rect.left - width - tailSize > 0;
+  const fitsLeftHalf = rect.left - width - tailSize / 2 > 0;
+  const fitsTop = rect.top - height - tailSize > 0;
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
 
-  let left: number = 0;
-  let top: number = 0;
+  let left = 0;
+  let top = 0;
   let position: string;
 
 
