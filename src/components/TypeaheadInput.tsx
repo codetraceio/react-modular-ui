@@ -25,7 +25,6 @@ export interface TypeaheadInputProps {
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
   onKeyUp?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onKeyPress?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
   onSubmit?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
   onBlur?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
@@ -158,7 +157,6 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
         onChange={props.onChange}
         onKeyDown={props.onKeyDown}
         onKeyUp={props.onKeyUp}
-        onKeyPress={props.onKeyPress}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onSubmit={props.onSubmit}

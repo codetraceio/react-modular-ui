@@ -17,7 +17,6 @@ export interface TextareaProps {
   onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   onKeyUp?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  onKeyPress?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   onFocus?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
   onBlur?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
@@ -51,7 +50,6 @@ export default function Textarea(props: TextareaProps) {
         onChange={useEvent(props.onChange)}
         onKeyDown={useEvent(props.onKeyDown)}
         onKeyUp={useEvent(props.onKeyUp)}
-        onKeyPress={useEvent(props.onKeyPress)}
         onFocus={useEvent(props.onFocus)}
         onBlur={useEvent(props.onBlur)}
       />
