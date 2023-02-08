@@ -28,6 +28,7 @@ export default function Icon(props: IconProps) {
       data-color={props.color}
       data-rotate={props.rotate}
       data-theme={theme}
+      data-clickable={!!props.onClick}
       aria-disabled={props.disabled}
       tabIndex={props.onClick && !props.disabled ? 0 : -1}
       onClick={props.onClick}
