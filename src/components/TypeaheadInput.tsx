@@ -5,6 +5,12 @@ import Input from "./Input";
 import { updateDropDown } from "../utils/updateDropDown";
 import { className } from "../utils/className";
 
+export enum TypeaheadInputFilter {
+  includes = "includes",
+  startsWith = "startsWith",
+  endsWith = "endsWith",
+}
+
 export interface TypeaheadInputProps {
   size?: string | number;
   variant?: string;
@@ -19,6 +25,7 @@ export interface TypeaheadInputProps {
   options?: string[];
   matchingOptionsOnly?: boolean;
   hideInitialOptions?: boolean;
+  filter?: TypeaheadInputFilter;
 
   portal?: JSX.Element[];
 
@@ -35,13 +42,20 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
   const dropdownRef = useRef<HTMLDivElement>();
   const wrapperRef = useRef<HTMLDivElement>();
 
-  const { options, value, onBlur, onFocus, onChange } = props;
+  const {
+    options,
+    value,
+    onBlur,
+    onFocus,
+    onChange,
+    filter = TypeaheadInputFilter.includes,
+  } = props;
 
   const [open, setOpen] = useState(false);
 
   const matchingOptions = useMemo(() => {
-    return options.filter((option) => option.toLowerCase().includes(value.toLowerCase()));
-  }, [options, value]);
+    return options.filter((option) => option.toLowerCase()[filter](value.toLowerCase()));
+  }, [options, value, filter]);
   
   const optionSet = useMemo(() => {
     const set = new Set<string>();
