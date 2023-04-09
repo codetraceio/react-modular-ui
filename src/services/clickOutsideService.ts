@@ -26,7 +26,7 @@ function clickOutsideService() {
     if (!events.delete(element)) {
       return;
     }
-    if (events.size === 1) {
+    if (events.size === 0) {
       document.removeEventListener('click', emit);
     }
   }
