@@ -14,7 +14,7 @@ export interface TabsProps {
   color?: string;
   variant?: string;
   disabled?: boolean;
-  options: TabsOption[];
+  options: TabsOption[] | Readonly<TabsOption[]>;
   value: string;
 
   onChange?: (value: string | number, option: TabsOption) => void;

@@ -13,7 +13,7 @@ export interface SelectProps {
   size?: string | number;
   variant?: string;
   disabled?: boolean;
-  options?: SelectOption[];
+  options?: SelectOption[] | Readonly<SelectOption[]>;
   value?: string;
 
   onChange?: (value: string, option: SelectOption) => void;
