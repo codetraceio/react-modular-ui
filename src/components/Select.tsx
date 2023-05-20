@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { updateDropDown } from "../utils/updateDropDown";
@@ -6,6 +6,7 @@ import { className } from "../utils/className";
 import clickOutsideService from "../services/clickOutsideService";
 
 import Icon from "./Icon";
+import { ThemeContext } from "./ThemeContext";
 
 export interface SelectProps {
   placeholder?: string;
@@ -15,6 +16,7 @@ export interface SelectProps {
   disabled?: boolean;
   options?: SelectOption[] | Readonly<SelectOption[]>;
   value?: string;
+  theme?: string;
 
   onChange?: (value: string, option: SelectOption) => void;
 }
@@ -25,7 +27,8 @@ export interface SelectOption {
 }
 
 export default function Select(props: SelectProps) {
-  const { label, value, options, placeholder, onChange } = props;
+  const { label, value, options, placeholder, onChange } = props
+  const theme = useContext(ThemeContext);
 
   const dropdownRef = useRef<HTMLDivElement>();
   const selectRef = useRef<HTMLDivElement>();
@@ -134,6 +137,7 @@ export default function Select(props: SelectProps) {
       className={className("select")}
       data-size={props.size}
       data-variant={props.variant}
+      data-theme={props.theme ?? theme}
       aria-disabled={props.disabled}
       tabIndex={props.disabled ? -1 : 0}
     >

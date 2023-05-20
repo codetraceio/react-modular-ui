@@ -17,6 +17,7 @@ export interface InputProps {
   type?: string;
   inputMode?: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
   pattern?: string;
+  theme?: string;
 
   onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
@@ -60,7 +61,7 @@ export default function Input(props: InputProps) {
       data-variant={props.variant}
       data-color={props.color}
       data-shape={props.shape}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
     >
       {labelElement}
       <input

@@ -1,12 +1,14 @@
-import React, { PropsWithChildren, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { PropsWithChildren, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { updateTooltip } from "../utils/updateTooltip";
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface TooltipProps {
   title: string | JSX.Element;
   prefer?: string;
+  theme?: string;
 }
 
 export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
@@ -14,6 +16,8 @@ export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const { title } = props;
+  const theme = useContext(ThemeContext);
+  const propsTheme = props.theme;
 
   const [open, setOpen] = useState(false);
 
@@ -44,11 +48,11 @@ export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
 
   const tooltipElement = useMemo(() => {
     return (
-      <div className={className("tooltip")} ref={tooltipRef}>
+      <div className={className("tooltip")} data-theme={propsTheme ?? theme} ref={tooltipRef}>
         {title}
       </div>
     );
-  }, [title]);
+  }, [title, propsTheme, theme]);
 
   const portalElement = useMemo(() => {
     if (!open) {

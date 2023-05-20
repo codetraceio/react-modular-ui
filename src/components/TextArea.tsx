@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 
 import { className } from "../utils/className";
 import { useEvent } from "../utils/useEvent";
+import { ThemeContext } from "./ThemeContext";
 
 export interface TextareaProps {
   size?: string | number;
@@ -13,6 +14,7 @@ export interface TextareaProps {
   name?: string;
   placeholder?: string;
   value?: string | number;
+  theme?: string;
 
   onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -23,6 +25,7 @@ export interface TextareaProps {
 
 export default function Textarea(props: TextareaProps) {
   const { label } = props;
+  const theme = useContext(ThemeContext);
 
   const labelElement = useMemo(() => {
     return label ? (
@@ -36,6 +39,7 @@ export default function Textarea(props: TextareaProps) {
       data-size={props.size}
       data-variant={props.variant}
       data-color={props.color}
+      data-theme={props.theme ?? theme}
       aria-disabled={props.disabled}
     >
       {labelElement}

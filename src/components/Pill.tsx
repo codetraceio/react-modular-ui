@@ -8,6 +8,7 @@ export interface PillProps {
   variant?: string;
   paddingLeft?: string | number;
   paddingRight?: string | number;
+  theme?: string;
 
   onClick?: () => void;
 }
@@ -23,7 +24,7 @@ export default function Pill(props: PropsWithChildren<PillProps>) {
       data-variant={props.variant}
       data-padding-left={props.paddingLeft}
       data-padding-right={props.paddingRight}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
       onClick={props.onClick}
     >
       {props.children}

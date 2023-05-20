@@ -7,6 +7,7 @@ export interface CheckboxProps {
   disabled?: boolean;
   checked?: boolean;
   name?: string;
+  theme?: string;
 
   onChange?: (checked: boolean, event: MouseEvent<HTMLDivElement>) => void;
 }
@@ -32,7 +33,7 @@ export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
       data-name={props.name}
       data-size={props.size}
       data-variant={props.variant}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
       aria-checked={props.checked}
       aria-disabled={props.disabled}
       tabIndex={props.disabled ? -1 : 0}

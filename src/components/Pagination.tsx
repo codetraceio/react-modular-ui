@@ -11,6 +11,7 @@ export interface PaginationProps {
   limit?: number;
   offset?: number;
   hideLastPage?: boolean;
+  theme?: string;
 
   onChange?: (offset: number, page: number) => void;
 }
@@ -127,7 +128,7 @@ export default function Pagination(props: PaginationProps) {
       className={className("pagination")}
       data-size={props.size}
       data-color={props.color}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
     >
       {prevElement}
       {pagesElement}

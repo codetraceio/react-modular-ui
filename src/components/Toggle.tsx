@@ -1,18 +1,21 @@
-import React, { PropsWithChildren, useCallback } from "react";
+import React, { PropsWithChildren, useCallback, useContext } from "react";
 
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface ToggleProps {
   size?: string | number;
   color?: string;
   disabled?: boolean;
   checked?: boolean;
+  theme?: string;
 
   onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Toggle(props: PropsWithChildren<ToggleProps>) {
   const { checked, onChange } = props;
+  const theme = useContext(ThemeContext);
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (typeof onChange === "function") {
@@ -29,6 +32,7 @@ export default function Toggle(props: PropsWithChildren<ToggleProps>) {
       aria-checked={props.checked}
       data-size={props.size}
       data-color={props.color}
+      data-theme={props.theme ?? theme}
 
       onClick={handleClick}
     >

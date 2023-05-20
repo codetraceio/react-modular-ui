@@ -1,9 +1,10 @@
-import React, { useRef, useState, useMemo, useCallback, KeyboardEvent, MouseEvent, ChangeEvent, FocusEvent, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useState, useMemo, useCallback, KeyboardEvent, MouseEvent, ChangeEvent, FocusEvent, useLayoutEffect, useEffect, useContext } from "react";
 import { createPortal } from "react-dom";
 
 import Input from "./Input";
 import { updateDropDown } from "../utils/updateDropDown";
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export enum TypeaheadInputFilter {
   includes = "includes",
@@ -26,6 +27,7 @@ export interface TypeaheadInputProps {
   matchingOptionsOnly?: boolean;
   hideInitialOptions?: boolean;
   filter?: TypeaheadInputFilter;
+  theme?: string;
 
   portal?: JSX.Element[];
 
@@ -41,6 +43,7 @@ export interface TypeaheadInputProps {
 export default function TypeaheadInput(props: TypeaheadInputProps) {
   const dropdownRef = useRef<HTMLDivElement>();
   const wrapperRef = useRef<HTMLDivElement>();
+  const theme = useContext(ThemeContext);
 
   const {
     options,
@@ -155,6 +158,7 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
   return (
     <div
       className={className("typeahead-input")}
+      data-theme={props.theme ?? theme}
       ref={wrapperRef}
     >
       <Input

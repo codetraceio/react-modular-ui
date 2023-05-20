@@ -11,6 +11,7 @@ export interface ButtonProps {
   name?: string;
   href?: string;
   target?: string;
+  theme?: string;
 
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
@@ -30,7 +31,7 @@ export default function Button<T extends ButtonProps>(props: PropsWithChildren<T
       data-variant={props.variant}
       data-color={props.color}
       data-shape={props.shape}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
       aria-disabled={props.disabled}
       tabIndex={props.disabled ? -1 : 0}
       onClick={props.onClick}

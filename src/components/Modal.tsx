@@ -7,6 +7,7 @@ import { ThemeContext } from "./ThemeContext";
 export interface ModalProps {
   show?: boolean;
   name?: string;
+  theme?: string;
 
   onClose?: () => void;
 }
@@ -15,6 +16,7 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
   const { onClose, children } = props;
 
   const theme = useContext(ThemeContext);
+  const propsTheme = props.theme;
 
   const handleClose = useCallback(() => {
     if (typeof onClose === "function") {
@@ -28,13 +30,13 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
 
   const modalElement = useMemo(() => {
     return (
-      <div className={className("modal")} data-theme={theme} onClick={handleClose}>
+      <div className={className("modal")} data-theme={propsTheme ?? theme} onClick={handleClose}>
         <div className={className("modal", "content")} onClick={handleClickInside}>
           {children}
         </div>
       </div>
     );
-  }, [children, theme, handleClose]);
+  }, [children, theme, propsTheme, handleClose]);
 
   if (!props.show || configService.getConfig().server) {
     return null;

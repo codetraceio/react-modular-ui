@@ -6,6 +6,7 @@ import { ThemeContext } from "./ThemeContext";
 export interface LoadingProps {
   size?: string | number;
   color?: string;
+  theme?: string;
 }
 
 export default function Loading(props: LoadingProps) {
@@ -16,7 +17,7 @@ export default function Loading(props: LoadingProps) {
       className={className("loading")}
       data-size={props.size}
       data-color={props.color}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
     >
       <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
         <circle cx="50" cy="50" r="40" stroke="none" fill="none" strokeWidth="10">

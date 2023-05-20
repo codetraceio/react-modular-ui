@@ -12,6 +12,7 @@ export interface IconProps {
   rotate?: string | number;
   icon?: string;
   disabled?: boolean;
+  theme?: string;
 
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
@@ -27,7 +28,7 @@ export default function Icon(props: IconProps) {
       data-height={props.height}
       data-color={props.color}
       data-rotate={props.rotate}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
       data-clickable={!!props.onClick}
       aria-disabled={props.disabled}
       tabIndex={props.onClick && !props.disabled ? 0 : -1}

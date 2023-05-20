@@ -5,6 +5,7 @@ import { ThemeContext } from "./ThemeContext";
 export interface ProgressProps {
   size?: string | number;
   color?: string;
+  theme?: string;
   value: number;
 }
 
@@ -16,7 +17,7 @@ export default function Progress(props: ProgressProps) {
       className={className("progress")}
       data-size={props.size}
       data-color={props.color}
-      data-theme={theme}
+      data-theme={props.theme ?? theme}
     >
       <div
         className={className("progress", "line")}

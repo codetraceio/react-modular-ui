@@ -1,6 +1,7 @@
-import React, { DragEvent, PropsWithChildren, useRef, useState, useCallback } from "react";
+import React, { DragEvent, PropsWithChildren, useRef, useState, useCallback, useContext } from "react";
 
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface UploadProps {
   size?: string | number;
@@ -8,12 +9,14 @@ export interface UploadProps {
   disabled?: boolean;
   checked?: boolean;
   name?: string;
+  theme?: string;
 
   onChange?: (files: FileList) => void
 }
 
 export default function Upload(props: PropsWithChildren<UploadProps>) {
   const { onChange } = props;
+  const theme = useContext(ThemeContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [active, setActive] = useState(false);
@@ -61,6 +64,7 @@ export default function Upload(props: PropsWithChildren<UploadProps>) {
       className={className("upload")}
       data-name={props.name}
       data-active={active}
+      data-theme={props.theme ?? theme}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}

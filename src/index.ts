@@ -16,7 +16,7 @@ export {default as Progress} from "./components/Progress";
 export {default as Upload} from "./components/Upload";
 export {default as Select} from "./components/Select";
 export {default as TypeaheadInput} from "./components/TypeaheadInput";
-export {default as Sortable, removeElement, insertElement} from "./components/Sortable";
+export { ThemeContext } from "./components/ThemeContext";
 
 export { default as clickOutsideService } from "./services/clickOutsideService";
 export { default as dragService } from "./services/dragService";

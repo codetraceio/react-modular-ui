@@ -1,7 +1,8 @@
-import React, { PropsWithChildren, useCallback } from "react";
+import React, { PropsWithChildren, useCallback, useContext } from "react";
 
 import Icon from "./Icon";
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface RadioProps {
   size?: string | number;
@@ -11,11 +12,13 @@ export interface RadioProps {
   name?: string;
   value?: string | number | boolean;
   checked?: boolean;
+  theme?: string;
 
   onChange?: (value: string | number | boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Radio(props: PropsWithChildren<RadioProps>) {
+  const theme = useContext(ThemeContext);
   const { value, onChange } = props;
 
   const handleChange = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
@@ -31,6 +34,7 @@ export default function Radio(props: PropsWithChildren<RadioProps>) {
       data-size={props.size}
       data-variant={props.variant}
       data-color={props.color}
+      data-theme={props.theme ?? theme}
       aria-disabled={props.disabled}
       aria-checked={props.checked}
       tabIndex={0}

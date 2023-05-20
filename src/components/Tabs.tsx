@@ -1,6 +1,7 @@
-import React, { PropsWithChildren, useLayoutEffect, useCallback, useMemo, useRef  } from "react";
+import React, { PropsWithChildren, useLayoutEffect, useCallback, useMemo, useRef, useContext  } from "react";
 
 import { className } from "../utils/className";
+import { ThemeContext } from "./ThemeContext";
 
 export interface TabsOption {
   title: string;
@@ -14,6 +15,7 @@ export interface TabsProps {
   color?: string;
   variant?: string;
   disabled?: boolean;
+  theme?: string;
   options: TabsOption[] | Readonly<TabsOption[]>;
   value: string;
 
@@ -41,6 +43,7 @@ function updateLine(tabs: HTMLDivElement, line: HTMLDivElement, value: string) {
 
 export default function Tabs(props: PropsWithChildren<TabsProps>) {
   const { options, value, onChange } = props;
+  const theme = useContext(ThemeContext);
 
   const tabsRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null);
@@ -99,6 +102,7 @@ export default function Tabs(props: PropsWithChildren<TabsProps>) {
       data-color={props.color}
       data-variant={props.variant}
       data-disabled={props.disabled}
+      data-theme={props.theme ?? theme}
     >
       <div ref={tabsRef} className={className("tabs", "options")}>
         {optionsElement}
