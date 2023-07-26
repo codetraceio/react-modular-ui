@@ -13,6 +13,7 @@ export interface IconProps {
   icon?: string;
   disabled?: boolean;
   theme?: string;
+  verticalAlign?: string;
 
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
@@ -30,6 +31,7 @@ export default function Icon(props: IconProps) {
       data-rotate={props.rotate}
       data-theme={props.theme ?? theme}
       data-clickable={!!props.onClick}
+      data-vertical-align={props.verticalAlign}
       aria-disabled={props.disabled}
       tabIndex={props.onClick && !props.disabled ? 0 : -1}
       onClick={props.onClick}
