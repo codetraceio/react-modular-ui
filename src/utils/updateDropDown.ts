@@ -4,6 +4,7 @@ export const DROP_DOWN_ORIENTATION_BOTTOM = "bottom";
 export function updateDropDown(
   dropDownElement: HTMLElement,
   selectElement: HTMLElement,
+  shouldSetMinWidth = true,
 ) {
   if (!dropDownElement || !selectElement) {
     return;
@@ -21,7 +22,9 @@ export function updateDropDown(
 
   const maxHeight = Math.min(Math.max(window.innerHeight - selectRect.bottom - 32, 256), 512);
 
-  dropDownElement.style.minWidth = `${selectRect.width}px`;
+  if (shouldSetMinWidth) {
+    dropDownElement.style.minWidth = `${selectRect.width}px`;
+  }
   dropDownElement.style.maxWidth = `${window.innerWidth - 64}px`;
   dropDownElement.style.maxHeight = `${maxHeight}px`;
 
