@@ -15,6 +15,7 @@ export interface InputProps {
   placeholder?: string;
   shape?: string;
   type?: string;
+  maxLength?: number;
   inputMode?: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
   pattern?: string;
   theme?: string;
@@ -72,6 +73,7 @@ export default function Input(props: InputProps) {
         type={props.type}
         inputMode={props.inputMode}
         pattern={props.pattern}
+        maxLength={props.maxLength}
         onChange={useEvent(props.onChange)}
         onKeyDown={handleKeyDown}
         onKeyUp={useEvent(props.onKeyUp)}

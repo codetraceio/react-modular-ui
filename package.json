@@ -11,6 +11,7 @@
     "test-dev": "jest --coverage",
     "test-update": "jest --coverage -u",
     "build": "./run/build.sh",
+    "build-windows": "tsc --project tsconfig.build.json && node-sass ./styles/src/default/index.scss ./styles/lib/default/index.css",
     "watch": "./run/watch.sh",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
