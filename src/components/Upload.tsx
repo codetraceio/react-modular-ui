@@ -64,6 +64,7 @@ export default function Upload(props: PropsWithChildren<UploadProps>) {
       className={className("upload")}
       data-name={props.name}
       data-active={active}
+      data-color={props.color}
       data-theme={props.theme ?? theme}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
