@@ -107,7 +107,7 @@ export default function Select(props: SelectProps) {
 
   const optionsElement = useMemo(() => {
     return (
-      <div className={className("select", "dropdown")} ref={dropdownRef} data-theme={theme}>
+      <div className={className("select", "dropdown")} ref={dropdownRef} data-theme={props.theme ?? theme}>
         {options.map((option: SelectOption) => {
           return (
             <div
@@ -123,7 +123,7 @@ export default function Select(props: SelectProps) {
         })}
       </div>
     );
-  }, [options, value, theme, handleOptionClickCreator]);
+  }, [options, value, props.theme, theme, handleOptionClickCreator]);
 
   const portalElement = useMemo(() => {
     if (!open || !options || options.length === 0) {
