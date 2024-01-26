@@ -29,10 +29,32 @@ export interface InputProps {
   onClick?: (value: string, event: MouseEvent<HTMLInputElement>) => void;
 }
 
-export default function Input(props: InputProps) {
-  const { label, onSubmit, onKeyDown } = props;
+export default function Input({
+  size,
+  variant,
+  color,
+  disabled,
+  name,
+  label,
+  value,
+  placeholder,
+  shape,
+  type,
+  theme,
+  inputMode,
+  pattern,
+  maxLength,
+  onChange,
+  onKeyDown,
+  onKeyUp,
+  onFocus,
+  onBlur,
+  onSubmit,
+  onClick,
+  ...props
+}: InputProps) {
 
-  const theme = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
 
   const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
     if (typeof onKeyDown === "function") {
@@ -58,28 +80,29 @@ export default function Input(props: InputProps) {
   return (
     <div
       className={className("input")}
-      data-size={props.size}
-      data-variant={props.variant}
-      data-color={props.color}
-      data-shape={props.shape}
-      data-theme={props.theme ?? theme}
+      data-size={size}
+      data-variant={variant}
+      data-color={color}
+      data-shape={shape}
+      data-theme={theme ?? themeContext}
+      {...props}
     >
       {labelElement}
       <input
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
-        disabled={props.disabled}
-        type={props.type}
-        inputMode={props.inputMode}
-        pattern={props.pattern}
-        maxLength={props.maxLength}
-        onChange={useEvent(props.onChange)}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        disabled={disabled}
+        type={type}
+        inputMode={inputMode}
+        pattern={pattern}
+        maxLength={maxLength}
+        onChange={useEvent(onChange)}
         onKeyDown={handleKeyDown}
-        onKeyUp={useEvent(props.onKeyUp)}
-        onFocus={useEvent(props.onFocus)}
-        onBlur={useEvent(props.onBlur)}
-        onClick={useEvent(props.onClick)}
+        onKeyUp={useEvent(onKeyUp)}
+        onFocus={useEvent(onFocus)}
+        onBlur={useEvent(onBlur)}
+        onClick={useEvent(onClick)}
       />
     </div>
   );

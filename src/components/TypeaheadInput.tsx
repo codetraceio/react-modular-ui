@@ -40,19 +40,31 @@ export interface TypeaheadInputProps {
   onClick?: (value: string, event: MouseEvent<HTMLInputElement>) => void;
 }
 
-export default function TypeaheadInput(props: TypeaheadInputProps) {
+export default function TypeaheadInput({
+  options,
+  value,
+  filter = TypeaheadInputFilter.includes,
+  theme,
+  size,
+  variant,
+  color,
+  disabled,
+  name,
+  label,
+  placeholder,
+  shape,
+  onSubmit,
+  onClick,
+  onBlur,
+  onFocus,
+  onChange,
+  onKeyDown,
+  onKeyUp,
+  ...props
+}: TypeaheadInputProps) {
   const dropdownRef = useRef<HTMLDivElement>();
   const wrapperRef = useRef<HTMLDivElement>();
-  const theme = useContext(ThemeContext);
-
-  const {
-    options,
-    value,
-    onBlur,
-    onFocus,
-    onChange,
-    filter = TypeaheadInputFilter.includes,
-  } = props;
+  const themeContext = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
 
@@ -158,27 +170,28 @@ export default function TypeaheadInput(props: TypeaheadInputProps) {
   return (
     <div
       className={className("typeahead-input")}
-      data-theme={props.theme ?? theme}
+      data-theme={theme ?? themeContext}
       ref={wrapperRef}
+      {...props}
     >
       <Input
-        size={props.size}
-        variant={props.variant}
-        color={props.color || optionSet.has(props.value) && "success"}
-        disabled={props.disabled}
-        name={props.name}
-        label={props.label}
-        value={props.value}
-        placeholder={props.placeholder}
-        shape={props.shape}
+        size={size}
+        variant={variant}
+        color={color || optionSet.has(value) && "success"}
+        disabled={disabled}
+        name={name}
+        label={label}
+        value={value}
+        placeholder={placeholder}
+        shape={shape}
 
-        onChange={props.onChange}
-        onKeyDown={props.onKeyDown}
-        onKeyUp={props.onKeyUp}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onSubmit={props.onSubmit}
-        onClick={props.onClick}
+        onSubmit={onSubmit}
+        onClick={onClick}
       />
       {portalElement}
     </div>

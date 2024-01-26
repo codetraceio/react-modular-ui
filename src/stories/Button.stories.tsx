@@ -40,5 +40,5 @@ export default {
 };
 
 export const Button = (props: ButtonProps) => {
-  return <UiButton {...props} />
+  return <UiButton {...props} data-something="aaa" />
 };

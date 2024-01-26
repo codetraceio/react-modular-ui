@@ -26,9 +26,19 @@ export interface SelectOption {
   value: string;
 }
 
-export default function Select(props: SelectProps) {
-  const { label, value, options, placeholder, onChange } = props
-  const theme = useContext(ThemeContext);
+export default function Select({
+  placeholder,
+  label,
+  size,
+  variant,
+  disabled,
+  options,
+  value,
+  theme,
+  onChange,
+  ...props
+}: SelectProps) {
+  const themeContext = useContext(ThemeContext);
 
   const dropdownRef = useRef<HTMLDivElement>();
   const selectRef = useRef<HTMLDivElement>();
@@ -107,7 +117,7 @@ export default function Select(props: SelectProps) {
 
   const optionsElement = useMemo(() => {
     return (
-      <div className={className("select", "dropdown")} ref={dropdownRef} data-theme={props.theme ?? theme}>
+      <div className={className("select", "dropdown")} ref={dropdownRef} data-theme={theme ?? themeContext}>
         {options.map((option: SelectOption) => {
           return (
             <div
@@ -123,7 +133,7 @@ export default function Select(props: SelectProps) {
         })}
       </div>
     );
-  }, [options, value, props.theme, theme, handleOptionClickCreator]);
+  }, [options, value, theme, themeContext, handleOptionClickCreator]);
 
   const portalElement = useMemo(() => {
     if (!open || !options || options.length === 0) {
@@ -135,11 +145,12 @@ export default function Select(props: SelectProps) {
   return (
     <div
       className={className("select")}
-      data-size={props.size}
-      data-variant={props.variant}
-      data-theme={props.theme ?? theme}
-      aria-disabled={props.disabled}
-      tabIndex={props.disabled ? -1 : 0}
+      data-size={size}
+      data-variant={variant}
+      data-theme={theme ?? themeContext}
+      aria-disabled={disabled}
+      tabIndex={disabled ? -1 : 0}
+      {...props}
     >
       {labelElement}
       <div

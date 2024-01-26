@@ -49,6 +49,7 @@
   user-select: none;
   outline: none;
   min-width: 100px;
+  border: 0;
 
   &[data-size='24'] {
     @include button-size(24px, 8px, 14px);

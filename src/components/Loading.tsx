@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { HTMLAttributes, useContext } from "react";
 
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
@@ -9,15 +9,21 @@ export interface LoadingProps {
   theme?: string;
 }
 
-export default function Loading(props: LoadingProps) {
-  const theme = useContext(ThemeContext);
+export default function Loading({
+  size,
+  color,
+  theme,
+  ...props
+}: LoadingProps & HTMLAttributes<HTMLDivElement>) {
+  const themeContext = useContext(ThemeContext);
 
   return (
     <div
       className={className("loading")}
-      data-size={props.size}
-      data-color={props.color}
-      data-theme={props.theme ?? theme}
+      data-size={size}
+      data-color={color}
+      data-theme={theme ?? themeContext}
+      {...props}
     >
       <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
         <circle cx="50" cy="50" r="40" stroke="none" fill="none" strokeWidth="10">

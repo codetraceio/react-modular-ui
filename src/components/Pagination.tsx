@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { HTMLAttributes, useCallback, useContext, useMemo } from "react";
 
 import { className } from "../utils/className";
 import Icon from "./Icon";
@@ -17,16 +17,23 @@ export interface PaginationProps {
 }
 
 
-export default function Pagination(props: PaginationProps) {
-  const { onChange, hideLastPage } = props;
+export default function Pagination({
+  size = 24,
+  color,
+  count = 0,
+  limit = 10,
+  offset,
+  hideLastPage,
+  theme,
 
-  const theme = useContext(ThemeContext);
+  onChange,
+  ...props
+}: PaginationProps & HTMLAttributes<HTMLDivElement>) {
 
-  const limit = props.limit ?? 10;
-  const count = props.count ?? 0;
-  const offset = Math.max(Math.min(props.offset ?? 0, count - 1), 0);
-  const size = props.size ?? 24;
-  const page = limit > 0 ? Math.ceil(offset / limit) + 1 : 0;
+  const themeContext = useContext(ThemeContext);
+
+  const normalizedOffset = Math.max(Math.min(offset ?? 0, count - 1), 0);
+  const page = limit > 0 ? Math.ceil(normalizedOffset / limit) + 1 : 0;
   const lastPage =  limit > 0 ? Math.ceil(count / limit) : 0;
   const startPage = Math.max(page - 2, 1);
   const endPage = Math.min(page + 2, lastPage);
@@ -126,9 +133,10 @@ export default function Pagination(props: PaginationProps) {
   return (
     <div
       className={className("pagination")}
-      data-size={props.size}
-      data-color={props.color}
-      data-theme={props.theme ?? theme}
+      data-size={size}
+      data-color={color}
+      data-theme={theme ?? themeContext}
+      {...props}
     >
       {prevElement}
       {pagesElement}

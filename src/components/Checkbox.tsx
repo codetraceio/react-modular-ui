@@ -16,10 +16,19 @@ import Icon from "./Icon";
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
-export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
-  const { checked, onChange } = props;
+export default function Checkbox({
+  checked,
+  name,
+  size,
+  variant,
+  theme,
+  disabled,
+  children,
+  onChange,
+  ...props
+}: PropsWithChildren<CheckboxProps>) {
 
-  const theme = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext);
 
   const handleChange = useCallback((e: MouseEvent<HTMLDivElement>) => {
     if (typeof onChange === "function") {
@@ -30,24 +39,26 @@ export default function Checkbox(props: PropsWithChildren<CheckboxProps>) {
   return (
     <div
       className={className("checkbox")}
-      data-name={props.name}
-      data-size={props.size}
-      data-variant={props.variant}
-      data-theme={props.theme ?? theme}
-      aria-checked={props.checked}
-      aria-disabled={props.disabled}
-      tabIndex={props.disabled ? -1 : 0}
+      data-name={name}
+      data-size={size}
+      data-variant={variant}
+      data-theme={theme ?? themeContext}
+      aria-checked={checked}
+      aria-disabled={disabled}
+      role="checkbox"
+      tabIndex={disabled ? -1 : 0}
       onClick={handleChange}
+      {...props}
     >
       <div className={className("checkbox", "icon")}>
-        {props.checked ? (
+        {checked ? (
           <Icon
-            size={props.size}
+            size={size}
             icon="checkbox"
           />
         ) : null}
       </div>
-      <div>{props.children}</div>
+      <div>{children}</div>
     </div>
   );
 }

@@ -14,9 +14,17 @@ export interface UploadProps {
   onChange?: (files: FileList) => void
 }
 
-export default function Upload(props: PropsWithChildren<UploadProps>) {
-  const { onChange } = props;
-  const theme = useContext(ThemeContext);
+export default function Upload({
+  name,
+  size,
+  color,
+  theme,
+  disabled,
+  children,
+  onChange,
+  ...props
+}: PropsWithChildren<UploadProps>) {
+  const themeContext = useContext(ThemeContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [active, setActive] = useState(false);
@@ -62,24 +70,29 @@ export default function Upload(props: PropsWithChildren<UploadProps>) {
   return (
     <div
       className={className("upload")}
-      data-name={props.name}
+      data-name={name}
+      data-size={size}
       data-active={active}
-      data-color={props.color}
-      data-theme={props.theme ?? theme}
+      data-color={color}
+      data-theme={theme ?? themeContext}
+      aria-disabled={disabled}
+      role="button"
+      tabIndex={disabled ? -1 : 0}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       onClick={handleClick}
+      {...props}
     >
       <input
         type="file"
-        name={props.name}
+        name={name}
         style={{display: "none"}}
         ref={inputRef}
         onChange={handleChange}
       />
       <div>
-        {props.children}
+        {children}
       </div>
     </div>
   );

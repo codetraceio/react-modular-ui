@@ -11,8 +11,15 @@ export interface FormProps {
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function Form(props: PropsWithChildren<FormProps>) {
-  const { onChange } = props;
+export default function Form({
+  action,
+  method,
+  name,
+  target,
+  onChange,
+  onSubmit,
+  ...props
+}: PropsWithChildren<FormProps>) {
 
   const handleChange = useCallback((event: ChangeEvent<HTMLFormElement>) => {
     if (typeof onChange === "function") {
@@ -23,12 +30,13 @@ export default function Form(props: PropsWithChildren<FormProps>) {
   return (
     <form
       className={className("form")}
-      action={props.action}
-      method={props.method}
-      name={props.name}
-      target={props.target}
+      action={action}
+      method={method}
+      name={name}
+      target={target}
       onChange={handleChange}
-      onSubmit={props.onSubmit}
+      onSubmit={onSubmit}
+      {...props}
     >
       <input type="submit" style={{display: "none"}}/>
       {props.children}

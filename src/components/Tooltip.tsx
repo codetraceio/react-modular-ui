@@ -11,23 +11,27 @@ export interface TooltipProps {
   theme?: string;
 }
 
-export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
+export default function Tooltip({
+  title,
+  prefer,
+  theme,
+  children,
+  ...props
+}: PropsWithChildren<TooltipProps>) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const { title } = props;
-  const theme = useContext(ThemeContext);
-  const propsTheme = props.theme;
+  const themeContext = useContext(ThemeContext);
 
   const [open, setOpen] = useState(false);
 
   useLayoutEffect(() => {
-    updateTooltip(wrapperRef.current, tooltipRef.current, props.prefer);
-  }, [open, props.prefer]);
+    updateTooltip(wrapperRef.current, tooltipRef.current, prefer);
+  }, [open, prefer]);
 
   const handleUpdate = useCallback(() => {
-    updateTooltip(wrapperRef.current, tooltipRef.current, props.prefer);
-  }, [props.prefer]);
+    updateTooltip(wrapperRef.current, tooltipRef.current, prefer);
+  }, [prefer]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleUpdate, true);
@@ -48,11 +52,11 @@ export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
 
   const tooltipElement = useMemo(() => {
     return (
-      <div className={className("tooltip")} data-theme={propsTheme ?? theme} ref={tooltipRef}>
+      <div className={className("tooltip")} data-theme={theme ?? themeContext} ref={tooltipRef}>
         {title}
       </div>
     );
-  }, [title, propsTheme, theme]);
+  }, [title, theme, themeContext]);
 
   const portalElement = useMemo(() => {
     if (!open) {
@@ -66,8 +70,9 @@ export default function Tooltip(props: PropsWithChildren<TooltipProps>) {
       onMouseOver={handleOver}
       onMouseOut={handleOut}
       ref={wrapperRef}
+      {...props}
     >
-      {props.children}
+      {children}
       {portalElement}
     </span>
   );

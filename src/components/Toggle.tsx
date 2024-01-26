@@ -13,9 +13,17 @@ export interface ToggleProps {
   onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default function Toggle(props: PropsWithChildren<ToggleProps>) {
-  const { checked, onChange } = props;
-  const theme = useContext(ThemeContext);
+export default function Toggle({
+  size,
+  color,
+  disabled,
+  checked,
+  theme,
+  children,
+  onChange,
+  ...props
+}: PropsWithChildren<ToggleProps>) {
+  const themeContext = useContext(ThemeContext);
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (typeof onChange === "function") {
@@ -28,21 +36,22 @@ export default function Toggle(props: PropsWithChildren<ToggleProps>) {
       className={className("toggle")}
       role="checkbox"
       tabIndex={0}
-      aria-disabled={props.disabled}
-      aria-checked={props.checked}
-      data-size={props.size}
-      data-color={props.color}
-      data-theme={props.theme ?? theme}
+      aria-disabled={disabled}
+      aria-checked={checked}
+      data-size={size}
+      data-color={color}
+      data-theme={theme ?? themeContext}
 
       onClick={handleClick}
+      {...props}
     >
       <div className={className("toggle", "container")}>
         <div className={className("toggle", "line")} />
         <div className={className("toggle", "handle")} />
       </div>
-      {props.children ? (
+      {children ? (
         <div className={className("toggle", "label")}>
-          {props.children}
+          {children}
         </div>
       ) :  null}
     </div>

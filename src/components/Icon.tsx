@@ -18,25 +18,39 @@ export interface IconProps {
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
-export default function Icon(props: IconProps) {
-  const theme = useContext(ThemeContext);
+export default function Icon({
+  icon,
+  size,
+  width,
+  height,
+  color,
+  rotate,
+  theme,
+  disabled,
+  verticalAlign,
+  onClick,
+  ...props
+}: IconProps) {
+  const themeContext = useContext(ThemeContext);
 
   return (
     <span
       className={className("icon")}
-      data-size={props.size}
-      data-width={props.width}
-      data-height={props.height}
-      data-color={props.color}
-      data-rotate={props.rotate}
-      data-theme={props.theme ?? theme}
-      data-clickable={!!props.onClick}
-      data-vertical-align={props.verticalAlign}
-      aria-disabled={props.disabled}
-      tabIndex={props.onClick && !props.disabled ? 0 : -1}
-      onClick={props.onClick}
+      data-size={size}
+      data-width={width}
+      data-height={height}
+      data-color={color}
+      data-rotate={rotate}
+      data-theme={theme ?? themeContext}
+      data-clickable={!!onClick}
+      data-vertical-align={verticalAlign}
+      aria-disabled={disabled}
+      role={onClick && "button"}
+      tabIndex={onClick && !disabled ? 0 : -1}
+      onClick={onClick}
+      {...props}
     >
-      {configService.getConfig().icons[props.icon]}
+      {configService.getConfig().icons[icon]}
     </span>
   );
 }

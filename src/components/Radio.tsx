@@ -17,9 +17,20 @@ export interface RadioProps {
   onChange?: (value: string | number | boolean, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default function Radio(props: PropsWithChildren<RadioProps>) {
-  const theme = useContext(ThemeContext);
-  const { value, onChange } = props;
+export default function Radio({
+  name,
+  size,
+  variant,
+  color,
+  disabled,
+  checked,
+  value,
+  theme,
+  children,
+  onChange,
+  ...props
+}: PropsWithChildren<RadioProps>) {
+  const themeContext = useContext(ThemeContext);
 
   const handleChange = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (typeof onChange === "function") {
@@ -30,25 +41,26 @@ export default function Radio(props: PropsWithChildren<RadioProps>) {
   return (
     <div
       className={className("radio")}
-      data-name={props.name}
-      data-size={props.size}
-      data-variant={props.variant}
-      data-color={props.color}
-      data-theme={props.theme ?? theme}
-      aria-disabled={props.disabled}
-      aria-checked={props.checked}
+      data-name={name}
+      data-size={size}
+      data-variant={variant}
+      data-color={color}
+      data-theme={theme ?? themeContext}
+      aria-disabled={disabled}
+      aria-checked={checked}
       tabIndex={0}
       onClick={handleChange}
+      {...props}
     >
       <div className={className("radio", "icon")}>
-        {props.checked ? (
+        {checked ? (
           <Icon
-            size={props.size}
+            size={size}
             icon="radio"
           />
         ) : null}
       </div>
-      <div>{props.children}</div>
+      <div>{children}</div>
     </div>
   );
 }

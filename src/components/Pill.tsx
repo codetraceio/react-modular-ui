@@ -13,21 +13,32 @@ export interface PillProps {
   onClick?: () => void;
 }
 
-export default function Pill(props: PropsWithChildren<PillProps>) {
-  const theme = useContext(ThemeContext);
+export default function Pill({
+  size,
+  color,
+  variant,
+  paddingLeft,
+  paddingRight,
+  theme,
+  children,
+  onClick,
+  ...props
+}: PropsWithChildren<PillProps>) {
+  const themeContext = useContext(ThemeContext);
 
   return (
     <span
       className={className("pill")}
-      data-size={props.size}
-      data-color={props.color}
-      data-variant={props.variant}
-      data-padding-left={props.paddingLeft}
-      data-padding-right={props.paddingRight}
-      data-theme={props.theme ?? theme}
-      onClick={props.onClick}
+      data-size={size}
+      data-color={color}
+      data-variant={variant}
+      data-padding-left={paddingLeft}
+      data-padding-right={paddingRight}
+      data-theme={theme ?? themeContext}
+      onClick={onClick}
+      {...props}
     >
-      {props.children}
+      {children}
     </span>
   );
 }

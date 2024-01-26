@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useContext, useMemo } from "react";
+import React, { HTMLAttributes, PropsWithChildren, useCallback, useContext, useMemo } from "react";
 import { createPortal } from "react-dom";
 import configService from "../services/configService";
 import { className } from "../utils/className";
@@ -6,17 +6,20 @@ import { ThemeContext } from "./ThemeContext";
 
 export interface ModalProps {
   show?: boolean;
-  name?: string;
   theme?: string;
 
   onClose?: () => void;
 }
 
-export default function Modal(props: PropsWithChildren<ModalProps>) {
-  const { onClose, children } = props;
+export default function Modal({
+  show,
+  theme,
+  children,
+  onClose,
+  ...props
+}: PropsWithChildren<ModalProps & HTMLAttributes<HTMLDivElement>>) {
 
-  const theme = useContext(ThemeContext);
-  const propsTheme = props.theme;
+  const themeContext = useContext(ThemeContext);
 
   const handleClose = useCallback(() => {
     if (typeof onClose === "function") {
@@ -30,15 +33,20 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
 
   const modalElement = useMemo(() => {
     return (
-      <div className={className("modal")} data-theme={propsTheme ?? theme} onClick={handleClose}>
+      <div
+        className={className("modal")}
+        data-theme={theme ?? themeContext}
+        onClick={handleClose}
+        {...props}
+      >
         <div className={className("modal", "content")} onClick={handleClickInside}>
           {children}
         </div>
       </div>
     );
-  }, [children, theme, propsTheme, handleClose]);
+  }, [props, children, theme, themeContext, handleClose]);
 
-  if (!props.show || configService.getConfig().server) {
+  if (!show || configService.getConfig().server) {
     return null;
   }
 

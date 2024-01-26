@@ -23,9 +23,25 @@ export interface TextareaProps {
   onBlur?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
-export default function Textarea(props: TextareaProps) {
-  const { label } = props;
-  const theme = useContext(ThemeContext);
+export default function Textarea({
+  size,
+  variant,
+  color,
+  disabled,
+  height,
+  label,
+  name,
+  placeholder,
+  value,
+  theme,
+  onChange,
+  onKeyDown,
+  onKeyUp,
+  onFocus,
+  onBlur,
+  ...props
+}: TextareaProps) {
+  const themeContext = useContext(ThemeContext);
 
   const labelElement = useMemo(() => {
     return label ? (
@@ -36,26 +52,27 @@ export default function Textarea(props: TextareaProps) {
   return (
     <div
       className={className("textarea")}
-      data-size={props.size}
-      data-variant={props.variant}
-      data-color={props.color}
-      data-theme={props.theme ?? theme}
-      aria-disabled={props.disabled}
+      data-size={size}
+      data-variant={variant}
+      data-color={color}
+      data-theme={theme ?? themeContext}
+      aria-disabled={disabled}
+      {...props}
     >
       {labelElement}
       <textarea
-        name={props.name}
-        placeholder={props.placeholder}
-        value={props.value}
-        disabled={props.disabled}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        disabled={disabled}
         style={{
-          height: props.height,
+          height: height,
         }}
-        onChange={useEvent(props.onChange)}
-        onKeyDown={useEvent(props.onKeyDown)}
-        onKeyUp={useEvent(props.onKeyUp)}
-        onFocus={useEvent(props.onFocus)}
-        onBlur={useEvent(props.onBlur)}
+        onChange={useEvent(onChange)}
+        onKeyDown={useEvent(onKeyDown)}
+        onKeyUp={useEvent(onKeyUp)}
+        onFocus={useEvent(onFocus)}
+        onBlur={useEvent(onBlur)}
       />
     </div>
   );
