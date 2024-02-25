@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useCallback, useContext, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 
 import { className } from "../utils/className";
 import Icon from "./Icon";
@@ -28,7 +28,7 @@ export default function Pagination({
 
   onChange,
   ...props
-}: PaginationProps & HTMLAttributes<HTMLDivElement>) {
+}: PaginationProps) {
 
   const themeContext = useContext(ThemeContext);
 
