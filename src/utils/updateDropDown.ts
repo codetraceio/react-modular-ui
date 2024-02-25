@@ -15,11 +15,6 @@ export function updateDropDown(
   const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
   let orientation = DROP_DOWN_ORIENTATION_BOTTOM;
 
-  // if (fixed) {
-  //   dropDownElement.style.position = "fixed";
-  //   scrollLeft = scrollTop = 0;
-  // }
-
   const maxHeight = Math.min(Math.max(window.innerHeight - selectRect.bottom - 32, 256), 512);
 
   if (shouldSetMinWidth) {
@@ -36,10 +31,10 @@ export function updateDropDown(
   }
   let left = selectRect.left + scrollLeft;
   let right = 0;
-  const availableWidth = window.innerWidth - 16;
+  const availableWidth = window.innerWidth;
   if (selectRect.left + dropDownElement.offsetWidth > availableWidth) {
-    left = Math.max(8, availableWidth - dropDownElement.offsetWidth);
-    right = Math.max(8, availableWidth - selectRect.left - dropDownElement.offsetWidth);
+    left = 16;
+    right = 16;
   }
 
   dropDownElement.style.top = `${top}px`;
@@ -47,12 +42,4 @@ export function updateDropDown(
   dropDownElement.style.right = right ? `${right}px` : "auto";
 
   dropDownElement.setAttribute("data-orientation", orientation);
-  // if (scroll) {
-  //   const selectedElement: HTMLDivElement = (
-  //     dropDownElement.querySelector("[data-selected=true]") as HTMLDivElement
-  //   );
-  //   if (selectedElement) {
-  //     dropDownElement.scrollTop = selectedElement.offsetTop;
-  //   }
-  // }
 }

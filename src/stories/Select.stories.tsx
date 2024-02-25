@@ -58,5 +58,7 @@ export const Select = (props: SelectProps) => {
     setValue(value);
   }, []);
 
-  return <UiSelect {...props} options={options} value={value} onChange={handleChange} />
+  return (
+    <UiSelect {...props} options={options} value={value} onChange={handleChange} />
+  );
 };
