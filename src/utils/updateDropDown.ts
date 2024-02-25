@@ -38,8 +38,8 @@ export function updateDropDown(
   let right = 0;
   const availableWidth = window.innerWidth - 16;
   if (selectRect.left + dropDownElement.offsetWidth > availableWidth) {
-    left = Math.max(16, availableWidth - dropDownElement.offsetWidth);
-    right = Math.max(16, availableWidth - selectRect.left - dropDownElement.offsetWidth);
+    left = Math.max(8, availableWidth - dropDownElement.offsetWidth);
+    right = Math.max(8, availableWidth - selectRect.left - dropDownElement.offsetWidth);
   }
 
   dropDownElement.style.top = `${top}px`;
