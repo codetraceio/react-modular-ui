@@ -12,6 +12,8 @@ export interface ButtonProps {
   theme?: string;
   href?: string;
   target?: HTMLAttributeAnchorTarget;
+  padding?: string | number;
+  width?: string | number;
 
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
@@ -39,6 +41,8 @@ export default function Button({
   children,
   href,
   target,
+  padding,
+  width,
   onClick,
   ...props
 }: PropsWithChildren<ButtonProps>) {
@@ -55,6 +59,8 @@ export default function Button({
       data-color={color}
       data-shape={shape}
       data-theme={theme ?? themeContext}
+      data-padding={padding}
+      data-width={width}
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       onClick={onClick}
