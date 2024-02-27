@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, MouseEvent, useContext } from "react";
+import React, { PropsWithChildren, MouseEvent, useContext, HTMLAttributeAnchorTarget } from "react";
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
@@ -10,6 +10,8 @@ export interface ButtonProps {
   shape?: string;
   name?: string;
   theme?: string;
+  href?: string;
+  target?: HTMLAttributeAnchorTarget;
 
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
@@ -35,13 +37,17 @@ export default function Button({
   theme,
   disabled,
   children,
+  href,
+  target,
   onClick,
   ...props
 }: PropsWithChildren<ButtonProps>) {
   const themeContext = useContext(ThemeContext);
 
+  const TagName = href ? "a" : "button";
+
   return (
-    <button
+    <TagName
       className={className("button")}
       data-name={name}
       data-size={size}
@@ -52,9 +58,11 @@ export default function Button({
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       onClick={onClick}
+      href={href}
+      target={target}
       {...props}
     >
       {children}
-    </button>
+    </TagName>
   );
 }
