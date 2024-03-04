@@ -12,6 +12,7 @@ export interface SelectProps {
   placeholder?: string;
   label?: string;
   size?: string | number;
+  width?: string | number;
   variant?: string;
   disabled?: boolean;
   options?: SelectOption[] | Readonly<SelectOption[]>;
@@ -30,6 +31,7 @@ export default function Select({
   placeholder,
   label,
   size,
+  width,
   variant,
   disabled,
   options,
@@ -146,6 +148,7 @@ export default function Select({
     <div
       className={className("select")}
       data-size={size}
+      data-width={width}
       data-variant={variant}
       data-theme={theme ?? themeContext}
       aria-disabled={disabled}
