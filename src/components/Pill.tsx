@@ -6,11 +6,15 @@ export interface PillProps {
   size?: string | number;
   color?: string;
   variant?: string;
-  paddingLeft?: string | number;
-  paddingRight?: string | number;
+  padding?: string | number;
+  width?: string | number;
   theme?: string;
 
   onClick?: () => void;
+
+  // deprecated
+  paddingLeft?: string | number;
+  paddingRight?: string | number;
 }
 
 export default function Pill({
@@ -19,6 +23,8 @@ export default function Pill({
   variant,
   paddingLeft,
   paddingRight,
+  padding,
+  width,
   theme,
   children,
   onClick,
@@ -34,6 +40,8 @@ export default function Pill({
       data-variant={variant}
       data-padding-left={paddingLeft}
       data-padding-right={paddingRight}
+      data-padding={padding}
+      data-width={width}
       data-theme={theme ?? themeContext}
       onClick={onClick}
       {...props}
