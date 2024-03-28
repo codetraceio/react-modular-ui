@@ -10,6 +10,9 @@ export interface UploadProps {
   checked?: boolean;
   name?: string;
   theme?: string;
+  variant?: string;
+  clickDisabled?: boolean;
+  dropDisabled?: boolean;
 
   onChange?: (files: FileList) => void
 }
@@ -20,6 +23,9 @@ export default function Upload({
   color,
   theme,
   disabled,
+  variant,
+  clickDisabled,
+  dropDisabled,
   children,
   onChange,
   ...props
@@ -74,14 +80,17 @@ export default function Upload({
       data-size={size}
       data-active={active}
       data-color={color}
+      data-variant={variant}
       data-theme={theme ?? themeContext}
+      data-click-disabled={clickDisabled}
+      data-drop-disabled={dropDisabled}
       aria-disabled={disabled}
       role="button"
       tabIndex={disabled ? -1 : 0}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      onClick={handleClick}
+      onDragOver={!dropDisabled && !disabled ? handleDragOver : null}
+      onDragLeave={!dropDisabled && !disabled ? handleDragLeave : null}
+      onDrop={!dropDisabled && !disabled ? handleDrop : null}
+      onClick={!clickDisabled && !disabled ? handleClick : null}
       {...props}
     >
       <input
