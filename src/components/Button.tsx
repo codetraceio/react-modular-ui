@@ -14,18 +14,7 @@ export interface ButtonProps {
   target?: HTMLAttributeAnchorTarget;
   padding?: string | number;
   width?: string | number;
-
-  onClick?: (event: MouseEvent<HTMLElement>) => void;
-}
-
-export interface ButtonProps {
-  size?: string | number;
-  variant?: string;
-  color?: string;
-  disabled?: boolean;
-  shape?: string;
-  name?: string;
-  theme?: string;
+  download?: string;
 
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
