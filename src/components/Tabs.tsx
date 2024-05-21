@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useLayoutEffect, useCallback, useMemo, useRef, useContext  } from "react";
+import React, { PropsWithChildren, useLayoutEffect, useCallback, useMemo, useRef, useContext, ReactNode } from "react";
 
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
 export interface TabsOption {
-  title: string;
+  title: ReactNode;
   value: string;
   count?: number;
   countColor?: string;
