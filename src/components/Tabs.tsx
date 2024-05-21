@@ -18,6 +18,7 @@ export interface TabsProps {
   theme?: string;
   options: TabsOption[] | Readonly<TabsOption[]>;
   value: string;
+  noLine?: boolean;
 
   onChange?: (value: string | number, option: TabsOption) => void;
 }
@@ -50,6 +51,7 @@ export default function Tabs({
   disabled,
   children,
   options,
+  noLine,
 
   onChange,
   ...props
@@ -120,7 +122,7 @@ export default function Tabs({
     >
       <div ref={tabsRef} className={className("tabs", "options")}>
         {optionsElement}
-        {lineElement}
+        {!noLine ? lineElement : null}
       </div>
       {children}
     </div>
