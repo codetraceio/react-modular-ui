@@ -23,7 +23,7 @@ export interface SelectProps {
 }
 
 export interface SelectOption {
-  title: string;
+  title: string | JSX.Element;
   value: string;
 }
 
