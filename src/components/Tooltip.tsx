@@ -3,12 +3,15 @@ import { createPortal } from "react-dom";
 
 import { updateTooltip } from "../utils/updateTooltip";
 import { className } from "../utils/className";
+import { useLongPress } from "../hooks/useLongPress";
 import { ThemeContext } from "./ThemeContext";
 
 export interface TooltipProps {
   title: string | JSX.Element;
-  prefer?: string;
+  prefer?: "left" | "right" | "top" | "bottom";
   theme?: string;
+  disableMouse?: boolean;
+  disableTouch?: boolean;
 }
 
 export default function Tooltip({
@@ -16,6 +19,8 @@ export default function Tooltip({
   prefer,
   theme,
   children,
+  disableMouse,
+  disableTouch,
   ...props
 }: PropsWithChildren<TooltipProps>) {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -50,6 +55,15 @@ export default function Tooltip({
     setOpen(false);
   }, []);
 
+  const {
+    onTouchStart,
+    onTouchEnd,
+    onTouchMove,
+  } = useLongPress({
+    onTouchStart: handleOver,
+    onTouchEnd: handleOut,
+  });
+
   const tooltipElement = useMemo(() => {
     return (
       <div className={className("tooltip")} data-theme={theme ?? themeContext} ref={tooltipRef}>
@@ -67,8 +81,11 @@ export default function Tooltip({
 
   return (
     <span
-      onMouseOver={handleOver}
-      onMouseOut={handleOut}
+      onMouseOver={disableMouse ? null : handleOver}
+      onMouseOut={disableMouse ? null : handleOut}
+      onTouchStart={disableTouch ? null : onTouchStart}
+      onTouchEnd={disableTouch ? null : onTouchEnd}
+      onTouchMove={disableTouch ? null : onTouchMove}
       ref={wrapperRef}
       {...props}
     >

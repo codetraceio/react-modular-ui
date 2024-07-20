@@ -21,5 +21,9 @@ export default {
 };
 
 export const Tooltip = (props: TooltipProps) => {
-  return <UiTooltip {...props} />
+  return (
+    <div style={{padding: "96px"}}>
+      <UiTooltip {...props} />
+    </div>
+  );
 };

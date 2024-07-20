@@ -1,6 +1,6 @@
-export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLElement, prefer?: string) {
+export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLElement, prefer?: "left" | "right" | "top" | "bottom"): boolean {
   if (!wrapperElement || !tooltipElement) {
-    return;
+    return false;
   }
   const rect = wrapperElement.getBoundingClientRect();
   const wrapperWidth = wrapperElement.offsetWidth;
@@ -8,19 +8,16 @@ export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLE
   const width = tooltipElement.offsetWidth;
   const height = tooltipElement.offsetHeight;
   const tailSize = 8;
-  const fitsRight = rect.left + width + tailSize < window.innerWidth;
-  const fitsRightHalf = rect.left + width / 2 + tailSize < window.innerWidth;
-  const fitsBottom = rect.bottom + height + tailSize < window.innerHeight;
-  const fitsLeft = rect.left - width - tailSize > 0;
-  const fitsLeftHalf = rect.left - width - tailSize / 2 > 0;
-  const fitsTop = rect.top - height - tailSize > 0;
-  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+  const fitsRight = rect.right + width + tailSize <= window.innerWidth;
+  const fitsRightHalf = rect.right + width / 2 + tailSize <= window.innerWidth;
+  const fitsBottom = rect.bottom + height + tailSize <= window.innerHeight;
+  const fitsLeft = rect.left - width - tailSize >= 0;
+  const fitsLeftHalf = rect.left - width / 2 - tailSize >= 0;
+  const fitsTop = rect.top - height - tailSize >= 0;
 
   let left = 0;
   let top = 0;
   let position: string;
-
 
   if (prefer === "left" && fitsLeft) {
     position = "left";
@@ -28,32 +25,51 @@ export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLE
     position = "right";
   } else if (prefer === "top" && fitsRightHalf && fitsLeftHalf && fitsTop) {
     position = "top";
+  } else if (prefer === "bottom" && fitsRightHalf && fitsLeftHalf && fitsBottom) {
+    position = "bottom";
   } else if (fitsRightHalf && fitsLeftHalf && (fitsTop || fitsBottom)) {
     position = fitsBottom ? "bottom" : "top";
-  } else {
+  } else if (fitsRight || fitsLeft) {
     position = fitsRight ? "right" : "left";
+  } else {
+    // Fallback: center the tooltip over the wrapper
+    position = "center";
   }
 
-  if (position === "top" || position === "bottom") {
-    left = rect.left - width / 2 + wrapperWidth / 2;
-    if (position === "top") {
+  switch (position) {
+    case "top":
+      left = rect.left + wrapperWidth / 2 - width / 2;
       top = rect.top - height - tailSize;
       tooltipElement.setAttribute("data-tail", "bottom");
-    } else {
-      top = rect.top + wrapperHeight + tailSize;
+      break;
+    case "bottom":
+      left = rect.left + wrapperWidth / 2 - width / 2;
+      top = rect.bottom + tailSize;
       tooltipElement.setAttribute("data-tail", "top");
-    }
-  } else {
-    top = rect.top - height / 2 + wrapperHeight / 2;
-    if (position === "left") {
+      break;
+    case "left":
       left = rect.left - width - tailSize;
+      top = rect.top + wrapperHeight / 2 - height / 2;
       tooltipElement.setAttribute("data-tail", "right");
-    } else {
-      left = rect.left + wrapperWidth + tailSize;
+      break;
+    case "right":
+      left = rect.right + tailSize;
+      top = rect.top + wrapperHeight / 2 - height / 2;
       tooltipElement.setAttribute("data-tail", "left");
-    }
+      break;
+    case "center":
+      left = rect.left + wrapperWidth / 2 - width / 2;
+      top = rect.top + wrapperHeight / 2 - height / 2;
+      tooltipElement.removeAttribute("data-tail");
+      break;
   }
 
-  tooltipElement.style.left = (scrollLeft + left) + "px";
-  tooltipElement.style.top = (scrollTop + top) + "px";
+  // Ensure the tooltip stays within the viewport
+  left = Math.max(0, Math.min(left, window.innerWidth - width));
+  top = Math.max(0, Math.min(top, window.innerHeight - height));
+
+  tooltipElement.style.left = `${left}px`;
+  tooltipElement.style.top = `${top}px`;
+
+  return true;
 }
