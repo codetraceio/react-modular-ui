@@ -32,7 +32,7 @@ export default {
     },
     value: {
       control: { type: "none" },
-    }
+    },
   },
   decorators: [ThemeDecorator],
 };
@@ -67,5 +67,12 @@ export const Tabs = (props: TabsProps) => {
     setValue(newValue);
   }, []);
 
-  return <UiTabs {...props} options={options} value={value} onChange={handleChange} />
+  return (
+    <UiTabs
+      {...props}
+      options={options}
+      value={value}
+      onChange={handleChange}
+    />
+  );
 };

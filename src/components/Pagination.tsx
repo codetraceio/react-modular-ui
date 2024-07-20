@@ -16,7 +16,6 @@ export interface PaginationProps {
   onChange?: (offset: number, page: number) => void;
 }
 
-
 export default function Pagination({
   size = 24,
   color,
@@ -29,12 +28,11 @@ export default function Pagination({
   onChange,
   ...props
 }: PaginationProps) {
-
   const themeContext = useContext(ThemeContext);
 
   const normalizedOffset = Math.max(Math.min(offset ?? 0, count - 1), 0);
   const page = limit > 0 ? Math.ceil(normalizedOffset / limit) + 1 : 0;
-  const lastPage =  limit > 0 ? Math.ceil(count / limit) : 0;
+  const lastPage = limit > 0 ? Math.ceil(count / limit) : 0;
   const startPage = Math.max(page - 2, 1);
   const endPage = Math.min(page + 2, lastPage);
 
@@ -52,12 +50,15 @@ export default function Pagination({
     return result;
   }, [startPage, endPage, lastPage]);
 
-  const handleChangeCreator = useCallback((newPage: number) => () => {
-    const newOffset: number = (newPage - 1) * limit;
-    if (typeof onChange === "function") {
-      onChange(newOffset, newPage);
-    }
-  }, [limit, onChange]);
+  const handleChangeCreator = useCallback(
+    (newPage: number) => () => {
+      const newOffset: number = (newPage - 1) * limit;
+      if (typeof onChange === "function") {
+        onChange(newOffset, newPage);
+      }
+    },
+    [limit, onChange],
+  );
 
   const prevElement = useMemo(() => {
     return (
@@ -88,14 +89,14 @@ export default function Pagination({
     const result: JSX.Element[] = [];
     pages.forEach((currentPage, index) => {
       let afterEllipsis = false;
-      if (currentPage !== (prevPage + 1)) {
+      if (currentPage !== prevPage + 1) {
         result.push(
           <div
             key={"ellipsis." + currentPage}
             className={className("pagination", "ellipsis")}
           >
             …
-          </div>
+          </div>,
         );
         afterEllipsis = true;
       }
@@ -118,7 +119,7 @@ export default function Pagination({
             onClick={handleChangeCreator(currentPage)}
           >
             {currentPage}
-          </div>
+          </div>,
         );
       }
       prevPage = currentPage;

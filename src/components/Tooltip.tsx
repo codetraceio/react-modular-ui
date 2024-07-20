@@ -1,4 +1,13 @@
-import React, { PropsWithChildren, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 
 import { updateTooltip } from "../utils/updateTooltip";
@@ -55,18 +64,18 @@ export default function Tooltip({
     setOpen(false);
   }, []);
 
-  const {
-    onTouchStart,
-    onTouchEnd,
-    onTouchMove,
-  } = useLongPress({
+  const { onTouchStart, onTouchEnd, onTouchMove } = useLongPress({
     onTouchStart: handleOver,
     onTouchEnd: handleOut,
   });
 
   const tooltipElement = useMemo(() => {
     return (
-      <div className={className("tooltip")} data-theme={theme ?? themeContext} ref={tooltipRef}>
+      <div
+        className={className("tooltip")}
+        data-theme={theme ?? themeContext}
+        ref={tooltipRef}
+      >
         {title}
       </div>
     );

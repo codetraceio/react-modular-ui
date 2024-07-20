@@ -1,4 +1,12 @@
-import React, { PropsWithChildren, useLayoutEffect, useCallback, useMemo, useRef, useContext, ReactNode } from "react";
+import React, {
+  PropsWithChildren,
+  useLayoutEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  useContext,
+  ReactNode,
+} from "react";
 
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
@@ -58,37 +66,31 @@ export default function Tabs({
 }: PropsWithChildren<TabsProps>) {
   const themeContext = useContext(ThemeContext);
 
-  const tabsRef = useRef<HTMLDivElement>(null)
+  const tabsRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     updateLine(tabsRef.current, lineRef.current, value);
   }, [value]);
 
-  const handleChangeCreator = useCallback((value: string | number, option: TabsOption) => () => {
-    if (typeof onChange === "function") {
-      onChange(value, option);
-    }
-  }, [onChange]);
+  const handleChangeCreator = useCallback(
+    (value: string | number, option: TabsOption) => () => {
+      if (typeof onChange === "function") {
+        onChange(value, option);
+      }
+    },
+    [onChange],
+  );
 
   const lineElement = useMemo(() => {
-    return (
-      <div
-        ref={lineRef}
-        className={className("tabs", "line")}
-      />
-    );
+    return <div ref={lineRef} className={className("tabs", "line")} />;
   }, []);
 
   const renderCount = useCallback((option: TabsOption) => {
     if (typeof option.count !== "string" && typeof option.count !== "number") {
       return null;
     }
-    return (
-      <div className={className("tabs", "count")}>
-        {option.count}
-      </div>
-    );
+    return <div className={className("tabs", "count")}>{option.count}</div>;
   }, []);
 
   const optionsElement = useMemo(() => {

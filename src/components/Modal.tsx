@@ -1,4 +1,10 @@
-import React, { HTMLAttributes, PropsWithChildren, useCallback, useContext, useMemo } from "react";
+import React, {
+  HTMLAttributes,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useMemo,
+} from "react";
 import { createPortal } from "react-dom";
 import configService from "../services/configService";
 import { className } from "../utils/className";
@@ -18,7 +24,6 @@ export default function Modal({
   onClose,
   ...props
 }: PropsWithChildren<ModalProps & HTMLAttributes<HTMLDivElement>>) {
-
   const themeContext = useContext(ThemeContext);
 
   const handleClose = useCallback(() => {
@@ -39,7 +44,10 @@ export default function Modal({
         onClick={handleClose}
         {...props}
       >
-        <div className={className("modal", "content")} onClick={handleClickInside}>
+        <div
+          className={className("modal", "content")}
+          onClick={handleClickInside}
+        >
           {children}
         </div>
       </div>

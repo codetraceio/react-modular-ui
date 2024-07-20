@@ -25,11 +25,14 @@ export default function Toggle({
 }: PropsWithChildren<ToggleProps>) {
   const themeContext = useContext(ThemeContext);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof onChange === "function") {
-      onChange(!checked, e);
-    }
-  }, [checked, onChange]);
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (typeof onChange === "function") {
+        onChange(!checked, e);
+      }
+    },
+    [checked, onChange],
+  );
 
   return (
     <div
@@ -41,7 +44,6 @@ export default function Toggle({
       data-size={size}
       data-color={color}
       data-theme={theme ?? themeContext}
-
       onClick={handleClick}
       {...props}
     >
@@ -50,10 +52,8 @@ export default function Toggle({
         <div className={className("toggle", "handle")} />
       </div>
       {children ? (
-        <div className={className("toggle", "label")}>
-          {children}
-        </div>
-      ) :  null}
+        <div className={className("toggle", "label")}>{children}</div>
+      ) : null}
     </div>
   );
 }

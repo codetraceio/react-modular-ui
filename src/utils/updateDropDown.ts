@@ -11,11 +11,16 @@ export function updateDropDown(
   }
 
   const selectRect = selectElement.getBoundingClientRect();
-  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+  const scrollTop =
+    document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollLeft =
+    document.documentElement.scrollLeft || document.body.scrollLeft;
   let orientation = DROP_DOWN_ORIENTATION_BOTTOM;
 
-  const maxHeight = Math.min(Math.max(window.innerHeight - selectRect.bottom - 32, 256), 512);
+  const maxHeight = Math.min(
+    Math.max(window.innerHeight - selectRect.bottom - 32, 256),
+    512,
+  );
 
   if (shouldSetMinWidth) {
     dropDownElement.style.minWidth = `${selectRect.width}px`;

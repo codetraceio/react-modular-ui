@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from "react";
 
 import { className } from "../utils/className";
-import { useEvent } from "../utils/useEvent";
+import { useEvent } from "../hooks/useEvent";
 import { ThemeContext } from "./ThemeContext";
 
 export interface TextareaProps {
@@ -16,11 +16,26 @@ export interface TextareaProps {
   value?: string | number;
   theme?: string;
 
-  onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onKeyDown?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  onKeyUp?: (value: string, event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  onFocus?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
-  onBlur?: (value: string, event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
+  onKeyDown?: (
+    value: string,
+    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => void;
+  onKeyUp?: (
+    value: string,
+    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => void;
+  onFocus?: (
+    value: string,
+    event: React.FocusEvent<HTMLTextAreaElement>,
+  ) => void;
+  onBlur?: (
+    value: string,
+    event: React.FocusEvent<HTMLTextAreaElement>,
+  ) => void;
 }
 
 export default function Textarea({

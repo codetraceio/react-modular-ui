@@ -12,13 +12,13 @@ function configService() {
     separator: "--",
     icons: {},
   };
-  
+
   function getConfig() {
     return config;
   }
-  
+
   function setConfig(newConfig: Partial<Config>) {
-    config = {...config, ...newConfig};
+    config = { ...config, ...newConfig };
   }
 
   return {

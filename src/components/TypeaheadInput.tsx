@@ -1,4 +1,16 @@
-import React, { useRef, useState, useMemo, useCallback, KeyboardEvent, MouseEvent, ChangeEvent, FocusEvent, useLayoutEffect, useEffect, useContext } from "react";
+import React, {
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+  KeyboardEvent,
+  MouseEvent,
+  ChangeEvent,
+  FocusEvent,
+  useLayoutEffect,
+  useEffect,
+  useContext,
+} from "react";
 import { createPortal } from "react-dom";
 
 import Input from "./Input";
@@ -69,9 +81,11 @@ export default function TypeaheadInput({
   const [open, setOpen] = useState(false);
 
   const matchingOptions = useMemo(() => {
-    return options.filter((option) => option.toLowerCase()[filter](value.toLowerCase()));
+    return options.filter((option) =>
+      option.toLowerCase()[filter](value.toLowerCase()),
+    );
   }, [options, value, filter]);
-  
+
   const optionSet = useMemo(() => {
     const set = new Set<string>();
     options.forEach((option) => {
@@ -100,41 +114,58 @@ export default function TypeaheadInput({
     };
   }, [handleUpdate]);
 
-    const handleClickCreator = useCallback((option: string) => () => {
-    if (onChange) {
-      onChange(option, null);
-    }
-    if (onBlur) {
-      onBlur(option, null);
-    }
+  const handleClickCreator = useCallback(
+    (option: string) => () => {
+      if (onChange) {
+        onChange(option, null);
+      }
+      if (onBlur) {
+        onBlur(option, null);
+      }
 
-    setOpen(false);
-  }, [setOpen, onChange, onBlur]);
+      setOpen(false);
+    },
+    [setOpen, onChange, onBlur],
+  );
 
-  const handleFocus = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
-    setOpen(true);
+  const handleFocus = useCallback(
+    (value: string, event: FocusEvent<HTMLInputElement>) => {
+      setOpen(true);
 
-    if (onFocus) {
-      onFocus(value, event);
-    }
-  }, [setOpen, onFocus]);
+      if (onFocus) {
+        onFocus(value, event);
+      }
+    },
+    [setOpen, onFocus],
+  );
 
-  const handleBlur = useCallback((value: string, event: FocusEvent<HTMLInputElement>) => {
-    if (event.relatedTarget && (
-      event.relatedTarget.classList.contains(className("typeahead-input", "dropdown")) ||
-      event.relatedTarget.classList.contains(className("typeahead-input", "option"))
-    )) {
-      return;
-    }
-    setOpen(false);
+  const handleBlur = useCallback(
+    (value: string, event: FocusEvent<HTMLInputElement>) => {
+      if (
+        event.relatedTarget &&
+        (event.relatedTarget.classList.contains(
+          className("typeahead-input", "dropdown"),
+        ) ||
+          event.relatedTarget.classList.contains(
+            className("typeahead-input", "option"),
+          ))
+      ) {
+        return;
+      }
+      setOpen(false);
 
-    if (onBlur) {
-      onBlur(value, event);
-    }
-  }, [setOpen, onBlur]);
+      if (onBlur) {
+        onBlur(value, event);
+      }
+    },
+    [setOpen, onBlur],
+  );
 
   const dropdownElement = useMemo(() => {
-    if (matchingOptions.length === 0 || matchingOptions.length === 1 && matchingOptions[0] === value) {
+    if (
+      matchingOptions.length === 0 ||
+      (matchingOptions.length === 1 && matchingOptions[0] === value)
+    ) {
       return;
     }
 
@@ -177,14 +208,13 @@ export default function TypeaheadInput({
       <Input
         size={size}
         variant={variant}
-        color={color || optionSet.has(value) && "success"}
+        color={color || (optionSet.has(value) && "success")}
         disabled={disabled}
         name={name}
         label={label}
         value={value}
         placeholder={placeholder}
         shape={shape}
-
         onChange={onChange}
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}

@@ -14,7 +14,10 @@ export interface RadioProps {
   checked?: boolean;
   theme?: string;
 
-  onChange?: (value: string | number | boolean, event: React.MouseEvent<HTMLDivElement>) => void;
+  onChange?: (
+    value: string | number | boolean,
+    event: React.MouseEvent<HTMLDivElement>,
+  ) => void;
 }
 
 export default function Radio({
@@ -32,11 +35,14 @@ export default function Radio({
 }: PropsWithChildren<RadioProps>) {
   const themeContext = useContext(ThemeContext);
 
-  const handleChange = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof onChange === "function") {
-      onChange(value, event);
-    }
-  }, [value, onChange]);
+  const handleChange = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (typeof onChange === "function") {
+        onChange(value, event);
+      }
+    },
+    [value, onChange],
+  );
 
   return (
     <div
@@ -53,12 +59,7 @@ export default function Radio({
       {...props}
     >
       <div className={className("radio", "icon")}>
-        {checked ? (
-          <Icon
-            size={size}
-            icon="radio"
-          />
-        ) : null}
+        {checked ? <Icon size={size} icon="radio" /> : null}
       </div>
       <div>{children}</div>
     </div>

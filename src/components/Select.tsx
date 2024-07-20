@@ -1,4 +1,12 @@
-import React, { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 
 import { updateDropDown } from "../utils/updateDropDown";
@@ -48,7 +56,7 @@ export default function Select({
   const [open, setOpen] = useState(false);
 
   const handleClick = useCallback(() => {
-    setOpen(state => !state);
+    setOpen((state) => !state);
   }, [setOpen]);
 
   const handleUpdate = useCallback(() => {
@@ -97,29 +105,32 @@ export default function Select({
     return placeholder;
   }, [value, options, placeholder]);
 
-  const handleOptionClickCreator = useCallback((value: string, option: SelectOption) => () => {
-    if (typeof onChange === "function") {
-      onChange(value, option);
-    }
+  const handleOptionClickCreator = useCallback(
+    (value: string, option: SelectOption) => () => {
+      if (typeof onChange === "function") {
+        onChange(value, option);
+      }
 
-    setOpen(false);
-  }, [onChange]);
+      setOpen(false);
+    },
+    [onChange],
+  );
 
   const labelElement = useMemo(() => {
     if (!label) {
       return null;
     }
 
-    return (
-      <div className={className("select", "label")}>
-        {label}
-      </div>
-    );
+    return <div className={className("select", "label")}>{label}</div>;
   }, [label]);
 
   const optionsElement = useMemo(() => {
     return (
-      <div className={className("select", "dropdown")} ref={dropdownRef} data-theme={theme ?? themeContext}>
+      <div
+        className={className("select", "dropdown")}
+        ref={dropdownRef}
+        data-theme={theme ?? themeContext}
+      >
         {options.map((option: SelectOption) => {
           return (
             <div
@@ -161,9 +172,7 @@ export default function Select({
         onClick={handleClick}
         ref={selectRef}
       >
-        <div className={className("select", "value")}>
-          {titleElement}
-        </div>
+        <div className={className("select", "value")}>{titleElement}</div>
         <div className={className("select", "icon")}>
           <Icon size="12" rotate={open ? 180 : 0} icon="dropdown" />
         </div>

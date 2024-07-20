@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from "react";
 
-import UiTypeaheadInput, { TypeaheadInputProps } from "../components/TypeaheadInput";
+import UiTypeaheadInput, {
+  TypeaheadInputProps,
+} from "../components/TypeaheadInput";
 import "../../styles/src/default/typeahead-input.scss";
 import { ThemeDecorator } from "./ThemeDecorator";
 
@@ -34,15 +36,12 @@ export default {
     },
     options: {
       control: { type: "none" },
-    }
+    },
   },
   decorators: [ThemeDecorator],
 };
 
-const options = [
-  "Title 1",
-  "Title 2",
-];
+const options = ["Title 1", "Title 2"];
 
 export const TypeaheadInput = (props: TypeaheadInputProps) => {
   const [value, setValue] = useState(options[0]);
@@ -51,5 +50,12 @@ export const TypeaheadInput = (props: TypeaheadInputProps) => {
     setValue(newValue);
   }, []);
 
-  return <UiTypeaheadInput {...props} options={options} value={value} onChange={handleChange} />
+  return (
+    <UiTypeaheadInput
+      {...props}
+      options={options}
+      value={value}
+      onChange={handleChange}
+    />
+  );
 };

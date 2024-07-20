@@ -1,4 +1,8 @@
-export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLElement, prefer?: "left" | "right" | "top" | "bottom"): boolean {
+export function updateTooltip(
+  wrapperElement: HTMLElement,
+  tooltipElement: HTMLElement,
+  prefer?: "left" | "right" | "top" | "bottom",
+): boolean {
   if (!wrapperElement || !tooltipElement) {
     return false;
   }
@@ -25,7 +29,12 @@ export function updateTooltip(wrapperElement: HTMLElement, tooltipElement: HTMLE
     position = "right";
   } else if (prefer === "top" && fitsRightHalf && fitsLeftHalf && fitsTop) {
     position = "top";
-  } else if (prefer === "bottom" && fitsRightHalf && fitsLeftHalf && fitsBottom) {
+  } else if (
+    prefer === "bottom" &&
+    fitsRightHalf &&
+    fitsLeftHalf &&
+    fitsBottom
+  ) {
     position = "bottom";
   } else if (fitsRightHalf && fitsLeftHalf && (fitsTop || fitsBottom)) {
     position = fitsBottom ? "bottom" : "top";

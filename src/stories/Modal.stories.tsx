@@ -26,5 +26,5 @@ export default {
 };
 
 export const Modal = (props: ModalProps) => {
-  return <UiModal {...props} />
+  return <UiModal {...props} />;
 };

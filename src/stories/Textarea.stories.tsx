@@ -37,5 +37,5 @@ export default {
 };
 
 export const Textarea = (props: TextareaProps) => {
-  return <UiTextarea {...props} />
+  return <UiTextarea {...props} />;
 };

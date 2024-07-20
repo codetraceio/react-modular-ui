@@ -35,5 +35,5 @@ export default {
 };
 
 export const Radio = (props: RadioProps) => {
-  return <UiRadio {...props} />
+  return <UiRadio {...props} />;
 };

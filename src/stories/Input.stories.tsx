@@ -37,5 +37,5 @@ export default {
 };
 
 export const Input = (props: InputProps) => {
-  return <UiInput {...props} />
+  return <UiInput {...props} />;
 };

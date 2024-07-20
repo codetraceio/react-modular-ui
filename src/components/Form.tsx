@@ -1,4 +1,9 @@
-import React, { useCallback, PropsWithChildren, ChangeEvent, FormEvent } from "react";
+import React, {
+  useCallback,
+  PropsWithChildren,
+  ChangeEvent,
+  FormEvent,
+} from "react";
 import { className } from "../utils/className";
 
 export interface FormProps {
@@ -7,7 +12,11 @@ export interface FormProps {
   target?: string;
 
   name?: string;
-  onChange?: (name: string, value: string, event: ChangeEvent<HTMLFormElement>) => void;
+  onChange?: (
+    name: string,
+    value: string,
+    event: ChangeEvent<HTMLFormElement>,
+  ) => void;
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
@@ -20,12 +29,14 @@ export default function Form({
   onSubmit,
   ...props
 }: PropsWithChildren<FormProps>) {
-
-  const handleChange = useCallback((event: ChangeEvent<HTMLFormElement>) => {
-    if (typeof onChange === "function") {
-      onChange(event.target.name, event.target.value, event);
-    }
-  }, [onChange]);
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLFormElement>) => {
+      if (typeof onChange === "function") {
+        onChange(event.target.name, event.target.value, event);
+      }
+    },
+    [onChange],
+  );
 
   return (
     <form
@@ -38,7 +49,7 @@ export default function Form({
       onSubmit={onSubmit}
       {...props}
     >
-      <input type="submit" style={{display: "none"}}/>
+      <input type="submit" style={{ display: "none" }} />
       {props.children}
     </form>
   );

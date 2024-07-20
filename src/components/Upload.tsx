@@ -1,4 +1,11 @@
-import React, { DragEvent, PropsWithChildren, useRef, useState, useCallback, useContext } from "react";
+import React, {
+  DragEvent,
+  PropsWithChildren,
+  useRef,
+  useState,
+  useCallback,
+  useContext,
+} from "react";
 
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
@@ -14,7 +21,7 @@ export interface UploadProps {
   clickDisabled?: boolean;
   dropDisabled?: boolean;
 
-  onChange?: (files: FileList) => void
+  onChange?: (files: FileList) => void;
 }
 
 export default function Upload({
@@ -35,27 +42,33 @@ export default function Upload({
 
   const [active, setActive] = useState(false);
 
-  const handleDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setActive(true);
-  }, [setActive]);
+  const handleDragOver = useCallback(
+    (event: DragEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      setActive(true);
+    },
+    [setActive],
+  );
 
   const handleDragLeave = useCallback(() => {
     setActive(false);
   }, []);
 
-  const handleDrop = useCallback((event: DragEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
+  const handleDrop = useCallback(
+    (event: DragEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      event.preventDefault();
 
-    const files = event.dataTransfer.files;
+      const files = event.dataTransfer.files;
 
-    setActive(false);
+      setActive(false);
 
-    if (typeof onChange === "function") {
-      onChange(files);
-    }
-  }, [setActive, onChange]);
+      if (typeof onChange === "function") {
+        onChange(files);
+      }
+    },
+    [setActive, onChange],
+  );
 
   const handleClick = useCallback(() => {
     if (!inputRef.current) {
@@ -96,13 +109,11 @@ export default function Upload({
       <input
         type="file"
         name={name}
-        style={{display: "none"}}
+        style={{ display: "none" }}
         ref={inputRef}
         onChange={handleChange}
       />
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 }

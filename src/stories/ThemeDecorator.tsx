@@ -16,12 +16,14 @@ export function ThemeDecorator(
         value: string;
       };
     };
-  }
+  },
 ) {
   const backgroundColor = props.globals?.backgrounds?.value || "#ffffff";
 
   return (
-    <ThemeContext.Provider value={themeMap[backgroundColor] || themeMap.default}>
+    <ThemeContext.Provider
+      value={themeMap[backgroundColor] || themeMap.default}
+    >
       <Story />
     </ThemeContext.Provider>
   );

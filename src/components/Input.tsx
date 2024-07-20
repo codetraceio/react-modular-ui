@@ -1,7 +1,15 @@
-import React, { ChangeEvent, FocusEvent, KeyboardEvent, MouseEvent, useCallback, useContext, useMemo } from "react";
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useContext,
+  useMemo,
+} from "react";
 
 import { className } from "../utils/className";
-import { useEvent } from "../utils/useEvent";
+import { useEvent } from "../hooks/useEvent";
 import { ThemeContext } from "./ThemeContext";
 
 export interface InputProps {
@@ -16,7 +24,15 @@ export interface InputProps {
   shape?: string;
   type?: string;
   maxLength?: number;
-  inputMode?: "none" | "text" | "tel" | "url" | "email" | "numeric" | "decimal" | "search";
+  inputMode?:
+    | "none"
+    | "text"
+    | "tel"
+    | "url"
+    | "email"
+    | "numeric"
+    | "decimal"
+    | "search";
   pattern?: string;
   theme?: string;
 
@@ -53,23 +69,26 @@ export default function Input({
   onClick,
   ...props
 }: InputProps) {
-
   const themeContext = useContext(ThemeContext);
 
-  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
-    if (typeof onKeyDown === "function") {
-      onKeyDown(event.currentTarget.value, event);
-    }
-    if (event.isPropagationStopped()) {
-      return;
-    }
-    if (
-      typeof onSubmit === "function" &&
-      ["Enter", "NumpadEnter"].indexOf(event.key) !== -1 && !event.shiftKey
-    ) {
-      onSubmit(event.currentTarget.value, event);
-    }
-  }, [onKeyDown, onSubmit]);
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (typeof onKeyDown === "function") {
+        onKeyDown(event.currentTarget.value, event);
+      }
+      if (event.isPropagationStopped()) {
+        return;
+      }
+      if (
+        typeof onSubmit === "function" &&
+        ["Enter", "NumpadEnter"].indexOf(event.key) !== -1 &&
+        !event.shiftKey
+      ) {
+        onSubmit(event.currentTarget.value, event);
+      }
+    },
+    [onKeyDown, onSubmit],
+  );
 
   const labelElement = useMemo(() => {
     return label ? (

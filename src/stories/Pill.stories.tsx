@@ -27,5 +27,5 @@ export default {
 };
 
 export const Pill = (props: PillProps) => {
-  return <UiPill {...props} />
+  return <UiPill {...props} />;
 };

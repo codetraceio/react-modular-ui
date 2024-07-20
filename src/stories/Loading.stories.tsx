@@ -23,5 +23,5 @@ export default {
 };
 
 export const Loading = (props: LoadingProps) => {
-  return <UiLoading {...props} />
+  return <UiLoading {...props} />;
 };

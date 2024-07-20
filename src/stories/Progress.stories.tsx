@@ -27,5 +27,5 @@ export default {
 };
 
 export const Progress = (props: ProgressProps) => {
-  return <UiProgress {...props} />
+  return <UiProgress {...props} />;
 };

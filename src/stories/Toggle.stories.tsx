@@ -35,5 +35,5 @@ export default {
 };
 
 export const Toggle = (props: ToggleProps) => {
-  return <UiToggle {...props} />
+  return <UiToggle {...props} />;
 };

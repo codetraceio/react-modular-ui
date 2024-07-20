@@ -17,5 +17,5 @@ export default {
 };
 
 export const Upload = (props: UploadProps) => {
-  return <UiUpload {...props} />
+  return <UiUpload {...props} />;
 };

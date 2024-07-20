@@ -35,5 +35,5 @@ export default {
 };
 
 export const Pagination = (props: PaginationProps) => {
-  return <UiPagination {...props} />
+  return <UiPagination {...props} />;
 };

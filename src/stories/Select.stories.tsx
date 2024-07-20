@@ -35,7 +35,7 @@ export default {
     },
     options: {
       control: { type: "none" },
-    }
+    },
   },
   decorators: [ThemeDecorator],
 };
@@ -48,7 +48,7 @@ const options = [
   {
     title: "Title 2",
     value: "value2",
-  }
+  },
 ];
 
 export const Select = (props: SelectProps) => {
@@ -59,6 +59,11 @@ export const Select = (props: SelectProps) => {
   }, []);
 
   return (
-    <UiSelect {...props} options={options} value={value} onChange={handleChange} />
+    <UiSelect
+      {...props}
+      options={options}
+      value={value}
+      onChange={handleChange}
+    />
   );
 };

@@ -1,9 +1,4 @@
-import { useCallback, useRef } from 'react';
-
-interface LongPressOptions {
-  shouldPreventDefault?: boolean;
-  delay?: number;
-}
+import { useCallback, useRef } from "react";
 
 type LongPressEvent = React.TouchEvent;
 
@@ -11,45 +6,39 @@ export function useLongPress({
   onLongPress,
   onTouchStart,
   onTouchEnd,
-  options = { delay: 300, shouldPreventDefault: true },
+  delay = 300,
 }: {
   onLongPress?: (event: LongPressEvent) => void;
   onTouchStart?: (event: LongPressEvent) => void;
   onTouchEnd?: (event: LongPressEvent) => void;
-  options?: LongPressOptions;
+  delay?: number;
 }) {
   const timeout = useRef<NodeJS.Timeout>();
   const target = useRef<EventTarget>();
 
   const start = useCallback(
     (event: LongPressEvent) => {
-      document.addEventListener('contextmenu', preventDefault);
-      if (options.shouldPreventDefault && event.target) {
-        event.target.addEventListener('touchend', preventDefault, {
-          passive: false
-        });
+      document.addEventListener("contextmenu", preventDefault);
+      if (event.target) {
         target.current = event.target;
       }
       timeout.current = setTimeout(() => {
         onLongPress?.(event);
-      }, options.delay);
-      
+      }, delay);
+
       onTouchStart?.(event);
     },
-    [onLongPress, onTouchStart, options.delay, options.shouldPreventDefault]
+    [onLongPress, onTouchStart, delay],
   );
 
   const clear = useCallback(
     (event: LongPressEvent) => {
-      document.removeEventListener('contextmenu', preventDefault);
+      document.removeEventListener("contextmenu", preventDefault);
       timeout.current && clearTimeout(timeout.current);
-      if (options.shouldPreventDefault && target.current) {
-        target.current.removeEventListener('touchend', preventDefault);
-      }
-      
+
       onTouchEnd?.(event);
     },
-    [options.shouldPreventDefault, onTouchEnd]
+    [onTouchEnd],
   );
 
   return {

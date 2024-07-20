@@ -1,4 +1,9 @@
-import React, { useCallback, PropsWithChildren, MouseEvent, useContext } from "react";
+import React, {
+  useCallback,
+  PropsWithChildren,
+  MouseEvent,
+  useContext,
+} from "react";
 
 export interface CheckboxProps {
   size?: string | number;
@@ -27,14 +32,16 @@ export default function Checkbox({
   onChange,
   ...props
 }: PropsWithChildren<CheckboxProps>) {
-
   const themeContext = useContext(ThemeContext);
 
-  const handleChange = useCallback((e: MouseEvent<HTMLDivElement>) => {
-    if (typeof onChange === "function") {
-      onChange(!checked, e);
-    }
-  }, [checked, onChange]);
+  const handleChange = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      if (typeof onChange === "function") {
+        onChange(!checked, e);
+      }
+    },
+    [checked, onChange],
+  );
 
   return (
     <div
@@ -51,12 +58,7 @@ export default function Checkbox({
       {...props}
     >
       <div className={className("checkbox", "icon")}>
-        {checked ? (
-          <Icon
-            size={size}
-            icon="checkbox"
-          />
-        ) : null}
+        {checked ? <Icon size={size} icon="checkbox" /> : null}
       </div>
       <div>{children}</div>
     </div>

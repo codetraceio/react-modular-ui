@@ -28,7 +28,7 @@ export default function Progress({
     >
       <div
         className={className("progress", "line")}
-        style={{width: `${Math.round(value || 0)}%`}}
+        style={{ width: `${Math.round(value || 0)}%` }}
       />
     </div>
   );

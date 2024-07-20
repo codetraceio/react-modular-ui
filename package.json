@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "main": "lib/",
   "repository": {
     "type": "git",
@@ -16,7 +16,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token=ba6f18b77375",
-    "eslint": "eslint --ext .ts,.tsx src"
+    "lint": "eslint --ext .ts,.tsx src",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {},
   "devDependencies": {
@@ -41,6 +42,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^29.3.1",
     "node-sass": "^8.0.0",
+    "prettier": "^3.3.3",
     "raf": "^3.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
