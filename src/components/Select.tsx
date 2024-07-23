@@ -16,6 +16,9 @@ import clickOutsideService from "../services/clickOutsideService";
 import Icon from "./Icon";
 import { ThemeContext } from "./ThemeContext";
 
+// avoid running useLayoutEffect on server
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
 export interface SelectProps {
   placeholder?: string;
   label?: string;
@@ -87,7 +90,7 @@ export default function Select({
     };
   }, [open]);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (open) {
       updateDropDown(dropdownRef.current, selectRef.current);
     }
