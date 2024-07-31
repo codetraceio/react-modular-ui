@@ -76,6 +76,7 @@ export default function Tooltip({
         data-theme={theme ?? themeContext}
         ref={tooltipRef}
       >
+        <div className={className("tooltip", "tail")} />
         {title}
       </div>
     );

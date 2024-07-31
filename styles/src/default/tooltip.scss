@@ -13,16 +13,11 @@
   pointer-events: none;
   @include shadow();
 
-  &:after {
-    display: block;
-    content: "";
+  &--tail {
     position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
   }
 
-  &[data-tail='bottom']:after {
+  &--tail[data-position='bottom'] {
     top: 100%;
     left: 50%;
     margin-left: -8px;
@@ -31,7 +26,7 @@
     border-left: 8px solid transparent;
   }
 
-  &[data-tail='top']:after {
+  &--tail[data-position='top'] {
     top: 0;
     left: 50%;
     margin-left: -8px;
@@ -41,7 +36,7 @@
     border-left: 8px solid transparent;
   }
 
-  &[data-tail='left']:after {
+  &--tail[data-position='left'] {
     top: 50%;
     left: 0;
     margin-left: -8px;
@@ -51,7 +46,7 @@
     border-bottom: 8px solid transparent;
   }
 
-  &[data-tail='right']:after {
+  &--tail[data-position='right'] {
     top: 50%;
     left: 100%;
     margin-right: -8px;
