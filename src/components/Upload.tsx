@@ -20,6 +20,7 @@ export interface UploadProps {
   variant?: string;
   clickDisabled?: boolean;
   dropDisabled?: boolean;
+  multiple?: boolean;
 
   onChange?: (files: FileList) => void;
 }
@@ -34,6 +35,7 @@ export default function Upload({
   clickDisabled,
   dropDisabled,
   children,
+  multiple,
   onChange,
   ...props
 }: PropsWithChildren<UploadProps>) {
@@ -111,6 +113,7 @@ export default function Upload({
         name={name}
         style={{ display: "none" }}
         ref={inputRef}
+        multiple={multiple}
         onChange={handleChange}
       />
       <div>{children}</div>
