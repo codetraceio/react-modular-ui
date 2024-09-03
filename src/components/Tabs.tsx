@@ -6,6 +6,7 @@ import React, {
   useRef,
   useContext,
   ReactNode,
+  MouseEvent,
 } from "react";
 
 import { className } from "../utils/className";
@@ -28,7 +29,7 @@ export interface TabsProps {
   value: string;
   noLine?: boolean;
 
-  onChange?: (value: string | number, option: TabsOption) => void;
+  onChange?: (value: string, option: TabsOption) => void;
 }
 
 function updateLine(tabs: HTMLDivElement, line: HTMLDivElement, value: string) {
@@ -73,13 +74,15 @@ export default function Tabs({
     updateLine(tabsRef.current, lineRef.current, value);
   }, [value]);
 
-  const handleChangeCreator = useCallback(
-    (value: string | number, option: TabsOption) => () => {
+  const handleChange = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
       if (typeof onChange === "function") {
-        onChange(value, option);
+        const value = event.currentTarget.getAttribute("data-value");
+        const selectedOption = options.find((option) => option.value === value);
+        onChange(value, selectedOption);
       }
     },
-    [onChange],
+    [options, onChange],
   );
 
   const lineElement = useMemo(() => {
@@ -96,21 +99,22 @@ export default function Tabs({
   const optionsElement = useMemo(() => {
     return options.map((option) => {
       return (
-        <div
+        <button
           key={option.value}
           className={className("tabs", "option")}
           data-name={option.value}
+          data-value={option.value}
           data-selected={option.value === value}
           role="button"
           tabIndex={disabled ? -1 : 0}
-          onClick={handleChangeCreator(option.value, option)}
+          onClick={handleChange}
         >
           <div>{option.title}</div>
           {renderCount(option)}
-        </div>
+        </button>
       );
     });
-  }, [options, disabled, value, renderCount, handleChangeCreator]);
+  }, [options, disabled, value, renderCount, handleChange]);
 
   return (
     <div
