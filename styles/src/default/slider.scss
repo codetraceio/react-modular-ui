@@ -1,0 +1,41 @@
+@import "./constants.scss";
+
+.c-slider {
+  flex: 1;
+  cursor: pointer;
+  padding: 0 8px;
+
+  &--container{
+    height: 24px;
+    position: relative;
+  }
+
+  &--track {
+    position: absolute;
+    height: 16px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+
+  &--progress {
+    position: absolute;
+    height: 16px;
+    background: $color-primary;
+    border-radius: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &--handle {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    background: white;
+    border-radius: 12px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}

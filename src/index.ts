@@ -15,6 +15,7 @@ export { default as Pagination } from "./components/Pagination";
 export { default as Progress } from "./components/Progress";
 export { default as Upload } from "./components/Upload";
 export { default as Select } from "./components/Select";
+export { default as Slider } from "./components/Slider";
 export { default as TypeaheadInput } from "./components/TypeaheadInput";
 export { ThemeContext } from "./components/ThemeContext";
 
