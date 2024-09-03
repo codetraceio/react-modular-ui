@@ -218,6 +218,7 @@ export default function Select({
       data-width={width}
       data-variant={variant}
       data-theme={theme ?? themeContext}
+      data-open={open}
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
