@@ -47,4 +47,5 @@ export function updateDropDown(
   dropDownElement.style.right = right ? `${right}px` : "auto";
 
   dropDownElement.setAttribute("data-orientation", orientation);
+  selectElement.setAttribute("data-orientation", orientation);
 }
