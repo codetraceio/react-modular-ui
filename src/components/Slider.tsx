@@ -2,6 +2,7 @@ import React, {
   useCallback,
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
+  KeyboardEvent,
 } from "react";
 import { className } from "../utils/className";
 
@@ -92,7 +93,7 @@ function handleTouchMove(
 export default function Slider(props: SliderProps) {
   const { total, onChange, onBlur } = props;
 
-  const onMouseDown = useCallback(
+  const handleMouseDown = useCallback(
     (event: ReactMouseEvent<HTMLDivElement>) => {
       if (event.button !== 0) {
         return;
@@ -104,7 +105,7 @@ export default function Slider(props: SliderProps) {
     [total, onChange, onBlur],
   );
 
-  const onTouchStart = useCallback(
+  const handleTouchStart = useCallback(
     (event: ReactTouchEvent<HTMLDivElement>) => {
       const element = event.currentTarget;
       const clientX = event.touches[0].clientX;
@@ -113,13 +114,25 @@ export default function Slider(props: SliderProps) {
     [total, onChange],
   );
 
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+        onChange(Math.max(0, props.value - 1));
+      } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+        onChange(Math.min(props.total, props.value + 1));
+      }
+    },
+    [onChange, props.value, props.total],
+  );
+
   const percent = Math.max(Math.min((props.value * 100) / props.total, 100), 0);
 
   return (
     <div
       className={className("slider")}
-      onMouseDown={onMouseDown}
-      onTouchStart={onTouchStart}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
+      onKeyDown={handleKeyDown}
       tabIndex={0}
       data-height={props.height}
     >
