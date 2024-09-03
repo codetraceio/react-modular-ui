@@ -1,4 +1,10 @@
-import React, { PropsWithChildren, useCallback, useContext } from "react";
+import React, {
+  KeyboardEvent,
+  MouseEvent,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+} from "react";
 
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
@@ -10,7 +16,8 @@ export interface ToggleProps {
   checked?: boolean;
   theme?: string;
 
-  onChange?: (value: boolean, event: React.MouseEvent<HTMLDivElement>) => void;
+  onChange?: (value: boolean, event: MouseEvent<HTMLDivElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
 }
 
 export default function Toggle({
@@ -21,17 +28,33 @@ export default function Toggle({
   theme,
   children,
   onChange,
+  onKeyDown,
   ...props
 }: PropsWithChildren<ToggleProps>) {
   const themeContext = useContext(ThemeContext);
 
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
+    (e: MouseEvent<HTMLDivElement>) => {
       if (typeof onChange === "function") {
         onChange(!checked, e);
       }
     },
     [checked, onChange],
+  );
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (typeof onKeyDown === "function") {
+        onKeyDown(event);
+      }
+      if (event.isPropagationStopped()) {
+        return;
+      }
+      if (["Enter", " "].indexOf(event.key) !== -1) {
+        onChange(!checked, null);
+      }
+    },
+    [checked, onChange, onKeyDown],
   );
 
   return (
@@ -45,6 +68,7 @@ export default function Toggle({
       data-color={color}
       data-theme={theme ?? themeContext}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       {...props}
     >
       <div className={className("toggle", "container")}>

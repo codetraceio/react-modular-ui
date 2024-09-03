@@ -27,6 +27,10 @@
   transition: transform .3s ease-in-out;
   transform-style: preserve-3d;
 
+  &:focus {
+    outline: 2px solid rgba($color-primary, .4);
+  }
+
   svg {
     display: block;
   }

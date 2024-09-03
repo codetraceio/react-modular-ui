@@ -16,6 +16,13 @@
 
   &--item {
     cursor: pointer;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 12px;
+    &:focus {
+      outline: 2px solid rgba($color-primary, .4);
+    }
     &.-characters-multiple {
       width: auto;
       padding: 0 4px;
@@ -29,11 +36,19 @@
   &--item[data-current='true'] {
     background: $color-primary;
     color: white;
-    border-radius: 12px;
   }
 
   &--prev, &--next {
     color: $color-primary;
     cursor: pointer;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 12px;
+    &:focus {
+      outline: 2px solid rgba($color-primary, .4);
+    }
   }
 }

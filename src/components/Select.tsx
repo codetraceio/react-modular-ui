@@ -1,4 +1,6 @@
 import React, {
+  KeyboardEvent,
+  MouseEvent,
   useCallback,
   useContext,
   useEffect,
@@ -17,7 +19,8 @@ import Icon from "./Icon";
 import { ThemeContext } from "./ThemeContext";
 
 // avoid running useLayoutEffect on server
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export interface SelectProps {
   placeholder?: string;
@@ -31,6 +34,7 @@ export interface SelectProps {
   theme?: string;
 
   onChange?: (value: string, option: SelectOption) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
 }
 
 export interface SelectOption {
@@ -49,7 +53,7 @@ export default function Select({
   value,
   theme,
   onChange,
-  ...props
+  onKeyDown,
 }: SelectProps) {
   const themeContext = useContext(ThemeContext);
 
@@ -108,15 +112,19 @@ export default function Select({
     return placeholder;
   }, [value, options, placeholder]);
 
-  const handleOptionClickCreator = useCallback(
-    (value: string, option: SelectOption) => () => {
+  const handleOptionClick = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
       if (typeof onChange === "function") {
-        onChange(value, option);
+        const newValue = (event.target as HTMLElement).getAttribute(
+          "data-value",
+        );
+        const option = options.find((option) => option.value === newValue);
+        onChange(newValue, option);
       }
 
       setOpen(false);
     },
-    [onChange],
+    [options, onChange],
   );
 
   const labelElement = useMemo(() => {
@@ -141,7 +149,8 @@ export default function Select({
               className={className("select", "option")}
               aria-selected={option.value === value}
               tabIndex={0}
-              onClick={handleOptionClickCreator(option.value, option)}
+              data-value={option.value}
+              onClick={handleOptionClick}
             >
               {option.title}
             </div>
@@ -149,7 +158,51 @@ export default function Select({
         })}
       </div>
     );
-  }, [options, value, theme, themeContext, handleOptionClickCreator]);
+  }, [options, value, theme, themeContext, handleOptionClick]);
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (typeof onKeyDown === "function") {
+        onKeyDown(event);
+      }
+      const selector = className("select", "option");
+      if (["Enter", " "].includes(event.key)) {
+        const focusedElement =
+          dropdownRef.current?.querySelector<HTMLDivElement>(
+            `.${selector}:focus`,
+          );
+        if (focusedElement) {
+          focusedElement.click();
+        } else {
+          setOpen((state) => !state);
+        }
+      }
+      if (["ArrowUp", "ArrowDown"].includes(event.key)) {
+        const focusedElement =
+          dropdownRef.current?.querySelector<HTMLDivElement>(
+            `.${selector}:focus`,
+          );
+        if (focusedElement) {
+          if (event.key === "ArrowUp") {
+            (focusedElement.previousElementSibling as HTMLDivElement)?.focus();
+          } else {
+            (focusedElement.nextElementSibling as HTMLDivElement)?.focus();
+          }
+        } else {
+          const elementSelector =
+            event.key === "ArrowUp"
+              ? `.${selector}:last-child`
+              : `.${selector}:first-child`;
+          const element =
+            dropdownRef.current?.querySelector<HTMLDivElement>(elementSelector);
+          if (element) {
+            element.focus();
+          }
+        }
+      }
+    },
+    [onKeyDown],
+  );
 
   const portalElement = useMemo(() => {
     if (!open || !options || options.length === 0) {
@@ -167,7 +220,7 @@ export default function Select({
       data-theme={theme ?? themeContext}
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
-      {...props}
+      onKeyDown={handleKeyDown}
     >
       {labelElement}
       <div

@@ -8,6 +8,10 @@
   color: $color-dark-grey;
   outline: none;
 
+  &:focus &--icon {
+    outline: 2px solid rgba($color-primary, .4);
+  }
+
   &--icon {
     width: 24px;
     height: 24px;

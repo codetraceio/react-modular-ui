@@ -7,7 +7,7 @@
     background: $hover-background;
   }
   &:focus {
-    background: $hover-background;
+    outline: 2px solid rgba($color-primary, .4);
   }
 }
 

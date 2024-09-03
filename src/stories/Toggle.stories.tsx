@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import UiToggle, { ToggleProps } from "../components/Toggle";
 import "../../styles/src/default/toggle.scss";
@@ -35,5 +35,6 @@ export default {
 };
 
 export const Toggle = (props: ToggleProps) => {
-  return <UiToggle {...props} />;
+  const [checked, setChecked] = useState(false);
+  return <UiToggle {...props} checked={checked} onChange={setChecked} />;
 };

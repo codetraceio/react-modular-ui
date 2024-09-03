@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { MouseEvent, useCallback, useContext, useMemo } from "react";
 
 import { className } from "../utils/className";
 import Icon from "./Icon";
@@ -50,8 +50,9 @@ export default function Pagination({
     return result;
   }, [startPage, endPage, lastPage]);
 
-  const handleChangeCreator = useCallback(
-    (newPage: number) => () => {
+  const handleChange = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      const newPage = Number(event.currentTarget.getAttribute("data-page"));
       const newOffset: number = (newPage - 1) * limit;
       if (typeof onChange === "function") {
         onChange(newOffset, newPage);
@@ -62,27 +63,29 @@ export default function Pagination({
 
   const prevElement = useMemo(() => {
     return (
-      <div
+      <button
         className={className("pagination", "prev")}
         aria-disabled={page === 1}
-        onClick={handleChangeCreator(page - 1)}
+        data-page={page - 1}
+        onClick={handleChange}
       >
         <Icon height={size} icon="pagination" />
-      </div>
+      </button>
     );
-  }, [page, size, handleChangeCreator]);
+  }, [page, size, handleChange]);
 
   const nextElement = useMemo(() => {
     return (
-      <div
+      <button
         className={className("pagination", "next")}
         aria-disabled={page === lastPage}
-        onClick={handleChangeCreator(page + 1)}
+        data-page={page + 1}
+        onClick={handleChange}
       >
         <Icon height={size} icon="pagination" rotate={180} />
-      </div>
+      </button>
     );
-  }, [page, size, lastPage, handleChangeCreator]);
+  }, [page, size, lastPage, handleChange]);
 
   const pagesElement = useMemo(() => {
     let prevPage = 0;
@@ -111,21 +114,22 @@ export default function Pagination({
           characters = "multiple";
         }
         result.push(
-          <div
+          <button
             key={currentPage}
             className={className("pagination", "item")}
             data-current={page === currentPage}
             data-characters={characters}
-            onClick={handleChangeCreator(currentPage)}
+            data-page={currentPage}
+            onClick={handleChange}
           >
             {currentPage}
-          </div>,
+          </button>,
         );
       }
       prevPage = currentPage;
     });
     return result;
-  }, [pages, page, hideLastPage, handleChangeCreator]);
+  }, [pages, page, hideLastPage, handleChange]);
 
   if (!page || count <= limit) {
     return null;

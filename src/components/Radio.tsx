@@ -1,4 +1,10 @@
-import React, { PropsWithChildren, useCallback, useContext } from "react";
+import React, {
+  KeyboardEvent,
+  MouseEvent,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+} from "react";
 
 import Icon from "./Icon";
 import { className } from "../utils/className";
@@ -10,14 +16,11 @@ export interface RadioProps {
   color?: string;
   disabled?: boolean;
   name?: string;
-  value?: string | number | boolean;
+  value?: string;
   checked?: boolean;
   theme?: string;
-
-  onChange?: (
-    value: string | number | boolean,
-    event: React.MouseEvent<HTMLDivElement>,
-  ) => void;
+  onChange?: (value: string, event: MouseEvent<HTMLDivElement>) => void;
+  onKeyDown?: (value: string, event: KeyboardEvent<HTMLDivElement>) => void;
 }
 
 export default function Radio({
@@ -31,6 +34,7 @@ export default function Radio({
   theme,
   children,
   onChange,
+  onKeyDown,
   ...props
 }: PropsWithChildren<RadioProps>) {
   const themeContext = useContext(ThemeContext);
@@ -42,6 +46,20 @@ export default function Radio({
       }
     },
     [value, onChange],
+  );
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (typeof onKeyDown === "function") {
+        onKeyDown(value, event);
+      }
+      if (["Enter", " "].indexOf(event.key) !== -1) {
+        if (typeof onChange === "function") {
+          onChange(value, null);
+        }
+      }
+    },
+    [value, onKeyDown, onChange],
   );
 
   return (
@@ -56,6 +74,7 @@ export default function Radio({
       aria-checked={checked}
       tabIndex={0}
       onClick={handleChange}
+      onKeyDown={handleKeyDown}
       {...props}
     >
       <div className={className("radio", "icon")}>

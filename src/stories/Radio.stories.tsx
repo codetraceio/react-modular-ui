@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import UiRadio, { RadioProps } from "../components/Radio";
 import "../../styles/src/default/radio.scss";
@@ -35,5 +35,13 @@ export default {
 };
 
 export const Radio = (props: RadioProps) => {
-  return <UiRadio {...props} />;
+  const [selected, setSelected] = useState("");
+  return (
+    <UiRadio
+      {...props}
+      value="radio1"
+      checked={selected === "radio1"}
+      onChange={setSelected}
+    />
+  );
 };

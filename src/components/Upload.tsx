@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
   useContext,
+  KeyboardEvent,
 } from "react";
 
 import { className } from "../utils/className";
@@ -88,6 +89,15 @@ export default function Upload({
     }
   }, [onChange]);
 
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (["Enter", " "].indexOf(event.key) !== -1) {
+        handleClick();
+      }
+    },
+    [handleClick],
+  );
+
   return (
     <div
       className={className("upload")}
@@ -106,6 +116,7 @@ export default function Upload({
       onDragLeave={!dropDisabled && !disabled ? handleDragLeave : null}
       onDrop={!dropDisabled && !disabled ? handleDrop : null}
       onClick={!clickDisabled && !disabled ? handleClick : null}
+      onKeyDown={!disabled ? handleKeyDown : null}
       {...props}
     >
       <input

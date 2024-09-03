@@ -3,13 +3,15 @@ import { className } from "./className";
 export function updateTooltip(
   wrapperElement: HTMLElement,
   tooltipElement: HTMLElement,
-  prefer?: "left" | "right" | "top" | "bottom"
+  prefer?: "left" | "right" | "top" | "bottom",
 ): boolean {
   if (!wrapperElement || !tooltipElement) {
     return false;
   }
 
-  const tailElement = tooltipElement.querySelector(`.${className("tooltip", "tail")}`) as HTMLElement;
+  const tailElement = tooltipElement.querySelector(
+    `.${className("tooltip", "tail")}`,
+  ) as HTMLElement;
 
   const rect = wrapperElement.getBoundingClientRect();
   const wrapperWidth = wrapperElement.offsetWidth;
@@ -35,11 +37,12 @@ export function updateTooltip(
     bottom: () => fitsBottom && "bottom",
   };
 
-  const position = prefer && positionMap[prefer]() || 
-    (fitsBottom && "bottom") || 
-    (fitsTop && "top") || 
-    (fitsRight && "right") || 
-    (fitsLeft && "left") || 
+  const position =
+    (prefer && positionMap[prefer]()) ||
+    (fitsBottom && "bottom") ||
+    (fitsTop && "top") ||
+    (fitsRight && "right") ||
+    (fitsLeft && "left") ||
     "bottom"; // fallback
 
   switch (position) {

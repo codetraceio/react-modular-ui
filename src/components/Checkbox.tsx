@@ -3,6 +3,7 @@ import React, {
   PropsWithChildren,
   MouseEvent,
   useContext,
+  KeyboardEvent,
 } from "react";
 
 export interface CheckboxProps {
@@ -15,6 +16,7 @@ export interface CheckboxProps {
   theme?: string;
 
   onChange?: (checked: boolean, event: MouseEvent<HTMLDivElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
 }
 
 import Icon from "./Icon";
@@ -30,6 +32,7 @@ export default function Checkbox({
   disabled,
   children,
   onChange,
+  onKeyDown,
   ...props
 }: PropsWithChildren<CheckboxProps>) {
   const themeContext = useContext(ThemeContext);
@@ -41,6 +44,21 @@ export default function Checkbox({
       }
     },
     [checked, onChange],
+  );
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (typeof onKeyDown === "function") {
+        onKeyDown(event);
+      }
+      if (event.isPropagationStopped()) {
+        return;
+      }
+      if (["Enter", " "].indexOf(event.key) !== -1) {
+        onChange(!checked, null);
+      }
+    },
+    [checked, onChange, onKeyDown],
   );
 
   return (
@@ -55,6 +73,7 @@ export default function Checkbox({
       role="checkbox"
       tabIndex={disabled ? -1 : 0}
       onClick={handleChange}
+      onKeyDown={handleKeyDown}
       {...props}
     >
       <div className={className("checkbox", "icon")}>

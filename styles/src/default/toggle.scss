@@ -8,6 +8,10 @@
   cursor: pointer;
   outline: none;
 
+  &:focus &--line {
+    outline: 2px solid rgba($color-primary, .4);
+  }
+
   &--label {
     padding-left: 4px;
     font-size: 16px;
