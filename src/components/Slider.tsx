@@ -136,8 +136,8 @@ export default function Slider(props: SliderProps) {
       tabIndex={0}
       data-height={props.height}
     >
+      <div className={className("slider", "track")} />
       <div className={className("slider", "container")}>
-        <div className={className("slider", "track")} />
         <div
           className={className("slider", "progress")}
           style={{
