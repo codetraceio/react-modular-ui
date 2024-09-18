@@ -127,7 +127,7 @@ export default function Upload({
         multiple={multiple}
         onChange={handleChange}
       />
-      <div>{children}</div>
+      {children}
     </div>
   );
 }
