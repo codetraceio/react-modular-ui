@@ -20,6 +20,7 @@ export interface ButtonProps {
   padding?: string | number;
   width?: string | number;
   download?: string;
+  placement?: string;
 
   onClick?: (event: MouseEvent<HTMLElement>) => void;
 }
@@ -37,6 +38,7 @@ export default function Button({
   target,
   padding,
   width,
+  placement,
   onClick,
   ...props
 }: PropsWithChildren<ButtonProps>) {
@@ -55,6 +57,7 @@ export default function Button({
       data-theme={theme ?? themeContext}
       data-padding={padding}
       data-width={width}
+      data-placement={placement}
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       onClick={onClick}

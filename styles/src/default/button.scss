@@ -119,4 +119,18 @@
   &[data-theme='dark'][data-variant='outline'][data-color='secondary'] {
     @include button-outline($color-light, $color-light);
   }
+
+  &[data-placement='start'] {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &[data-placement='end'] {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &[data-placement='middle'] {
+    border-radius: 0;
+  }
 }
