@@ -6,11 +6,14 @@ interface GroupProps {
 }
 
 export default function Group({ children }: GroupProps) {
-  const count = React.Children.count(children);
+  const validChildren = React.Children.map(children, (child) => child).filter(
+    Boolean,
+  );
+  const count = validChildren.length;
 
   return (
     <div className={className("group")}>
-      {React.Children.map(children, (child, index) => {
+      {validChildren.map((child, index) => {
         if (!child) {
           return null;
         }

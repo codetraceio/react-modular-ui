@@ -15,9 +15,11 @@ export default {
 export const Group = () => {
   return (
     <UiGroup>
+      {null}
       <Button>First</Button>
       <Button>Second</Button>
       <Button>Third</Button>
+      {null}
     </UiGroup>
   );
 };
