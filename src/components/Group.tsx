@@ -5,6 +5,19 @@ interface GroupProps {
   children: React.ReactNode;
 }
 
+function getPlacement(index: number, count: number) {
+  if (count === 0) {
+    return "";
+  }
+  if (index === 0) {
+    return "start";
+  }
+  if (index === count - 1) {
+    return "end";
+  }
+  return "middle";
+}
+
 export default function Group({ children }: GroupProps) {
   const validChildren = React.Children.map(children, (child) => child).filter(
     Boolean,
@@ -18,8 +31,7 @@ export default function Group({ children }: GroupProps) {
           return null;
         }
         return React.cloneElement(child as React.ReactElement, {
-          placement:
-            index === 0 ? "start" : index === count - 1 ? "end" : "middle",
+          placement: getPlacement(index, count),
         });
       })}
     </div>
