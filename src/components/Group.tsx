@@ -6,7 +6,7 @@ interface GroupProps {
 }
 
 function getPlacement(index: number, count: number) {
-  if (count === 0) {
+  if (count === 1) {
     return "";
   }
   if (index === 0) {
