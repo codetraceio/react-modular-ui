@@ -11,6 +11,9 @@ export default function Group({ children }: GroupProps) {
   return (
     <div className={className("group")}>
       {React.Children.map(children, (child, index) => {
+        if (!child) {
+          return null;
+        }
         return React.cloneElement(child as React.ReactElement, {
           placement:
             index === 0 ? "start" : index === count - 1 ? "end" : "middle",
