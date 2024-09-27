@@ -9,11 +9,11 @@ import { className } from "../utils/className";
 export interface SliderProps {
   value: number;
   total: number;
-  size: number;
+  size?: number;
   onChange(value: number): void;
   onBlur?(value: number): void;
   // deprecated
-  height: number;
+  height?: number;
 }
 
 function onGlobalMouseUp(callback: () => void) {
