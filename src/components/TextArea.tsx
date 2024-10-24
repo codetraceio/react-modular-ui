@@ -15,6 +15,7 @@ export interface TextareaProps {
   placeholder?: string;
   value?: string | number;
   theme?: string;
+  data?: Record<string, string>;
 
   onChange?: (
     value: string,
@@ -49,6 +50,7 @@ export default function Textarea({
   placeholder,
   value,
   theme,
+  data = {},
   onChange,
   onKeyDown,
   onKeyUp,
@@ -83,11 +85,11 @@ export default function Textarea({
         style={{
           height: height,
         }}
-        onChange={useEvent(onChange)}
-        onKeyDown={useEvent(onKeyDown)}
-        onKeyUp={useEvent(onKeyUp)}
-        onFocus={useEvent(onFocus)}
-        onBlur={useEvent(onBlur)}
+        onChange={useEvent(onChange, data)}
+        onKeyDown={useEvent(onKeyDown, data)}
+        onKeyUp={useEvent(onKeyUp, data)}
+        onFocus={useEvent(onFocus, data)}
+        onBlur={useEvent(onBlur, data)}
       />
     </div>
   );

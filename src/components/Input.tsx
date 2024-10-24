@@ -35,14 +35,43 @@ export interface InputProps {
     | "search";
   pattern?: string;
   theme?: string;
+  data?: Record<string, string>;
 
-  onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onKeyUp?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onFocus?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
-  onSubmit?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onClick?: (value: string, event: MouseEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: string,
+    event: ChangeEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyDown?: (
+    value: string,
+    event: KeyboardEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyUp?: (
+    value: string,
+    event: KeyboardEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onFocus?: (
+    value: string,
+    event: FocusEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onBlur?: (
+    value: string,
+    event: FocusEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onSubmit?: (
+    value: string,
+    event: KeyboardEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onClick?: (
+    value: string,
+    event: MouseEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export default function Input({
@@ -60,6 +89,7 @@ export default function Input({
   inputMode,
   pattern,
   maxLength,
+  data = {},
   onChange,
   onKeyDown,
   onKeyUp,
@@ -74,7 +104,7 @@ export default function Input({
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
       if (typeof onKeyDown === "function") {
-        onKeyDown(event.currentTarget.value, event);
+        onKeyDown(event.currentTarget.value, event, data);
       }
       if (event.isPropagationStopped()) {
         return;
@@ -84,10 +114,10 @@ export default function Input({
         ["Enter", "NumpadEnter"].indexOf(event.key) !== -1 &&
         !event.shiftKey
       ) {
-        onSubmit(event.currentTarget.value, event);
+        onSubmit(event.currentTarget.value, event, data);
       }
     },
-    [onKeyDown, onSubmit],
+    [data, onKeyDown, onSubmit],
   );
 
   const labelElement = useMemo(() => {
@@ -116,12 +146,12 @@ export default function Input({
         inputMode={inputMode}
         pattern={pattern}
         maxLength={maxLength}
-        onChange={useEvent(onChange)}
+        onChange={useEvent(onChange, data)}
         onKeyDown={handleKeyDown}
-        onKeyUp={useEvent(onKeyUp)}
-        onFocus={useEvent(onFocus)}
-        onBlur={useEvent(onBlur)}
-        onClick={useEvent(onClick)}
+        onKeyUp={useEvent(onKeyUp, data)}
+        onFocus={useEvent(onFocus, data)}
+        onBlur={useEvent(onBlur, data)}
+        onClick={useEvent(onClick, data)}
       />
     </div>
   );

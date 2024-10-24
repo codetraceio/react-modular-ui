@@ -10,8 +10,9 @@ export interface SliderProps {
   value: number;
   total: number;
   size?: number;
-  onChange(value: number): void;
-  onBlur?(value: number): void;
+  data?: Record<string, string>;
+  onChange(value: number, data: Record<string, string>): void;
+  onBlur?(value: number, data: Record<string, string>): void;
   // deprecated
   height?: number;
 }
@@ -28,8 +29,9 @@ function handleMouseMove(
   element: HTMLElement,
   clientX: number,
   total: number,
-  onChange: (value: number) => void,
-  onBlur?: (value: number) => void,
+  data: Record<string, string>,
+  onChange: (value: number, data: Record<string, string>) => void,
+  onBlur?: (value: number, data: Record<string, string>) => void,
 ) {
   const rect = element.getBoundingClientRect();
   const positionLeft = clientX - rect.left;
@@ -38,7 +40,7 @@ function handleMouseMove(
 
   const value = Math.round(total * percent);
 
-  onChange(value);
+  onChange(value, data);
 
   const onMouseMove = (event: MouseEvent) => {
     const positionLeft = event.clientX - rect.left;
@@ -47,14 +49,14 @@ function handleMouseMove(
 
     const value = Math.round(total * percent);
 
-    onChange(value);
+    onChange(value, data);
   };
 
   document.addEventListener("mousemove", onMouseMove);
 
   onGlobalMouseUp(() => {
     if (onBlur) {
-      onBlur(value);
+      onBlur(value, data);
     }
     document.removeEventListener("mousemove", onMouseMove);
   });
@@ -64,7 +66,8 @@ function handleTouchMove(
   element: HTMLElement,
   clientX: number,
   total: number,
-  onChange: (value: number) => void,
+  data: Record<string, string>,
+  onChange: (value: number, data: Record<string, string>) => void,
 ) {
   const rect = element.getBoundingClientRect();
   const positionLeft = clientX - rect.left;
@@ -73,7 +76,7 @@ function handleTouchMove(
 
   const value = Math.round(total * percent);
 
-  onChange(value);
+  onChange(value, data);
 
   const onTouchMove = (event: TouchEvent) => {
     const positionLeft = event.touches[0].clientX - rect.left;
@@ -82,7 +85,7 @@ function handleTouchMove(
 
     const value = Math.round(total * percent);
 
-    onChange(value);
+    onChange(value, data);
   };
 
   document.addEventListener("touchmove", onTouchMove);
@@ -97,6 +100,7 @@ export default function Slider({
   total,
   size,
   height,
+  data = {},
   onChange,
   onBlur,
 }: SliderProps) {
@@ -107,29 +111,29 @@ export default function Slider({
       }
       const element = event.currentTarget;
       const clientX = event.clientX;
-      handleMouseMove(element, clientX, total, onChange, onBlur);
+      handleMouseMove(element, clientX, total, data, onChange, onBlur);
     },
-    [total, onChange, onBlur],
+    [total, data, onChange, onBlur],
   );
 
   const handleTouchStart = useCallback(
     (event: ReactTouchEvent<HTMLDivElement>) => {
       const element = event.currentTarget;
       const clientX = event.touches[0].clientX;
-      handleTouchMove(element, clientX, total, onChange);
+      handleTouchMove(element, clientX, total, data, onChange);
     },
-    [total, onChange],
+    [total, data, onChange],
   );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-        onChange(Math.max(0, value - 1));
+        onChange(Math.max(0, value - 1), data);
       } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-        onChange(Math.min(total, value + 1));
+        onChange(Math.min(total, value + 1), data);
       }
     },
-    [onChange, value, total],
+    [value, total, data, onChange],
   );
 
   const percent = Math.max(Math.min((value * 100) / total, 100), 0);

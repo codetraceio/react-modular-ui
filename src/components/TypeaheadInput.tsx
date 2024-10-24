@@ -40,16 +40,45 @@ export interface TypeaheadInputProps {
   hideInitialOptions?: boolean;
   filter?: TypeaheadInputFilter;
   theme?: string;
+  data?: Record<string, string>;
 
   portal?: JSX.Element[];
 
-  onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onKeyUp?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onSubmit?: (value: string, event: KeyboardEvent<HTMLInputElement>) => void;
-  onFocus?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (value: string, event: FocusEvent<HTMLInputElement>) => void;
-  onClick?: (value: string, event: MouseEvent<HTMLInputElement>) => void;
+  onChange?: (
+    value: string,
+    event: ChangeEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyDown?: (
+    value: string,
+    event: KeyboardEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyUp?: (
+    value: string,
+    event: KeyboardEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onSubmit?: (
+    value: string,
+    event: KeyboardEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onFocus?: (
+    value: string,
+    event: FocusEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onBlur?: (
+    value: string,
+    event: FocusEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
+  onClick?: (
+    value: string,
+    event: MouseEvent<HTMLInputElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export default function TypeaheadInput({
@@ -65,6 +94,7 @@ export default function TypeaheadInput({
   label,
   placeholder,
   shape,
+  data = {},
   onSubmit,
   onClick,
   onBlur,
@@ -117,15 +147,15 @@ export default function TypeaheadInput({
   const handleClickCreator = useCallback(
     (option: string) => () => {
       if (onChange) {
-        onChange(option, null);
+        onChange(option, null, data);
       }
       if (onBlur) {
-        onBlur(option, null);
+        onBlur(option, null, data);
       }
 
       setOpen(false);
     },
-    [setOpen, onChange, onBlur],
+    [data, setOpen, onChange, onBlur],
   );
 
   const handleFocus = useCallback(
@@ -133,10 +163,10 @@ export default function TypeaheadInput({
       setOpen(true);
 
       if (onFocus) {
-        onFocus(value, event);
+        onFocus(value, event, data);
       }
     },
-    [setOpen, onFocus],
+    [data, setOpen, onFocus],
   );
 
   const handleBlur = useCallback(
@@ -155,10 +185,10 @@ export default function TypeaheadInput({
       setOpen(false);
 
       if (onBlur) {
-        onBlur(value, event);
+        onBlur(value, event, data);
       }
     },
-    [setOpen, onBlur],
+    [data, setOpen, onBlur],
   );
 
   const dropdownElement = useMemo(() => {

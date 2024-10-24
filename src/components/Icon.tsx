@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext } from "react";
+import React, { MouseEvent, useCallback, useContext } from "react";
 import configService from "../services/configService";
 
 import { className } from "../utils/className";
@@ -14,8 +14,12 @@ export interface IconProps {
   disabled?: boolean;
   theme?: string;
   verticalAlign?: string;
+  data?: Record<string, string>;
 
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  onClick?: (
+    event: MouseEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export default function Icon({
@@ -28,10 +32,20 @@ export default function Icon({
   theme,
   disabled,
   verticalAlign,
+  data = {},
   onClick,
   ...props
 }: IconProps) {
   const themeContext = useContext(ThemeContext);
+
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
+      if (typeof onClick === "function") {
+        onClick(event, data);
+      }
+    },
+    [data, onClick],
+  );
 
   return (
     <span
@@ -47,7 +61,7 @@ export default function Icon({
       aria-disabled={disabled}
       role={onClick && "button"}
       tabIndex={onClick && !disabled ? 0 : -1}
-      onClick={onClick}
+      onClick={handleClick}
       {...props}
     >
       {configService.getConfig().icons[icon]}

@@ -15,9 +15,17 @@ export interface ToggleProps {
   disabled?: boolean;
   checked?: boolean;
   theme?: string;
+  data?: Record<string, string>;
 
-  onChange?: (value: boolean, event: MouseEvent<HTMLDivElement>) => void;
-  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  onChange?: (
+    value: boolean,
+    event: MouseEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyDown?: (
+    event: KeyboardEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export default function Toggle({
@@ -27,6 +35,7 @@ export default function Toggle({
   checked,
   theme,
   children,
+  data = {},
   onChange,
   onKeyDown,
   ...props
@@ -36,25 +45,25 @@ export default function Toggle({
   const handleClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
       if (typeof onChange === "function") {
-        onChange(!checked, e);
+        onChange(!checked, e, data);
       }
     },
-    [checked, onChange],
+    [checked, data, onChange],
   );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (typeof onKeyDown === "function") {
-        onKeyDown(event);
+        onKeyDown(event, data);
       }
       if (event.isPropagationStopped()) {
         return;
       }
       if (["Enter", " "].indexOf(event.key) !== -1) {
-        onChange(!checked, null);
+        onChange(!checked, null, data);
       }
     },
-    [checked, onChange, onKeyDown],
+    [checked, data, onChange, onKeyDown],
   );
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children, cloneElement, ReactElement } from "react";
 import { className } from "../utils/className";
 
 interface GroupProps {
@@ -19,7 +19,7 @@ function getPlacement(index: number, count: number) {
 }
 
 export default function Group({ children }: GroupProps) {
-  const validChildren = React.Children.map(children, (child) => child).filter(
+  const validChildren = Children.map(children, (child) => child).filter(
     Boolean,
   );
   const count = validChildren.length;
@@ -30,7 +30,7 @@ export default function Group({ children }: GroupProps) {
         if (!child) {
           return null;
         }
-        return React.cloneElement(child as React.ReactElement, {
+        return cloneElement(child as ReactElement, {
           placement: getPlacement(index, count),
         });
       })}

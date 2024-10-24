@@ -28,8 +28,13 @@ export interface TabsProps {
   options: TabsOption[] | Readonly<TabsOption[]>;
   value: string;
   noLine?: boolean;
+  data?: Record<string, string>;
 
-  onChange?: (value: string, option: TabsOption) => void;
+  onChange?: (
+    value: string,
+    option: TabsOption,
+    data: Record<string, string>,
+  ) => void;
 }
 
 function updateLine(tabs: HTMLDivElement, line: HTMLDivElement, value: string) {
@@ -61,6 +66,7 @@ export default function Tabs({
   children,
   options,
   noLine,
+  data = {},
 
   onChange,
   ...props
@@ -79,10 +85,10 @@ export default function Tabs({
       if (typeof onChange === "function") {
         const value = event.currentTarget.getAttribute("data-value");
         const selectedOption = options.find((option) => option.value === value);
-        onChange(value, selectedOption);
+        onChange(value, selectedOption, data);
       }
     },
-    [options, onChange],
+    [data, options, onChange],
   );
 
   const lineElement = useMemo(() => {

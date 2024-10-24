@@ -12,10 +12,12 @@ export interface FormProps {
   target?: string;
 
   name?: string;
+  data?: Record<string, string>;
   onChange?: (
     name: string,
     value: string,
     event: ChangeEvent<HTMLFormElement>,
+    data: Record<string, string>,
   ) => void;
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
@@ -25,6 +27,7 @@ export default function Form({
   method,
   name,
   target,
+  data = {},
   onChange,
   onSubmit,
   ...props
@@ -32,10 +35,10 @@ export default function Form({
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLFormElement>) => {
       if (typeof onChange === "function") {
-        onChange(event.target.name, event.target.value, event);
+        onChange(event.target.name, event.target.value, event, data);
       }
     },
-    [onChange],
+    [data, onChange],
   );
 
   return (

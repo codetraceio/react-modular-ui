@@ -22,8 +22,9 @@ export interface UploadProps {
   clickDisabled?: boolean;
   dropDisabled?: boolean;
   multiple?: boolean;
+  data?: Record<string, string>;
 
-  onChange?: (files: FileList) => void;
+  onChange?: (files: FileList, data: Record<string, string>) => void;
 }
 
 export default function Upload({
@@ -37,6 +38,7 @@ export default function Upload({
   dropDisabled,
   children,
   multiple,
+  data = {},
   onChange,
   ...props
 }: PropsWithChildren<UploadProps>) {
@@ -67,10 +69,10 @@ export default function Upload({
       setActive(false);
 
       if (typeof onChange === "function") {
-        onChange(files);
+        onChange(files, data);
       }
     },
-    [setActive, onChange],
+    [data, setActive, onChange],
   );
 
   const handleClick = useCallback(() => {
@@ -85,9 +87,9 @@ export default function Upload({
     const files = inputRef.current.files;
 
     if (typeof onChange === "function") {
-      onChange(files);
+      onChange(files, data);
     }
-  }, [onChange]);
+  }, [data, onChange]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {

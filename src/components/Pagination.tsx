@@ -12,8 +12,13 @@ export interface PaginationProps {
   offset?: number;
   hideLastPage?: boolean;
   theme?: string;
+  data?: Record<string, string>;
 
-  onChange?: (offset: number, page: number) => void;
+  onChange?: (
+    offset: number,
+    page: number,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export default function Pagination({
@@ -24,6 +29,7 @@ export default function Pagination({
   offset,
   hideLastPage,
   theme,
+  data = {},
 
   onChange,
   ...props
@@ -55,10 +61,10 @@ export default function Pagination({
       const newPage = Number(event.currentTarget.getAttribute("data-page"));
       const newOffset: number = (newPage - 1) * limit;
       if (typeof onChange === "function") {
-        onChange(newOffset, newPage);
+        onChange(newOffset, newPage, data);
       }
     },
-    [limit, onChange],
+    [limit, data, onChange],
   );
 
   const prevElement = useMemo(() => {

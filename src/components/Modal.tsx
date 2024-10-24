@@ -13,14 +13,16 @@ import { ThemeContext } from "./ThemeContext";
 export interface ModalProps {
   show?: boolean;
   theme?: string;
+  data?: Record<string, string>;
 
-  onClose?: () => void;
+  onClose?: (data: Record<string, string>) => void;
 }
 
 export default function Modal({
   show,
   theme,
   children,
+  data = {},
   onClose,
   ...props
 }: PropsWithChildren<ModalProps & HTMLAttributes<HTMLDivElement>>) {
@@ -28,9 +30,9 @@ export default function Modal({
 
   const handleClose = useCallback(() => {
     if (typeof onClose === "function") {
-      onClose();
+      onClose(data);
     }
-  }, [onClose]);
+  }, [data, onClose]);
 
   const handleClickInside = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

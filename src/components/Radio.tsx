@@ -19,8 +19,17 @@ export interface RadioProps {
   value?: string;
   checked?: boolean;
   theme?: string;
-  onChange?: (value: string, event: MouseEvent<HTMLDivElement>) => void;
-  onKeyDown?: (value: string, event: KeyboardEvent<HTMLDivElement>) => void;
+  data?: Record<string, string>;
+  onChange?: (
+    value: string,
+    event: MouseEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyDown?: (
+    value: string,
+    event: KeyboardEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export default function Radio({
@@ -33,6 +42,7 @@ export default function Radio({
   value,
   theme,
   children,
+  data = {},
   onChange,
   onKeyDown,
   ...props
@@ -42,24 +52,24 @@ export default function Radio({
   const handleChange = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       if (typeof onChange === "function") {
-        onChange(value, event);
+        onChange(value, event, data);
       }
     },
-    [value, onChange],
+    [value, data, onChange],
   );
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (typeof onKeyDown === "function") {
-        onKeyDown(value, event);
+        onKeyDown(value, event, data);
       }
       if (["Enter", " "].indexOf(event.key) !== -1) {
         if (typeof onChange === "function") {
-          onChange(value, null);
+          onChange(value, null, data);
         }
       }
     },
-    [value, onKeyDown, onChange],
+    [value, data, onKeyDown, onChange],
   );
 
   return (

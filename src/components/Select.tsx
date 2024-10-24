@@ -32,9 +32,17 @@ export interface SelectProps {
   options?: SelectOption[] | Readonly<SelectOption[]>;
   value?: string;
   theme?: string;
+  data?: Record<string, string>;
 
-  onChange?: (value: string, option: SelectOption) => void;
-  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  onChange?: (
+    value: string,
+    option: SelectOption,
+    data: Record<string, string>,
+  ) => void;
+  onKeyDown?: (
+    event: KeyboardEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 export interface SelectOption {
@@ -52,8 +60,10 @@ export default function Select({
   options,
   value,
   theme,
+  data = {},
   onChange,
   onKeyDown,
+  ...props
 }: SelectProps) {
   const themeContext = useContext(ThemeContext);
 
@@ -119,12 +129,12 @@ export default function Select({
           "data-value",
         );
         const option = options.find((option) => option.value === newValue);
-        onChange(newValue, option);
+        onChange(newValue, option, data);
       }
 
       setOpen(false);
     },
-    [options, onChange],
+    [options, data, onChange],
   );
 
   const labelElement = useMemo(() => {
@@ -163,7 +173,7 @@ export default function Select({
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (typeof onKeyDown === "function") {
-        onKeyDown(event);
+        onKeyDown(event, data);
       }
       const selector = className("select", "option");
       if (["Enter", " "].includes(event.key)) {
@@ -201,7 +211,7 @@ export default function Select({
         }
       }
     },
-    [onKeyDown],
+    [data, onKeyDown],
   );
 
   const portalElement = useMemo(() => {
@@ -222,6 +232,7 @@ export default function Select({
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
+      {...props}
     >
       {labelElement}
       <div

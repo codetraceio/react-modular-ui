@@ -14,9 +14,17 @@ export interface CheckboxProps {
   checked?: boolean;
   name?: string;
   theme?: string;
+  data?: Record<string, string>;
 
-  onChange?: (checked: boolean, event: MouseEvent<HTMLDivElement>) => void;
-  onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
+  onChange?: (
+    checked: boolean,
+    event: MouseEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
+  onKeyDown?: (
+    event: KeyboardEvent<HTMLDivElement>,
+    data: Record<string, string>,
+  ) => void;
 }
 
 import Icon from "./Icon";
@@ -31,6 +39,7 @@ export default function Checkbox({
   theme,
   disabled,
   children,
+  data = {},
   onChange,
   onKeyDown,
   ...props
@@ -40,25 +49,25 @@ export default function Checkbox({
   const handleChange = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
       if (typeof onChange === "function") {
-        onChange(!checked, e);
+        onChange(!checked, e, data);
       }
     },
-    [checked, onChange],
+    [checked, data, onChange],
   );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (typeof onKeyDown === "function") {
-        onKeyDown(event);
+        onKeyDown(event, data);
       }
       if (event.isPropagationStopped()) {
         return;
       }
       if (["Enter", " "].indexOf(event.key) !== -1) {
-        onChange(!checked, null);
+        onChange(!checked, null, data);
       }
     },
-    [checked, onChange, onKeyDown],
+    [checked, data, onChange, onKeyDown],
   );
 
   return (

@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useContext } from "react";
+import React, {
+  MouseEvent,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+} from "react";
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
@@ -9,8 +14,12 @@ export interface PillProps {
   padding?: string | number;
   width?: string | number;
   theme?: string;
+  data?: Record<string, string>;
 
-  onClick?: () => void;
+  onClick?: (
+    event: MouseEvent<HTMLSpanElement>,
+    data: Record<string, string>,
+  ) => void;
 
   // deprecated
   paddingLeft?: string | number;
@@ -27,10 +36,20 @@ export default function Pill({
   width,
   theme,
   children,
+  data = {},
   onClick,
   ...props
 }: PropsWithChildren<PillProps>) {
   const themeContext = useContext(ThemeContext);
+
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLSpanElement>) => {
+      if (typeof onClick === "function") {
+        onClick(event, data);
+      }
+    },
+    [data, onClick],
+  );
 
   return (
     <span
@@ -43,7 +62,7 @@ export default function Pill({
       data-padding={padding}
       data-width={width}
       data-theme={theme ?? themeContext}
-      onClick={onClick}
+      onClick={handleClick}
       {...props}
     >
       {children}
