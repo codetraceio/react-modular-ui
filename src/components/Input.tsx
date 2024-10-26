@@ -33,6 +33,7 @@ export interface InputProps {
     | "numeric"
     | "decimal"
     | "search";
+  placement?: string;
   pattern?: string;
   theme?: string;
   data?: Record<string, string>;
@@ -89,6 +90,7 @@ export default function Input({
   inputMode,
   pattern,
   maxLength,
+  placement,
   data = {},
   onChange,
   onKeyDown,
@@ -133,6 +135,7 @@ export default function Input({
       data-variant={variant}
       data-color={color}
       data-shape={shape}
+      data-placement={placement}
       data-theme={theme ?? themeContext}
       {...props}
     >

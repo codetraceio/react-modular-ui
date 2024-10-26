@@ -39,6 +39,7 @@ export interface TypeaheadInputProps {
   matchingOptionsOnly?: boolean;
   hideInitialOptions?: boolean;
   filter?: TypeaheadInputFilter;
+  placement?: string;
   theme?: string;
   data?: Record<string, string>;
 
@@ -94,6 +95,7 @@ export default function TypeaheadInput({
   label,
   placeholder,
   shape,
+  placement,
   data = {},
   onSubmit,
   onClick,
@@ -243,6 +245,7 @@ export default function TypeaheadInput({
         name={name}
         label={label}
         value={value}
+        placement={placement}
         placeholder={placeholder}
         shape={shape}
         onChange={onChange}

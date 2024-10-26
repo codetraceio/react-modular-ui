@@ -31,6 +31,7 @@ export interface SelectProps {
   disabled?: boolean;
   options?: SelectOption[] | Readonly<SelectOption[]>;
   value?: string;
+  placement?: string;
   theme?: string;
   data?: Record<string, string>;
 
@@ -59,6 +60,7 @@ export default function Select({
   disabled,
   options,
   value,
+  placement,
   theme,
   data = {},
   onChange,
@@ -229,6 +231,7 @@ export default function Select({
       data-variant={variant}
       data-theme={theme ?? themeContext}
       data-open={open}
+      data-placement={placement}
       aria-disabled={disabled}
       tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
