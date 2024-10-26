@@ -24,6 +24,7 @@ export interface InputProps {
   shape?: string;
   type?: string;
   maxLength?: number;
+  width?: string | number;
   inputMode?:
     | "none"
     | "text"
@@ -89,6 +90,7 @@ export default function Input({
   theme,
   inputMode,
   pattern,
+  width,
   maxLength,
   placement,
   data = {},
@@ -135,6 +137,7 @@ export default function Input({
       data-variant={variant}
       data-color={color}
       data-shape={shape}
+      data-width={width}
       data-placement={placement}
       data-theme={theme ?? themeContext}
       {...props}
