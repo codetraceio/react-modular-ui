@@ -11,6 +11,7 @@ export interface SliderProps {
   total: number;
   size?: number;
   data?: Record<string, string>;
+  variant?: string;
   onChange(value: number, data: Record<string, string>): void;
   onBlur?(value: number, data: Record<string, string>): void;
   // deprecated
@@ -100,6 +101,7 @@ export default function Slider({
   total,
   size,
   height,
+  variant,
   data = {},
   onChange,
   onBlur,
@@ -147,6 +149,7 @@ export default function Slider({
       tabIndex={0}
       data-size={size}
       data-height={height}
+      data-variant={variant}
     >
       <div className={className("slider", "track")} />
       <div className={className("slider", "container")}>
