@@ -49,6 +49,9 @@ export default function Upload({
 
   const handleDragOver = useCallback(
     (event: DragEvent<HTMLDivElement>) => {
+      if (!event.dataTransfer.types.includes("Files")) {
+        return;
+      }
       event.preventDefault();
       setActive(true);
     },
@@ -61,6 +64,9 @@ export default function Upload({
 
   const handleDrop = useCallback(
     (event: DragEvent<HTMLDivElement>) => {
+      if (!event.dataTransfer.types.includes("Files")) {
+        return;
+      }
       event.stopPropagation();
       event.preventDefault();
 
