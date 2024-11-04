@@ -12,6 +12,7 @@ export interface SliderProps {
   size?: number;
   data?: Record<string, string>;
   variant?: string;
+  disabled?: boolean;
   onChange(value: number, data: Record<string, string>): void;
   onBlur?(value: number, data: Record<string, string>): void;
   // deprecated
@@ -102,6 +103,7 @@ export default function Slider({
   size,
   height,
   variant,
+  disabled,
   data = {},
   onChange,
   onBlur,
@@ -146,7 +148,8 @@ export default function Slider({
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
       onKeyDown={handleKeyDown}
-      tabIndex={0}
+      tabIndex={disabled ? -1 : 0}
+      aria-disabled={disabled}
       data-size={size}
       data-height={height}
       data-variant={variant}
