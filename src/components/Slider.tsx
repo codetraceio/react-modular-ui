@@ -42,7 +42,7 @@ function handleMouseMove(
   const width = rect.width;
   const percent = positionLeft / width;
 
-  const value = Math.round(total * percent);
+  let value = Math.round(total * percent);
 
   onChange(value, data);
 
@@ -51,7 +51,7 @@ function handleMouseMove(
     const width = rect.width;
     const percent = Math.min(1, Math.max(0, positionLeft / width));
 
-    const value = Math.round(total * percent);
+    value = Math.round(total * percent);
 
     onChange(value, data);
   };
@@ -79,7 +79,7 @@ function handleTouchMove(
   const width = rect.width;
   const percent = positionLeft / width;
 
-  const value = Math.round(total * percent);
+  let value = Math.round(total * percent);
 
   onChange(value, data);
 
@@ -88,7 +88,7 @@ function handleTouchMove(
     const width = rect.width;
     const percent = Math.min(1, Math.max(0, positionLeft / width));
 
-    const value = Math.round(total * percent);
+    value = Math.round(total * percent);
 
     onChange(value, data);
   };
