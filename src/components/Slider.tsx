@@ -3,6 +3,8 @@ import React, {
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
   KeyboardEvent,
+  useState,
+  useEffect,
 } from "react";
 import { className } from "../utils/className";
 
@@ -70,6 +72,7 @@ function handleTouchMove(
   total: number,
   data: Record<string, string>,
   onChange: (value: number, data: Record<string, string>) => void,
+  onBlur?: (value: number, data: Record<string, string>) => void,
 ) {
   const rect = element.getBoundingClientRect();
   const positionLeft = clientX - rect.left;
@@ -93,6 +96,9 @@ function handleTouchMove(
   document.addEventListener("touchmove", onTouchMove);
 
   onGlobalMouseUp(() => {
+    if (onBlur) {
+      onBlur(value, data);
+    }
     document.removeEventListener("touchmove", onTouchMove);
   });
 }
@@ -108,6 +114,33 @@ export default function Slider({
   onChange,
   onBlur,
 }: SliderProps) {
+  const [currentValue, setCurrentValue] = useState(value);
+  const [dragging, setDragging] = useState(false);
+
+  useEffect(() => {
+    if (!dragging) {
+      setCurrentValue(value);
+    }
+  }, [value, dragging]);
+
+  const handleChange = useCallback(
+    (newValue: number, data: Record<string, string>) => {
+      setCurrentValue(newValue);
+      onChange(newValue, data);
+    },
+    [onChange],
+  );
+
+  const handleBlur = useCallback(
+    (newValue: number, data: Record<string, string>) => {
+      if (onBlur) {
+        onBlur(newValue, data);
+      }
+      setDragging(false);
+    },
+    [onBlur],
+  );
+
   const handleMouseDown = useCallback(
     (event: ReactMouseEvent<HTMLDivElement>) => {
       if (event.button !== 0) {
@@ -115,32 +148,34 @@ export default function Slider({
       }
       const element = event.currentTarget;
       const clientX = event.clientX;
-      handleMouseMove(element, clientX, total, data, onChange, onBlur);
+      handleMouseMove(element, clientX, total, data, handleChange, handleBlur);
+      setDragging(true);
     },
-    [total, data, onChange, onBlur],
+    [total, data, handleChange, handleBlur],
   );
 
   const handleTouchStart = useCallback(
     (event: ReactTouchEvent<HTMLDivElement>) => {
       const element = event.currentTarget;
       const clientX = event.touches[0].clientX;
-      handleTouchMove(element, clientX, total, data, onChange);
+      handleTouchMove(element, clientX, total, data, handleChange, handleBlur);
+      setDragging(true);
     },
-    [total, data, onChange],
+    [total, data, handleChange, handleBlur],
   );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-        onChange(Math.max(0, value - 1), data);
+        handleChange(Math.max(0, currentValue - 1), data);
       } else if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-        onChange(Math.min(total, value + 1), data);
+        handleChange(Math.min(total, currentValue + 1), data);
       }
     },
-    [value, total, data, onChange],
+    [currentValue, total, data, handleChange],
   );
 
-  const percent = Math.max(Math.min((value * 100) / total, 100), 0);
+  const percent = Math.max(Math.min((currentValue * 100) / total, 100), 0);
 
   return (
     <div
