@@ -2,6 +2,7 @@ import React, { Children, cloneElement, ReactElement } from "react";
 import { className } from "../utils/className";
 
 interface GroupProps {
+  variant?: string;
   children: React.ReactNode;
 }
 
@@ -18,14 +19,14 @@ function getPlacement(index: number, count: number) {
   return "middle";
 }
 
-export default function Group({ children }: GroupProps) {
+export default function Group({ variant, children }: GroupProps) {
   const validChildren = Children.map(children, (child) => child).filter(
     Boolean,
   );
   const count = validChildren.length;
 
   return (
-    <div className={className("group")}>
+    <div className={className("group")} data-variant={variant}>
       {validChildren.map((child, index) => {
         if (!child) {
           return null;
