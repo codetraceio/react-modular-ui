@@ -37,7 +37,10 @@ export function updateDropDown(
   let left = selectRect.left + scrollLeft;
   let right = 0;
   const availableWidth = window.innerWidth;
-  if (selectRect.left + dropDownElement.offsetWidth > availableWidth) {
+  if (
+    selectRect.left + dropDownElement.offsetWidth > availableWidth &&
+    window.innerWidth < 768
+  ) {
     left = 16;
     right = 16;
   }
