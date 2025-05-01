@@ -83,11 +83,11 @@ export default function Tooltip({
   }, [title, theme, themeContext]);
 
   const portalElement = useMemo(() => {
-    if (!open) {
+    if (!open || !title) {
       return;
     }
     return createPortal(tooltipElement, document.body);
-  }, [tooltipElement, open]);
+  }, [tooltipElement, open, title]);
 
   return (
     <span
