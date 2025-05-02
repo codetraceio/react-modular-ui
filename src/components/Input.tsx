@@ -143,6 +143,7 @@ export default function Input({
   return (
     <div
       className={className("input")}
+      aria-disabled={disabled}
       data-size={size}
       data-variant={variant}
       data-color={color}
