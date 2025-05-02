@@ -6,6 +6,7 @@ import React, {
   useCallback,
   useContext,
   useMemo,
+  useRef,
 } from "react";
 
 import { className } from "../utils/className";
@@ -36,6 +37,8 @@ export interface InputProps {
     | "search";
   placement?: string;
   pattern?: string;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
   theme?: string;
   data?: Record<string, string>;
 
@@ -93,6 +96,8 @@ export default function Input({
   width,
   maxLength,
   placement,
+  iconLeft,
+  iconRight,
   data = {},
   onChange,
   onKeyDown,
@@ -104,6 +109,7 @@ export default function Input({
   ...props
 }: InputProps) {
   const themeContext = useContext(ThemeContext);
+  const inputRef = useRef(null);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
@@ -124,6 +130,10 @@ export default function Input({
     [data, onKeyDown, onSubmit],
   );
 
+  const handleClick = useCallback(() => {
+    inputRef?.current?.focus();
+  }, []);
+
   const labelElement = useMemo(() => {
     return label ? (
       <div className={className("input", "label")}>{label}</div>
@@ -140,25 +150,31 @@ export default function Input({
       data-width={width}
       data-placement={placement}
       data-theme={theme ?? themeContext}
+      onClick={handleClick}
       {...props}
     >
       {labelElement}
-      <input
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        disabled={disabled}
-        type={type}
-        inputMode={inputMode}
-        pattern={pattern}
-        maxLength={maxLength}
-        onChange={useEvent(onChange, data)}
-        onKeyDown={handleKeyDown}
-        onKeyUp={useEvent(onKeyUp, data)}
-        onFocus={useEvent(onFocus, data)}
-        onBlur={useEvent(onBlur, data)}
-        onClick={useEvent(onClick, data)}
-      />
+      <div className={className("input", "container")}>
+        {iconLeft}
+        <input
+          ref={inputRef}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          disabled={disabled}
+          type={type}
+          inputMode={inputMode}
+          pattern={pattern}
+          maxLength={maxLength}
+          onChange={useEvent(onChange, data)}
+          onKeyDown={handleKeyDown}
+          onKeyUp={useEvent(onKeyUp, data)}
+          onFocus={useEvent(onFocus, data)}
+          onBlur={useEvent(onBlur, data)}
+          onClick={useEvent(onClick, data)}
+        />
+        {iconRight}
+      </div>
     </div>
   );
 }

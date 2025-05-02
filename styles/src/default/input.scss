@@ -11,39 +11,53 @@
     @include input-size(24px, 14px);
     box-sizing: border-box;
     width: 100%;
-    background: $color-light;
-    border: 1px solid $color-grey;
+    background: none;
+    border: none;
     outline: none;
-    border-radius: $border-radius;
     font-family: "Source Sans Pro", sans-serif;
-    &:focus {
-      border: 1px solid $color-primary;
-    }
   }
   &--label {
     font-size: 16px;
     color: $color-dark-grey;
     padding: 0 0 8px 0;
   }
+  &--container {
+    box-sizing: border-box;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    background: $color-light;
+    border: 1px solid $color-grey;
+    border-radius: $border-radius;
+    &:focus-within {
+      border: 1px solid $color-primary;
+    }
+  }
   &[data-size='24'] input {
     @include input-size(24px, 14px);
+  }
+  &[data-size='32'] &--container {
+    height: 32px;
   }
   &[data-size='32'] input {
     @include input-size(32px, 16px);
   }
+  &[data-size='48'] &--container {
+    height: 48px;
+  }
   &[data-size='48'] input {
     @include input-size(48px, 18px);
   }
-  &[data-size='24'][data-shape='rounded'] input {
+  &[data-size='24'][data-shape='rounded'] &--container {
     border-radius: 12px;
   }
-  &[data-size='32'][data-shape='rounded'] input {
+  &[data-size='32'][data-shape='rounded'] &--container {
     border-radius: 16px;
   }
-  &[data-size='48'][data-shape='rounded'] input {
+  &[data-size='48'][data-shape='rounded'] &--container {
     border-radius: 24px;
   }
-  &[data-color='success'] input {
+  &[data-color='success'] &--container {
     border-color: $color-success;
   }
 }
