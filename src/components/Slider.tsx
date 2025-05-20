@@ -1,10 +1,10 @@
 import React, {
-  useCallback,
+  KeyboardEvent,
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
-  KeyboardEvent,
-  useState,
+  useCallback,
   useEffect,
+  useState,
 } from "react";
 import { className } from "../utils/className";
 
@@ -17,6 +17,11 @@ export interface SliderProps {
   disabled?: boolean;
   onChange(value: number, data: Record<string, string>): void;
   onBlur?(value: number, data: Record<string, string>): void;
+  // Event handlers
+  onMouseDown?(event: ReactMouseEvent<HTMLDivElement>): void;
+  onMouseUp?(event: ReactMouseEvent<HTMLDivElement>): void;
+  onMouseMove?(event: ReactMouseEvent<HTMLDivElement>): void;
+  onMouseLeave?(event: ReactMouseEvent<HTMLDivElement>): void;
   // deprecated
   height?: number;
 }
@@ -113,6 +118,10 @@ export default function Slider({
   data = {},
   onChange,
   onBlur,
+  onMouseDown: onMouseDownProp,
+  onMouseUp: onMouseUpProp,
+  onMouseMove: onMouseMoveProp,
+  onMouseLeave: onMouseLeaveProp,
 }: SliderProps) {
   const [currentValue, setCurrentValue] = useState(value);
   const [dragging, setDragging] = useState(false);
@@ -143,6 +152,10 @@ export default function Slider({
 
   const handleMouseDown = useCallback(
     (event: ReactMouseEvent<HTMLDivElement>) => {
+      if (onMouseDownProp) {
+        onMouseDownProp(event);
+      }
+
       if (event.button !== 0) {
         return;
       }
@@ -151,7 +164,34 @@ export default function Slider({
       handleMouseMove(element, clientX, total, data, handleChange, handleBlur);
       setDragging(true);
     },
-    [total, data, handleChange, handleBlur],
+    [total, data, handleChange, handleBlur, onMouseDownProp],
+  );
+
+  const handleMouseUp = useCallback(
+    (event: ReactMouseEvent<HTMLDivElement>) => {
+      if (onMouseUpProp) {
+        onMouseUpProp(event);
+      }
+    },
+    [onMouseUpProp],
+  );
+
+  const handleMouseMoveEvent = useCallback(
+    (event: ReactMouseEvent<HTMLDivElement>) => {
+      if (onMouseMoveProp) {
+        onMouseMoveProp(event);
+      }
+    },
+    [onMouseMoveProp],
+  );
+
+  const handleMouseLeave = useCallback(
+    (event: ReactMouseEvent<HTMLDivElement>) => {
+      if (onMouseLeaveProp) {
+        onMouseLeaveProp(event);
+      }
+    },
+    [onMouseLeaveProp],
   );
 
   const handleTouchStart = useCallback(
@@ -181,6 +221,9 @@ export default function Slider({
     <div
       className={className("slider")}
       onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMoveEvent}
+      onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
       onKeyDown={handleKeyDown}
       tabIndex={disabled ? -1 : 0}
