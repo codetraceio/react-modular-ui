@@ -1,0 +1,31 @@
+@import "./constants.scss";
+@import "./mixins.scss";
+
+.c-dropdown {
+  font-family: sans-serif;
+  position: absolute;
+  background: $color-light;
+  border: 1px solid $color-grey;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
+  z-index: 1000;
+  top: -100%;
+  left: -100%;
+  max-width: 400px;
+  
+  &[data-orientation='top'] {
+    margin-top: -4px;
+  }
+  
+  &[data-orientation='bottom'] {
+    margin-top: 4px;
+  }
+  
+  &[data-placement='left'] {
+    margin-left: -4px;
+  }
+  
+  &[data-placement='right'] {
+    margin-left: 4px;
+  }
+}

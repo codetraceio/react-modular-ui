@@ -1,6 +1,6 @@
 {
   "name": "react-modular-ui",
-  "version": "3.13.3",
+  "version": "3.14.0",
   "main": "lib/",
   "repository": {
     "type": "git",
@@ -13,8 +13,8 @@
     "build": "./run/build.sh",
     "build-windows": "tsc --project tsconfig.build.json && node-sass ./styles/src/default/index.scss ./styles/lib/default/index.css",
     "watch": "./run/watch.sh",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006",
+    "build-storybook": "NODE_OPTIONS='--openssl-legacy-provider' build-storybook",
     "chromatic": "npx chromatic --project-token=ba6f18b77375",
     "lint": "eslint --ext .ts,.tsx src",
     "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
