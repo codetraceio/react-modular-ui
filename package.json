@@ -17,7 +17,8 @@
     "build-storybook": "NODE_OPTIONS='--openssl-legacy-provider' build-storybook",
     "chromatic": "npx chromatic --project-token=ba6f18b77375",
     "lint": "eslint --ext .ts,.tsx src",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx}\""
+    "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {},
   "devDependencies": {
