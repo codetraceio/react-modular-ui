@@ -31,7 +31,7 @@ export const Dropdown = (props: DropdownProps) => {
       <UiDropdown
         {...props}
         open={open}
-        onClickOutside={() => setOpen(false)}
+        onClose={() => setOpen(false)}
         content={
           props.content || (
             <div style={{ padding: "16px", minWidth: "200px" }}>

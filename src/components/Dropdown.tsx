@@ -20,17 +20,15 @@ const useIsomorphicLayoutEffect =
 export interface DropdownProps {
   open: boolean;
   content: React.ReactNode;
-  placement?: "left" | "right" | "top" | "bottom";
   theme?: string;
-  onClickOutside?: () => void;
+  onClose?: () => void;
 }
 
 export default function Dropdown({
   open,
   content,
-  placement,
   theme,
-  onClickOutside,
+  onClose,
   children,
   ...props
 }: PropsWithChildren<DropdownProps>) {
@@ -55,22 +53,22 @@ export default function Dropdown({
 
   useEffect(() => {
     const handleClickOutside = () => {
-      if (onClickOutside) {
-        onClickOutside();
+      if (onClose) {
+        onClose();
       }
     };
 
     const dropdown = dropdownRef.current;
     const wrapper = wrapperRef.current;
 
-    if (open && dropdown && onClickOutside) {
+    if (open && dropdown && onClose) {
       clickOutsideService.on(dropdown, [wrapper], handleClickOutside);
     }
 
     return () => {
       clickOutsideService.off(dropdown);
     };
-  }, [open, onClickOutside]);
+  }, [open, onClose]);
 
   useIsomorphicLayoutEffect(() => {
     if (open) {
@@ -83,13 +81,12 @@ export default function Dropdown({
       <div
         className={className("dropdown")}
         data-theme={theme ?? themeContext}
-        data-placement={placement}
         ref={dropdownRef}
       >
         {content}
       </div>
     );
-  }, [content, theme, themeContext, placement]);
+  }, [content, theme, themeContext]);
 
   const portalElement = useMemo(() => {
     if (!open || !content) {

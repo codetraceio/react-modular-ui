@@ -37,12 +37,17 @@ export function updateDropDown(
   let left = selectRect.left + scrollLeft;
   let right = 0;
   const availableWidth = window.innerWidth;
-  if (
-    selectRect.left + dropDownElement.offsetWidth > availableWidth &&
-    window.innerWidth < 768
-  ) {
-    left = 16;
-    right = 16;
+  
+  // Check if dropdown fits on the right side
+  if (selectRect.left + dropDownElement.offsetWidth > availableWidth) {
+    if (window.innerWidth < 768) {
+      // Mobile: use full width with margins
+      left = 16;
+      right = 16;
+    } else {
+      // Desktop: align right edges
+      left = selectRect.right - dropDownElement.offsetWidth + scrollLeft;
+    }
   }
 
   dropDownElement.style.top = `${top}px`;
