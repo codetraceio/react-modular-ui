@@ -103,7 +103,9 @@ export default function Dropdown({
     <div ref={wrapperRef} {...props}>
       {placement
         ? React.Children.map(children, (child) =>
-            isValidElement<{ placement?: string }>(child) ? cloneElement(child, { placement }) : child,
+            isValidElement<{ placement?: string }>(child)
+              ? cloneElement(child, { placement })
+              : child,
           )
         : children}
       {portalElement}
