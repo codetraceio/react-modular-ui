@@ -37,7 +37,7 @@ export function updateDropDown(
   let left = selectRect.left + scrollLeft;
   let right = 0;
   const availableWidth = window.innerWidth;
-  
+
   // Check if dropdown fits on the right side
   if (selectRect.left + dropDownElement.offsetWidth > availableWidth) {
     if (window.innerWidth < 768) {

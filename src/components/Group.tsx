@@ -1,9 +1,26 @@
-import React, { Children, cloneElement, ReactElement } from "react";
+import React, {
+  Children,
+  cloneElement,
+  isValidElement,
+  ReactElement,
+} from "react";
 import { className } from "../utils/className";
 
 interface GroupProps {
   variant?: string;
   children: React.ReactNode;
+}
+
+function flattenChildren(children: React.ReactNode): ReactElement[] {
+  const result: ReactElement[] = [];
+  Children.toArray(children).forEach((child) => {
+    if (isValidElement(child) && child.type === React.Fragment) {
+      result.push(...flattenChildren(child.props.children));
+    } else if (isValidElement(child)) {
+      result.push(child);
+    }
+  });
+  return result;
 }
 
 function getPlacement(index: number, count: number) {
@@ -20,21 +37,16 @@ function getPlacement(index: number, count: number) {
 }
 
 export default function Group({ variant, children }: GroupProps) {
-  const validChildren = Children.map(children, (child) => child).filter(
-    Boolean,
-  );
+  const validChildren = flattenChildren(children);
   const count = validChildren.length;
 
   return (
     <div className={className("group")} data-variant={variant}>
-      {validChildren.map((child, index) => {
-        if (!child) {
-          return null;
-        }
-        return cloneElement(child as ReactElement, {
+      {validChildren.map((child, index) =>
+        cloneElement(child, {
           placement: getPlacement(index, count),
-        });
-      })}
+        }),
+      )}
     </div>
   );
 }

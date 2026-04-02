@@ -27,7 +27,9 @@ export const Dropdown = (props: DropdownProps) => {
   const [open, setOpen] = useState(props.open || false);
 
   return (
-    <div style={{ padding: "200px", display: "flex", justifyContent: "center" }}>
+    <div
+      style={{ padding: "200px", display: "flex", justifyContent: "center" }}
+    >
       <UiDropdown
         {...props}
         open={open}
@@ -39,7 +41,8 @@ export const Dropdown = (props: DropdownProps) => {
                 Dropdown Content
               </div>
               <div style={{ marginBottom: "8px" }}>
-                This is a customizable dropdown that can contain any React content.
+                This is a customizable dropdown that can contain any React
+                content.
               </div>
               <button onClick={() => setOpen(false)}>Close</button>
             </div>
@@ -53,4 +56,3 @@ export const Dropdown = (props: DropdownProps) => {
     </div>
   );
 };
-
