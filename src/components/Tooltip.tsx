@@ -1,4 +1,6 @@
 import React, {
+  cloneElement,
+  isValidElement,
   PropsWithChildren,
   useCallback,
   useContext,
@@ -19,6 +21,7 @@ export interface TooltipProps {
   title: string | JSX.Element;
   prefer?: "left" | "right" | "top" | "bottom";
   theme?: string;
+  placement?: string;
   disableMouse?: boolean;
   disableTouch?: boolean;
 }
@@ -27,6 +30,7 @@ export default function Tooltip({
   title,
   prefer,
   theme,
+  placement,
   children,
   disableMouse,
   disableTouch,
@@ -99,7 +103,11 @@ export default function Tooltip({
       ref={wrapperRef}
       {...props}
     >
-      {children}
+      {placement
+        ? React.Children.map(children, (child) =>
+            isValidElement<{ placement?: string }>(child) ? cloneElement(child, { placement }) : child,
+          )
+        : children}
       {portalElement}
     </span>
   );

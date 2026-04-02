@@ -1,4 +1,6 @@
 import React, {
+  cloneElement,
+  isValidElement,
   PropsWithChildren,
   useCallback,
   useContext,
@@ -21,6 +23,7 @@ export interface DropdownProps {
   open: boolean;
   content: React.ReactNode;
   theme?: string;
+  placement?: string;
   onClose?: () => void;
 }
 
@@ -28,6 +31,7 @@ export default function Dropdown({
   open,
   content,
   theme,
+  placement,
   onClose,
   children,
   ...props
@@ -97,7 +101,11 @@ export default function Dropdown({
 
   return (
     <div ref={wrapperRef} {...props}>
-      {children}
+      {placement
+        ? React.Children.map(children, (child) =>
+            isValidElement<{ placement?: string }>(child) ? cloneElement(child, { placement }) : child,
+          )
+        : children}
       {portalElement}
     </div>
   );
