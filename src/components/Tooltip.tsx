@@ -36,7 +36,7 @@ export default function Tooltip({
   disableTouch,
   ...props
 }: PropsWithChildren<TooltipProps>) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const themeContext = useContext(ThemeContext);
@@ -93,24 +93,38 @@ export default function Tooltip({
     return createPortal(tooltipElement, document.body);
   }, [tooltipElement, open, title]);
 
+  const child =
+    typeof children === "string" || typeof children === "number" ? (
+      <span>{children}</span>
+    ) : (
+      React.Children.only(children)
+    );
+
+  if (!isValidElement(child)) {
+    return <>{children}</>;
+  }
+
+  const childProps: Record<string, unknown> = {
+    ref: wrapperRef,
+    ...props,
+    ...(placement ? { placement } : {}),
+  };
+
+  if (!disableMouse) {
+    childProps.onMouseOver = handleOver;
+    childProps.onMouseOut = handleOut;
+  }
+
+  if (!disableTouch) {
+    childProps.onTouchStart = onTouchStart;
+    childProps.onTouchEnd = onTouchEnd;
+    childProps.onTouchMove = onTouchMove;
+  }
+
   return (
-    <span
-      onMouseOver={disableMouse ? null : handleOver}
-      onMouseOut={disableMouse ? null : handleOut}
-      onTouchStart={disableTouch ? null : onTouchStart}
-      onTouchEnd={disableTouch ? null : onTouchEnd}
-      onTouchMove={disableTouch ? null : onTouchMove}
-      ref={wrapperRef}
-      {...props}
-    >
-      {placement
-        ? React.Children.map(children, (child) =>
-            isValidElement<{ placement?: string }>(child)
-              ? cloneElement(child, { placement })
-              : child,
-          )
-        : children}
+    <>
+      {cloneElement(child, childProps)}
       {portalElement}
-    </span>
+    </>
   );
 }
