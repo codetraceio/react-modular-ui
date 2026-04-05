@@ -93,16 +93,11 @@ export default function Tooltip({
     return createPortal(tooltipElement, document.body);
   }, [tooltipElement, open, title]);
 
-  const child =
-    typeof children === "string" || typeof children === "number" ? (
-      <span>{children}</span>
-    ) : (
-      React.Children.only(children)
-    );
-
-  if (!isValidElement(child)) {
-    return <>{children}</>;
-  }
+  const childCount = React.Children.count(children);
+  const resolvedChild =
+    childCount === 1 && isValidElement(React.Children.toArray(children)[0])
+      ? (React.Children.toArray(children)[0] as React.ReactElement)
+      : (<span>{children}</span>);
 
   const childProps: Record<string, unknown> = {
     ref: wrapperRef,
@@ -123,7 +118,7 @@ export default function Tooltip({
 
   return (
     <>
-      {cloneElement(child, childProps)}
+      {cloneElement(resolvedChild, childProps)}
       {portalElement}
     </>
   );
