@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useContext } from "react";
+import React, { PropsWithChildren, forwardRef, useContext } from "react";
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
 
@@ -14,38 +14,46 @@ export interface ButtonProps {
   theme?: string;
 }
 
-export default function Button({
-  href,
-  target,
-  name,
-  size,
-  variant,
-  color,
-  shape,
-  theme,
-  disabled,
-  children,
-  ...props
-}: PropsWithChildren<ButtonProps>) {
-  const themeContext = useContext(ThemeContext);
+const Button = forwardRef<HTMLAnchorElement, PropsWithChildren<ButtonProps>>(
+  function Button(
+    {
+      href,
+      target,
+      name,
+      size,
+      variant,
+      color,
+      shape,
+      theme,
+      disabled,
+      children,
+      ...props
+    },
+    ref,
+  ) {
+    const themeContext = useContext(ThemeContext);
 
-  return (
-    <a
-      className={className("button")}
-      href={href}
-      target={target}
-      data-name={name}
-      data-size={size}
-      data-variant={variant}
-      data-color={color}
-      data-shape={shape}
-      data-theme={theme ?? themeContext}
-      aria-disabled={disabled}
-      role="button"
-      tabIndex={disabled ? -1 : 0}
-      {...props}
-    >
-      {children}
-    </a>
-  );
-}
+    return (
+      <a
+        ref={ref}
+        className={className("button")}
+        href={href}
+        target={target}
+        data-name={name}
+        data-size={size}
+        data-variant={variant}
+        data-color={color}
+        data-shape={shape}
+        data-theme={theme ?? themeContext}
+        aria-disabled={disabled}
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  },
+);
+
+export default Button;

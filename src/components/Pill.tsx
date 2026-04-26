@@ -1,6 +1,7 @@
 import React, {
   MouseEvent,
   PropsWithChildren,
+  forwardRef,
   useCallback,
   useContext,
 } from "react";
@@ -26,46 +27,54 @@ export interface PillProps {
   paddingRight?: string | number;
 }
 
-export default function Pill({
-  size,
-  color,
-  variant,
-  paddingLeft,
-  paddingRight,
-  padding,
-  width,
-  theme,
-  children,
-  data = {},
-  onClick,
-  ...props
-}: PropsWithChildren<PillProps>) {
-  const themeContext = useContext(ThemeContext);
-
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLSpanElement>) => {
-      if (typeof onClick === "function") {
-        onClick(event, data);
-      }
+const Pill = forwardRef<HTMLSpanElement, PropsWithChildren<PillProps>>(
+  function Pill(
+    {
+      size,
+      color,
+      variant,
+      paddingLeft,
+      paddingRight,
+      padding,
+      width,
+      theme,
+      children,
+      data = {},
+      onClick,
+      ...props
     },
-    [data, onClick],
-  );
+    ref,
+  ) {
+    const themeContext = useContext(ThemeContext);
 
-  return (
-    <span
-      className={className("pill")}
-      data-size={size}
-      data-color={color}
-      data-variant={variant}
-      data-padding-left={paddingLeft}
-      data-padding-right={paddingRight}
-      data-padding={padding}
-      data-width={width}
-      data-theme={theme ?? themeContext}
-      onClick={handleClick}
-      {...props}
-    >
-      {children}
-    </span>
-  );
-}
+    const handleClick = useCallback(
+      (event: MouseEvent<HTMLSpanElement>) => {
+        if (typeof onClick === "function") {
+          onClick(event, data);
+        }
+      },
+      [data, onClick],
+    );
+
+    return (
+      <span
+        ref={ref}
+        className={className("pill")}
+        data-size={size}
+        data-color={color}
+        data-variant={variant}
+        data-padding-left={paddingLeft}
+        data-padding-right={paddingRight}
+        data-padding={padding}
+        data-width={width}
+        data-theme={theme ?? themeContext}
+        onClick={handleClick}
+        {...props}
+      >
+        {children}
+      </span>
+    );
+  },
+);
+
+export default Pill;

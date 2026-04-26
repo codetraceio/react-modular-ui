@@ -1,4 +1,9 @@
-import React, { MouseEvent, useCallback, useContext } from "react";
+import React, {
+  MouseEvent,
+  forwardRef,
+  useCallback,
+  useContext,
+} from "react";
 import configService from "../services/configService";
 
 import { className } from "../utils/className";
@@ -22,20 +27,23 @@ export interface IconProps {
   ) => void;
 }
 
-export default function Icon({
-  icon,
-  size,
-  width,
-  height,
-  color,
-  rotate,
-  theme,
-  disabled,
-  verticalAlign,
-  data = {},
-  onClick,
-  ...props
-}: IconProps) {
+const Icon = forwardRef<HTMLSpanElement, IconProps>(function Icon(
+  {
+    icon,
+    size,
+    width,
+    height,
+    color,
+    rotate,
+    theme,
+    disabled,
+    verticalAlign,
+    data = {},
+    onClick,
+    ...props
+  },
+  ref,
+) {
   const themeContext = useContext(ThemeContext);
 
   const handleClick = useCallback(
@@ -49,6 +57,7 @@ export default function Icon({
 
   return (
     <span
+      ref={ref}
       className={className("icon")}
       data-size={size}
       data-width={width}
@@ -67,4 +76,6 @@ export default function Icon({
       {configService.getConfig().icons[icon]}
     </span>
   );
-}
+});
+
+export default Icon;

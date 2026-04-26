@@ -4,6 +4,8 @@ import React, {
   useContext,
   HTMLAttributeAnchorTarget,
   useCallback,
+  forwardRef,
+  Ref,
 } from "react";
 import { className } from "../utils/className";
 import { ThemeContext } from "./ThemeContext";
@@ -30,57 +32,65 @@ export interface ButtonProps {
   ) => void;
 }
 
-export default function Button({
-  name,
-  size,
-  variant,
-  color,
-  shape,
-  theme,
-  disabled,
-  children,
-  href,
-  target,
-  padding,
-  width,
-  placement,
-  data = {},
-  onClick,
-  ...props
-}: PropsWithChildren<ButtonProps>) {
-  const themeContext = useContext(ThemeContext);
-
-  const TagName = href ? "a" : "button";
-
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLElement>) => {
-      if (typeof onClick === "function") {
-        onClick(event, data);
-      }
+const Button = forwardRef<HTMLElement, PropsWithChildren<ButtonProps>>(
+  function Button(
+    {
+      name,
+      size,
+      variant,
+      color,
+      shape,
+      theme,
+      disabled,
+      children,
+      href,
+      target,
+      padding,
+      width,
+      placement,
+      data = {},
+      onClick,
+      ...props
     },
-    [onClick, data],
-  );
+    ref,
+  ) {
+    const themeContext = useContext(ThemeContext);
 
-  return (
-    <TagName
-      className={className("button")}
-      data-name={name}
-      data-size={size}
-      data-variant={variant}
-      data-color={color}
-      data-shape={shape}
-      data-theme={theme ?? themeContext}
-      data-padding={padding}
-      data-width={width}
-      data-placement={placement}
-      aria-disabled={disabled}
-      tabIndex={disabled ? -1 : 0}
-      onClick={handleClick}
-      href={href}
-      target={target}
-      {...props}
-    >
-      {children}
-    </TagName>
-  );
-}
+    const TagName = href ? "a" : "button";
+
+    const handleClick = useCallback(
+      (event: MouseEvent<HTMLElement>) => {
+        if (typeof onClick === "function") {
+          onClick(event, data);
+        }
+      },
+      [onClick, data],
+    );
+
+    return (
+      <TagName
+        ref={ref as Ref<HTMLAnchorElement> & Ref<HTMLButtonElement>}
+        className={className("button")}
+        data-name={name}
+        data-size={size}
+        data-variant={variant}
+        data-color={color}
+        data-shape={shape}
+        data-theme={theme ?? themeContext}
+        data-padding={padding}
+        data-width={width}
+        data-placement={placement}
+        aria-disabled={disabled}
+        tabIndex={disabled ? -1 : 0}
+        onClick={handleClick}
+        href={href}
+        target={target}
+        {...props}
+      >
+        {children}
+      </TagName>
+    );
+  },
+);
+
+export default Button;
