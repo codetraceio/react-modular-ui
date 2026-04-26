@@ -95,9 +95,11 @@ export default function Tooltip({
 
   const childCount = React.Children.count(children);
   const resolvedChild =
-    childCount === 1 && isValidElement(React.Children.toArray(children)[0])
-      ? (React.Children.toArray(children)[0] as React.ReactElement)
-      : (<span>{children}</span>);
+    childCount === 1 && isValidElement(React.Children.toArray(children)[0]) ? (
+      (React.Children.toArray(children)[0] as React.ReactElement)
+    ) : (
+      <span>{children}</span>
+    );
 
   const childProps: Record<string, unknown> = {
     ref: wrapperRef,

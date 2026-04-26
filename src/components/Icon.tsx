@@ -1,9 +1,4 @@
-import React, {
-  MouseEvent,
-  forwardRef,
-  useCallback,
-  useContext,
-} from "react";
+import React, { MouseEvent, forwardRef, useCallback, useContext } from "react";
 import configService from "../services/configService";
 
 import { className } from "../utils/className";
