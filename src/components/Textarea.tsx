@@ -10,7 +10,7 @@ export interface TextareaProps {
   color?: string;
   disabled?: boolean;
   height?: string | number;
-  label?: string;
+  label?: React.ReactNode;
   name?: string;
   placeholder?: string;
   value?: string | number;

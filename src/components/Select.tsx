@@ -24,7 +24,7 @@ const useIsomorphicLayoutEffect =
 
 export interface SelectProps {
   placeholder?: string;
-  label?: string;
+  label?: React.ReactNode;
   size?: string | number;
   width?: string | number;
   variant?: string;

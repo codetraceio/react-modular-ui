@@ -19,7 +19,7 @@ export interface InputProps {
   color?: string;
   disabled?: boolean;
   name?: string;
-  label?: string;
+  label?: React.ReactNode;
   value?: string;
   placeholder?: string;
   shape?: string;
