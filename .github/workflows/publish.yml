@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
@@ -33,7 +33,20 @@ jobs:
             exit 1
           fi
 
+      - name: Build
+        run: npm run build
+
+      - name: Determine npm dist-tag
+        id: tag
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          # Extract prerelease label (e.g. "dev" from "4.0.0-dev.0"); empty for stable
+          PRERELEASE=$(node -p "require('semver').prerelease('$PKG_VERSION')?.[0] || ''")
+          if [ -n "$PRERELEASE" ]; then
+            echo "dist_tag=$PRERELEASE" >> "$GITHUB_OUTPUT"
+          else
+            echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public --tag ${{ steps.tag.outputs.dist_tag }}
