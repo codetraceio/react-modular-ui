@@ -1,71 +1,90 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-checkbox {
-  font-family: sans-serif;
-  display: flex;
+  font-family: constants.$font-family;
+  display: inline-flex;
   align-items: center;
   cursor: pointer;
-  color: $color-grey;
+  color: constants.$color-neutral-900;
   outline: none;
-
-  &:focus &--icon {
-    outline: 2px solid rgba($color-primary, .4);
-  }
+  user-select: none;
+  font-size: 14px;
+  gap: 8px;
 
   &--icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: $color-light-grey;
-    border: 1px solid $color-grey;
-    border-radius: $border-radius;
-  }
+    width: 18px;
+    height: 18px;
+    background: constants.$color-white;
+    border: 1.5px solid constants.$color-neutral-300;
+    border-radius: 5px;
+    color: constants.$color-white;
+    transition:
+      background-color constants.$duration constants.$ease,
+      border-color constants.$duration constants.$ease,
+      box-shadow constants.$duration constants.$ease;
 
-  &[aria-disabled='true'] {
-    opacity: .5;
-    pointer-events: none;
-  }
-  &[data-size='16'] {
-    font-size: 14px;
-  }
-
-  &[data-size='16'] &--icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  &[data-size='24'] {
-    font-size: 16px;
-  }
-
-  &[data-size='24'] &--icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  &[data-size='32'] {
-    font-size: 20px;
-  }
-
-  &[data-size='32'] &--icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  & > * {
-    margin-left: 4px;
-    &:first-child {
-      margin-left: 0;
+    svg {
+      width: 70%;
+      height: 70%;
+      fill: currentColor;
     }
   }
 
-  &[aria-checked='true'] &--icon.-checked {
-    display: none;
+  &:hover &--icon {
+    border-color: constants.$color-neutral-400;
   }
 
-  &[aria-checked='false'] &--icon.-not-checked {
-    display: none;
+  &:focus-visible &--icon {
+    box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
+  }
+
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &[data-size='16'] { font-size: 13px; gap: 6px; }
+  &[data-size='16'] &--icon { width: 14px; height: 14px; border-radius: 4px; }
+
+  &[data-size='24'] { font-size: 14px; }
+  &[data-size='24'] &--icon { width: 18px; height: 18px; }
+
+  &[data-size='32'] { font-size: 15px; gap: 10px; }
+  &[data-size='32'] &--icon { width: 22px; height: 22px; border-radius: 6px; }
+
+  // checked state
+  &[aria-checked='true'] &--icon {
+    background: constants.$color-primary;
+    border-color: constants.$color-primary;
+  }
+
+  &[aria-checked='true'][data-color='success'] &--icon {
+    background: constants.$color-success;
+    border-color: constants.$color-success;
+  }
+
+  &[aria-checked='true'][data-color='danger'] &--icon {
+    background: constants.$color-danger;
+    border-color: constants.$color-danger;
+  }
+
+  &[data-variant='outline'][aria-checked='true'] &--icon {
+    background: transparent;
+    color: constants.$color-primary;
+  }
+
+  &[data-theme='dark'] {
+    color: constants.$color-neutral-100;
+    .c-checkbox--icon {
+      background: constants.$color-neutral-900;
+      border-color: constants.$color-neutral-700;
+    }
+    &[aria-checked='true'] .c-checkbox--icon {
+      background: constants.$color-primary;
+      border-color: constants.$color-primary;
+    }
   }
 }

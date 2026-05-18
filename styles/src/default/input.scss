@@ -1,63 +1,99 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 @mixin input-size($size, $font-size) {
   height: $size;
-  padding: 0 calc($size / 4);
+  padding: 0 calc($size / 3);
   font-size: $font-size;
 }
 
 .c-input {
+  font-family: constants.$font-family;
+
   input {
-    @include input-size(24px, 14px);
+    @include input-size(32px, 14px);
     box-sizing: border-box;
     width: 100%;
     background: none;
     border: none;
     outline: none;
-    font-family: "Source Sans Pro", sans-serif;
-  }
-  &--label {
-    font-size: 16px;
-    color: $color-dark-grey;
-    padding: 0 0 8px 0;
-  }
-  &--container {
-    box-sizing: border-box;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    background: $color-light;
-    border: 1px solid $color-grey;
-    border-radius: $border-radius;
-    &:focus-within {
-      border: 1px solid $color-primary;
+    font-family: inherit;
+    color: constants.$color-neutral-900;
+
+    &::placeholder {
+      color: constants.$color-neutral-400;
     }
   }
-  &[data-size='24'] input {
-    @include input-size(24px, 14px);
+
+  &--label {
+    font-size: 13px;
+    font-weight: 500;
+    color: constants.$color-neutral-700;
+    padding: 0 0 6px 2px;
   }
-  &[data-size='32'] &--container {
+
+  &--container {
+    box-sizing: border-box;
     height: 32px;
+    display: flex;
+    align-items: center;
+    background: constants.$color-white;
+    border: 1px solid constants.$color-neutral-200;
+    border-radius: constants.$radius-md;
+    transition:
+      border-color constants.$duration constants.$ease,
+      box-shadow constants.$duration constants.$ease,
+      background-color constants.$duration constants.$ease;
+
+    &:hover {
+      border-color: constants.$color-neutral-300;
+    }
+
+    &:focus-within {
+      border-color: constants.$color-primary;
+      box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
+    }
   }
-  &[data-size='32'] input {
-    @include input-size(32px, 16px);
+
+  &[data-size='24'] &--container { height: 28px; border-radius: constants.$radius-sm; }
+  &[data-size='24'] input { @include input-size(28px, 13px); }
+
+  &[data-size='32'] &--container { height: 36px; }
+  &[data-size='32'] input { @include input-size(36px, 14px); }
+
+  &[data-size='48'] &--container { height: 44px; border-radius: constants.$radius-lg; }
+  &[data-size='48'] input { @include input-size(44px, 15px); }
+
+  &[data-shape='rectangle'] &--container { border-radius: 0; }
+  &[data-shape='rounded'] &--container { border-radius: constants.$radius-full; }
+
+  &[data-variant='outline'] &--container {
+    background: transparent;
   }
-  &[data-size='48'] &--container {
-    height: 48px;
-  }
-  &[data-size='48'] input {
-    @include input-size(48px, 18px);
-  }
-  &[data-size='24'][data-shape='rounded'] &--container {
-    border-radius: 12px;
-  }
-  &[data-size='32'][data-shape='rounded'] &--container {
-    border-radius: 16px;
-  }
-  &[data-size='48'][data-shape='rounded'] &--container {
-    border-radius: 24px;
-  }
+
   &[data-color='success'] &--container {
-    border-color: $color-success;
+    border-color: constants.$color-success;
+    &:focus-within {
+      box-shadow: 0 0 0 constants.$focus-ring-width rgba(16, 185, 129, 0.25);
+    }
+  }
+
+  &[data-color='danger'] &--container {
+    border-color: constants.$color-danger;
+    &:focus-within {
+      box-shadow: 0 0 0 constants.$focus-ring-width rgba(239, 68, 68, 0.25);
+    }
+  }
+
+  &[data-theme='dark'] {
+    input {
+      color: constants.$color-neutral-100;
+      &::placeholder { color: constants.$color-neutral-500; }
+    }
+    .c-input--label { color: constants.$color-neutral-300; }
+    .c-input--container {
+      background: constants.$color-neutral-900;
+      border-color: constants.$color-neutral-700;
+      &:hover { border-color: constants.$color-neutral-600; }
+    }
   }
 }

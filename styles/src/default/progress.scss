@@ -1,46 +1,33 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-progress {
-  background: $color-light-grey;
+  background: constants.$color-neutral-200;
   width: 100%;
   flex: 1;
-  border-radius: $border-radius;
+  border-radius: constants.$radius-full;
+  overflow: hidden;
 
   &--line {
-    height: 4px;
-    background: $color-default;
-    border-radius: $border-radius;
-  }
-
-  &[data-size='4'] &--line {
-    height: 4px;
-  }
-
-  &[data-size='8'] &--line {
     height: 8px;
+    background: constants.$color-primary;
+    border-radius: constants.$radius-full;
+    transition: width constants.$duration-slow constants.$ease;
   }
 
-  &[data-size='16'] &--line {
-    height: 16px;
-  }
+  &[data-size='4']  &--line { height: 4px; }
+  &[data-size='8']  &--line { height: 8px; }
+  &[data-size='16'] &--line { height: 16px; }
 
-  &[data-color='primary'] &--line {
-    background: $color-primary;
-  }
-
-  &[data-color='success'] &--line {
-    background: $color-success;
-  }
-
-  &[data-color='danger'] &--line {
-    background: $color-danger;
-  }
+  &[data-color='primary'] &--line { background: constants.$color-primary; }
+  &[data-color='success'] &--line { background: constants.$color-success; }
+  &[data-color='danger']  &--line { background: constants.$color-danger; }
 
   &[data-color='light'] {
-    background: rgba($color-white, .5);
+    background: rgba(constants.$color-white, 0.2);
   }
+  &[data-color='light'] &--line { background: constants.$color-white; }
 
-  &[data-color='light'] &--line {
-    background: $color-white;
+  &[data-theme='dark'] {
+    background: constants.$color-neutral-800;
   }
 }

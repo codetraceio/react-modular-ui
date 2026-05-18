@@ -1,23 +1,44 @@
-@import "./constants.scss";
+@use "constants.scss";
+
+@keyframes c-modal-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes c-modal-scale-in {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
 
 .c-modal {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  inset: 0;
   overflow-y: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, .6);
+  padding: 24px;
+  background: rgba(9, 9, 11, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: c-modal-fade-in 160ms constants.$ease;
+  z-index: 1000;
 
   &--content {
-    background: white;
+    background: constants.$color-white;
+    color: constants.$color-neutral-900;
     max-width: calc(100% - 32px);
     max-height: calc(100% - 32px);
-    border-radius: $border-radius;
-    padding: 8px;
+    border-radius: constants.$radius-lg;
+    box-shadow: constants.$shadow-2xl;
+    overflow: auto;
+    animation: c-modal-scale-in 200ms constants.$ease;
+  }
+
+  &[data-theme='dark'] &--content {
+    background: constants.$color-neutral-900;
+    color: constants.$color-neutral-100;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   }
 }

@@ -1,33 +1,53 @@
-@import "./constants.scss";
+@use "constants.scss";
 
-@mixin button-default($background, $hover-background, $text-color) {
-  background: $background;
-  color: $text-color;
+@mixin button-solid($bg, $bg-hover, $bg-active, $text, $ring) {
+  background: $bg;
+  color: $text;
+  border: 1px solid transparent;
+  box-shadow: constants.$shadow-xs;
+
   &:hover {
-    background: $hover-background;
+    background: $bg-hover;
   }
-  &:focus {
-    outline: 2px solid rgba($color-primary, .4);
+
+  &:active {
+    background: $bg-active;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 constants.$focus-ring-width $ring;
   }
 }
 
-@mixin button-outline($color, $text-color) {
-  border: 2px solid $color;
-  color: $text-color;
+@mixin button-outline($border, $text, $hover-bg, $ring) {
   background: transparent;
+  color: $text;
+  border: 1px solid $border;
+  box-shadow: constants.$shadow-xs;
+
   &:hover {
-    background: rgba($color-light, .2);
-    border: 2px solid lighten($color, 10);
-    color: lighten($text-color, 10);
+    background: $hover-bg;
+  }
+
+  &:active {
+    background: $hover-bg;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 constants.$focus-ring-width $ring;
   }
 }
 
-@mixin button-size($size, $padding, $font-size) {
-  height: $size;
+@mixin button-size($height, $padding, $font-size, $gap) {
+  height: $height;
   padding: 0 $padding;
   font-size: $font-size;
   & > * {
-    margin-left: calc($size / 8);
+    margin-left: $gap;
     &:first-child {
       margin-left: 0;
     }
@@ -35,89 +55,151 @@
 }
 
 .c-button {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   box-sizing: border-box;
-  @include button-default($color-default, lighten($color-default, 15), #ffffff);
-  @include button-size(24px, 8px, 14px);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  border-radius: $border-radius;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border-radius: constants.$radius-md;
   cursor: pointer;
   user-select: none;
-  outline: none;
-  min-width: 100px;
-  border: 0;
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 0;
+  transition:
+    background-color constants.$duration constants.$ease,
+    border-color constants.$duration constants.$ease,
+    box-shadow constants.$duration constants.$ease,
+    transform constants.$duration constants.$ease,
+    color constants.$duration constants.$ease;
 
-  &[data-size='24'] {
-    @include button-size(24px, 8px, 14px);
-  }
+  @include button-size(36px, 14px, 14px, 8px);
+  @include button-solid(
+    constants.$color-neutral-900,
+    constants.$color-neutral-800,
+    constants.$color-neutral-700,
+    constants.$color-white,
+    rgba(24, 24, 27, 0.25)
+  );
 
-  &[data-size='32'] {
-    @include button-size(32px, 12px, 16px);
-  }
-
-  &[data-size='48'] {
-    @include button-size(48px, 24px, 20px);
-  }
-
-  &[data-size='56'] {
-    @include button-size(56px, 24px, 24px);
-  }
+  &[data-size='24'] { @include button-size(24px, 10px, 12px, 6px); }
+  &[data-size='32'] { @include button-size(32px, 12px, 13px, 6px); border-radius: constants.$radius-sm; }
+  &[data-size='48'] { @include button-size(48px, 20px, 15px, 10px); }
+  &[data-size='56'] { @include button-size(56px, 24px, 16px, 12px); border-radius: constants.$radius-lg; }
 
   &[data-shape='rectangle'] {
     border-radius: 0;
   }
 
   &[data-color='primary'] {
-    @include button-default($color-primary, lighten($color-primary, 10), #ffffff);
+    @include button-solid(
+      constants.$color-primary,
+      constants.$color-primary-hover,
+      constants.$color-primary-active,
+      constants.$color-white,
+      constants.$focus-ring-color
+    );
   }
 
   &[data-color='secondary'] {
-    @include button-default($color-dark-grey, lighten($color-dark-grey, 10), #ffffff);
+    @include button-outline(
+      constants.$color-neutral-200,
+      constants.$color-neutral-900,
+      constants.$color-neutral-100,
+      rgba(24, 24, 27, 0.15)
+    );
   }
 
   &[data-color='success'] {
-    @include button-default($color-success, lighten($color-success, 10), #ffffff);
+    @include button-solid(
+      constants.$color-success,
+      constants.$color-success-hover,
+      constants.$color-success-hover,
+      constants.$color-white,
+      rgba(16, 185, 129, 0.35)
+    );
   }
 
   &[data-color='danger'] {
-    @include button-default($color-danger, lighten($color-danger, 10), $color-light);
+    @include button-solid(
+      constants.$color-danger,
+      constants.$color-danger-hover,
+      constants.$color-danger-hover,
+      constants.$color-white,
+      rgba(239, 68, 68, 0.35)
+    );
   }
 
   &[data-variant='outline'] {
-    @include button-outline($color-primary, $color-dark);
+    @include button-outline(
+      constants.$color-neutral-200,
+      constants.$color-neutral-900,
+      constants.$color-neutral-100,
+      rgba(24, 24, 27, 0.15)
+    );
   }
 
   &[data-variant='outline'][data-color='primary'] {
-    @include button-outline($color-primary, $color-primary);
-  }
-
-  &[data-variant='outline'][data-color='secondary'] {
-    @include button-outline($color-dark-grey, $color-dark-grey);
+    @include button-outline(
+      constants.$color-primary,
+      constants.$color-primary,
+      constants.$color-primary-soft,
+      constants.$focus-ring-color
+    );
   }
 
   &[data-variant='outline'][data-color='danger'] {
-    @include button-outline($color-danger, $color-danger);
+    @include button-outline(
+      constants.$color-danger,
+      constants.$color-danger,
+      constants.$color-danger-soft,
+      rgba(239, 68, 68, 0.35)
+    );
   }
 
   &[data-variant='outline'][data-color='success'] {
-    @include button-outline($color-success, $color-success);
+    @include button-outline(
+      constants.$color-success,
+      constants.$color-success-hover,
+      constants.$color-success-soft,
+      rgba(16, 185, 129, 0.35)
+    );
   }
 
   &[aria-disabled=true] {
-    opacity: .5;
+    opacity: 0.5;
     pointer-events: none;
   }
 
-  &[data-theme='dark'][data-color='secondary'] {
-    @include button-default($color-light, darken($color-light, 10), $color-dark);
-  }
+  &[data-theme='dark'] {
+    @include button-solid(
+      constants.$color-white,
+      constants.$color-neutral-100,
+      constants.$color-neutral-200,
+      constants.$color-neutral-900,
+      rgba(255, 255, 255, 0.35)
+    );
 
-  &[data-theme='dark'][data-variant='outline'][data-color='secondary'] {
-    @include button-outline($color-light, $color-light);
+    &[data-color='primary'] {
+      @include button-solid(
+        constants.$color-primary,
+        constants.$color-primary-hover,
+        constants.$color-primary-active,
+        constants.$color-white,
+        constants.$focus-ring-color
+      );
+    }
+
+    &[data-variant='outline'] {
+      @include button-outline(
+        constants.$color-neutral-700,
+        constants.$color-neutral-100,
+        constants.$color-neutral-800,
+        rgba(255, 255, 255, 0.2)
+      );
+    }
   }
 
   &[data-placement='start'] {

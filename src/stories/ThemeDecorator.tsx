@@ -3,8 +3,8 @@ import { Story as StoryType } from "@storybook/react";
 import { ThemeContext } from "../components/ThemeContext";
 
 const themeMap: Record<string, string> = {
-  "#f8f8f8": "light",
-  "#333333": "dark",
+  "#fafafa": "light",
+  "#0a0a0a": "dark",
   default: "light",
 };
 

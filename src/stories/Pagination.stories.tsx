@@ -1,39 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
 import UiPagination, { PaginationProps } from "../components/Pagination";
 import "../../styles/src/default/pagination.scss";
+import "../../styles/src/default/icon.scss";
 import { ThemeDecorator } from "./ThemeDecorator";
 
 export default {
   title: "Pagination",
   component: UiPagination,
+  args: {
+    size: 32,
+    color: "primary",
+    count: 248,
+    limit: 10,
+    offset: 30,
+  },
   argTypes: {
-    size: {
-      options: [24, 32, 48],
-      control: { type: "select" },
-      defaultValue: 24,
-    },
+    size: { options: [24, 32, 48], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
-    count: {
-      control: { type: "number" },
-      defaultValue: 100,
-    },
-    limit: {
-      control: { type: "number" },
-      defaultValue: 10,
-    },
-    offset: {
-      control: { type: "number" },
-      defaultValue: 10,
-    },
+    count: { control: { type: "number" } },
+    limit: { control: { type: "number" } },
+    offset: { control: { type: "number" } },
   },
   decorators: [ThemeDecorator],
 };
 
 export const Pagination = (props: PaginationProps) => {
-  return <UiPagination {...props} />;
+  const [offset, setOffset] = useState(props.offset ?? 0);
+
+  return (
+    <div style={{ padding: "24px" }}>
+      <UiPagination
+        {...props}
+        offset={offset}
+        onChange={(next) => setOffset(next)}
+      />
+    </div>
+  );
 };

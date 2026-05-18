@@ -1,73 +1,127 @@
-@import "./constants.scss";
-@import "./mixins.scss";
+@use "constants.scss";
+@use "mixins.scss";
 
-@mixin select-size($size, $font-size) {
-  height: $size;
-  padding: 0 calc($size / 4);
+@mixin select-size($height, $font-size) {
+  height: $height;
+  padding: 0 calc(#{$height} / 2.5);
   font-size: $font-size;
-  & > * {
-    margin-left: calc($size / 4);
-    &:first-child {
-      margin-left: 0;
-    }
-  }
 }
 
 .c-select {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
+  outline: none;
+  position: relative;
+
   &--box {
-    @include select-size(24px, 14px);
+    @include select-size(32px, 14px);
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white;
-    border: 1px solid $color-grey;
-    border-radius: $border-radius;
+    background: constants.$color-white;
+    color: constants.$color-neutral-900;
+    border: 1px solid constants.$color-neutral-200;
+    border-radius: constants.$radius-md;
     cursor: pointer;
+    user-select: none;
+    transition:
+      border-color constants.$duration constants.$ease,
+      box-shadow constants.$duration constants.$ease;
+    min-width: 160px;
+    gap: 8px;
+
+    &:hover {
+      border-color: constants.$color-neutral-300;
+    }
   }
+
+  &:focus-visible &--box {
+    border-color: constants.$color-primary;
+    box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
+  }
+
   &--dropdown {
-    @include scroll-bar();
-    font-family: sans-serif;
+    @include mixins.scroll-bar();
+    font-family: constants.$font-family;
     position: absolute;
-    overflow-x: auto;
-    background: $color-light;
-    box-shadow: 0 1px 12px 0 rgba(0,0,0,0.06);
-    border-radius: $border-radius;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: constants.$color-white;
+    border: 1px solid constants.$color-neutral-200;
+    box-shadow: constants.$shadow-lg;
+    border-radius: constants.$radius-md;
     top: -100%;
     left: -100%;
-    &[data-orientation='top'] {
-      margin-top: -4px;
-    }
-    &[data-orientation='bottom'] {
-      margin-top: 4px;
-    }
+    padding: 4px;
+    z-index: 1000;
+    max-height: 280px;
+
+    &[data-orientation='top']    { margin-top: -6px; }
+    &[data-orientation='bottom'] { margin-top: 6px; }
   }
+
   &--option {
-    padding: 8px;
+    padding: 8px 12px;
     cursor: pointer;
-    &[aria-selected='true'] {
-      font-weight: bold;
-    }
+    border-radius: constants.$radius-sm;
+    font-size: 14px;
+    color: constants.$color-neutral-800;
+    transition: background-color constants.$duration-fast constants.$ease;
+
     &:hover {
-      background: $color-grey;
+      background: constants.$color-neutral-100;
+    }
+
+    &[aria-selected='true'] {
+      background: constants.$color-primary-soft;
+      color: constants.$color-primary-active;
+      font-weight: 500;
     }
   }
+
   &--icon {
-    padding-left: 4px;
+    color: constants.$color-neutral-500;
+    display: flex;
+    align-items: center;
   }
+
   &--label {
-    font-size: 16px;
-    color: $color-dark-grey;
-    padding: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: constants.$color-neutral-700;
+    padding: 0 0 6px 2px;
+    display: block;
   }
-  &:focus &--box {
-    border: 1px solid $color-primary;
+
+  &[data-size='24'] &--box { @include select-size(28px, 13px); border-radius: constants.$radius-sm; }
+  &[data-size='32'] &--box { @include select-size(36px, 14px); }
+  &[data-size='48'] &--box { @include select-size(44px, 15px); border-radius: constants.$radius-lg; }
+
+  &[data-shape='rectangle'] &--box { border-radius: 0; }
+
+  &[data-variant='outline'] &--box {
+    background: transparent;
   }
-  &[data-size='32'] &--box {
-    @include select-size(32px, 16px);
-  }
-  &[data-size='40'] &--box {
-    @include select-size(40px, 16px);
+
+  &[data-theme='dark'] {
+    .c-select--box {
+      background: constants.$color-neutral-900;
+      color: constants.$color-neutral-100;
+      border-color: constants.$color-neutral-700;
+      &:hover { border-color: constants.$color-neutral-600; }
+    }
+    .c-select--dropdown {
+      background: constants.$color-neutral-900;
+      border-color: constants.$color-neutral-700;
+    }
+    .c-select--option {
+      color: constants.$color-neutral-200;
+      &:hover { background: constants.$color-neutral-800; }
+      &[aria-selected='true'] {
+        background: rgba(99, 102, 241, 0.18);
+        color: #c7d2fe;
+      }
+    }
+    .c-select--label { color: constants.$color-neutral-300; }
   }
 }

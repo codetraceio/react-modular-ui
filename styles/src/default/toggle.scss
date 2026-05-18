@@ -1,90 +1,83 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-toggle {
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: row;
+  font-family: constants.$font-family;
+  display: inline-flex;
   align-items: center;
   cursor: pointer;
   outline: none;
-
-  &:focus &--line {
-    outline: 2px solid rgba($color-primary, .4);
-  }
+  user-select: none;
+  gap: 10px;
+  color: constants.$color-neutral-900;
 
   &--label {
-    padding-left: 4px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   &--container {
     position: relative;
     outline: none;
     cursor: pointer;
-    height: 24px;
-    width: 46px;
-    margin-right: 4px;
-  }
-
-  &--handle {
-    position: absolute;
-    top: 0;
-    left: 2px;
-    height: 20px;
-    width: 20px;
-    margin: 2px 0;
-    background: $color-light;
-    border-radius: 50%;
-    box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.25);
-    transition: left .3s ease-in-out;
+    height: 22px;
+    width: 38px;
+    flex-shrink: 0;
   }
 
   &--line {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 24px;
-    width: 46px;
-    background: $color-light-grey;
-    border-radius: 12px;
-    transition: background .3s ease-in-out;
+    inset: 0;
+    background: constants.$color-neutral-300;
+    border-radius: constants.$radius-full;
+    transition: background-color constants.$duration constants.$ease;
+  }
+
+  &--handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 18px;
+    width: 18px;
+    background: constants.$color-white;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform constants.$duration constants.$ease;
+  }
+
+  &:focus-visible &--line {
+    box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
   }
 
   &[aria-checked='true'] &--handle {
-    left: 24px;
+    transform: translateX(16px);
   }
 
   &[aria-checked='true'] &--line {
-    background: $color-primary;
+    background: constants.$color-primary;
   }
 
-  &[data-size='32'] &--label {
-    font-size: 16px;
-  }
+  &[aria-checked='true'][data-color='success'] &--line { background: constants.$color-success; }
+  &[aria-checked='true'][data-color='danger'] &--line { background: constants.$color-danger; }
 
-  &[data-size='32'] &--container{
-    height: 32px;
-    width: 48px;
-  }
+  &[data-size='16'] &--label { font-size: 13px; }
+  &[data-size='16'] &--container { height: 16px; width: 28px; }
+  &[data-size='16'] &--handle { height: 12px; width: 12px; }
+  &[data-size='16'][aria-checked='true'] &--handle { transform: translateX(12px); }
 
-  &[data-size='32'] &--handle {
-    height: 26px;
-    width: 26px;
-  }
+  &[data-size='24'] &--container { height: 22px; width: 38px; }
 
-  &[data-size='32'] &--line {
-    top: 6px;
-    height: 20px;
-    width: 48px;
-    border-radius: 10px;
-  }
+  &[data-size='32'] &--label { font-size: 15px; }
+  &[data-size='32'] &--container { height: 28px; width: 48px; }
+  &[data-size='32'] &--handle { height: 24px; width: 24px; }
+  &[data-size='32'][aria-checked='true'] &--handle { transform: translateX(20px); }
 
-  &[data-size='32'][aria-checked=true] &--handle {
-    left: 22px;
-  }
-
-  &[aria-disabled=true] {
-    opacity: .5;
+  &[aria-disabled='true'] {
+    opacity: 0.5;
     pointer-events: none;
+  }
+
+  &[data-theme='dark'] {
+    color: constants.$color-neutral-100;
+    .c-toggle--line { background: constants.$color-neutral-700; }
+    &[aria-checked='true'] .c-toggle--line { background: constants.$color-primary; }
   }
 }

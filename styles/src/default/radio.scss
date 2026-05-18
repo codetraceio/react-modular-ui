@@ -1,60 +1,88 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-radio {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  color: $color-dark-grey;
+  color: constants.$color-neutral-900;
   outline: none;
-
-  &:focus &--icon {
-    outline: 2px solid rgba($color-primary, .4);
-  }
+  user-select: none;
+  font-size: 14px;
+  gap: 8px;
 
   &--icon {
-    width: 24px;
-    height: 24px;
-    background: $color-light-grey;
-    border: 1px solid $color-grey;
+    position: relative;
+    width: 18px;
+    height: 18px;
+    background: constants.$color-white;
+    border: 1.5px solid constants.$color-neutral-300;
     border-radius: 50%;
+    transition:
+      border-color constants.$duration constants.$ease,
+      box-shadow constants.$duration constants.$ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 0;
+      height: 0;
+      background: constants.$color-white;
+      border-radius: 50%;
+      transition:
+        width constants.$duration constants.$ease,
+        height constants.$duration constants.$ease;
+    }
+  }
+
+  &:hover &--icon {
+    border-color: constants.$color-neutral-400;
+  }
+
+  &:focus-visible &--icon {
+    box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
   }
 
   &[aria-disabled='true'] {
-    opacity: .5;
+    opacity: 0.5;
     pointer-events: none;
   }
-  &[data-size='16'] {
-    font-size: 14px;
+
+  &[data-size='16'] { font-size: 13px; gap: 6px; }
+  &[data-size='16'] &--icon { width: 14px; height: 14px; }
+  &[data-size='16'][aria-checked='true'] &--icon::after { width: 6px; height: 6px; }
+
+  &[data-size='24'] { font-size: 14px; }
+  &[data-size='24'] &--icon { width: 18px; height: 18px; }
+  &[data-size='24'][aria-checked='true'] &--icon::after { width: 8px; height: 8px; }
+
+  &[data-size='32'] { font-size: 15px; gap: 10px; }
+  &[data-size='32'] &--icon { width: 22px; height: 22px; }
+  &[data-size='32'][aria-checked='true'] &--icon::after { width: 10px; height: 10px; }
+
+  &[aria-checked='true'] &--icon {
+    background: constants.$color-primary;
+    border-color: constants.$color-primary;
+    &::after { width: 8px; height: 8px; }
   }
 
-  &[data-size='16'] &--icon {
-    width: 16px;
-    height: 16px;
+  &[aria-checked='true'][data-color='success'] &--icon {
+    background: constants.$color-success;
+    border-color: constants.$color-success;
   }
 
-  &[data-size='24'] {
-    font-size: 16px;
+  &[aria-checked='true'][data-color='danger'] &--icon {
+    background: constants.$color-danger;
+    border-color: constants.$color-danger;
   }
 
-  &[data-size='24'] &--icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  &[data-size='32'] {
-    font-size: 20px;
-  }
-
-  &[data-size='32'] &--icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  & > * {
-    margin-left: 4px;
-    &:first-child {
-      margin-left: 0;
+  &[data-theme='dark'] {
+    color: constants.$color-neutral-100;
+    .c-radio--icon {
+      background: constants.$color-neutral-900;
+      border-color: constants.$color-neutral-700;
     }
   }
 }

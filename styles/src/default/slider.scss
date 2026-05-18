@@ -1,24 +1,26 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-slider {
   flex: 1;
   cursor: pointer;
   position: relative;
-  height: 24px;;
+  height: 24px;
+  user-select: none;
+  touch-action: none;
 
   &--container {
     height: 24px;
     position: absolute;
     top: 0;
     left: 0;
-    right: 24px;
+    right: 18px;
   }
 
   &--track {
     position: absolute;
-    height: 16px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    height: 6px;
+    background: constants.$color-neutral-200;
+    border-radius: constants.$radius-full;
     top: 50%;
     width: 100%;
     transform: translateY(-50%);
@@ -26,21 +28,57 @@
 
   &--progress {
     position: absolute;
-    height: 16px;
-    background: $color-primary;
-    border-radius: 8px;
+    height: 6px;
+    background: constants.$color-primary;
+    border-radius: constants.$radius-full;
     top: 50%;
     transform: translateY(-50%);
-    padding-right: 20px;
   }
 
   &--handle {
     position: absolute;
-    height: 24px;
-    width: 24px;
-    background: white;
-    border-radius: 12px;
+    height: 18px;
+    width: 18px;
+    background: constants.$color-white;
+    border: 2px solid constants.$color-primary;
+    border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
+    box-shadow: constants.$shadow-sm;
+    transition:
+      transform constants.$duration-fast constants.$ease,
+      box-shadow constants.$duration constants.$ease;
+
+    &:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &:focus-visible,
+    &:active {
+      outline: none;
+      box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
+    }
+  }
+
+  &[data-color='success'] {
+    .c-slider--progress { background: constants.$color-success; }
+    .c-slider--handle { border-color: constants.$color-success; }
+  }
+
+  &[data-color='danger'] {
+    .c-slider--progress { background: constants.$color-danger; }
+    .c-slider--handle { border-color: constants.$color-danger; }
+  }
+
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &[data-theme='dark'] {
+    .c-slider--track { background: constants.$color-neutral-700; }
+    .c-slider--handle {
+      background: constants.$color-neutral-100;
+    }
   }
 }

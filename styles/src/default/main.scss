@@ -1,3 +1,9 @@
+@use "constants.scss";
+
 body {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
+  color: constants.$color-neutral-900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }

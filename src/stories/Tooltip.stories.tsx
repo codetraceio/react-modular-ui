@@ -7,14 +7,15 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Tooltip",
   component: UiTooltip,
+  args: {
+    title: "Helpful hint",
+    prefer: "top",
+  },
   argTypes: {
-    title: {
-      defaultValue: "Title",
-      control: { type: "text" },
-    },
-    children: {
-      defaultValue: "Tooltip",
-      control: { type: "text" },
+    title: { control: { type: "text" } },
+    prefer: {
+      options: ["top", "bottom", "left", "right"],
+      control: { type: "select" },
     },
   },
   decorators: [ThemeDecorator],
@@ -22,8 +23,26 @@ export default {
 
 export const Tooltip = (props: TooltipProps) => {
   return (
-    <div style={{ padding: "96px" }}>
-      <UiTooltip {...props} />
+    <div
+      style={{
+        padding: "120px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <UiTooltip {...props}>
+        <span
+          style={{
+            padding: "8px 16px",
+            border: "1px solid #e4e4e7",
+            borderRadius: "8px",
+            cursor: "pointer",
+            background: "#ffffff",
+          }}
+        >
+          Hover me
+        </span>
+      </UiTooltip>
     </div>
   );
 };

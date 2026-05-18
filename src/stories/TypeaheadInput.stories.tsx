@@ -9,45 +9,40 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "TypeaheadInput",
   component: UiTypeaheadInput,
+  args: {
+    size: 32,
+    color: "primary",
+    variant: "default",
+    shape: "default",
+    disabled: false,
+  },
   argTypes: {
-    size: {
-      options: [24, 32, 48],
-      control: { type: "select" },
-      defaultValue: 24,
-    },
+    size: { options: [24, 32, 48], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
     variant: {
-      defaultValue: "default",
       options: ["default", "outline"],
       control: { type: "select" },
     },
     shape: {
-      defaultValue: "default",
       options: ["default", "rectangle"],
       control: { type: "select" },
     },
-    disabled: {
-      defaultValue: false,
-      control: { type: "boolean" },
-    },
-    options: {
-      control: { type: "none" },
-    },
+    disabled: { control: { type: "boolean" } },
+    options: { control: { type: "none" } },
   },
   decorators: [ThemeDecorator],
 };
 
-const options = ["Title 1", "Title 2"];
+const options = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
 
 export const TypeaheadInput = (props: TypeaheadInputProps) => {
-  const [value, setValue] = useState(options[0]);
+  const [value, setValue] = useState("");
 
-  const handleChange = useCallback((newValue: string) => {
-    setValue(newValue);
+  const handleChange = useCallback((next: string) => {
+    setValue(next);
   }, []);
 
   return (

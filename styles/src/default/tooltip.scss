@@ -1,58 +1,75 @@
-@import "./constants.scss";
-@import "./mixins.scss";
+@use "constants.scss";
+
+$tooltip-bg: constants.$color-neutral-900;
 
 .c-tooltip {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   position: absolute;
-  z-index: 1000;
-  padding: 8px;
-  background: $color-dark-grey;
-  color: $color-light;
-  border-radius: $border-radius;
+  z-index: 1100;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  background: $tooltip-bg;
+  color: constants.$color-white;
+  border-radius: constants.$radius-sm;
   user-select: none;
   pointer-events: none;
-  @include shadow();
+  box-shadow: constants.$shadow-md;
+  max-width: 260px;
 
   &--tail {
     position: absolute;
+    width: 0;
+    height: 0;
   }
 
   &--tail[data-position='bottom'] {
     top: 100%;
     left: 50%;
-    margin-left: -8px;
-    border-top: 8px solid $color-dark-grey;
-    border-right: 8px solid transparent;
-    border-left: 8px solid transparent;
+    margin-left: -5px;
+    border-top: 5px solid $tooltip-bg;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
   }
 
   &--tail[data-position='top'] {
     top: 0;
     left: 50%;
-    margin-left: -8px;
-    margin-top: -8px;
-    border-bottom: 8px solid $color-dark-grey;
-    border-right: 8px solid transparent;
-    border-left: 8px solid transparent;
+    margin-left: -5px;
+    margin-top: -5px;
+    border-bottom: 5px solid $tooltip-bg;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
   }
 
   &--tail[data-position='left'] {
     top: 50%;
     left: 0;
-    margin-left: -8px;
-    margin-top: -8px;
-    border-right: 8px solid $color-dark-grey;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
+    margin-left: -5px;
+    margin-top: -5px;
+    border-right: 5px solid $tooltip-bg;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
   }
 
   &--tail[data-position='right'] {
     top: 50%;
     left: 100%;
-    margin-right: -8px;
-    margin-top: -8px;
-    border-left: 8px solid $color-dark-grey;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
+    margin-right: -5px;
+    margin-top: -5px;
+    border-left: 5px solid $tooltip-bg;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  &[data-theme='dark'] {
+    background: constants.$color-neutral-100;
+    color: constants.$color-neutral-900;
+
+    .c-tooltip--tail[data-position='bottom'] { border-top-color: constants.$color-neutral-100; }
+    .c-tooltip--tail[data-position='top']    { border-bottom-color: constants.$color-neutral-100; }
+    .c-tooltip--tail[data-position='left']   { border-right-color: constants.$color-neutral-100; }
+    .c-tooltip--tail[data-position='right']  { border-left-color: constants.$color-neutral-100; }
   }
 }

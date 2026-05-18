@@ -7,25 +7,26 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Pill",
   component: UiPill,
+  args: {
+    size: 24,
+    color: "primary",
+    children: "Active",
+  },
   argTypes: {
-    size: {
-      options: [24, 32, 48],
-      control: { type: "select" },
-      defaultValue: 24,
-    },
+    size: { options: [24, 32, 48], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
-    children: {
-      defaultValue: "Pill",
-      control: { type: "text" },
-    },
+    children: { control: { type: "text" } },
   },
   decorators: [ThemeDecorator],
 };
 
 export const Pill = (props: PillProps) => {
-  return <UiPill {...props} />;
+  return (
+    <div style={{ padding: "24px", display: "flex", gap: "8px" }}>
+      <UiPill {...props} />
+    </div>
+  );
 };

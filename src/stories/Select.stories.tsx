@@ -8,54 +8,44 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Select",
   component: UiSelect,
+  args: {
+    size: 32,
+    color: "primary",
+    variant: "default",
+    shape: "default",
+    disabled: false,
+  },
   argTypes: {
-    size: {
-      options: [24, 32, 48],
-      control: { type: "select" },
-      defaultValue: 24,
-    },
+    size: { options: [24, 32, 48], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
     variant: {
-      defaultValue: "default",
       options: ["default", "outline"],
       control: { type: "select" },
     },
     shape: {
-      defaultValue: "default",
       options: ["default", "rectangle"],
       control: { type: "select" },
     },
-    disabled: {
-      defaultValue: false,
-      control: { type: "boolean" },
-    },
-    options: {
-      control: { type: "none" },
-    },
+    disabled: { control: { type: "boolean" } },
+    options: { control: { type: "none" } },
   },
   decorators: [ThemeDecorator],
 };
 
 const options = [
-  {
-    title: "Title 1",
-    value: "value1",
-  },
-  {
-    title: "Title 2",
-    value: "value2",
-  },
+  { title: "Option one", value: "value1" },
+  { title: "Option two", value: "value2" },
+  { title: "Option three", value: "value3" },
 ];
 
 export const Select = (props: SelectProps) => {
   const [value, setValue] = useState("value1");
 
-  const handleChange = useCallback((value: string) => {
-    setValue(value);
+  const handleChange = useCallback((next: string) => {
+    setValue(next);
   }, []);
 
   return (

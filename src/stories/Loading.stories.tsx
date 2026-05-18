@@ -7,14 +7,13 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Loading",
   component: UiLoading,
+  args: {
+    size: 32,
+    color: "primary",
+  },
   argTypes: {
-    size: {
-      options: [16, 24, 32, 48],
-      control: { type: "select" },
-      defaultValue: 24,
-    },
+    size: { options: [16, 24, 32, 48], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
@@ -23,5 +22,9 @@ export default {
 };
 
 export const Loading = (props: LoadingProps) => {
-  return <UiLoading {...props} />;
+  return (
+    <div style={{ padding: "32px" }}>
+      <UiLoading {...props} />
+    </div>
+  );
 };

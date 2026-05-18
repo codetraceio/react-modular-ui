@@ -1,17 +1,25 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 @mixin shadow() {
-  box-shadow: 0 1px 4px 0 rgba($color-black, 0.25);
+  box-shadow: constants.$shadow-md;
+}
+
+@mixin focus-ring($color: constants.$focus-ring-color) {
+  outline: none;
+  box-shadow: 0 0 0 constants.$focus-ring-width $color;
 }
 
 @mixin scroll-bar() {
   &::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    background-color: rgba(0,0,0,0);
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+    background: constants.$color-neutral-300;
+    border-radius: constants.$radius-full;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: constants.$color-neutral-400;
   }
 }

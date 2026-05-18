@@ -1,19 +1,58 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-upload {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed $color-grey;
-  min-height: 80px;
+  border: 1.5px dashed constants.$color-neutral-300;
+  background: constants.$color-neutral-50;
+  border-radius: constants.$radius-lg;
+  min-height: 140px;
+  padding: 24px;
   cursor: pointer;
+  color: constants.$color-neutral-700;
+  transition:
+    border-color constants.$duration constants.$ease,
+    background-color constants.$duration constants.$ease,
+    box-shadow constants.$duration constants.$ease;
 
-  &:focus {
-    outline: 2px solid rgba($color-primary, .4);
+  &:hover {
+    border-color: constants.$color-neutral-400;
+    background: constants.$color-white;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: constants.$color-primary;
+    box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
   }
 
   &[data-active='true'] {
-    border-color: $color-primary;
+    border-color: constants.$color-primary;
+    background: constants.$color-primary-soft;
+    color: constants.$color-primary-active;
+  }
+
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &[data-theme='dark'] {
+    background: constants.$color-neutral-900;
+    border-color: constants.$color-neutral-700;
+    color: constants.$color-neutral-300;
+
+    &:hover {
+      background: constants.$color-neutral-800;
+      border-color: constants.$color-neutral-600;
+    }
+
+    &[data-active='true'] {
+      background: rgba(99, 102, 241, 0.18);
+      border-color: constants.$color-primary;
+      color: #c7d2fe;
+    }
   }
 }

@@ -1,54 +1,138 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-pagination {
-  font-family: sans-serif;
-  display: flex;
+  font-family: constants.$font-family;
+  display: inline-flex;
   flex-direction: row;
+  align-items: center;
+  gap: 2px;
 
   &--item, &--ellipsis {
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 24px;
-    width: 24px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 14px;
+    font-weight: 500;
   }
 
   &--item {
     cursor: pointer;
-    padding: 0;
+    padding: 0 8px;
     border: 0;
     background: transparent;
-    border-radius: 12px;
-    &:focus {
-      outline: 2px solid rgba($color-primary, .4);
+    color: constants.$color-neutral-700;
+    border-radius: constants.$radius-md;
+    font-family: inherit;
+    transition:
+      background-color constants.$duration constants.$ease,
+      color constants.$duration constants.$ease;
+
+    &:hover {
+      background: constants.$color-neutral-100;
+      color: constants.$color-neutral-900;
     }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
+    }
+
     &.-characters-multiple {
-      width: auto;
-      padding: 0 4px;
+      padding: 0 10px;
     }
   }
 
   &--ellipsis {
+    color: constants.$color-neutral-400;
     cursor: default;
   }
 
   &--item[data-current='true'] {
-    background: $color-primary;
-    color: white;
+    background: constants.$color-primary;
+    color: constants.$color-white;
+
+    &:hover {
+      background: constants.$color-primary-hover;
+      color: constants.$color-white;
+    }
   }
 
   &--prev, &--next {
-    color: $color-primary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: constants.$color-neutral-700;
     cursor: pointer;
-    height: 24px;
-    width: 24px;
+    height: 32px;
+    width: 32px;
     padding: 0;
     border: 0;
     background: transparent;
-    border-radius: 12px;
-    &:focus {
-      outline: 2px solid rgba($color-primary, .4);
+    border-radius: constants.$radius-md;
+    transition: background-color constants.$duration constants.$ease;
+
+    &:hover {
+      background: constants.$color-neutral-100;
+      color: constants.$color-neutral-900;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
+    }
+
+    &[aria-disabled='true'] {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+
+  &[data-size='24'] {
+    .c-pagination--item, .c-pagination--ellipsis,
+    .c-pagination--prev, .c-pagination--next {
+      height: 28px;
+      min-width: 28px;
+      font-size: 13px;
+    }
+    .c-pagination--prev, .c-pagination--next { width: 28px; }
+  }
+
+  &[data-size='48'] {
+    .c-pagination--item, .c-pagination--ellipsis,
+    .c-pagination--prev, .c-pagination--next {
+      height: 40px;
+      min-width: 40px;
+      font-size: 15px;
+    }
+    .c-pagination--prev, .c-pagination--next { width: 40px; }
+  }
+
+  &[data-color='success'] .c-pagination--item[data-current='true'] {
+    background: constants.$color-success;
+    &:hover { background: constants.$color-success-hover; }
+  }
+
+  &[data-color='danger'] .c-pagination--item[data-current='true'] {
+    background: constants.$color-danger;
+    &:hover { background: constants.$color-danger-hover; }
+  }
+
+  &[data-theme='dark'] {
+    .c-pagination--item,
+    .c-pagination--prev,
+    .c-pagination--next {
+      color: constants.$color-neutral-300;
+      &:hover {
+        background: constants.$color-neutral-800;
+        color: constants.$color-neutral-100;
+      }
+    }
+    .c-pagination--ellipsis { color: constants.$color-neutral-600; }
+    .c-pagination--item[data-current='true'] {
+      background: constants.$color-primary;
+      color: constants.$color-white;
     }
   }
 }

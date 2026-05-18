@@ -1,64 +1,66 @@
-@import "./constants.scss";
+@use "constants.scss";
 
-@mixin pill-default($background-color, $color) {
-  background-color: $background-color;
+@mixin pill-soft($bg, $color) {
+  background-color: $bg;
   color: $color;
 }
 
-@mixin pill-size($size, $font-size) {
+@mixin pill-size($height, $font-size, $padding) {
   font-size: $font-size;
-  height: $size;
-  padding: 0 calc($size / 2);
-  border-radius: calc($size / 2);
-  min-width: calc($size / 2);
-  font-weight: bold;
-  & > * {
-    margin-left: calc($size / 8);
-    &:first-child {
-      margin-left: 0;
-    }
-  }
+  height: $height;
+  padding: 0 $padding;
+  border-radius: constants.$radius-full;
+  font-weight: 500;
+  gap: 6px;
 }
 
 .c-pill {
-  @include pill-size(24px, 14px);
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: $color-dark-grey;
-  color: #ffffff;
-  border-radius: 12px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  @include pill-size(24px, 12px, 10px);
+  @include pill-soft(constants.$color-neutral-100, constants.$color-neutral-800);
+  border: 1px solid constants.$color-neutral-200;
 
   &[data-color='primary'] {
-    @include pill-default($color-primary, #ffffff);
+    @include pill-soft(constants.$color-primary-soft, constants.$color-primary-active);
+    border-color: transparent;
   }
 
   &[data-color='success'] {
-    @include pill-default($color-success, #ffffff);
+    @include pill-soft(constants.$color-success-soft, #047857);
+    border-color: transparent;
   }
 
   &[data-color='danger'] {
-    @include pill-default($color-danger, #ffffff);
+    @include pill-soft(constants.$color-danger-soft, #b91c1c);
+    border-color: transparent;
   }
 
-  &[data-color='light'] {
-    @include pill-default($color-light, $color-default);
+  &[data-color='secondary'] {
+    @include pill-soft(constants.$color-neutral-100, constants.$color-neutral-800);
   }
 
-  &[data-size='16'] {
-    @include pill-size(16px, 12px);
-  }
+  &[data-size='16'] { @include pill-size(18px, 11px, 8px); }
+  &[data-size='24'] { @include pill-size(22px, 12px, 10px); }
+  &[data-size='32'] { @include pill-size(28px, 13px, 12px); }
+  &[data-size='48'] { @include pill-size(36px, 14px, 16px); }
 
-  &[data-size='24'] {
-    @include pill-size(24px, 14px);
-  }
+  &[data-theme='dark'] {
+    @include pill-soft(constants.$color-neutral-800, constants.$color-neutral-100);
+    border-color: constants.$color-neutral-700;
 
-  &[data-size='32'] {
-    @include pill-size(32px, 16px);
-  }
-
-  &[data-size='48'] {
-    @include pill-size(48px, 20px);
+    &[data-color='primary'] {
+      @include pill-soft(rgba(99, 102, 241, 0.18), #c7d2fe);
+    }
+    &[data-color='success'] {
+      @include pill-soft(rgba(16, 185, 129, 0.18), #6ee7b7);
+    }
+    &[data-color='danger'] {
+      @include pill-soft(rgba(239, 68, 68, 0.18), #fca5a5);
+    }
   }
 }

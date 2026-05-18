@@ -7,29 +7,25 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Toggle",
   component: UiToggle,
+  args: {
+    size: 24,
+    color: "primary",
+    variant: "default",
+    disabled: false,
+    children: "Toggle",
+  },
   argTypes: {
-    size: {
-      options: [16, 24, 32],
-      control: { type: "select" },
-    },
+    size: { options: [16, 24, 32], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
     variant: {
-      defaultValue: "default",
       options: ["default", "outline"],
       control: { type: "select" },
     },
-    disabled: {
-      defaultValue: false,
-      control: { type: "boolean" },
-    },
-    children: {
-      defaultValue: "Toggle",
-      control: { type: "text" },
-    },
+    disabled: { control: { type: "boolean" } },
+    children: { control: { type: "text" } },
   },
   decorators: [ThemeDecorator],
 };

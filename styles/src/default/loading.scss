@@ -1,50 +1,31 @@
-@import "./constants.scss";
+@use "constants.scss";
 
 .c-loading {
-  display: flex;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
   }
 
   circle {
-    stroke: $color-dark-grey;
+    stroke: constants.$color-primary;
+    stroke-linecap: round;
   }
 
-  &[data-size='16'] svg {
-    height: 16px;
-    width: 16px;
-  }
+  &[data-size='16'] svg { height: 16px; width: 16px; }
+  &[data-size='24'] svg { height: 24px; width: 24px; }
+  &[data-size='32'] svg { height: 32px; width: 32px; }
+  &[data-size='48'] svg { height: 48px; width: 48px; }
 
-  &[data-size='24'] svg {
-    height: 24px;
-    width: 24px;
-  }
+  &[data-color='primary']   circle { stroke: constants.$color-primary; }
+  &[data-color='secondary'] circle { stroke: constants.$color-neutral-500; }
+  &[data-color='success']   circle { stroke: constants.$color-success; }
+  &[data-color='danger']    circle { stroke: constants.$color-danger; }
 
-  &[data-size='32'] svg {
-    height: 32px;
-    width: 32px;
-  }
-
-  &[data-size='48'] svg {
-    height: 48px;
-    width: 48px;
-  }
-
-  &[data-color='light'] circle {
-    stroke: $color-light;
-  }
-
-  &[data-color='primary'] circle {
-    stroke: $color-primary;
-  }
-
-  &[data-color='success'] circle {
-    stroke: $color-success;
-  }
-
-  &[data-color='danger'] circle {
-    stroke: $color-danger;
+  &[data-theme='dark'] circle {
+    stroke: constants.$color-neutral-100;
   }
 }

@@ -34,7 +34,9 @@ export function useLongPress({
   const clear = useCallback(
     (event: LongPressEvent) => {
       document.removeEventListener("contextmenu", preventDefault);
-      timeout.current && clearTimeout(timeout.current);
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
 
       onTouchEnd?.(event);
     },

@@ -7,64 +7,41 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Tabs",
   component: UiTabs,
+  args: {
+    size: 32,
+    color: "primary",
+    variant: "default",
+    disabled: false,
+  },
   argTypes: {
-    size: {
-      options: [24, 32, 48],
-      control: { type: "select" },
-      defaultValue: 24,
-    },
+    size: { options: [24, 32, 48], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
     variant: {
-      defaultValue: "default",
       options: ["default", "outline"],
       control: { type: "select" },
     },
-    disabled: {
-      defaultValue: false,
-      control: { type: "boolean" },
-    },
-    options: {
-      control: { type: "none" },
-    },
-    value: {
-      control: { type: "none" },
-    },
+    disabled: { control: { type: "boolean" } },
+    options: { control: { type: "none" } },
+    value: { control: { type: "none" } },
   },
   decorators: [ThemeDecorator],
 };
 
 const options = [
-  {
-    title: "Title 1",
-    value: "value1",
-  },
-  {
-    title: "Title 2",
-    value: "value2",
-  },
-  {
-    title: "Title 3",
-    value: "value3",
-  },
-  {
-    title: "Title 4",
-    value: "value4",
-  },
-  {
-    title: "Title 5",
-    value: "value5",
-  },
+  { title: "Overview", value: "overview" },
+  { title: "Activity", value: "activity" },
+  { title: "Settings", value: "settings" },
+  { title: "Billing", value: "billing" },
 ];
 
 export const Tabs = (props: TabsProps) => {
   const [value, setValue] = useState(options[0].value);
 
-  const handleChange = useCallback((newValue: string) => {
-    setValue(newValue);
+  const handleChange = useCallback((next: string) => {
+    setValue(next);
   }, []);
 
   return (

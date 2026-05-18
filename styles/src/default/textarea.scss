@@ -1,43 +1,68 @@
-@import "./constants.scss";
-
-@mixin textarea-size($size, $font-size) {
-  height: $size;
-  min-height: $size;
-  max-height: $size * 4;
-  font-size: $font-size;
-}
+@use "constants.scss";
 
 .c-textarea {
+  font-family: constants.$font-family;
+
   textarea {
-    @include textarea-size(48px, 16px);
     display: block;
     box-sizing: border-box;
     width: 100%;
-    max-width: 100%;
-    min-width: 100%;
-    padding: 8px;
-    background: $color-light;
-    border: 1px solid $color-grey;
+    min-height: 80px;
+    max-height: 320px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: constants.$color-neutral-900;
+    background: constants.$color-white;
+    border: 1px solid constants.$color-neutral-200;
     outline: none;
-    border-radius: $border-radius;
-    font-family: sans-serif;
+    border-radius: constants.$radius-md;
+    font-family: inherit;
     resize: vertical;
+    transition:
+      border-color constants.$duration constants.$ease,
+      box-shadow constants.$duration constants.$ease;
+
+    &::placeholder {
+      color: constants.$color-neutral-400;
+    }
+
+    &:hover {
+      border-color: constants.$color-neutral-300;
+    }
+
     &:focus {
-      border: 1px solid $color-primary;
+      border-color: constants.$color-primary;
+      box-shadow: 0 0 0 constants.$focus-ring-width constants.$focus-ring-color;
     }
   }
+
   &--label {
-    font-size: 16px;
-    color: $color-dark-grey;
-    padding: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: constants.$color-neutral-700;
+    padding: 0 0 6px 2px;
+    display: block;
   }
-  &[data-size='48'] textarea {
-    @include textarea-size(48px, 16px);
+
+  &[data-size='24'] textarea { min-height: 64px; font-size: 13px; }
+  &[data-size='32'] textarea { min-height: 88px; font-size: 14px; }
+  &[data-size='48'] textarea { min-height: 128px; font-size: 15px; padding: 12px 14px; }
+
+  &[data-shape='rectangle'] textarea { border-radius: 0; }
+
+  &[data-color='danger'] textarea {
+    border-color: constants.$color-danger;
+    &:focus { box-shadow: 0 0 0 constants.$focus-ring-width rgba(239, 68, 68, 0.25); }
   }
-  &[data-size='64'] textarea {
-    @include textarea-size(64px, 16px);
-  }
-  &[data-size='128'] textarea {
-    @include textarea-size(128px, 16px);
+
+  &[data-theme='dark'] {
+    textarea {
+      color: constants.$color-neutral-100;
+      background: constants.$color-neutral-900;
+      border-color: constants.$color-neutral-700;
+      &::placeholder { color: constants.$color-neutral-500; }
+    }
+    .c-textarea--label { color: constants.$color-neutral-300; }
   }
 }

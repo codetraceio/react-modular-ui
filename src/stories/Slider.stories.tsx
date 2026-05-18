@@ -7,16 +7,23 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Slider",
   component: UiSlider,
+  args: {
+    disabled: false,
+  },
   argTypes: {
-    disabled: {
-      defaultValue: false,
-      control: { type: "boolean" },
-    },
+    disabled: { control: { type: "boolean" } },
   },
   decorators: [ThemeDecorator],
 };
 
 export const Slider = (props: SliderProps) => {
-  const [value, setValue] = useState(0);
-  return <UiSlider {...props} value={value} total={100} onChange={setValue} />;
+  const [value, setValue] = useState(40);
+  return (
+    <div style={{ padding: "32px", maxWidth: "480px" }}>
+      <UiSlider {...props} value={value} total={100} onChange={setValue} />
+      <div style={{ marginTop: "16px", color: "#71717a", fontSize: "13px" }}>
+        Value: {value}
+      </div>
+    </div>
+  );
 };

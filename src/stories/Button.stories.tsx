@@ -7,38 +7,34 @@ import { ThemeDecorator } from "./ThemeDecorator";
 export default {
   title: "Button",
   component: UiButton,
+  args: {
+    size: 32,
+    color: "primary",
+    variant: "default",
+    shape: "default",
+    disabled: false,
+    children: "Button",
+  },
   argTypes: {
-    size: {
-      options: [32, 48, 56],
-      control: { type: "select" },
-    },
+    size: { options: [32, 48, 56], control: { type: "select" } },
     color: {
-      defaultValue: "primary",
       options: ["primary", "secondary", "danger", "success"],
       control: { type: "select" },
     },
     variant: {
-      defaultValue: "default",
       options: ["default", "outline"],
       control: { type: "select" },
     },
     shape: {
-      defaultValue: "default",
       options: ["default", "rectangle"],
       control: { type: "select" },
     },
-    disabled: {
-      defaultValue: false,
-      control: { type: "boolean" },
-    },
-    children: {
-      defaultValue: "Button",
-      control: { type: "text" },
-    },
+    disabled: { control: { type: "boolean" } },
+    children: { control: { type: "text" } },
   },
   decorators: [ThemeDecorator],
 };
 
 export const Button = (props: ButtonProps) => {
-  return <UiButton {...props} data-something="aaa" />;
+  return <UiButton {...props} />;
 };

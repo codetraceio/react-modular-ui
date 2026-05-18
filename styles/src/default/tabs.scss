@@ -1,75 +1,105 @@
-@import "./constants.scss";
+@use "constants.scss";
 
-@mixin tabs-option-size($size, $font-size, $space) {
-  height: $size;
+@mixin tabs-option-size($height, $font-size, $padding) {
+  height: $height;
   font-size: $font-size;
-  padding: 0 $space;
-
-  & > * {
-    margin-left: $space;
-    &:first-child {
-      margin-left: 0;
-    }
-  }
+  padding: 0 $padding;
 }
 
 .c-tabs {
-  font-family: sans-serif;
+  font-family: constants.$font-family;
   position: relative;
+
   &:after {
     content: "";
     position: absolute;
     width: 100%;
-    border-bottom: 1px solid $color-grey;
+    border-bottom: 1px solid constants.$color-neutral-200;
     bottom: 0;
   }
+
   &--options {
     display: flex;
     position: relative;
     overflow-y: hidden;
     overflow-x: auto;
+    gap: 4px;
   }
+
   &--option {
-    @include tabs-option-size(24px, 14px, 12px);
-    display: flex;
+    @include tabs-option-size(36px, 14px, 14px);
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
     user-select: none;
     background: transparent;
     border: 0;
     cursor: pointer;
     white-space: nowrap;
+    color: constants.$color-neutral-500;
+    font-weight: 500;
+    font-family: inherit;
+    transition: color constants.$duration constants.$ease;
+    position: relative;
+
+    &:hover {
+      color: constants.$color-neutral-900;
+    }
+
     &.-selected {
-      font-weight: bold;
+      color: constants.$color-neutral-900;
+      font-weight: 600;
     }
   }
+
   &--line {
     position: absolute;
     z-index: 1;
     bottom: -1px;
-    height: 3px;
-    background-color: $color-primary;
-    transition: left .3s ease-in-out, width .3s ease-in-out;
+    height: 2px;
+    border-radius: constants.$radius-full;
+    background-color: constants.$color-primary;
+    transition:
+      left constants.$duration-slow constants.$ease,
+      width constants.$duration-slow constants.$ease;
   }
+
   &--count {
-    font-size: 12px;
-    height: 16px;
-    background: $color-dark-grey;
-    border-radius: 8px;
-    padding: 0 8px;
-    line-height: 16px;
-    color: $color-light;
-    font-weight: bold;
+    font-size: 11px;
+    height: 18px;
+    min-width: 18px;
+    background: constants.$color-neutral-100;
+    border-radius: constants.$radius-full;
+    padding: 0 6px;
+    line-height: 18px;
+    color: constants.$color-neutral-700;
+    font-weight: 500;
+    text-align: center;
   }
-  &[data-size='24'] &--option {
-    @include tabs-option-size(24px, 14px, 12px);
+
+  &--option.-selected &--count {
+    background: constants.$color-primary-soft;
+    color: constants.$color-primary-active;
   }
-  &[data-size='32'] &--option {
-    @include tabs-option-size(32px, 14px, 14px);
-  }
-  &[data-size='48'] &--option {
-    @include tabs-option-size(48px, 16px, 16px);
-  }
-  &[data-size='56'] &--option {
-    @include tabs-option-size(56px, 16px, 20px);
+
+  &[data-size='24'] &--option { @include tabs-option-size(28px, 13px, 10px); }
+  &[data-size='32'] &--option { @include tabs-option-size(36px, 14px, 14px); }
+  &[data-size='48'] &--option { @include tabs-option-size(48px, 15px, 18px); }
+  &[data-size='56'] &--option { @include tabs-option-size(56px, 16px, 22px); }
+
+  &[data-color='success'] &--line  { background-color: constants.$color-success; }
+  &[data-color='danger']  &--line  { background-color: constants.$color-danger; }
+
+  &[data-theme='dark'] {
+    &:after { border-color: constants.$color-neutral-800; }
+    .c-tabs--option {
+      color: constants.$color-neutral-500;
+      &:hover { color: constants.$color-neutral-100; }
+      &.-selected { color: constants.$color-neutral-100; }
+    }
+    .c-tabs--count {
+      background: constants.$color-neutral-800;
+      color: constants.$color-neutral-300;
+    }
   }
 }
