@@ -15,6 +15,7 @@ export interface SliderProps {
   data?: Record<string, string>;
   variant?: string;
   disabled?: boolean;
+  hideHandle?: boolean;
   onChange(value: number, data: Record<string, string>): void;
   onBlur?(value: number, data: Record<string, string>): void;
   // Event handlers
@@ -115,6 +116,7 @@ export default function Slider({
   height,
   variant,
   disabled,
+  hideHandle,
   data = {},
   onChange,
   onBlur,
@@ -240,12 +242,14 @@ export default function Slider({
             width: `${percent}%`,
           }}
         />
-        <div
-          className={className("slider", "handle")}
-          style={{
-            left: `${percent}%`,
-          }}
-        />
+        {(!hideHandle || dragging) && (
+          <div
+            className={className("slider", "handle")}
+            style={{
+              left: `${percent}%`,
+            }}
+          />
+        )}
       </div>
     </div>
   );
