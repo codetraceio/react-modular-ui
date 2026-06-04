@@ -16,7 +16,15 @@ export default {
   },
   argTypes: {
     icon: {
-      options: ["checkbox", "radio", "pagination", "dropdown", "handle", "close", "upload"],
+      options: [
+        "checkbox",
+        "radio",
+        "pagination",
+        "dropdown",
+        "handle",
+        "close",
+        "upload",
+      ],
       control: { type: "select" },
     },
     size: { options: [16, 24, 32, 48], control: { type: "select" } },

@@ -26,14 +26,20 @@ export const Modal = (props: ModalProps) => {
       <UiButton onClick={() => setOpen(true)}>Open modal</UiButton>
       <UiModal {...props} show={open} onClose={() => setOpen(false)}>
         <div style={{ padding: "24px", maxWidth: "420px" }}>
-          <h2 style={{ margin: "0 0 12px 0", fontSize: "18px", fontWeight: 600 }}>
+          <h2
+            style={{ margin: "0 0 12px 0", fontSize: "18px", fontWeight: 600 }}
+          >
             Dialog title
           </h2>
-          <p style={{ margin: "0 0 20px 0", color: "#52525b", lineHeight: 1.5 }}>
+          <p
+            style={{ margin: "0 0 20px 0", color: "#52525b", lineHeight: 1.5 }}
+          >
             This is a modal dialog. Click outside the content or press the
             button to dismiss it.
           </p>
-          <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
+          <div
+            style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}
+          >
             <UiButton variant="outline" onClick={() => setOpen(false)}>
               Cancel
             </UiButton>

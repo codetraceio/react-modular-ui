@@ -24,7 +24,9 @@ export const Upload = (props: UploadProps) => {
     <div style={{ padding: "24px", maxWidth: "480px" }}>
       <UiUpload {...props}>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "15px", fontWeight: 500, marginBottom: "4px" }}>
+          <div
+            style={{ fontSize: "15px", fontWeight: 500, marginBottom: "4px" }}
+          >
             Drop files here
           </div>
           <div style={{ fontSize: "13px", color: "#71717a" }}>
