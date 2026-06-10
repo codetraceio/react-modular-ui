@@ -1,6 +1,10 @@
 import React, {
+  Children,
+  cloneElement,
   DragEvent,
+  isValidElement,
   PropsWithChildren,
+  ReactElement,
   useRef,
   useState,
   useCallback,
@@ -19,12 +23,28 @@ export interface UploadProps {
   name?: string;
   theme?: string;
   variant?: string;
+  placement?: string;
   clickDisabled?: boolean;
   dropDisabled?: boolean;
   multiple?: boolean;
   data?: Record<string, string>;
 
   onChange?: (files: FileList, data: Record<string, string>) => void;
+}
+
+function applyPlacement(
+  children: React.ReactNode,
+  placement?: string,
+): React.ReactNode {
+  if (placement === undefined) {
+    return children;
+  }
+
+  return Children.map(children, (child) =>
+    isValidElement(child)
+      ? cloneElement(child as ReactElement, { placement })
+      : child,
+  );
 }
 
 export default function Upload({
@@ -34,6 +54,7 @@ export default function Upload({
   theme,
   disabled,
   variant,
+  placement,
   clickDisabled,
   dropDisabled,
   children,
@@ -135,7 +156,7 @@ export default function Upload({
         multiple={multiple}
         onChange={handleChange}
       />
-      {children}
+      {applyPlacement(children, placement)}
     </div>
   );
 }
