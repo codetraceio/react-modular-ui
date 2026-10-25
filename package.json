@@ -44,7 +44,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.77.0",
-    "storybook": "^8.4.0",
+    "storybook": "^8.6.19",
     "storybook-addon-sass-postcss": "^0.3.1",
     "ts-jest": "^29.4.0",
     "typescript": "^5.4.0"
